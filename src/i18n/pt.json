@@ -1,0 +1,192 @@
+{
+  "site": {
+    "title": "Web Util<span class=\"text-purple-500\">.IO</span> - Ferramentas Online Rápidas e Seguras",
+    "plainTitle": "Web Util.IO - Ferramentas Online Rápidas e Seguras",
+    "description": "Sua coleção de utilitários web que rodam diretamente no seu navegador. Rápido, seguro e privado.",
+    "lang": "pt-BR"
+  },
+  "nav": {
+    "feedback": "Feedback",
+    "support": "Apoie o Projeto"
+  },
+  "tools": {
+    "remover-fundo": {
+      "title": "Removedor de Fundo",
+      "description": "Remova o fundo de imagens com um clique, usando IA."
+    },
+    "descompactar-arquivo": {
+      "title": "Descompactador de Arquivos",
+      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador."
+    },
+    "comprimir-imagem": {
+      "title": "Compressor de Imagens",
+      "description": "Reduza o tamanho de suas imagens sem perder qualidade."
+    },
+    "criptografar-arquivo": {
+      "title": "Criptografia de Arquivos",
+      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES."
+    },
+    "gerador-hash": {
+      "title": "Gerador de Hash",
+      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo."
+    },
+    "comprimir-arquivo": {
+      "title": "Compressor de Arquivos",
+      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil."
+    },
+    "contador-palavras": {
+      "title": "Contador de Palavras",
+      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto."
+    },
+    "conversor-arquivos": {
+      "title": "Conversor de Arquivos",
+      "description": "Converta arquivos de um formato para outro. Começando com imagens."
+    },
+    "redimensionar-imagem": {
+      "title": "Redimensionador de Imagens",
+      "description": "Altere as dimensões (largura e altura) de uma imagem."
+    }
+  },
+  "components": {
+    "fileCompressor": {
+      "selectFiles": "Selecionar Arquivos",
+      "filesSelected": "arquivo(s) selecionado(s)",
+      "compressButton": "Comprimir",
+      "compressing": "Comprimindo arquivos...",
+      "selectedFilesTitle": "Arquivos Selecionados:",
+      "compressedFileReadyTitle": "Arquivo Comprimido Pronto!",
+      "download": "Download",
+      "downloadNameZip": "arquivos.zip",
+      "downloadNameTar": "arquivos.tar",
+      "errorNoFiles": "Por favor, selecione pelo menos um arquivo para comprimir.",
+      "dragAndDrop": "Arraste e solte os arquivos aqui",
+      "clear": "Limpar",
+      "outputFormat": "Formato de Saída",
+      "errorCompressing": "Ocorreu um erro ao comprimir os arquivos:"
+    },
+    "imageCompressor": {
+      "selectImage": "Selecionar Imagem",
+      "quality": "Qualidade",
+      "compressButton": "Comprimir Imagem",
+      "compressing": "Comprimindo imagem...",
+      "original": "Original",
+      "compressed": "Comprimida",
+      "reduction": "de redução",
+      "waiting": "Aguardando compressão...",
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, WEBP).",
+      "errorCanvas": "Não foi possível obter o contexto do canvas.",
+      "dragAndDrop": "Arraste e solte uma imagem aqui",
+      "selectAnother": "Selecionar outra imagem",
+      "downloadPrefix": "comprimido",
+      "download": "Download"
+    },
+    "fileConverter": {
+      "selectFile": "Selecionar Arquivo",
+      "convertTo": "Converter para:",
+      "convert": "Converter",
+      "converting": "Convertendo arquivo...",
+      "download": "Download",
+      "original": "Original",
+      "converted": "Convertido",
+      "waiting": "Aguardando conversão...",
+      "errorInvalidFile": "Por favor, selecione um arquivo válido (imagem, PDF, JSON, CSV).",
+      "errorCanvas": "Não foi possível obter o contexto do canvas.",
+      "errorConversionFailed": "A conversão falhou. Por favor, tente novamente.",
+      "errorConversion": "Erro na conversão:",
+      "errorInvalidJson": "JSON inválido ou vazio. Certifique-se de que é um array de objetos.",
+      "errorParsingJson": "Erro ao analisar o JSON. Verifique a sintaxe.",
+      "errorInvalidCsv": "CSV inválido ou vazio. Certifique-se de que possui cabeçalhos e dados.",
+      "errorParsingCsv": "Erro ao analisar o CSV. Verifique a sintaxe.",
+      "noPreview": "Sem pré-visualização"
+    },
+    "fileEncryptor": {
+      "encrypt": "Criptografar Arquivo",
+      "decrypt": "Descriptografar Arquivo",
+      "passwordPlaceholder": "Digite sua senha secreta",
+      "processing": "Processando...",
+      "encryptButton": "Criptografar Arquivo",
+      "decryptButton": "Descriptografar Arquivo",
+      "result": "Resultado:",
+      "errorFillFile": "Por favor, selecione um arquivo e digite a senha.",
+      "errorFillEncryptedFile": "Por favor, selecione um arquivo criptografado e digite a senha.",
+      "errorDecrypt": "Erro ao descriptografar. Verifique a senha ou o arquivo cifrado.",
+      "errorEncrypt": "Erro ao criptografar. Tente novamente.",
+      "errorCryptoNotAvailable": "Recursos de criptografia não estão disponíveis neste navegador ou contexto. Por favor, certifique-se de estar usando um navegador moderno sobre HTTPS.",
+      "dragAndDrop": "Arraste e solte um arquivo aqui",
+      "selectFile": "Selecionar Arquivo",
+      "download": "Download"
+    },
+    "hashGenerator": {
+      "placeholder": "Digite o texto para gerar o hash SHA-256...",
+      "generating": "Gerando...",
+      "generateButton": "Gerar Hash",
+      "generatedHash": "Hash SHA-256 Gerado:",
+      "verifyOptional": "Verificar Hash (Opcional):",
+      "verifyPlaceholder": "Cole um hash para comparar...",
+      "match": "✅ Hashes correspondem!",
+      "noMatch": "❌ Hashes NÃO correspondem!",
+      "errorGeneratingHash": "Erro ao gerar o hash.",
+      "errorCryptoNotAvailable": "Recursos de criptografia não estão disponíveis neste navegador ou contexto. Por favor, certifique-se de estar usando um navegador moderno sobre HTTPS."
+    },
+    "backgroundRemover": {
+      "selectImage": "Selecionar Imagem",
+      "processing": "Processando...",
+      "original": "Original",
+      "result": "Resultado",
+      "waiting": "Aguardando imagem...",
+      "resultHere": "O resultado aparecerá aqui.",
+      "download": "Download",
+      "errorProcessing": "Erro: O processamento da imagem não retornou um resultado válido.",
+      "dragAndDrop": "Arraste e solte uma imagem aqui",
+      "selectAnother": "Selecionar outra imagem",
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido."
+    },
+    "contadorPalavras": {
+      "placeholder": "Cole seu texto aqui...",
+      "words": "Palavras",
+      "characters": "Caracteres",
+      "sentences": "Sentenças",
+      "paragraphs": "Parágrafos"
+    },
+    "fileDecompressor": {
+      "readingArchive": "Lendo arquivo...",
+      "selectArchive": "Selecionar Arquivo",
+      "fileContents": "Conteúdo do Arquivo:",
+      "fileName": "Nome do Arquivo",
+      "size": "Tamanho",
+      "action": "Ação",
+      "folder": "Pasta",
+      "download": "Download",
+      "errorInvalidArchive": "Por favor, selecione um arquivo .zip ou .tar válido.",
+      "errorReadingArchive": "Ocorreu um erro ao ler o arquivo. Ele pode estar corrompido ou não é um formato suportado.",
+      "dragAndDrop": "Arraste e solte um arquivo .zip ou .tar aqui",
+      "selectAnother": "Selecionar outro arquivo"
+    },
+    "imageResizer": {
+      "selectImage": "Selecionar Imagem",
+      "dragAndDrop": "Arraste e solte uma imagem aqui",
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido.",
+      "original": "Original",
+      "resized": "Redimensionada",
+      "waiting": "Aguardando redimensionamento...",
+      "width": "Largura",
+      "height": "Altura",
+      "resizeButton": "Redimensionar Imagem",
+      "resizing": "Redimensionando imagem...",
+      "download": "Download",
+      "errorDimensions": "Por favor, insira largura e altura válidas.",
+      "errorCanvas": "Não foi possível obter o contexto do canvas.",
+      "errorLoadingImage": "Erro ao carregar a imagem.",
+      "errorReadingFile": "Erro ao ler o arquivo."
+    },
+    "feedbackForm": {
+      "nameLabel": "Nome",
+      "namePlaceholder": "Seu nome (opcional)",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Seu email (para contato)",
+      "messageLabel": "Mensagem",
+      "messagePlaceholder": "Sua mensagem...",
+      "submitButton": "Enviar Feedback por E-mail"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "site": {
+    "title": "Web Util<span class=\"text-purple-500\">.IO</span> - Fast & Secure Online Tools",
+    "plainTitle": "Web Util.IO - Fast & Secure Online Tools",
+    "description": "Your collection of web utilities that run directly in your browser. Fast, secure, and private.",
+    "lang": "en-US"
+  },
+  "nav": {
+    "feedback": "Feedback",
+    "support": "Support the Project"
+  },
+  "tools": {
+    "remover-fundo": {
+      "title": "Background Remover",
+      "description": "Remove the background from images with a single click, using AI."
+    },
+    "descompactar-arquivo": {
+      "title": "File Decompressor",
+      "description": "Extract files from a .zip archive directly in the browser."
+    },
+    "comprimir-imagem": {
+      "title": "Image Compressor",
+      "description": "Reduce the size of your images without losing quality."
+    },
+    "criptografar-arquivo": {
+      "title": "File Encryptor",
+      "description": "Encrypt and decrypt files using the AES algorithm."
+    },
+    "gerador-hash": {
+      "title": "Hash Generator",
+      "description": "Generate SHA-256 hashes for any text or file."
+    },
+    "comprimir-arquivo": {
+      "title": "File Compressor",
+      "description": "Create ZIP archives from multiple files easily."
+    },
+    "contador-palavras": {
+      "title": "Word Counter",
+      "description": "Count words, characters, sentences, and paragraphs in a text."
+    },
+    "conversor-arquivos": {
+      "title": "File Converter",
+      "description": "Convert files from one format to another. Starting with images."
+    },
+    "redimensionar-imagem": {
+      "title": "Image Resizer",
+      "description": "Change the dimensions (width and height) of an image."
+    }
+  },
+  "components": {
+    "fileCompressor": {
+      "selectFiles": "Select Files",
+      "filesSelected": "file(s) selected",
+      "compressButton": "Compress",
+      "compressing": "Compressing files...",
+      "selectedFilesTitle": "Selected Files:",
+      "compressedFileReadyTitle": "Compressed File Ready!",
+      "download": "Download",
+      "downloadNameZip": "files.zip",
+      "downloadNameTar": "files.tar",
+      "errorNoFiles": "Please select at least one file to compress.",
+      "dragAndDrop": "Drag and drop files here",
+      "clear": "Clear",
+      "outputFormat": "Output Format",
+      "errorCompressing": "An error occurred while compressing the files:"
+    },
+    "imageCompressor": {
+      "selectImage": "Select Image",
+      "quality": "Quality",
+      "compressButton": "Compress Image",
+      "compressing": "Compressing image...",
+      "original": "Original",
+      "compressed": "Compressed",
+      "reduction": "reduction",
+      "waiting": "Waiting for compression...",
+      "errorInvalidFile": "Please select a valid image file (JPEG, PNG, WEBP).",
+      "errorCanvas": "Could not get canvas context.",
+      "dragAndDrop": "Drag and drop an image here",
+      "selectAnother": "Select another image",
+      "downloadPrefix": "compressed",
+      "download": "Download"
+    },
+    "fileConverter": {
+      "selectFile": "Select File",
+      "convertTo": "Convert to:",
+      "convert": "Convert",
+      "converting": "Converting file...",
+      "download": "Download",
+      "original": "Original",
+      "converted": "Converted",
+      "waiting": "Waiting for conversion...",
+      "errorInvalidFile": "Please select a valid file (image, PDF, JSON, CSV).",
+      "errorCanvas": "Could not get canvas context.",
+      "errorConversionFailed": "Conversion failed. Please try again.",
+      "errorConversion": "Error during conversion:",
+      "errorInvalidJson": "Invalid or empty JSON. Ensure it's an array of objects.",
+      "errorParsingJson": "Error parsing JSON. Check syntax.",
+      "errorInvalidCsv": "Invalid or empty CSV. Ensure it has headers and data.",
+      "errorParsingCsv": "Error parsing CSV. Check syntax.",
+      "noPreview": "No preview"
+    },
+    "fileEncryptor": {
+      "encrypt": "Encrypt File",
+      "decrypt": "Decrypt File",
+      "passwordPlaceholder": "Enter your secret password",
+      "processing": "Processing...",
+      "encryptButton": "Encrypt File",
+      "decryptButton": "Decrypt File",
+      "result": "Result:",
+      "errorFillFile": "Please select a file and enter the password.",
+      "errorFillEncryptedFile": "Please select an encrypted file and enter the password.",
+      "errorDecrypt": "Error decrypting. Check the password or the encrypted file.",
+      "errorEncrypt": "Error encrypting. Please try again.",
+      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS.",
+      "dragAndDrop": "Drag and drop a file here",
+      "selectFile": "Select File",
+      "download": "Download"
+    },
+    "hashGenerator": {
+      "placeholder": "Enter text to generate SHA-256 hash...",
+      "generating": "Generating...",
+      "generateButton": "Generate Hash",
+      "generatedHash": "Generated SHA-256 Hash:",
+      "verifyOptional": "Verify Hash (Optional):",
+      "verifyPlaceholder": "Paste a hash to compare...",
+      "match": "✅ Hashes match!",
+      "noMatch": "❌ Hashes DO NOT match!",
+      "errorGeneratingHash": "Error generating hash.",
+      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS."
+    },
+    "backgroundRemover": {
+      "selectImage": "Select Image",
+      "processing": "Processing...",
+      "original": "Original",
+      "result": "Result",
+      "waiting": "Waiting for image...",
+      "resultHere": "The result will appear here.",
+      "download": "Download",
+      "errorProcessing": "Error: Image processing did not return a valid result.",
+      "dragAndDrop": "Drag and drop an image here",
+      "selectAnother": "Select another image",
+      "errorInvalidFile": "Please select a valid image file."
+    },
+    "contadorPalavras": {
+      "placeholder": "Paste your text here...",
+      "words": "Words",
+      "characters": "Characters",
+      "sentences": "Sentences",
+      "paragraphs": "Paragraphs"
+    },
+    "fileDecompressor": {
+      "readingArchive": "Reading archive...",
+      "selectArchive": "Select Archive",
+      "fileContents": "File Contents:",
+      "fileName": "File Name",
+      "size": "Size",
+      "action": "Action",
+      "folder": "Folder",
+      "download": "Download",
+      "errorInvalidArchive": "Please select a valid .zip or .tar file.",
+      "errorReadingArchive": "An error occurred while reading the file. It may be corrupted or not a supported format.",
+      "dragAndDrop": "Drag and drop a .zip or .tar file here",
+      "selectAnother": "Select another file"
+    },
+    "imageResizer": {
+      "selectImage": "Select Image",
+      "dragAndDrop": "Drag and drop an image here",
+      "errorInvalidFile": "Please select a valid image file.",
+      "original": "Original",
+      "resized": "Resized",
+      "waiting": "Waiting for resize...",
+      "width": "Width",
+      "height": "Height",
+      "resizeButton": "Resize Image",
+      "resizing": "Resizing image...",
+      "download": "Download",
+      "errorDimensions": "Please enter valid width and height.",
+      "errorCanvas": "Could not get canvas context.",
+      "errorLoadingImage": "Error loading image.",
+      "errorReadingFile": "Error reading file."
+    },
+    "feedbackForm": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name (optional)",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Your email (for contact)",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Your message...",
+      "submitButton": "Send Feedback by Email"
+    }
+  }
+}

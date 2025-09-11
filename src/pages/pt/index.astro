@@ -1,0 +1,28 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import pt from '../../i18n/pt.json';
+import { tools } from '../../data/tools';
+import ToolCard from '../../components/ToolCard.astro';
+---
+
+<Layout title={pt.site.plainTitle} description={pt.site.description} lang={pt.site.lang}>
+  <section class="text-center py-12">
+    <h1 class="text-5xl font-extrabold text-gray-800 dark:text-gray-100 leading-tight mb-4"
+      set:html={pt.site.title}
+    ></h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+      {pt.site.description}
+    </p>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {tools.map(tool => (
+      <ToolCard 
+        tool={tool} 
+        lang="pt"
+        title={pt.tools[tool.slug].title}
+        description={pt.tools[tool.slug].description}
+      />
+    ))}
+  </section>
+</Layout>

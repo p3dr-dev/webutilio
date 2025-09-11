@@ -1,0 +1,30 @@
+---
+const { lang } = Astro.props; // 'pt' ou 'en'
+const { pathname } = Astro.url;
+
+// Remove o prefixo de idioma atual para construir o novo link
+const pathWithoutLang = pathname.startsWith('/en') || pathname.startsWith('/pt') 
+  ? pathname.substring(3) 
+  : pathname;
+---
+
+<div class="flex items-center space-x-2 border border-gray-300 dark:border-gray-600 rounded-full p-1">
+  <a 
+    href={`/pt${pathWithoutLang}`} 
+    class:list={[
+      "px-3 py-1 text-sm rounded-full transition-colors",
+      lang === 'pt' ? 'bg-purple-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+    ]}
+  >
+    PT
+  </a>
+  <a 
+    href={`/en${pathWithoutLang}`} 
+    class:list={[
+      "px-3 py-1 text-sm rounded-full transition-colors",
+      lang === 'en' ? 'bg-purple-500 text-white' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+    ]}
+  >
+    EN
+  </a>
+</div>

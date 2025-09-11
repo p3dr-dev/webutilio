@@ -1,0 +1,50 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	lang: 'pt-BR' | 'en-US';
+}
+
+const { title, description, lang } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={new URL('/og-image.png', Astro.site)} /> {/* Crie uma imagem de 1200x630px em public/ */}
+		
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
+
+		
+
+		<link rel="alternate" hreflang="pt-BR" href={Astro.site + 'pt' + Astro.url.pathname.substring(3)} />
+		<link rel="alternate" hreflang="en-US" href={Astro.site + 'en' + Astro.url.pathname.substring(3)} />
+		<link rel="alternate" hreflang="x-default" href={Astro.site + 'pt' + Astro.url.pathname.substring(3)} />
+	</head>
+	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+		<Header lang={lang.split('-')[0]} /> {/* Passa o idioma para o Header */}
+		<main class="container mx-auto px-6 py-8 min-h-screen">
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
