@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
         "build": "node ./node_modules/astro/dist/core/index.js build",
-    ,"preview": "astro preview",
+    "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
