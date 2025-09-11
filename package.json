@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node --eval 'require(\"child_process\").execSync(\"node_modules/.bin/astro build\", {stdio: \"inherit\"})'"
+        "build": "node ./node_modules/astro/dist/core/index.js build",
     ,"preview": "astro preview",
     "astro": "astro"
   },
