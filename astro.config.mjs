@@ -6,7 +6,6 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.webutil.io', // <-- ADICIONE A URL DO SEU SITE AQUI
   integrations: [react(), tailwind(), sitemap()],
   server: {
     host: '0.0.0.0',
