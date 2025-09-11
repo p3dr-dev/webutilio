@@ -1,3 +1,51 @@
 ---
-// Direct redirect to Portuguese version
+// Redireciona da raiz "/" para a página em português "/pt/"
 return Astro.redirect('/pt/');
+---
+
+<!-- Página temporária de redirecionamento com meta refresh como fallback -->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Util IO - Ferramentas Online</title>
+  <meta http-equiv="refresh" content="0; url=/pt/">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .container {
+      text-align: center;
+      padding: 2rem;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="spinner"></div>
+    <h1>Web Util IO</h1>
+    <p>Redirecionando para a versão em português...</p>
+    <p><small>Se não redirecionar automaticamente, <a href="/pt/" style="color: white; text-decoration: underline;">clique aqui</a></small></p>
+  </div>
+</body>
+</html>
