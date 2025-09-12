@@ -11,40 +11,40 @@
   },
   "tools": {
     "remover-fundo": {
-      "title": "Removedor de Fundo",
-      "description": "Remova o fundo de imagens com um clique, usando IA."
+      "title": "Removedor de Fundo Online e Grátis",
+      "description": "Remova o fundo de imagens com um clique, usando IA. Ferramenta online gratuita para remover fundo de fotos rapidamente e sem perder qualidade."
     },
     "descompactar-arquivo": {
-      "title": "Descompactador de Arquivos",
-      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador."
+      "title": "Descompactador de Arquivos ZIP Online",
+      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador. Descompacte ZIP online de forma segura e gratuita, sem instalar software."
     },
     "comprimir-imagem": {
-      "title": "Compressor de Imagens",
-      "description": "Reduza o tamanho de suas imagens sem perder qualidade."
+      "title": "Compressor de Imagens Online Grátis",
+      "description": "Reduza o tamanho de suas imagens JPG, PNG e WEBP sem perder qualidade. Comprima imagens online gratuitamente para web."
     },
     "criptografar-arquivo": {
-      "title": "Criptografia de Arquivos",
-      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES."
+      "title": "Criptografia de Arquivos AES Online",
+      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES. Ferramenta segura online para proteger seus arquivos com senha."
     },
     "gerador-hash": {
-      "title": "Gerador de Hash",
-      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo."
+      "title": "Gerador de Hash SHA-256 Online",
+      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo. Verifique integridade de arquivos online gratuitamente."
     },
     "comprimir-arquivo": {
-      "title": "Compressor de Arquivos",
-      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil."
+      "title": "Compressor de Arquivos ZIP Online",
+      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil. Comprima arquivos online gratuitamente no navegador."
     },
     "contador-palavras": {
-      "title": "Contador de Palavras",
-      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto."
+      "title": "Contador de Palavras Online Grátis",
+      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto. Ferramenta online para análise de texto rápida e gratuita."
     },
     "conversor-arquivos": {
-      "title": "Conversor de Arquivos",
-      "description": "Converta arquivos de um formato para outro. Começando com imagens."
+      "title": "Conversor de Arquivos Online",
+      "description": "Converta arquivos de um formato para outro. Começando com imagens. Ferramenta gratuita online para conversão de arquivos."
     },
     "redimensionar-imagem": {
-      "title": "Redimensionador de Imagens",
-      "description": "Altere as dimensões (largura e altura) de uma imagem."
+      "title": "Redimensionador de Imagens Online",
+      "description": "Altere as dimensões (largura e altura) de uma imagem. Redimensione fotos online gratuitamente sem perder qualidade."
     }
   },
   "components": {

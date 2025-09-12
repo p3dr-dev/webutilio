@@ -1,0 +1,6 @@
+# Permite que todos os robôs acessem todo o site.
+User-agent: *
+Disallow:
+
+# Localização do Sitemap
+Sitemap: https://webutilio.vercel.app/sitemap-0.xml

@@ -26,19 +26,35 @@ const DonationOptions: React.FC = () => {
         </p>
       </div>
 
-      {/* Opção 2: Buy Me a Coffee (Internacional) */}
+      {/* Opção 2: Ko-fi (Internacional) */}
       <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700 text-center">
-        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Pague-me um Café ☕</h3>
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">Ko-fi ☕</h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Se preferir, você pode me apoiar através da plataforma Buy Me a Coffee.
+          Apoie com qualquer valor através do Ko-fi, sem taxas da plataforma.
         </p>
-        <a 
-          href="https://www.buymeacoffee.com/pedro0simoes" // SUBSTITUA PELO SEU LINK
-          target="_blank" 
+        <a
+          href="https://ko-fi.com/pedro0simoes" // SUBSTITUA PELO SEU LINK DO KO-FI
+          target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-yellow-400 text-gray-900 font-bold py-3 px-8 rounded-full hover:bg-yellow-500 transition-colors shadow-lg"
+          className="inline-block bg-blue-500 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-600 transition-colors shadow-lg"
         >
-          Buy Me a Coffee
+          Ko-fi
+        </a>
+      </div>
+
+      {/* Opção 3: GitHub Sponsors */}
+      <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md border dark:border-gray-700 text-center">
+        <h3 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">GitHub Sponsors</h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          Se você é desenvolvedor, apoie diretamente no GitHub. Taxa zero!
+        </p>
+        <a
+          href="https://github.com/sponsors/pedro0simoes" // SUBSTITUA PELO SEU LINK DO GITHUB SPONSORS
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block bg-gray-800 text-white font-bold py-3 px-8 rounded-full hover:bg-gray-900 transition-colors shadow-lg"
+        >
+          GitHub Sponsors
         </a>
       </div>
     </div>

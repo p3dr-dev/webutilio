@@ -11,40 +11,40 @@
   },
   "tools": {
     "remover-fundo": {
-      "title": "Background Remover",
-      "description": "Remove the background from images with a single click, using AI."
+      "title": "Online Background Remover Free",
+      "description": "Remove the background from images with a single click, using AI. Free online tool to remove photo backgrounds quickly without losing quality."
     },
     "descompactar-arquivo": {
-      "title": "File Decompressor",
-      "description": "Extract files from a .zip archive directly in the browser."
+      "title": "Online ZIP File Decompressor",
+      "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required."
     },
     "comprimir-imagem": {
-      "title": "Image Compressor",
-      "description": "Reduce the size of your images without losing quality."
+      "title": "Free Online Image Compressor",
+      "description": "Reduce the size of your JPG, PNG, and WEBP images without losing quality. Compress images online for free for web use."
     },
     "criptografar-arquivo": {
-      "title": "File Encryptor",
-      "description": "Encrypt and decrypt files using the AES algorithm."
+      "title": "Online AES File Encryption",
+      "description": "Encrypt and decrypt files using the AES algorithm. Secure online tool to protect your files with a password."
     },
     "gerador-hash": {
-      "title": "Hash Generator",
-      "description": "Generate SHA-256 hashes for any text or file."
+      "title": "Online SHA-256 Hash Generator",
+      "description": "Generate SHA-256 hashes for any text or file. Check file integrity online for free."
     },
     "comprimir-arquivo": {
-      "title": "File Compressor",
-      "description": "Create ZIP archives from multiple files easily."
+      "title": "Online ZIP File Compressor",
+      "description": "Create ZIP archives from multiple files easily. Compress files online for free in the browser."
     },
     "contador-palavras": {
-      "title": "Word Counter",
-      "description": "Count words, characters, sentences, and paragraphs in a text."
+      "title": "Free Online Word Counter",
+      "description": "Count words, characters, sentences, and paragraphs in a text. Fast and free online text analysis tool."
     },
     "conversor-arquivos": {
-      "title": "File Converter",
-      "description": "Convert files from one format to another. Starting with images."
+      "title": "Online File Converter",
+      "description": "Convert files from one format to another. Starting with images. Free online file conversion tool."
     },
     "redimensionar-imagem": {
-      "title": "Image Resizer",
-      "description": "Change the dimensions (width and height) of an image."
+      "title": "Online Image Resizer",
+      "description": "Change the dimensions (width and height) of an image. Resize photos online for free without losing quality."
     }
   },
   "components": {
