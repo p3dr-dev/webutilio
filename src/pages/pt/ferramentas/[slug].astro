@@ -16,7 +16,7 @@ const toolTranslations = pt.tools[slug]; // Pega a tradução da ferramenta
 ---
 
 <Layout
-  title={`${toolTranslations.title} - Web Util.IO`}
+  title={`${toolTranslations.title} - SLIT.IO`}
   description={toolTranslations.description}
   lang={pt.site.lang}
 >
@@ -40,5 +40,8 @@ const toolTranslations = pt.tools[slug]; // Pega a tradução da ferramenta
       <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{toolTranslations.description}</p>
     </div>
     <ToolLoader slug={slug} lang="pt" client:only="react" />
+    <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
+      Gostou desta ferramenta? Considere <a href="/apoie" class="underline hover:text-purple-600 dark:hover:text-purple-400">apoiar o projeto</a> para que ele continue gratuito e sem anúncios.
+    </p>
   </div>
 </Layout>

@@ -10,8 +10,10 @@ const i18n = lang === 'pt' ? pt : en;
 ---
 <header class="bg-white shadow-md dark:bg-gray-800 dark:border-b dark:border-gray-700 relative">
   <div class="container mx-auto px-6 py-3 flex justify-between items-center">
-    <a href={`/${lang}/`} class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-      Web Util<span class="text-purple-500">.IO</span>
+    <a href={`/${lang}/`} class="flex items-center space-x-1 text-2xl font-bold text-gray-800 dark:text-gray-100">
+      <img src="/static/images/slit_preto.png" alt="SLIT.IO Logo" class="h-8 dark:hidden" />
+      <img src="/static/images/slit_branco.png" alt="SLIT.IO Logo" class="h-8 hidden dark:block" />
+      <span>SLIT<span class="text-purple-500">.IO</span></span>
     </a>
 
     <!-- Desktop Nav -->

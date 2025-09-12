@@ -1,8 +1,8 @@
 {
   "site": {
-    "title": "Web Util<span class=\"text-purple-500\">.IO</span> - Fast & Secure Online Tools",
-    "plainTitle": "Web Util.IO - Fast & Secure Online Tools",
-    "description": "Your collection of web utilities that run directly in your browser. Fast, secure, and private.",
+    "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Fast & Secure Online Tools",
+    "plainTitle": "SLIT.IO - Fast & Secure Online Tools",
+    "description": "Your collection of SLITities that run directly in your browser. Fast, secure, and private.",
     "lang": "en-US"
   },
   "nav": {
@@ -12,39 +12,48 @@
   "tools": {
     "remover-fundo": {
       "title": "Online Background Remover Free",
-      "description": "Remove the background from images with a single click, using AI. Free online tool to remove photo backgrounds quickly without losing quality."
+      "description": "Remove the background from images with a single click, using AI. Free online tool to remove photo backgrounds quickly without losing quality.",
+      "icon": "🖼️"
     },
     "descompactar-arquivo": {
       "title": "Online ZIP File Decompressor",
-      "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required."
+      "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required.",
+      "icon": "📦"
     },
     "comprimir-imagem": {
       "title": "Free Online Image Compressor",
-      "description": "Reduce the size of your JPG, PNG, and WEBP images without losing quality. Compress images online for free for web use."
+      "description": "Reduce the size of your JPG, PNG, and WEBP images without losing quality. Compress images online for free for web use.",
+      "icon": "🗜️"
     },
     "criptografar-arquivo": {
       "title": "Online AES File Encryption",
-      "description": "Encrypt and decrypt files using the AES algorithm. Secure online tool to protect your files with a password."
+      "description": "Encrypt and decrypt files using the AES algorithm. Secure online tool to protect your files with a password.",
+      "icon": "🔒"
     },
     "gerador-hash": {
       "title": "Online SHA-256 Hash Generator",
-      "description": "Generate SHA-256 hashes for any text or file. Check file integrity online for free."
+      "description": "Generate SHA-256 hashes for any text or file. Check file integrity online for free.",
+      "icon": "🔢"
     },
     "comprimir-arquivo": {
       "title": "Online ZIP File Compressor",
-      "description": "Create ZIP archives from multiple files easily. Compress files online for free in the browser."
+      "description": "Create ZIP archives from multiple files easily. Compress files online for free in the browser.",
+      "icon": "📁"
     },
     "contador-palavras": {
       "title": "Free Online Word Counter",
-      "description": "Count words, characters, sentences, and paragraphs in a text. Fast and free online text analysis tool."
+      "description": "Count words, characters, sentences, and paragraphs in a text. Fast and free online text analysis tool.",
+      "icon": "📝"
     },
     "conversor-arquivos": {
       "title": "Online File Converter",
-      "description": "Convert files from one format to another. Starting with images. Free online file conversion tool."
+      "description": "Convert files from one format to another. Starting with images. Free online file conversion tool.",
+      "icon": "🔄"
     },
     "redimensionar-imagem": {
       "title": "Online Image Resizer",
-      "description": "Change the dimensions (width and height) of an image. Resize photos online for free without losing quality."
+      "description": "Change the dimensions (width and height) of an image. Resize photos online for free without losing quality.",
+      "icon": "📏"
     }
   },
   "components": {

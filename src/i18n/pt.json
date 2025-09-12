@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "Web Util<span class=\"text-purple-500\">.IO</span> - Ferramentas Online Rápidas e Seguras",
-    "plainTitle": "Web Util.IO - Ferramentas Online Rápidas e Seguras",
+    "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Ferramentas Online Rápidas e Seguras",
+    "plainTitle": "SLIT.IO - Ferramentas Online Rápidas e Seguras",
     "description": "Sua coleção de utilitários web que rodam diretamente no seu navegador. Rápido, seguro e privado.",
     "lang": "pt-BR"
   },
@@ -12,39 +12,48 @@
   "tools": {
     "remover-fundo": {
       "title": "Removedor de Fundo Online e Grátis",
-      "description": "Remova o fundo de imagens com um clique, usando IA. Ferramenta online gratuita para remover fundo de fotos rapidamente e sem perder qualidade."
+      "description": "Remova o fundo de imagens com um clique, usando IA. Ferramenta online gratuita para remover fundo de fotos rapidamente e sem perder qualidade.",
+      "icon": "🖼️"
     },
     "descompactar-arquivo": {
       "title": "Descompactador de Arquivos ZIP Online",
-      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador. Descompacte ZIP online de forma segura e gratuita, sem instalar software."
+      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador. Descompacte ZIP online de forma segura e gratuita, sem instalar software.",
+      "icon": "📦"
     },
     "comprimir-imagem": {
       "title": "Compressor de Imagens Online Grátis",
-      "description": "Reduza o tamanho de suas imagens JPG, PNG e WEBP sem perder qualidade. Comprima imagens online gratuitamente para web."
+      "description": "Reduza o tamanho de suas imagens JPG, PNG e WEBP sem perder qualidade. Comprima imagens online gratuitamente para web.",
+      "icon": "🗜️"
     },
     "criptografar-arquivo": {
       "title": "Criptografia de Arquivos AES Online",
-      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES. Ferramenta segura online para proteger seus arquivos com senha."
+      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES. Ferramenta segura online para proteger seus arquivos com senha.",
+      "icon": "🔒"
     },
     "gerador-hash": {
       "title": "Gerador de Hash SHA-256 Online",
-      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo. Verifique integridade de arquivos online gratuitamente."
+      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo. Verifique integridade de arquivos online gratuitamente.",
+      "icon": "🔢"
     },
     "comprimir-arquivo": {
       "title": "Compressor de Arquivos ZIP Online",
-      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil. Comprima arquivos online gratuitamente no navegador."
+      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil. Comprima arquivos online gratuitamente no navegador.",
+      "icon": "📁"
     },
     "contador-palavras": {
       "title": "Contador de Palavras Online Grátis",
-      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto. Ferramenta online para análise de texto rápida e gratuita."
+      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto. Ferramenta online para análise de texto rápida e gratuita.",
+      "icon": "📝"
     },
     "conversor-arquivos": {
       "title": "Conversor de Arquivos Online",
-      "description": "Converta arquivos de um formato para outro. Começando com imagens. Ferramenta gratuita online para conversão de arquivos."
+      "description": "Converta arquivos de um formato para outro. Começando com imagens. Ferramenta gratuita online para conversão de arquivos.",
+      "icon": "🔄"
     },
     "redimensionar-imagem": {
       "title": "Redimensionador de Imagens Online",
-      "description": "Altere as dimensões (largura e altura) de uma imagem. Redimensione fotos online gratuitamente sem perder qualidade."
+      "description": "Altere as dimensões (largura e altura) de uma imagem. Redimensione fotos online gratuitamente sem perder qualidade.",
+      "icon": "📏"
     }
   },
   "components": {

@@ -17,11 +17,12 @@ import ToolCard from '../../components/ToolCard.astro';
 
   <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {tools.map(tool => (
-      <ToolCard 
-        tool={tool} 
+      <ToolCard
+        tool={tool}
         lang="en"
         title={en.tools[tool.slug].title}
         description={en.tools[tool.slug].description}
+        icon={en.tools[tool.slug].icon}
       />
     ))}
   </section>

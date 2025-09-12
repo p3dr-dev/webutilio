@@ -3,11 +3,12 @@ import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import { Canvg } from 'canvg';
 import * as pdfjs from 'pdfjs-dist';
+import potrace from 'potrace';
 
 // Set the worker source for pdf.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-type OutputFormat = 'jpeg' | 'png' | 'webp' | 'csv';
+type OutputFormat = 'jpeg' | 'png' | 'webp' | 'csv' | 'svg' | 'json';
 type InputType = 'image' | 'svg' | 'pdf' | 'json';
 
 const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
@@ -22,10 +23,10 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const availableFormats: Record<string, OutputFormat[]> = {
-    'image/jpeg': ['png', 'webp', 'jpeg'],
-    'image/png': ['jpeg', 'webp', 'png'],
-    'image/webp': ['jpeg', 'png', 'webp'],
-    'image/svg+xml': ['png', 'jpeg', 'webp'],
+    'image/jpeg': ['png', 'webp', 'jpeg', 'svg'],
+    'image/png': ['jpeg', 'webp', 'png', 'svg'],
+    'image/webp': ['jpeg', 'png', 'webp', 'svg'],
+    'image/svg+xml': ['png', 'jpeg', 'webp', 'svg'],
     'application/pdf': ['png', 'jpeg', 'webp'],
     'application/json': ['csv'],
     'text/csv': ['json'], // Although not explicitly requested, it's good to have a reverse
@@ -87,9 +88,18 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       let convertedBlob: Blob | null = null;
 
       if (inputType === 'image') {
-        convertedBlob = await convertImageToImage(originalFile, outputFormat);
+        if (outputFormat === 'svg') {
+          convertedBlob = await convertImageToSvg(originalFile);
+        } else {
+          convertedBlob = await convertImageToImage(originalFile, outputFormat);
+        }
       } else if (inputType === 'svg') {
-        convertedBlob = await convertSvgToImage(originalFile, outputFormat);
+        if (outputFormat === 'svg') {
+          // If converting SVG to SVG, just return the original file blob
+          convertedBlob = originalFile;
+        } else {
+          convertedBlob = await convertSvgToImage(originalFile, outputFormat);
+        }
       } else if (inputType === 'pdf') {
         convertedBlob = await convertPdfToImage(originalFile, outputFormat);
       } else if (inputType === 'json' && outputFormat === 'csv') {
@@ -142,6 +152,33 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     });
   };
 
+  const convertImageToSvg = async (file: File): Promise<Blob | null> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const arrayBuffer = event.target?.result as ArrayBuffer;
+          potrace.trace(Buffer.from(arrayBuffer), {}, (err?: Error, svg?: string) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            if (svg) {
+              const blob = new Blob([svg], { type: 'image/svg+xml' });
+              resolve(blob);
+            } else {
+              reject(new Error('SVG conversion failed'));
+            }
+          });
+        } catch (error) {
+          reject(error);
+        }
+      };
+      reader.onerror = reject;
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
   const convertSvgToImage = async (file: File, format: OutputFormat): Promise<Blob | null> => {
     return new Promise(async (resolve, reject) => {
       const reader = new FileReader();
@@ -188,6 +225,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         const renderContext = {
           canvasContext: ctx,
           viewport: viewport,
+          canvas: canvas,
         };
         await page.render(renderContext).promise;
 

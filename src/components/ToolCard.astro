@@ -6,21 +6,26 @@ interface Props {
   lang: string;
   title: string;
   description: string;
+  icon: string;
 }
 
-const { tool, lang, title, description } = Astro.props;
+const { tool, lang, title, description, icon } = Astro.props;
 ---
-<a 
+<a
   href={`/${lang}/ferramentas/${tool.slug}`}
-  class="group block bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-200 dark:bg-gray-800 dark:border-gray-700"
+  class="group block bg-white rounded-lg shadow-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-4 transition-all duration-300 hover:shadow-xl hover:p-6 text-center"
+  style="min-height: 4rem;"
 >
+  <div class="mb-2">
+    <span class="text-4xl">{icon}</span>
+  </div>
   <h3 class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 dark:text-gray-100 dark:group-hover:text-purple-400">
     {title}
   </h3>
-  <p class="text-gray-600 mt-2 dark:text-gray-400">
+  <p class="text-gray-600 mt-2 dark:text-gray-400 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-96">
     {description}
   </p>
-  <span class="mt-4 inline-block text-sm font-semibold text-purple-500 group-hover:text-purple-700 dark:text-purple-400 dark:group-hover:text-purple-300">
+  <span class="mt-4 inline-block text-sm font-semibold text-purple-500 group-hover:text-purple-700 dark:text-purple-400 dark:group-hover:text-purple-300 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-96">
     {tool.category}
   </span>
 </a>

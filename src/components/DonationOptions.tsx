@@ -25,8 +25,6 @@ const DonationOptions: React.FC = () => {
           </span>
         </p>
       </div>
-
-
     </div>
   );
 };

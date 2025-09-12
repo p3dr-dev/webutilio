@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import pt from '../../i18n/pt.json';
 ---
 
-<Layout title="Feedback - Web Util.IO" description="Deixe seu feedback e sugestões para o Web Util.IO." lang={pt.site.lang}>
+<Layout title="Feedback - SLIT.IO" description="Deixe seu feedback e sugestões para o SLIT.IO." lang={pt.site.lang}>
   <section class="container mx-auto px-6 py-12 text-center">
     <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">Deixe seu Feedback</h1>
     <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
@@ -47,7 +47,7 @@ import pt from '../../i18n/pt.json';
       const email = form.elements.email.value;
       const message = form.elements.message.value;
       
-      const subject = `Feedback Web Util.IO - de ${name || 'Usuário Anônimo'}`;
+      const subject = `Feedback SLIT.IO - de ${name || 'Usuário Anônimo'}`;
       
       let body = `Feedback recebido:\n\n`;
       body += `Nome: ${name || 'Não informado'}\n`;

@@ -1,10 +1,10 @@
-# GEMINI.MD: Guia de Desenvolvimento para o "Web Util.IO"
+# GEMINI.MD: Guia de Desenvolvimento para o "SLIT.IO"
 
 Este documento serve como o guia principal para a IA Gemini. O objetivo é construir uma coleção de ferramentas online rápidas, eficientes e que funcionam inteiramente no lado do cliente (client-side).
 
 ## 1. Visão Geral do Projeto
 
-- **Nome do Projeto:** Web Util.IO
+- **Nome do Projeto:** SLIT.IO
 - **Conceito:** Um portal de utilidades web. Cada ferramenta deve ser uma "single-page application" dentro de sua própria rota, otimizada para performance e simplicidade.
 - **Princípio Fundamental:** **Performance e Privacidade.** As operações devem, sempre que possível, ocorrer no navegador do usuário usando JavaScript, WebAssembly (WASM) ou APIs do navegador. Nenhuma informação do usuário (arquivos, textos) deve ser enviada a um servidor, a menos que seja absolutamente necessário.
 
@@ -28,3 +28,5 @@ Este documento serve como o guia principal para a IA Gemini. O objetivo é const
 - **Layout:** Manter os componentes reutilizáveis `Header.astro`, `Footer.astro` e `Container.astro` para garantir a consistência visual.
 
 - **Idioma:** Responda sempre em **português do Brasil**.
+
+- **Atualização:** Removido Ko-fi e GitHub Sponsors da monetização. Mantido apenas Pix para simplicidade e alinhamento com a filosofia do projeto.
