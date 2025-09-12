@@ -6,7 +6,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://webutilio.vercel.app', // Use a URL do seu site Vercel
+  site: 'https://slitio.vercel.app', // Use a URL do seu site Vercel
   integrations: [react(), tailwind(), sitemap()],
   server: {
     host: '0.0.0.0',
