@@ -46,5 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 			<slot />
 		</main>
 		<Footer />
+		<!-- Vercel Analytics -->
+		<script type="module" src="/_vercel/insights/script.js"></script>
 	</body>
 </html>
