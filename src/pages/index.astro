@@ -1,22 +1,20 @@
+---
+// This page now uses a client-side script for language-based redirection.
+// It's intentionally minimal to prevent any flash of content before the redirect.
+---
 <html lang="en">
   <head>
+    <title>Redirecting...</title>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/pt/" />
-    <script>
-      // Detect browser language and redirect accordingly
+    <script is:inline>
       const userLang = navigator.language || navigator.userLanguage;
-      if (userLang.startsWith('en')) {
-        window.location.replace('/en/');
-      } else if (userLang.startsWith('pt')) {
-        window.location.replace('/pt/');
-      } else {
-        window.location.replace('/pt/');
-      }
+      // Default to 'pt' if the language is not English
+      const targetLang = userLang.startsWith('en') ? 'en' : 'pt';
+      // Use replace to avoid adding the root page to browser history
+      window.location.replace(`/${targetLang}/`);
     </script>
-    <title>SLIT - Ferramentas Online Rápidas e Seguras</title>
-    <meta name="description" content="Sua coleção de utilitários web que rodam diretamente no seu navegador. Rápido, seguro e privado." />
   </head>
   <body>
-    <p>Redirecionando...</p>
+    <!-- Body is intentionally empty to prevent flash of content -->
   </body>
 </html>

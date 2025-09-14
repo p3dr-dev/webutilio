@@ -21,8 +21,8 @@
       "icon": "📦"
     },
     "comprimir-imagem": {
-      "title": "Compressor de Imagens Online Grátis",
-      "description": "Reduza o tamanho de suas imagens JPG, PNG e WEBP sem perder qualidade. Comprima imagens online gratuitamente para web.",
+      "title": "Compressor de Mídia Online Grátis",
+      "description": "Reduza o tamanho de suas imagens e vídeos JPG, PNG, WEBP, MP4, WebM sem perder qualidade. Comprima mídia online gratuitamente.",
       "icon": "🗜️"
     },
     "criptografar-arquivo": {
@@ -74,18 +74,19 @@
       "errorCompressing": "Ocorreu um erro ao comprimir os arquivos:"
     },
     "imageCompressor": {
-      "selectImage": "Selecionar Imagem",
+      "selectImage": "Selecionar Imagem ou Vídeo",
       "quality": "Qualidade",
       "compressButton": "Comprimir Imagem",
-      "compressing": "Comprimindo imagem...",
+      "compressVideoButton": "Comprimir Vídeo",
+      "compressing": "Comprimindo mídia...",
       "original": "Original",
       "compressed": "Comprimida",
       "reduction": "de redução",
       "waiting": "Aguardando compressão...",
-      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido (JPEG, PNG, WEBP).",
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem ou vídeo válido (JPEG, PNG, WEBP, MP4, WebM, OGG).",
       "errorCanvas": "Não foi possível obter o contexto do canvas.",
-      "dragAndDrop": "Arraste e solte uma imagem aqui",
-      "selectAnother": "Selecionar outra imagem",
+      "dragAndDrop": "Arraste e solte uma imagem ou vídeo aqui",
+      "selectAnother": "Selecionar outro arquivo",
       "downloadPrefix": "comprimido",
       "download": "Download"
     },

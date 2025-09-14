@@ -13,19 +13,26 @@ const { tool, lang, title, description, icon } = Astro.props;
 ---
 <a
   href={`/${lang}/ferramentas/${tool.slug}`}
-  class="group relative z-0 block bg-white rounded-lg shadow-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-4 pt-4 pb-4 transition-all duration-300 hover:z-10 hover:shadow-xl hover:pt-6 hover:pb-4 text-center"
-  style="min-height: 4rem;"
+  class="group relative z-0 block rounded-lg border bg-white p-4 text-center shadow-md transition-all duration-300 hover:z-10 hover:scale-105 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
 >
   <div class="mb-2">
     <span class="text-4xl">{icon}</span>
   </div>
-  <h3 class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 dark:text-gray-100 dark:group-hover:text-purple-400">
-    {title}
-  </h3>
-  <p class="text-gray-600 mt-2 dark:text-gray-400 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-96">
-    {description}
-  </p>
-  <span class="mt-4 inline-block text-sm font-semibold text-purple-500 group-hover:text-purple-700 dark:group-hover:text-purple-300 opacity-0 max-h-0 overflow-hidden transition-all duration-300 group-hover:opacity-100 group-hover:max-h-96">
-    {tool.category}
-  </span>
+
+  {/* Container to standardize title height */}
+  <div class="flex h-16 items-center justify-center">
+    <h3 class="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-purple-600 dark:text-gray-100 dark:group-hover:text-purple-400">
+      {title}
+    </h3>
+  </div>
+
+  {/* This container appears on hover inside the scaled card */}
+  <div class="max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-96 group-hover:opacity-100">
+    <p class="mt-2 text-gray-600 dark:text-gray-400">
+      {description}
+    </p>
+    <span class="mt-4 inline-block text-sm font-semibold text-purple-500 group-hover:text-purple-700 dark:group-hover:text-purple-300">
+      {tool.category}
+    </span>
+  </div>
 </a>

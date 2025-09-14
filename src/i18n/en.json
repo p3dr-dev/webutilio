@@ -21,8 +21,8 @@
       "icon": "📦"
     },
     "comprimir-imagem": {
-      "title": "Free Online Image Compressor",
-      "description": "Reduce the size of your JPG, PNG, and WEBP images without losing quality. Compress images online for free for web use.",
+      "title": "Free Online Media Compressor",
+      "description": "Reduce the size of your images (JPG, PNG, WEBP) and videos (MP4, WebM, OGG) without losing quality. Compress media online for free.",
       "icon": "🗜️"
     },
     "criptografar-arquivo": {
@@ -74,18 +74,19 @@
       "errorCompressing": "An error occurred while compressing the files:"
     },
     "imageCompressor": {
-      "selectImage": "Select Image",
+      "selectImage": "Select Image or Video",
       "quality": "Quality",
       "compressButton": "Compress Image",
-      "compressing": "Compressing image...",
+      "compressVideoButton": "Compress Video",
+      "compressing": "Compressing media...",
       "original": "Original",
       "compressed": "Compressed",
       "reduction": "reduction",
       "waiting": "Waiting for compression...",
-      "errorInvalidFile": "Please select a valid image file (JPEG, PNG, WEBP).",
+      "errorInvalidFile": "Please select a valid image (JPEG, PNG, WEBP) or video (MP4, WebM, OGG) file.",
       "errorCanvas": "Could not get canvas context.",
-      "dragAndDrop": "Drag and drop an image here",
-      "selectAnother": "Select another image",
+      "dragAndDrop": "Drag and drop an image or video here",
+      "selectAnother": "Select another file",
       "downloadPrefix": "compressed",
       "download": "Download"
     },
@@ -102,7 +103,7 @@
       "errorCanvas": "Could not get canvas context.",
       "errorConversionFailed": "Conversion failed. Please try again.",
       "errorConversion": "Error during conversion:",
-      "errorInvalidJson": "Invalid or empty JSON. Ensure it's an array of objects.",
+      "errorInvalidJson": "Invalid or empty JSON. Ensure it\u0027s an array of objects.",
       "errorParsingJson": "Error parsing JSON. Check syntax.",
       "errorInvalidCsv": "Invalid or empty CSV. Ensure it has headers and data.",
       "errorParsingCsv": "Error parsing CSV. Check syntax.",

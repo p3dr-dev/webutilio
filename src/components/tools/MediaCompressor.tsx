@@ -1,8 +1,9 @@
 import React, { useState, useCallback, useRef } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
 
-const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string>('');
@@ -13,26 +14,48 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const ffmpegRef = useRef<FFmpeg | null>(null);
+
+  const loadFFmpeg = useCallback(async () => {
+    if (ffmpegLoaded) return;
+
+    try {
+      const ffmpeg = new FFmpeg();
+      ffmpegRef.current = ffmpeg;
+
+      ffmpeg.on('log', ({ message }) => {
+        console.log(message);
+      });
+
+      await ffmpeg.load();
+
+      setFfmpegLoaded(true);
+    } catch (error) {
+      console.error('Failed to load FFmpeg:', error);
+      setError('Erro ao carregar FFmpeg. Tente novamente.');
+    }
+  }, [ffmpegLoaded]);
 
   const handleFileSelect = (file: File | null) => {
-    if (file && file.type.startsWith('image/')) {
+    if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
       setOriginalFile(file);
       setOriginalUrl(URL.createObjectURL(file));
       setOriginalSize(file.size);
       setCompressedUrl('');
       setCompressedSize(null);
       setError('');
-    } else if (file) { // if a file is selected but it is not an image
+    } else if (file) {
       setError(t('components.imageCompressor.errorInvalidFile'));
       setOriginalFile(null);
       setOriginalUrl('');
       setOriginalSize(null);
-    } else { // if the file selection is cancelled
-        setOriginalFile(null);
-        setOriginalUrl('');
-        setOriginalSize(null);
-        setError('');
+    } else {
+      setOriginalFile(null);
+      setOriginalUrl('');
+      setOriginalSize(null);
+      setError('');
     }
   };
 
@@ -98,6 +121,60 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     reader.readAsDataURL(originalFile);
   }, [originalFile, quality, t]);
 
+  const compressVideo = useCallback(async () => {
+    if (!originalFile || !ffmpegRef.current) return;
+
+    setIsLoading(true);
+    setCompressedUrl('');
+    setCompressedSize(null);
+
+    try {
+      const ffmpeg = ffmpegRef.current;
+      const inputName = 'input' + originalFile.name;
+      const outputName = 'output.mp4';
+
+      // Write input file to FFmpeg filesystem
+      await ffmpeg.writeFile(inputName, await originalFile.arrayBuffer());
+
+      // Run FFmpeg compression
+      await ffmpeg.exec([
+        '-i', inputName,
+        '-b:v', `${Math.floor(quality * 1000)}k`,
+        '-bufsize', `${Math.floor(quality * 1000)}k`,
+        '-c:v', 'libx264',
+        '-preset', 'fast',
+        '-y', // Overwrite output files
+        outputName
+      ]);
+
+      // Read output file
+      const data = await ffmpeg.readFile(outputName);
+      const videoBlob = new Blob([data], { type: 'video/mp4' });
+      setCompressedUrl(URL.createObjectURL(videoBlob));
+      setCompressedSize(videoBlob.size);
+    } catch (e) {
+      console.error('Video compression error:', e);
+      setError('Erro ao comprimir vídeo. Tente novamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [originalFile, quality]);
+
+  const compressMedia = useCallback(async () => {
+    if (!originalFile) return;
+
+    if (originalFile.type.startsWith('image/')) {
+      compressImage();
+    } else if (originalFile.type.startsWith('video/')) {
+      await loadFFmpeg();
+      if (ffmpegLoaded) {
+        await compressVideo();
+      }
+    } else {
+      setError(t('components.imageCompressor.errorInvalidFile'));
+    }
+  }, [originalFile, compressImage, compressVideo, loadFFmpeg, ffmpegLoaded, t]);
+
   const formatBytes = (bytes: number | null) => {
     if (bytes === null) return '0 Bytes';
     if (bytes === 0) return '0 Bytes';
@@ -107,24 +184,36 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
+  const renderMedia = (url: string, isVideo: boolean) => {
+    if (isVideo) {
+      return <video src={url} controls className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
+    } else {
+      return <img src={url} alt="Media" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
+    }
+  };
+
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
       {isLoading && <LoadingSpinner text={t('components.imageCompressor.compressing')} />}
-      
+
       <input
         type="file"
-        accept="image/jpeg, image/png, image/webp"
+        accept="image/jpeg, image/png, image/webp, video/mp4, video/webm, video/ogg"
         onChange={handleFileChange}
         className="hidden"
         ref={fileInputRef}
+        aria-label="Selecionar arquivo de mídia"
       />
 
       {!originalFile && (
-        <div 
-          onDrop={handleDrop} 
+        <div
+          onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          className={`flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors ${isDragging ? 'border-purple-600 bg-purple-50 dark:bg-gray-700' : 'border-gray-300 dark:border-gray-600'}`}>
+          className={`flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors ${
+            isDragging ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-300 dark:border-gray-600'
+          }`}
+        >
           <p className="text-gray-500 dark:text-gray-400 mb-4">{t('components.imageCompressor.dragAndDrop')}</p>
           <button
             onClick={() => fileInputRef.current?.click()}
@@ -153,30 +242,30 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                 step="0.05"
                 value={quality}
                 onChange={(e) => setQuality(parseFloat(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600"
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-purple-600 dark:bg-gray-700"
                 disabled={isLoading}
               />
             </div>
 
             <button
-              onClick={compressImage}
+              onClick={compressMedia}
               disabled={isLoading}
               className="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 transition-colors disabled:bg-green-300 dark:disabled:bg-green-800"
             >
-              {t('components.imageCompressor.compressButton')}
+              {originalFile.type.startsWith('image/') ? t('components.imageCompressor.compressButton') : t('components.imageCompressor.compressVideoButton')}
             </button>
-            
+
             <div className="grid md:grid-cols-2 gap-6 mt-6 text-center">
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageCompressor.original')}</h3>
-                {originalUrl && <img src={originalUrl} alt="Original" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />}
+                {originalUrl && renderMedia(originalUrl, originalFile.type.startsWith('video/'))}
                 <p className="mt-2 font-medium text-gray-700 dark:text-gray-300">{formatBytes(originalSize)}</p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageCompressor.compressed')}</h3>
                 {compressedUrl ? (
                   <>
-                    <img src={compressedUrl} alt="Comprimida" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />
+                    {renderMedia(compressedUrl, originalFile.type.startsWith('video/'))}
                     <p className="mt-2 font-bold text-green-600 dark:text-green-400">
                       {formatBytes(compressedSize)}
                       {originalSize && compressedSize && (
@@ -186,12 +275,12 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                       )}
                     </p>
                     <a
-                        href={compressedUrl}
-                        download={`${t('components.imageCompressor.downloadPrefix')}-${originalFile.name}`}
-                        className="mt-4 inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 dark:disabled:bg-blue-800"
-                      >
-                        {t('components.imageCompressor.download')}
-                      </a>
+                      href={compressedUrl}
+                      download={`${t('components.imageCompressor.downloadPrefix')}-${originalFile.name}`}
+                      className="mt-4 inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 dark:disabled:bg-blue-800"
+                    >
+                      {t('components.imageCompressor.download')}
+                    </a>
                   </>
                 ) : (
                   <div className="mt-2 flex items-center justify-center h-80 bg-gray-100 rounded-lg dark:bg-gray-700">
@@ -201,11 +290,16 @@ const ImageCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               </div>
             </div>
           </div>
-           <button onClick={() => handleFileSelect(null)} className="w-full mt-4 text-sm text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400">{t('components.imageCompressor.selectAnother')}</button>
+          <button
+            onClick={() => handleFileSelect(null)}
+            className="w-full mt-4 text-sm text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400"
+          >
+            {t('components.imageCompressor.selectAnother')}
+          </button>
         </div>
       )}
     </div>
   );
 };
 
-export default ImageCompressor;
+export default MediaCompressor;
