@@ -85,27 +85,30 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   }, [quality, originalSize]);
 
+  const resetOriginalFileState = () => {
+    setOriginalFile(null);
+    setOriginalUrl('');
+    setOriginalSize(null);
+    setCompressedUrl('');
+    setCompressedSize(null);
+    setError('');
+    setProgress(null);
+  };
+
   const handleFileSelect = (file: File | null) => {
-    if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
+    if (!file) {
+      resetOriginalFileState();
+      return;
+    }
+
+    if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+      resetOriginalFileState();
       setOriginalFile(file);
       setOriginalUrl(URL.createObjectURL(file));
       setOriginalSize(file.size);
-      setCompressedUrl('');
-      setCompressedSize(null);
-      setError('');
-      setProgress(null);
-    } else if (file) {
-      setError(t('components.mediaCompressor.errorInvalidFile'));
-      setOriginalFile(null);
-      setOriginalUrl('');
-      setOriginalSize(null);
-      setProgress(null);
     } else {
-      setOriginalFile(null);
-      setOriginalUrl('');
-      setOriginalSize(null);
-      setError('');
-      setProgress(null);
+      resetOriginalFileState();
+      setError(t('components.mediaCompressor.errorInvalidFile'));
     }
   };
 

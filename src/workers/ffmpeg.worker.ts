@@ -26,7 +26,6 @@ async function initializeFFmpeg() {
     await ffmpeg.load({
       coreURL: '/ffmpeg/ffmpeg-core.js',
       wasmURL: '/ffmpeg/ffmpeg-core.wasm',
-      workerURL: '/ffmpeg/ffmpeg-core.js', // Usamos o ffmpeg-core.js como worker
     });
   } catch (e: any) {
     self.postMessage({ type: 'error', message: `[ffmpeg.worker] Error loading FFmpeg core files: ${e.message}` });
