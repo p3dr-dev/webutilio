@@ -1,21 +1,12 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { removeBackground } from '@imgly/background-removal';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import * as ort from 'onnxruntime-web';
+import { useLoadingPhrases } from './useLoadingPhrases';
 
-const loadingPhrases = [
-  "Aguarde um momento, a mágica está acontecendo...",
-  "Estamos removendo o fundo, pixel por pixel!",
-  "Quase lá! Tomando um café enquanto processamos...",
-  "Não se preocupe, não vamos remover seu bom humor!",
-  "Contando os pixels... são muitos!",
-  "Processando sua imagem mais rápido que um raio (quase)!",
-  "Preparando a imagem para o seu próximo grande projeto.",
-  "Aguarde, estamos dando um trato na sua foto.",
-  "Seu fundo está prestes a desaparecer!",
-  "Estamos trabalhando duro para deixar sua imagem perfeita.",
-];
+// Configure o caminho do WASM uma vez fora do componente
+ort.env.wasm.wasmPath = '/models/';
 
 const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -25,20 +16,8 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [currentPhrase, setCurrentPhrase] = useState(loadingPhrases[0]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isLoading) {
-      interval = setInterval(() => {
-        setCurrentPhrase(loadingPhrases[Math.floor(Math.random() * loadingPhrases.length)]);
-      }, 3000);
-    } else {
-      setCurrentPhrase(loadingPhrases[0]);
-    }
-    return () => clearInterval(interval);
-  }, [isLoading]);
+  const loadingText = useLoadingPhrases(isLoading, 'components.backgroundRemover.loadingPhrases');
 
   const processImage = useCallback(async (file: File) => {
     if (!file) return;
@@ -46,12 +25,10 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setIsLoading(true);
     setProcessedUrl(null);
     setError(null);
-    setCurrentPhrase(loadingPhrases[0]);
     
     const reader = new FileReader();
     reader.onloadend = async () => {
       setOriginalUrl(reader.result as string);
-      ort.env.wasm.wasmPath = '/models/';
       try {
         const resultBlob = await removeBackground(file);
         if (resultBlob) {
@@ -60,7 +37,8 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           setError(t('components.backgroundRemover.errorProcessing'));
         }
       } catch (err: any) {
-        setError(`Ocorreu um erro ao processar a imagem: ${err.message}`);
+        console.error(err); // Log do erro para depuração
+        setError(`${t('components.backgroundRemover.errorProcessing')}: ${err.message}`);
       } finally {
         setIsLoading(false);
       }
@@ -183,3 +161,4 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 };
 
 export default BackgroundRemover;
+

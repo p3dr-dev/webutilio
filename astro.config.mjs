@@ -11,23 +11,21 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     https: true,
-    headers: {
-      // Habilita o modo cross-origin isolated, necessário para o multi-threading do WASM.
-      'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-    },
   },
   vite: {
-    plugins: [basicSsl()],
+    plugins: [
+      basicSsl(),
+      {
+        name: 'add-coep-coop-headers',
+        configureServer(server) {
+          server.middlewares.use((req, res, next) => {
+            res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+            res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+            next();
+          });
+        },
+      },
+    ],
   },
-  response: {
-    headers: {
-      // Garante que os cabeçalhos também sejam aplicados no build final.
-      'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
-      // 'unsafe-eval' é um requisito do onnxruntime-web para carregar o modelo WASM.
-      // O risco é baixo, pois a aplicação é totalmente client-side.
-      'Content-Security-Policy': "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob;",
-    },
-  },
+  
 });

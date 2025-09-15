@@ -1,19 +1,29 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
 	title: string;
 	description: string;
-	lang: 'pt-BR' | 'en-US';
+	lang: 'pt' | 'en';
 }
 
 const { title, description, lang } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Helper para obter o caminho base sem o idioma
+const getBasePath = (pathname: string) => {
+  const parts = pathname.split('/').filter(Boolean); // Remove partes vazias
+  if (parts.length > 0 && (parts[0] === 'en' || parts[0] === 'pt')) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return pathname;
+};
+
+const basePath = getBasePath(Astro.url.pathname);
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en-US'}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -37,22 +47,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 		
 
-		<link rel="alternate" hreflang="pt-BR" href={Astro.site + 'pt' + Astro.url.pathname.substring(3)} />
-		<link rel="alternate" hreflang="en-US" href={Astro.site + 'en' + Astro.url.pathname.substring(3)} />
-		<link rel="alternate" hreflang="x-default" href={Astro.site + 'pt' + Astro.url.pathname.substring(3)} />
+		<link rel="alternate" hreflang="pt-BR" href={Astro.site + 'pt' + basePath} />
+		<link rel="alternate" hreflang="en-US" href={Astro.site + 'en' + basePath} />
+		<link rel="alternate" hreflang="x-default" href={Astro.site + 'pt' + basePath} />
 	</head>
 	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-		<Header lang={lang.split('-')[0]} /> {/* Passa o idioma para o Header */}
+		<Header lang={lang} /> {/* Passa o idioma para o Header */}
 		<main class="container mx-auto px-6 py-8 min-h-screen">
 			<slot />
 		</main>
 		<Footer />
-		{import.meta.env.PROD && (
-			<>
-				<!-- Vercel Analytics -->
-				<script type="module" src="/_vercel/insights/script.js"></script>
-				<SpeedInsights />
-			</>
-		)}
 	</body>
 </html>

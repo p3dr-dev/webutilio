@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import ToolLoader from '../../../components/tools/ToolLoader.tsx';
+import ToolLoader from '../../../components/tools/ToolLoader';
 import { tools as toolsData } from '../../../data/tools'; // Dados estruturais
 import pt from '../../../i18n/pt.json'; // Dicionário em português
 
@@ -18,9 +18,9 @@ const toolTranslations = pt.tools[slug]; // Pega a tradução da ferramenta
 <Layout
   title={`${toolTranslations.title} - SLIT.IO`}
   description={toolTranslations.description}
-  lang={pt.site.lang}
+  lang="pt"
 >
-  <script type="application/ld+json" set:html={JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": toolTranslations.title,

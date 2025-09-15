@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { tools } from '../../data/tools';
+import ToolCard from '../../components/ToolCard.astro';
+import { useTranslations, getStaticPaths as getLangStaticPaths } from '../../i18n/utils';
+
+export const getStaticPaths = getLangStaticPaths;
+
+const { lang } = Astro.params as { lang: 'en' | 'pt' };
+const t = useTranslations(lang);
+---
+
+<Layout title={t('site.plainTitle')} description={t('site.description')} lang={lang}>
+  <section class="text-center py-12">
+    <h1 class="text-5xl font-extrabold text-gray-800 dark:text-gray-100 leading-tight mb-4"
+      set:html={t('site.title')}
+    ></h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-10">
+      {t('site.description')}
+    </p>
+  </section>
+
+  <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+    {tools.map(tool => (
+      <ToolCard
+        tool={tool}
+        lang={lang}
+        title={t(`tools.${tool.slug}.title`)}
+        description={t(`tools.${tool.slug}.description`)}
+        icon={t(`tools.${tool.slug}.icon`)}
+        category={t(`categories.${tool.category}`)}
+      />
+    ))}
+  </section>
+</Layout>

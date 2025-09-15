@@ -1,13 +1,13 @@
 import React, { useState, useRef, useCallback } from 'react';
 import JSZip from 'jszip';
-import { Archive as TarArchive } from '@obsidize/tar-browserify';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
+import { useLoadingPhrases } from './useLoadingPhrases';
 
 const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [files, setFiles] = useState<File[]>([]);
-  const [outputFormat, setOutputFormat] = useState<'zip'>('zip');
+  
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [processedUrl, setProcessedUrl] = useState<string | null>(null);
@@ -15,6 +15,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [outputFileName, setOutputFileName] = useState<string>('');
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const setZipUrl = setProcessedUrl; // Alias for clarity
   const setZipSize = setProcessedSize; // Alias for clarity
@@ -74,25 +75,23 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     try {
       let outputBlob: Blob;
 
-      if (outputFormat === 'zip') {
-        const zip = new JSZip();
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          zip.file(file.name, file);
-        }
-
-        outputBlob = await zip.generateAsync({
-          type: 'blob',
-          compression: 'DEFLATE',
-          compressionOptions: {
-            level: 9,
-          },
-        });
-        setOutputFileName(t('components.fileCompressor.downloadNameZip'));
+      const zip = new JSZip();
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        zip.file(file.name, file);
       }
 
-      setProcessedUrl(URL.createObjectURL(outputBlob));
-      setProcessedSize(outputBlob.size);
+      outputBlob = await zip.generateAsync({
+        type: 'blob',
+        compression: 'DEFLATE',
+        compressionOptions: {
+          level: 9,
+        },
+      });
+      setOutputFileName('compressed.zip');
+
+      setProcessedUrl(URL.createObjectURL(outputBlob!));
+      setProcessedSize(outputBlob!.size);
 
     } catch (err: any) {
       setError(`${t('components.fileCompressor.errorCompressing')} ${err.message}`);
@@ -111,7 +110,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.fileCompressor.compressing')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
 
       <input
         type="file"
@@ -136,15 +135,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         </button>
       </div>
 
-      <div className="mt-4 mb-4">
-        <fieldset className="flex space-x-4 justify-center">
-          <legend className="sr-only">{t('components.fileCompressor.outputFormat')}</legend>
-          <div>
-            <input type="radio" id="zipFormat" name="outputFormat" value="zip" checked={outputFormat === 'zip'} onChange={() => setOutputFormat('zip')} className="h-4 w-4 text-purple-600 border-gray-300 focus:ring-purple-500 dark:border-gray-600" />
-            <label htmlFor="zipFormat" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">.ZIP</label>
-          </div>
-        </fieldset>
-      </div>
+      
 
       {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 

@@ -9,6 +9,13 @@
     "feedback": "Feedback",
     "support": "Support the Project"
   },
+  "categories": {
+    "images": "Images",
+    "files": "Files",
+    "text": "Text",
+    "converters": "Converters",
+    "media": "Media"
+  },
   "tools": {
     "remover-fundo": {
       "title": "Online Background Remover Free",
@@ -20,7 +27,7 @@
       "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required.",
       "icon": "📦"
     },
-    "comprimir-imagem": {
+    "comprimir-midia": {
       "title": "Free Online Media Compressor",
       "description": "Reduce the size of your images (JPG, PNG, WEBP) and videos (MP4, WebM, OGG) without losing quality. Compress media online for free.",
       "icon": "🗜️"
@@ -90,6 +97,25 @@
       "downloadPrefix": "compressed",
       "download": "Download"
     },
+    "mediaCompressor": {
+      "selectImage": "Select Image or Video",
+      "quality": "Quality",
+      "compressButton": "Compress Image",
+      "compressVideoButton": "Compress Video",
+      "processing": "Compressing media...",
+      "original": "Original",
+      "compressed": "Compressed",
+      "reduction": "reduction",
+      "waiting": "Waiting for compression...",
+      "errorInvalidFile": "Please select a valid image (JPEG, PNG, WEBP) or video (MP4, WebM, OGG) file.",
+      "errorCanvas": "Could not get canvas context.",
+      "dragAndDrop": "Drag and drop an image or video here",
+      "selectAnother": "Select another file",
+      "downloadPrefix": "compressed",
+      "download": "Download",
+      "errorLoadFFmpeg": "Error loading video processor. Please try again.",
+      "errorCompressVideo": "Error compressing video. Please try again."
+    },
     "fileConverter": {
       "selectFile": "Select File",
       "convertTo": "Convert to:",
@@ -149,7 +175,19 @@
       "errorProcessing": "Error: Image processing did not return a valid result.",
       "dragAndDrop": "Drag and drop an image here",
       "selectAnother": "Select another image",
-      "errorInvalidFile": "Please select a valid image file."
+      "errorInvalidFile": "Please select a valid image file.",
+      "loadingPhrases": [
+        "Hold on, the magic is happening...",
+        "We're removing the background, pixel by pixel!",
+        "Almost there! Grabbing a coffee while we process...",
+        "Don't worry, we won't remove your good mood!",
+        "Counting the pixels... there are a lot!",
+        "Processing your image faster than lightning (almost)!",
+        "Preparing the image for your next big project.",
+        "Hang on, we're giving your photo a makeover.",
+        "Your background is about to disappear!",
+        "We're working hard to make your image perfect."
+      ]
     },
     "contadorPalavras": {
       "placeholder": "Paste your text here...",

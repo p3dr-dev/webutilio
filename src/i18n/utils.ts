@@ -1,19 +1,30 @@
-import pt from './pt.json';
 import en from './en.json';
+import pt from './pt.json';
 
-const languages = { pt, en };
+export const languages = { en, pt };
 
-export function useTranslations(lang: 'pt' | 'en') {
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'pt' } }];
+}
+
+export function getLangFromUrl(url: URL) {
+  const [, lang] = url.pathname.split('/');
+  if (lang in languages) return lang as keyof typeof languages;
+  return 'pt';
+}
+
+export function useTranslations(lang: keyof typeof languages) {
   return function t(key: string) {
+    // Deeply nested key access
     const keys = key.split('.');
-    let result = languages[lang] as any;
+    let value: any = languages[lang];
     for (const k of keys) {
-      if (result === undefined || result === null) {
-        result = undefined; // Ensure result is undefined if any part of the path is missing
-        break;
+      if (value && typeof value === 'object' && k in value) {
+        value = value[k];
+      } else {
+        return key; // Return the key itself if not found
       }
-      result = result?.[k];
     }
-    return result || key;
-  }
+    return value;
+  };
 }

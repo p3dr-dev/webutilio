@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
+import { useLoadingPhrases } from './useLoadingPhrases';
 
 const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -12,6 +13,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -121,7 +123,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.imageResizer.resizing')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
 
       <input
         type="file"

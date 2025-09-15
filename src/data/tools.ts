@@ -1,43 +1,45 @@
+export type ToolCategory = 'images' | 'files' | 'text' | 'converters' | 'media';
+
 export interface Tool {
   slug: string;
-  category: 'Imagens' | 'Arquivos' | 'Texto' | 'Conversores';
+  category: ToolCategory;
 }
 
 export const tools: Tool[] = [
   {
-    slug: 'remover-fundo',
-    category: 'Imagens',
-  },
-    {
-    slug: 'descompactar-arquivo',
-    category: 'Arquivos',
-  },
-  {
-    slug: 'comprimir-imagem',
-    category: 'Imagens',
-  },
-  {
-    slug: 'criptografar-arquivo',
-    category: 'Arquivos',
-  },
-  {
-    slug: 'gerador-hash',
-    category: 'Texto',
-  },
-    {
     slug: 'comprimir-arquivo',
-    category: 'Arquivos',
+    category: 'files',
+  },
+  {
+    slug: 'comprimir-midia',
+    category: 'media',
   },
   {
     slug: 'contador-palavras',
-    category: 'Texto',
+    category: 'text',
   },
-    {
+  {
     slug: 'conversor-arquivos',
-    category: 'Conversores',
+    category: 'files',
+  },
+  {
+    slug: 'criptografar-arquivo',
+    category: 'files',
+  },
+  {
+    slug: 'descompactar-arquivo',
+    category: 'files',
+  },
+  {
+    slug: 'gerador-hash',
+    category: 'text',
   },
   {
     slug: 'redimensionar-imagem',
-    category: 'Imagens',
+    category: 'images',
+  },
+  {
+    slug: 'remover-fundo',
+    category: 'images',
   }
 ];

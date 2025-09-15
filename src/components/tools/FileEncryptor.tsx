@@ -1,6 +1,7 @@
-import React, { useState, useCallback, useRef } from 'react';
-import LoadingSpinner from './LoadingSpinner';
+import React, { useState, useRef } from 'react';
 import { useTranslations } from '../../i18n/utils';
+import { useLoadingPhrases } from './useLoadingPhrases';
+import LoadingSpinner from './LoadingSpinner';
 
 const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -13,6 +14,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState('');
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const getPasswordKey = async (password: string): Promise<CryptoKey> => {
     const encoder = new TextEncoder();
@@ -168,7 +170,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.fileEncryptor.processing')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <fieldset className="flex space-x-4">

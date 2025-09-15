@@ -1,5 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslations } from '../../i18n/utils';
+import LoadingSpinner from './LoadingSpinner';
+import { useLoadingPhrases } from './useLoadingPhrases';
+
 
 const GeradorHash: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -9,6 +12,7 @@ const GeradorHash: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [comparisonResult, setComparisonResult] = useState<'match' | 'no-match' | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const generateHash = useCallback(async () => {
     if (!input) {
@@ -48,15 +52,34 @@ const GeradorHash: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   }, [input, compareHash]);
 
+  const handleClear = () => {
+    setInput('');
+    setHash('');
+    setCompareHash('');
+    setComparisonResult(null);
+    setError(null);
+  };
+
   return (
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      <textarea
-        className="w-full h-40 p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-        placeholder={t('components.hashGenerator.placeholder')}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        disabled={isLoading}
-      ></textarea>
+      {isLoading && <LoadingSpinner text={loadingText} />}
+      <div className="relative">
+        <textarea
+          className="w-full h-40 p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+          placeholder={t('components.hashGenerator.placeholder')}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          disabled={isLoading}
+        ></textarea>
+        {input && (
+            <button
+                onClick={handleClear}
+                className="absolute top-2 right-2 px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
+            >
+                {t('components.fileCompressor.clear')}
+            </button>
+        )}
+      </div>
       <button
         onClick={generateHash}
         disabled={isLoading || !input}

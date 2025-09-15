@@ -7,9 +7,10 @@ interface Props {
   title: string;
   description: string;
   icon: string;
+  category: string;
 }
 
-const { tool, lang, title, description, icon } = Astro.props;
+const { tool, lang, title, description, icon, category } = Astro.props;
 ---
 <a
   href={`/${lang}/ferramentas/${tool.slug}`}
@@ -32,7 +33,7 @@ const { tool, lang, title, description, icon } = Astro.props;
       {description}
     </p>
     <span class="mt-4 inline-block text-sm font-semibold text-purple-500 group-hover:text-purple-700 dark:group-hover:text-purple-300">
-      {tool.category}
+      {category}
     </span>
   </div>
 </a>

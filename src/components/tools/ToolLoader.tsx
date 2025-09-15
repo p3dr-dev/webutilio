@@ -9,7 +9,7 @@ interface ToolLoaderProps {
 const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.ComponentType<any>> } = {
   'contador-palavras': lazy(() => import('./ContadorPalavras')),
   'gerador-hash': lazy(() => import('./GeradorHash')),
-  'comprimir-imagem': lazy(() => import('./MediaCompressor')),
+  'comprimir-midia': lazy(() => import('./MediaCompressor')),
   'criptografar-arquivo': lazy(() => import('./FileEncryptor')),
   'conversor-arquivos': lazy(() => import('./FileConverter')),
   'comprimir-arquivo': lazy(() => import('./FileCompressor')),

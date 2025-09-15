@@ -1,7 +1,12 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
-import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { useLoadingPhrases } from './useLoadingPhrases';
+
+// Importa o worker usando a sintaxe específica do Vite
+const ffmpegWorker = new Worker(new URL('../../workers/ffmpeg.worker.ts', import.meta.url), {
+  type: 'module',
+});
 
 const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -14,29 +19,52 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [ffmpegLoaded, setFfmpegLoaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const loadingText = useLoadingPhrases(isLoading);
+  const workerRef = useRef<Worker>(ffmpegWorker);
+  const [ffmpegLogs, setFfmpegLogs] = useState<string[]>([]);
 
-  const loadFFmpeg = useCallback(async () => {
-    if (ffmpegLoaded) return;
+  useEffect(() => {
+    const worker = workerRef.current;
 
-    try {
-      const ffmpeg = new FFmpeg();
-      ffmpegRef.current = ffmpeg;
+    worker.onmessage = (event) => {
+      const { type, data, progress, time, message: workerMessage, outputFileName } = event.data;
 
-      ffmpeg.on('log', ({ message }) => {
-        console.log(message);
-      });
+      switch (type) {
+        case 'log':
+          setFfmpegLogs((prev) => [...prev, workerMessage]);
+          break;
+        case 'progress':
+          // Aqui você pode atualizar um estado de progresso se quiser
+          // console.log(`Progresso: ${Math.round(progress * 100)}% - Tempo: ${time}s`);
+          break;
+        case 'result':
+          const blob = new Blob([data], { type: 'video/mp4' }); // Ajuste o tipo MIME conforme necessário
+          const url = URL.createObjectURL(blob);
+          setCompressedUrl(url);
+          setCompressedSize(blob.size);
+          setIsLoading(false);
+          break;
+        case 'error':
+          setError(workerMessage);
+          setIsLoading(false);
+          console.error('Worker error:', workerMessage);
+          break;
+        default:
+          console.log('Message from worker:', event.data);
+      }
+    };
 
-      await ffmpeg.load();
+    worker.onerror = (error) => {
+      console.error('Worker error event:', error);
+      setError(t('components.mediaCompressor.errorWorker'));
+      setIsLoading(false);
+    };
 
-      setFfmpegLoaded(true);
-    } catch (error) {
-      console.error('Failed to load FFmpeg:', error);
-      setError('Erro ao carregar FFmpeg. Tente novamente.');
-    }
-  }, [ffmpegLoaded]);
+    return () => {
+      // worker.terminate(); // Opcional: terminar o worker quando o componente é desmontado
+    };
+  }, [t]);
 
   const handleFileSelect = (file: File | null) => {
     if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
@@ -47,7 +75,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       setCompressedSize(null);
       setError('');
     } else if (file) {
-      setError(t('components.imageCompressor.errorInvalidFile'));
+      setError(t('components.mediaCompressor.errorInvalidFile'));
       setOriginalFile(null);
       setOriginalUrl('');
       setOriginalSize(null);
@@ -98,7 +126,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         canvas.height = img.height;
         const ctx = canvas.getContext('2d');
         if (!ctx) {
-          setError(t('components.imageCompressor.errorCanvas'));
+          setError(t('components.mediaCompressor.errorCanvas'));
           setIsLoading(false);
           return;
         }
@@ -122,42 +150,32 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   }, [originalFile, quality, t]);
 
   const compressVideo = useCallback(async () => {
-    if (!originalFile || !ffmpegRef.current) return;
+    if (!originalFile) return;
 
     setIsLoading(true);
     setCompressedUrl('');
     setCompressedSize(null);
 
-    try {
-      const ffmpeg = ffmpegRef.current;
-      const inputName = 'input' + originalFile.name;
-      const outputName = 'output.mp4';
+    const inputFileName = originalFile.name;
+    const outputFileName = `output-${originalFile.name.split('.').slice(0, -1).join('.')}.mp4`; // Exemplo: converter para mp4
 
-      // Write input file to FFmpeg filesystem
-      await ffmpeg.writeFile(inputName, await originalFile.arrayBuffer());
-
-      // Run FFmpeg compression
-      await ffmpeg.exec([
-        '-i', inputName,
-        '-b:v', `${Math.floor(quality * 1000)}k`,
-        '-bufsize', `${Math.floor(quality * 1000)}k`,
-        '-c:v', 'libx264',
-        '-preset', 'fast',
-        '-y', // Overwrite output files
-        outputName
-      ]);
-
-      // Read output file
-      const data = await ffmpeg.readFile(outputName);
-      const videoBlob = new Blob([data], { type: 'video/mp4' });
-      setCompressedUrl(URL.createObjectURL(videoBlob));
-      setCompressedSize(videoBlob.size);
-    } catch (e) {
-      console.error('Video compression error:', e);
-      setError('Erro ao comprimir vídeo. Tente novamente.');
-    } finally {
-      setIsLoading(false);
-    }
+    workerRef.current.postMessage({
+      type: 'run',
+      payload: {
+        file: originalFile,
+        fileName: inputFileName,
+        outputFileName,
+        args: [
+          '-i', inputFileName,
+          '-b:v', `${Math.floor(quality * 1000)}k`,
+          '-bufsize', `${Math.floor(quality * 1000)}k`,
+          '-c:v', 'libx264',
+          '-preset', 'fast',
+          '-y', // Overwrite output files
+          outputFileName
+        ], // Exemplo: converter para mp4
+      },
+    });
   }, [originalFile, quality]);
 
   const compressMedia = useCallback(async () => {
@@ -166,14 +184,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     if (originalFile.type.startsWith('image/')) {
       compressImage();
     } else if (originalFile.type.startsWith('video/')) {
-      await loadFFmpeg();
-      if (ffmpegLoaded) {
-        await compressVideo();
-      }
+      compressVideo();
     } else {
-      setError(t('components.imageCompressor.errorInvalidFile'));
+      setError(t('components.mediaCompressor.errorInvalidFile'));
     }
-  }, [originalFile, compressImage, compressVideo, loadFFmpeg, ffmpegLoaded, t]);
+  }, [originalFile, compressImage, compressVideo, t]);
 
   const formatBytes = (bytes: number | null) => {
     if (bytes === null) return '0 Bytes';
@@ -194,7 +209,15 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.imageCompressor.compressing')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
+
+      {isLoading && ffmpegLogs.length > 0 && (
+        <div className="absolute bottom-0 left-0 right-0 p-2 bg-gray-900 text-white text-xs max-h-24 overflow-y-auto rounded-b-lg">
+          {ffmpegLogs.map((log, index) => (
+            <p key={index}>{log}</p>
+          ))}
+        </div>
+      )}
 
       <input
         type="file"
@@ -214,13 +237,13 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             isDragging ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-300 dark:border-gray-600'
           }`}
         >
-          <p className="text-gray-500 dark:text-gray-400 mb-4">{t('components.imageCompressor.dragAndDrop')}</p>
+          <p className="text-gray-500 dark:text-gray-400 mb-4">{t('components.mediaCompressor.dragAndDrop')}</p>
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isLoading}
             className="w-auto bg-purple-600 text-white font-bold py-2 px-4 rounded-md hover:bg-purple-700 transition-colors disabled:bg-purple-400 dark:disabled:bg-purple-800"
           >
-            {t('components.imageCompressor.selectImage')}
+            {t('components.mediaCompressor.selectImage')}
           </button>
         </div>
       )}
@@ -232,7 +255,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           <div className="mt-6">
             <div className="mb-4">
               <label htmlFor="quality" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                {t('components.imageCompressor.quality')}: {Math.round(quality * 100)}%
+                {t('components.mediaCompressor.quality')}: {Math.round(quality * 100)}%
               </label>
               <input
                 type="range"
@@ -252,17 +275,17 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               disabled={isLoading}
               className="w-full bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600 transition-colors disabled:bg-green-300 dark:disabled:bg-green-800"
             >
-              {originalFile.type.startsWith('image/') ? t('components.imageCompressor.compressButton') : t('components.imageCompressor.compressVideoButton')}
+              {originalFile.type.startsWith('image/') ? t('components.mediaCompressor.compressButton') : t('components.mediaCompressor.compressVideoButton')}
             </button>
 
             <div className="grid md:grid-cols-2 gap-6 mt-6 text-center">
               <div>
-                <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageCompressor.original')}</h3>
+                <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.mediaCompressor.original')}</h3>
                 {originalUrl && renderMedia(originalUrl, originalFile.type.startsWith('video/'))}
                 <p className="mt-2 font-medium text-gray-700 dark:text-gray-300">{formatBytes(originalSize)}</p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageCompressor.compressed')}</h3>
+                <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.mediaCompressor.compressed')}</h3>
                 {compressedUrl ? (
                   <>
                     {renderMedia(compressedUrl, originalFile.type.startsWith('video/'))}
@@ -270,21 +293,21 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                       {formatBytes(compressedSize)}
                       {originalSize && compressedSize && (
                         <span className="text-sm text-gray-500 ml-2 dark:text-gray-400">
-                          ({(((originalSize - compressedSize) / originalSize) * 100).toFixed(0)}% {t('components.imageCompressor.reduction')})
+                          ({(((originalSize - compressedSize) / originalSize) * 100).toFixed(0)}% {t('components.mediaCompressor.reduction')})
                         </span>
                       )}
                     </p>
                     <a
                       href={compressedUrl}
-                      download={`${t('components.imageCompressor.downloadPrefix')}-${originalFile.name}`}
+                      download={`${t('components.mediaCompressor.downloadPrefix')}-${originalFile.name}`}
                       className="mt-4 inline-block bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition-colors disabled:bg-blue-300 dark:disabled:bg-blue-800"
                     >
-                      {t('components.imageCompressor.download')}
+                      {t('components.mediaCompressor.download')}
                     </a>
                   </>
                 ) : (
                   <div className="mt-2 flex items-center justify-center h-80 bg-gray-100 rounded-lg dark:bg-gray-700">
-                    <p className="text-gray-500 dark:text-gray-400">{t('components.imageCompressor.waiting')}</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t('components.mediaCompressor.waiting')}</p>
                   </div>
                 )}
               </div>
@@ -294,7 +317,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             onClick={() => handleFileSelect(null)}
             className="w-full mt-4 text-sm text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400"
           >
-            {t('components.imageCompressor.selectAnother')}
+            {t('components.mediaCompressor.selectAnother')}
           </button>
         </div>
       )}

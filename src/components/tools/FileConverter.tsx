@@ -3,13 +3,15 @@ import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import { Canvg } from 'canvg';
 import * as pdfjs from 'pdfjs-dist';
-import potrace from 'potrace';
+
 
 // Set the worker source for pdf.js
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 type OutputFormat = 'jpeg' | 'png' | 'webp' | 'csv' | 'svg' | 'json';
 type InputType = 'image' | 'svg' | 'pdf' | 'json';
+
+import { useLoadingPhrases } from './useLoadingPhrases';
 
 const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -21,6 +23,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const availableFormats: Record<string, OutputFormat[]> = {
     'image/jpeg': ['png', 'webp', 'jpeg', 'svg'],
@@ -88,11 +91,10 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       let convertedBlob: Blob | null = null;
 
       if (inputType === 'image') {
-        if (outputFormat === 'svg') {
-          convertedBlob = await convertImageToSvg(originalFile);
-        } else {
+        // if (outputFormat === 'svg') {
+        //   convertedBlob = await convertImageToSvg(originalFile);
+        // } else {
           convertedBlob = await convertImageToImage(originalFile, outputFormat);
-        }
       } else if (inputType === 'svg') {
         if (outputFormat === 'svg') {
           // If converting SVG to SVG, just return the original file blob
@@ -152,32 +154,32 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     });
   };
 
-  const convertImageToSvg = async (file: File): Promise<Blob | null> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const arrayBuffer = event.target?.result as ArrayBuffer;
-          potrace.trace(Buffer.from(arrayBuffer), {}, (err?: Error, svg?: string) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            if (svg) {
-              const blob = new Blob([svg], { type: 'image/svg+xml' });
-              resolve(blob);
-            } else {
-              reject(new Error('SVG conversion failed'));
-            }
-          });
-        } catch (error) {
-          reject(error);
-        }
-      };
-      reader.onerror = reject;
-      reader.readAsArrayBuffer(file);
-    });
-  };
+  // const convertImageToSvg = async (file: File): Promise<Blob | null> => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.onload = (event) => {
+  //       try {
+  //         const arrayBuffer = event.target?.result as ArrayBuffer;
+  //         potrace.trace(Buffer.from(arrayBuffer), {}, (err?: Error, svg?: string) => {
+  //           if (err) {
+  //             reject(err);
+  //             return;
+  //           }
+  //           if (svg) {
+  //             const blob = new Blob([svg], { type: 'image/svg+xml' });
+  //             resolve(blob);
+  //           } else {
+  //             reject(new Error('SVG conversion failed'));
+  //           }
+  //         });
+  //       } catch (error) {
+  //         reject(error);
+  //       }
+  //     };
+  //     reader.onerror = reject;
+  //     reader.readAsArrayBuffer(file);
+  //   });
+  // };
 
   const convertSvgToImage = async (file: File, format: OutputFormat): Promise<Blob | null> => {
     return new Promise(async (resolve, reject) => {
@@ -308,7 +310,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.fileConverter.converting')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
       
       <input
         type="file"

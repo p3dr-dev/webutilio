@@ -9,6 +9,13 @@
     "feedback": "Feedback",
     "support": "Apoie o Projeto"
   },
+  "categories": {
+    "images": "Imagens",
+    "files": "Arquivos",
+    "text": "Texto",
+    "converters": "Conversores",
+    "media": "Mídia"
+  },
   "tools": {
     "remover-fundo": {
       "title": "Removedor de Fundo Online e Grátis",
@@ -20,7 +27,7 @@
       "description": "Extraia arquivos de um arquivo .zip diretamente no navegador. Descompacte ZIP online de forma segura e gratuita, sem instalar software.",
       "icon": "📦"
     },
-    "comprimir-imagem": {
+    "comprimir-midia": {
       "title": "Compressor de Mídia Online Grátis",
       "description": "Reduza o tamanho de suas imagens e vídeos JPG, PNG, WEBP, MP4, WebM sem perder qualidade. Comprima mídia online gratuitamente.",
       "icon": "🗜️"
@@ -90,6 +97,25 @@
       "downloadPrefix": "comprimido",
       "download": "Download"
     },
+    "mediaCompressor": {
+      "selectImage": "Selecionar Imagem ou Vídeo",
+      "quality": "Qualidade",
+      "compressButton": "Comprimir Imagem",
+      "compressVideoButton": "Comprimir Vídeo",
+      "processing": "Comprimindo mídia...",
+      "original": "Original",
+      "compressed": "Comprimida",
+      "reduction": "de redução",
+      "waiting": "Aguardando compressão...",
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem ou vídeo válido (JPEG, PNG, WEBP, MP4, WebM, OGG).",
+      "errorCanvas": "Não foi possível obter o contexto do canvas.",
+      "dragAndDrop": "Arraste e solte uma imagem ou vídeo aqui",
+      "selectAnother": "Selecionar outro arquivo",
+      "downloadPrefix": "comprimido",
+      "download": "Download",
+      "errorLoadFFmpeg": "Erro ao carregar o processador de vídeo. Tente novamente.",
+      "errorCompressVideo": "Erro ao comprimir o vídeo. Tente novamente."
+    },
     "fileConverter": {
       "selectFile": "Selecionar Arquivo",
       "convertTo": "Converter para:",
@@ -149,7 +175,19 @@
       "errorProcessing": "Erro: O processamento da imagem não retornou um resultado válido.",
       "dragAndDrop": "Arraste e solte uma imagem aqui",
       "selectAnother": "Selecionar outra imagem",
-      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido."
+      "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido.",
+      "loadingPhrases": [
+        "Aguarde um momento, a mágica está acontecendo...",
+        "Estamos removendo o fundo, pixel por pixel!",
+        "Quase lá! Tomando um café enquanto processamos...",
+        "Não se preocupe, não vamos remover seu bom humor!",
+        "Contando os pixels... são muitos!",
+        "Processando sua imagem mais rápido que um raio (quase)!",
+        "Preparando a imagem para o seu próximo grande projeto.",
+        "Aguarde, estamos dando um trato na sua foto.",
+        "Seu fundo está prestes a desaparecer!",
+        "Estamos trabalhando duro para deixar sua imagem perfeita."
+      ]
     },
     "contadorPalavras": {
       "placeholder": "Cole seu texto aqui...",

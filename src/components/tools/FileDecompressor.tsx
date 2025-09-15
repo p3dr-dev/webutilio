@@ -4,6 +4,8 @@ import untar from 'js-untar';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 
+import { useLoadingPhrases } from './useLoadingPhrases';
+
 interface ExtractedFile {
   name: string;
   isDirectory: boolean;
@@ -19,6 +21,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const loadingText = useLoadingPhrases(isLoading);
 
   const formatBytes = (bytes: number) => {
     if (bytes === 0) return '0 Bytes';
@@ -129,7 +132,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={t('components.fileDecompressor.readingArchive')} />}
+      {isLoading && <LoadingSpinner text={loadingText} />}
 
       <input
         type="file"
