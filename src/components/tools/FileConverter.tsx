@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import { Canvg } from 'canvg';
@@ -24,6 +24,18 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading);
+
+  useEffect(() => {
+    // This effect runs when the component unmounts or when the URLs change.
+    return () => {
+      if (originalUrl) {
+        URL.revokeObjectURL(originalUrl);
+      }
+      if (convertedUrl) {
+        URL.revokeObjectURL(convertedUrl);
+      }
+    };
+  }, [originalUrl, convertedUrl]);
 
   const availableFormats: Record<string, OutputFormat[]> = {
     'image/jpeg': ['png', 'webp', 'jpeg', 'svg'],
@@ -154,32 +166,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     });
   };
 
-  // const convertImageToSvg = async (file: File): Promise<Blob | null> => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.onload = (event) => {
-  //       try {
-  //         const arrayBuffer = event.target?.result as ArrayBuffer;
-  //         potrace.trace(Buffer.from(arrayBuffer), {}, (err?: Error, svg?: string) => {
-  //           if (err) {
-  //             reject(err);
-  //             return;
-  //           }
-  //           if (svg) {
-  //             const blob = new Blob([svg], { type: 'image/svg+xml' });
-  //             resolve(blob);
-  //           } else {
-  //             reject(new Error('SVG conversion failed'));
-  //           }
-  //         });
-  //       } catch (error) {
-  //         reject(error);
-  //       }
-  //     };
-  //     reader.onerror = reject;
-  //     reader.readAsArrayBuffer(file);
-  //   });
-  // };
+  
 
   const convertSvgToImage = async (file: File, format: OutputFormat): Promise<Blob | null> => {
     return new Promise(async (resolve, reject) => {

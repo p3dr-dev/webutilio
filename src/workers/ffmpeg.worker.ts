@@ -1,4 +1,5 @@
 // src/workers/ffmpeg.worker.ts
+console.log('[ffmpeg.worker] Worker script started.');
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 
 let ffmpeg: FFmpeg | null = null;
@@ -21,11 +22,16 @@ async function initializeFFmpeg() {
 
   // Carrega os arquivos core do FFmpeg.wasm
   // Certifique-se de que estes arquivos estão na pasta `public/ffmpeg/`
-  await ffmpeg.load({
-    coreURL: '/ffmpeg/ffmpeg-core.js',
-    wasmURL: '/ffmpeg/ffmpeg-core.wasm',
-    workerURL: '/ffmpeg/ffmpeg-core.js', // Usamos o ffmpeg-core.js como worker
-  });
+  try {
+    await ffmpeg.load({
+      coreURL: '/ffmpeg/ffmpeg-core.js',
+      wasmURL: '/ffmpeg/ffmpeg-core.wasm',
+      workerURL: '/ffmpeg/ffmpeg-core.js', // Usamos o ffmpeg-core.js como worker
+    });
+  } catch (e: any) {
+    self.postMessage({ type: 'error', message: `[ffmpeg.worker] Error loading FFmpeg core files: ${e.message}` });
+    throw e; // Re-throw to propagate the error to the main thread's onerror handler
+  }
 
   self.postMessage({ type: 'log', message: '[ffmpeg.worker] FFmpeg loaded successfully.' });
   return ffmpeg;
@@ -55,6 +61,7 @@ self.onmessage = async (event) => {
         self.postMessage({ type: 'log', message: `[ffmpeg.worker] Read output file: ${outputFileName}` });
 
         // Envia o resultado de volta para o thread principal
+        console.log('[ffmpeg.worker] Sending result to main thread.');
         self.postMessage({ type: 'result', data: data as Uint8Array, outputFileName });
         break;
       }

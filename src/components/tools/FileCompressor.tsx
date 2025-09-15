@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import JSZip from 'jszip';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
@@ -14,17 +14,26 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [processedSize, setProcessedSize] = useState<number | null>(null);
   const [outputFileName, setOutputFileName] = useState<string>('');
   const [isDragging, setIsDragging] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading);
 
-  const setZipUrl = setProcessedUrl; // Alias for clarity
-  const setZipSize = setProcessedSize; // Alias for clarity
+  useEffect(() => {
+    // This effect runs when the component unmounts or when processedUrl changes.
+    return () => {
+      if (processedUrl) {
+        URL.revokeObjectURL(processedUrl);
+      }
+    };
+  }, [processedUrl]);
+
+  
 
   const handleFileSelect = (selectedFiles: FileList | null) => {
     if (selectedFiles && selectedFiles.length > 0) {
       setFiles(prevFiles => [...prevFiles, ...Array.from(selectedFiles)]);
-      setZipUrl(null);
-      setZipSize(null);
+      setProcessedUrl(null);
+      setProcessedSize(null);
       setError('');
     }
   };
@@ -81,13 +90,18 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         zip.file(file.name, file);
       }
 
-      outputBlob = await zip.generateAsync({
-        type: 'blob',
-        compression: 'DEFLATE',
-        compressionOptions: {
-          level: 9,
+      outputBlob = await zip.generateAsync(
+        {
+          type: 'blob',
+          compression: 'DEFLATE',
+          compressionOptions: {
+            level: 9,
+          },
         },
-      });
+        (metadata) => {
+          setProgress(metadata.percent / 100);
+        }
+      );
       setOutputFileName('compressed.zip');
 
       setProcessedUrl(URL.createObjectURL(outputBlob!));
@@ -106,11 +120,12 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProcessedSize(null);
     setOutputFileName('');
     setError('');
+    setProgress(null);
   }
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={loadingText} />}
+      {isLoading && <LoadingSpinner text={loadingText} progress={progress} />}
 
       <input
         type="file"

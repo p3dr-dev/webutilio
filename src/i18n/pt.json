@@ -162,7 +162,8 @@
       "match": "✅ Hashes correspondem!",
       "noMatch": "❌ Hashes NÃO correspondem!",
       "errorGeneratingHash": "Erro ao gerar o hash.",
-      "errorCryptoNotAvailable": "Recursos de criptografia não estão disponíveis neste navegador ou contexto. Por favor, certifique-se de estar usando um navegador moderno sobre HTTPS."
+      "errorCryptoNotAvailable": "Recursos de criptografia não estão disponíveis neste navegador ou contexto. Por favor, certifique-se de estar usando um navegador moderno sobre HTTPS.",
+      "clear": "Limpar"
     },
     "backgroundRemover": {
       "selectImage": "Selecionar Imagem",
@@ -194,7 +195,8 @@
       "words": "Palavras",
       "characters": "Caracteres",
       "sentences": "Sentenças",
-      "paragraphs": "Parágrafos"
+      "paragraphs": "Parágrafos",
+      "clear": "Limpar"
     },
     "fileDecompressor": {
       "readingArchive": "Lendo arquivo...",

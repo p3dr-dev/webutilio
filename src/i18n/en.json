@@ -162,7 +162,8 @@
       "match": "✅ Hashes match!",
       "noMatch": "❌ Hashes DO NOT match!",
       "errorGeneratingHash": "Error generating hash.",
-      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS."
+      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS.",
+      "clear": "Clear"
     },
     "backgroundRemover": {
       "selectImage": "Select Image",
@@ -194,7 +195,8 @@
       "words": "Words",
       "characters": "Characters",
       "sentences": "Sentences",
-      "paragraphs": "Paragraphs"
+      "paragraphs": "Paragraphs",
+      "clear": "Clear"
     },
     "fileDecompressor": {
       "readingArchive": "Reading archive...",

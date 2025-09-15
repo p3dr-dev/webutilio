@@ -20,6 +20,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading);
 
@@ -36,14 +37,18 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setIsLoading(true);
     setError(null);
     setFileList([]);
+    setProgress(null); // Added this line
 
     try {
       if (file.name.endsWith('.zip')) {
         const zip = new JSZip();
         const loadedZip = await zip.loadAsync(file);
         const entries: ExtractedFile[] = [];
+        const filesInZip = Object.keys(loadedZip.files);
+        const totalFiles = filesInZip.length;
         
-        for (const relativePath in loadedZip.files) {
+        for (let i = 0; i < totalFiles; i++) {
+          const relativePath = filesInZip[i];
           const zipEntry = loadedZip.files[relativePath];
           const blob = zipEntry.dir ? null : await zipEntry.async('blob');
           entries.push({
@@ -52,6 +57,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             size: blob ? blob.size : 0,
             blob: blob,
           });
+          setProgress((i + 1) / totalFiles); // Update progress here
         }
         setFileList(entries);
       } else if (file.name.endsWith('.tar')) {
@@ -80,7 +86,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [t]);
+  }, [t, setProgress]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -128,11 +134,12 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setArchiveFile(null);
     setFileList([]);
     setError(null);
+    setProgress(null);
   }
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={loadingText} />}
+      {isLoading && <LoadingSpinner text={loadingText} progress={progress} />}
 
       <input
         type="file"

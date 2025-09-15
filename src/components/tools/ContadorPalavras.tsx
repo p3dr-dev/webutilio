@@ -32,7 +32,7 @@ const ContadorPalavras: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             onClick={() => setText('')}
             className="absolute top-2 right-2 px-3 py-1 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500"
           >
-            {t('components.fileCompressor.clear')}
+            {t('components.contadorPalavras.clear')}
           </button>
         )}
       </div>

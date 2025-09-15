@@ -16,25 +16,27 @@ const genericLoadingPhrases = [
 /**
  * Um hook customizado que retorna uma frase de loading aleatória que muda em um intervalo.
  * @param isLoading - Booleano que indica se o estado de loading está ativo.
+ * @param phrases - Array opcional de frases para usar em vez das genéricas.
  * @returns Uma string com a frase de loading atual.
  */
-export function useLoadingPhrases(isLoading: boolean) {
-  const [currentPhrase, setCurrentPhrase] = useState(genericLoadingPhrases[0]);
+export function useLoadingPhrases(isLoading: boolean, phrases?: string[]) {
+  const phraseList = phrases && phrases.length > 0 ? phrases : genericLoadingPhrases;
+  const [currentPhrase, setCurrentPhrase] = useState(phraseList[0]);
 
   useEffect(() => {
     if (isLoading) {
       // Define uma frase inicial aleatória imediatamente
-      setCurrentPhrase(genericLoadingPhrases[Math.floor(Math.random() * genericLoadingPhrases.length)]);
+      setCurrentPhrase(phraseList[Math.floor(Math.random() * phraseList.length)]);
 
       // Configura o intervalo para mudar a frase
       const interval = setInterval(() => {
-        setCurrentPhrase(genericLoadingPhrases[Math.floor(Math.random() * genericLoadingPhrases.length)]);
+        setCurrentPhrase(phraseList[Math.floor(Math.random() * phraseList.length)]);
       }, 3000);
 
       // Limpa o intervalo quando o componente é desmontado ou isLoading se torna falso
       return () => clearInterval(interval);
     }
-  }, [isLoading]);
+  }, [isLoading, phraseList]);
 
   return currentPhrase;
 }

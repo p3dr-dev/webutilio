@@ -11,8 +11,8 @@ const i18n = lang === 'pt' ? pt : en;
 <header class="bg-white shadow-md dark:bg-gray-800 dark:border-b dark:border-gray-700 relative">
   <div class="container mx-auto px-6 py-3 flex justify-between items-center">
     <a href={`/${lang}/`} class="flex items-center space-x-1 text-2xl font-bold text-gray-800 dark:text-gray-100">
-      <img src="/static/images/slit_preto.png" alt="SLIT.IO Logo" class="h-8 dark:hidden" />
-      <img src="/static/images/slit_branco.png" alt="SLIT.IO Logo" class="h-8 hidden dark:block" />
+      <img src="/static/images/slit_preto.png" alt="SLIT.IO Logo" class="h-8 dark:hidden" width="32" height="32" />
+      <img src="/static/images/slit_branco.png" alt="SLIT.IO Logo" class="h-8 hidden dark:block" width="32" height="32" />
       <span>SLIT<span class="text-purple-500">.IO</span></span>
     </a>
 
@@ -26,7 +26,7 @@ const i18n = lang === 'pt' ? pt : en;
 
     <!-- Mobile Nav Button -->
     <div class="md:hidden">
-      <button id="mobile-menu-button" class="text-gray-800 dark:text-gray-200 focus:outline-none">
+      <button type="button" id="mobile-menu-button" class="text-gray-800 dark:text-gray-200 focus:outline-none" aria-label="Abrir menu">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>

@@ -19,7 +19,7 @@ Este documento serve como o guia principal para a IA Gemini. O objetivo é const
 
 - **Página Inicial (`/`):** Uma página estática (`index.astro`) que serve como um menu, apresentando e linkando para todas as ferramentas disponíveis.
 - **Páginas das Ferramentas (`/ferramentas/[slug]`):** Uma única rota dinâmica do Astro (`[slug].astro`) que atuará como uma "casca" (shell). Ela renderizará o componente React interativo correto com base no `slug` da URL.
-- **Componentes das Ferramentas (`src/components/tools/`):** Cada ferramenta será um componente React (`.tsx`) autocontido (ex: `EncryptDecrypt.tsx`, `ImageCompressor.tsx`). Estes serão renderizados como Ilhas do Astro (`client:only="react"`) dentro da página da ferramenta.
+- **Componentes das Ferramentas (`src/components/tools/`):** Cada ferramenta será um componente React (`.tsx`) autocontido (ex: `FileEncryptor.tsx`, `MediaCompressor.tsx`, `ImageResizer.tsx`). Estes serão renderizados como Ilhas do Astro (`client:only="react"`) dentro da página da ferramenta.
 
 ## 4. Diretrizes de Código
 

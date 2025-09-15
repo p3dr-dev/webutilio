@@ -20,7 +20,7 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
 
 // Componente de fallback para o Suspense
 const LoadingFallback = () => (
-  <div className="flex justify-center items-center p-10">
+  <div className="flex justify-center items-center p-10 min-h-[400px]">
     <div className="w-12 h-12 border-4 border-gray-200 border-t-purple-600 rounded-full animate-spin"></div>
   </div>
 );

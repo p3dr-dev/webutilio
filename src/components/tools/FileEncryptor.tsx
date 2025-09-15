@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from '../../i18n/utils';
 import { useLoadingPhrases } from './useLoadingPhrases';
 import LoadingSpinner from './LoadingSpinner';
@@ -15,6 +15,15 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading);
+
+  useEffect(() => {
+    // This effect runs when the component unmounts or when processedFileUrl changes.
+    return () => {
+      if (processedFileUrl) {
+        URL.revokeObjectURL(processedFileUrl);
+      }
+    };
+  }, [processedFileUrl]);
 
   const getPasswordKey = async (password: string): Promise<CryptoKey> => {
     const encoder = new TextEncoder();

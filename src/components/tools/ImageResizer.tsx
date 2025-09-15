@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import { useLoadingPhrases } from './useLoadingPhrases';
@@ -12,8 +12,21 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [height, setHeight] = useState<number | ''>('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading);
+
+  useEffect(() => {
+    // This effect runs when the component unmounts or when the URLs change.
+    return () => {
+      if (originalImageUrl) {
+        URL.revokeObjectURL(originalImageUrl);
+      }
+      if (resizedImageUrl) {
+        URL.revokeObjectURL(resizedImageUrl);
+      }
+    };
+  }, [originalImageUrl, resizedImageUrl]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -95,7 +108,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    // setIsDragging(false); // Assuming this state is managed by parent or another handler
+    setIsDragging(false);
     const file = event.dataTransfer.files?.[0];
     if (file) {
       handleFileChange({ target: { files: [file] } } as React.ChangeEvent<HTMLInputElement>);
@@ -105,13 +118,13 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    // setIsDragging(true); // Assuming this state is managed by parent or another handler
+    setIsDragging(true);
   };
 
   const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
-    // setIsDragging(false); // Assuming this state is managed by parent or another handler
+    setIsDragging(false);
   };
 
   const getOutputFileName = () => {
@@ -137,7 +150,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        className="flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors border-gray-300 dark:border-gray-600"
+        className={`flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors ${isDragging ? 'border-purple-600 bg-purple-50 dark:bg-gray-700' : 'border-gray-300 dark:border-gray-600'}`}
       >
         <p className="text-gray-500 dark:text-gray-400 mb-4">{t('components.imageResizer.dragAndDrop')}</p>
         <button

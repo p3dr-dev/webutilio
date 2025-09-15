@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { removeBackground } from '@imgly/background-removal';
 import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
@@ -16,8 +16,19 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const loadingText = useLoadingPhrases(isLoading, 'components.backgroundRemover.loadingPhrases');
+  const phrases = t('components.backgroundRemover.loadingPhrases') as string[];
+  const loadingText = useLoadingPhrases(isLoading, phrases);
+
+  useEffect(() => {
+    // This effect runs when the component unmounts or when processedUrl changes.
+    return () => {
+      if (processedUrl) {
+        URL.revokeObjectURL(processedUrl);
+      }
+    };
+  }, [processedUrl]);
 
   const processImage = useCallback(async (file: File) => {
     if (!file) return;
@@ -30,7 +41,11 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     reader.onloadend = async () => {
       setOriginalUrl(reader.result as string);
       try {
-        const resultBlob = await removeBackground(file);
+        const resultBlob = await removeBackground(file, {
+          onProgress: (progress) => {
+            setProgress(progress.value / progress.total);
+          },
+        });
         if (resultBlob) {
           setProcessedUrl(URL.createObjectURL(resultBlob));
         } else {
@@ -44,17 +59,19 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       }
     };
     reader.readAsDataURL(file);
-  }, [t]);
+  }, [t, setProgress]);
 
   const handleFileSelect = (file: File | null) => {
     if (file && file.type.startsWith('image/')) {
       setOriginalFile(file);
+      setProgress(null);
       processImage(file);
     } else {
       setError(t('components.backgroundRemover.errorInvalidFile'));
       setOriginalFile(null);
       setOriginalUrl(null);
       setProcessedUrl(null);
+      setProgress(null);
     }
   };
 
@@ -94,11 +111,12 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setOriginalUrl(null);
     setProcessedUrl(null);
     setError(null);
+    setProgress(null);
   }
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={currentPhrase} />}
+      {isLoading && <LoadingSpinner text={loadingText} progress={progress} />}
 
       <input
         type="file"

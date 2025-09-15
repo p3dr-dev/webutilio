@@ -3,10 +3,8 @@ import LoadingSpinner from './LoadingSpinner';
 import { useTranslations } from '../../i18n/utils';
 import { useLoadingPhrases } from './useLoadingPhrases';
 
-// Importa o worker usando a sintaxe específica do Vite
-const ffmpegWorker = new Worker(new URL('../../workers/ffmpeg.worker.ts', import.meta.url), {
-  type: 'module',
-});
+// Importa o worker diretamente do diretório public
+const ffmpegWorker = new Worker('/ffmpeg.worker.js', { type: 'module' });
 
 const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -23,6 +21,20 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const loadingText = useLoadingPhrases(isLoading);
   const workerRef = useRef<Worker>(ffmpegWorker);
   const [ffmpegLogs, setFfmpegLogs] = useState<string[]>([]);
+  const [progress, setProgress] = useState<number | null>(null);
+  const [estimatedSize, setEstimatedSize] = useState<number | null>(null);
+
+  useEffect(() => {
+    // This effect runs when the component unmounts or when the URLs change.
+    return () => {
+      if (originalUrl) {
+        URL.revokeObjectURL(originalUrl);
+      }
+      if (compressedUrl) {
+        URL.revokeObjectURL(compressedUrl);
+      }
+    };
+  }, [originalUrl, compressedUrl]);
 
   useEffect(() => {
     const worker = workerRef.current;
@@ -35,8 +47,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           setFfmpegLogs((prev) => [...prev, workerMessage]);
           break;
         case 'progress':
-          // Aqui você pode atualizar um estado de progresso se quiser
-          // console.log(`Progresso: ${Math.round(progress * 100)}% - Tempo: ${time}s`);
+          setProgress(progress);
           break;
         case 'result':
           const blob = new Blob([data], { type: 'video/mp4' }); // Ajuste o tipo MIME conforme necessário
@@ -64,7 +75,15 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     return () => {
       // worker.terminate(); // Opcional: terminar o worker quando o componente é desmontado
     };
-  }, [t]);
+  }, []);
+
+  useEffect(() => {
+    if (originalSize) {
+      setEstimatedSize(originalSize * quality);
+    } else {
+      setEstimatedSize(null);
+    }
+  }, [quality, originalSize]);
 
   const handleFileSelect = (file: File | null) => {
     if (file && (file.type.startsWith('image/') || file.type.startsWith('video/'))) {
@@ -74,16 +93,19 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       setCompressedUrl('');
       setCompressedSize(null);
       setError('');
+      setProgress(null);
     } else if (file) {
       setError(t('components.mediaCompressor.errorInvalidFile'));
       setOriginalFile(null);
       setOriginalUrl('');
       setOriginalSize(null);
+      setProgress(null);
     } else {
       setOriginalFile(null);
       setOriginalUrl('');
       setOriginalSize(null);
       setError('');
+      setProgress(null);
     }
   };
 
@@ -116,6 +138,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setIsLoading(true);
     setCompressedUrl('');
     setCompressedSize(null);
+    setProgress(null);
 
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -155,6 +178,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setIsLoading(true);
     setCompressedUrl('');
     setCompressedSize(null);
+    setProgress(null);
 
     const inputFileName = originalFile.name;
     const outputFileName = `output-${originalFile.name.split('.').slice(0, -1).join('.')}.mp4`; // Exemplo: converter para mp4
@@ -167,10 +191,13 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         outputFileName,
         args: [
           '-i', inputFileName,
+          '-c:v', 'libx264',
           '-b:v', `${Math.floor(quality * 1000)}k`,
           '-bufsize', `${Math.floor(quality * 1000)}k`,
-          '-c:v', 'libx264',
           '-preset', 'fast',
+          '-c:a', 'aac', // Add audio codec
+          '-b:a', '128k', // Add audio bitrate (common default)
+          '-v', 'info', // Add verbose logging
           '-y', // Overwrite output files
           outputFileName
         ], // Exemplo: converter para mp4
@@ -209,9 +236,9 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="relative bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
-      {isLoading && <LoadingSpinner text={loadingText} />}
+      {isLoading && <LoadingSpinner text={loadingText} progress={progress} />}
 
-      {isLoading && ffmpegLogs.length > 0 && (
+      {isLoading && (
         <div className="absolute bottom-0 left-0 right-0 p-2 bg-gray-900 text-white text-xs max-h-24 overflow-y-auto rounded-b-lg">
           {ffmpegLogs.map((log, index) => (
             <p key={index}>{log}</p>
@@ -256,6 +283,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             <div className="mb-4">
               <label htmlFor="quality" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {t('components.mediaCompressor.quality')}: {Math.round(quality * 100)}%
+                {estimatedSize && (
+                  <span className="text-gray-500 dark:text-gray-400 ml-2">
+                    (Estimado: {formatBytes(estimatedSize)})
+                  </span>
+                )}
               </label>
               <input
                 type="range"
@@ -314,6 +346,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             </div>
           </div>
           <button
+            type="button"
             onClick={() => handleFileSelect(null)}
             className="w-full mt-4 text-sm text-gray-500 hover:text-purple-600 dark:text-gray-400 dark:hover:text-purple-400"
           >
