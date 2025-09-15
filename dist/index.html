@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="en"> <head><title>Redirecting...</title><meta charset="UTF-8"><script>
+      const userLang = navigator.language || navigator.userLanguage;
+      // Default to 'pt' if the language is not English
+      const targetLang = userLang.startsWith('en') ? 'en' : 'pt';
+      // Use replace to avoid adding the root page to browser history
+      window.location.replace(`/${targetLang}/`);
+    </script><link rel="stylesheet" href="/_astro/index.32ad9357.css" /></head> <body> <!-- Body is intentionally empty to prevent flash of content --> </body></html>
