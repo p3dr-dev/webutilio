@@ -1,29 +1,37 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import ToolLoader from '../../../components/tools/ToolLoader';
-import { tools as toolsData } from '../../../data/tools'; // Dados estruturais
-import en from '../../../i18n/en.json'; // Dicionário em inglês
+import { tools as toolsData, type Tool } from '../../../data/tools';
 
 export async function getStaticPaths() {
   return toolsData.map(tool => ({
-    params: { slug: tool.slug },
-    props: { slug: tool.slug }
+    params: { slug: tool.slugs.en },
   }));
 }
 
-const { slug } = Astro.props;
-const toolTranslations = en.tools[slug]; // Pega a tradução da ferramenta
+const { slug } = Astro.params;
+
+// Find the corresponding tool based on the English slug
+const tool: Tool | undefined = toolsData.find(t => t.slugs.en === slug);
+
+// If the tool is not found, redirect to the 404 page
+if (!tool) {
+  return Astro.redirect('/en/404');
+}
+
+const title = tool.title.en;
+const description = tool.description.en;
 ---
 
 <Layout
-  title={`${toolTranslations.title} - SLIT.IO`}
-  description={toolTranslations.description}
+  title={`${title} - SLIT.IO`}
+  description={description}
   lang="en"
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": toolTranslations.title,
+    "name": title,
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Web",
     "offers": {
@@ -31,15 +39,15 @@ const toolTranslations = en.tools[slug]; // Pega a tradução da ferramenta
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": toolTranslations.description
+    "description": description
   })} />
 
   <div class="max-w-4xl mx-auto">
     <div class="text-center border-b border-gray-200 dark:border-gray-700 pb-6 mb-8">
-      <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{toolTranslations.title}</h1>
-      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{toolTranslations.description}</p>
+      <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{title}</h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
     </div>
-    <ToolLoader slug={slug} lang="en" client:only="react" />
+    <ToolLoader toolId={tool.id} lang="en" client:only="react" />
     <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
       Liked this tool? Consider <a href="/en/apoie" class="underline hover:text-purple-600 dark:hover:text-purple-400">supporting the project</a> to keep it free and ad-free.
     </p>

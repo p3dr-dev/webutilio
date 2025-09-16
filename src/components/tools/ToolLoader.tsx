@@ -1,21 +1,21 @@
 import React, { Suspense, lazy } from 'react';
 
 interface ToolLoaderProps {
-  slug: string;
+  toolId: string;
   lang: 'pt' | 'en';
 }
 
-// O seu mapa de componentes está perfeito!
+// Mapeia o ID da ferramenta (que é neutro em relação ao idioma) para o componente React correspondente.
 const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.ComponentType<any>> } = {
-  'contador-palavras': lazy(() => import('./ContadorPalavras')),
-  'gerador-hash': lazy(() => import('./GeradorHash')),
-  'comprimir-midia': lazy(() => import('./MediaCompressor')),
-  'criptografar-arquivo': lazy(() => import('./FileEncryptor')),
-  'conversor-arquivos': lazy(() => import('./FileConverter')),
-  'comprimir-arquivo': lazy(() => import('./FileCompressor')),
-  'descompactar-arquivo': lazy(() => import('./FileDecompressor')),
-  'remover-fundo': lazy(() => import('./BackgroundRemover')),
-  'redimensionar-imagem': lazy(() => import('./ImageResizer')),
+  'word-counter': lazy(() => import('./ContadorPalavras')),
+  'hash-generator': lazy(() => import('./GeradorHash')),
+  'media-compressor': lazy(() => import('./MediaCompressor')),
+  'file-encryptor': lazy(() => import('./FileEncryptor')),
+  'file-converter': lazy(() => import('./FileConverter')),
+  'file-compressor': lazy(() => import('./FileCompressor')),
+  'file-decompressor': lazy(() => import('./FileDecompressor')),
+  'background-remover': lazy(() => import('./BackgroundRemover')),
+  'image-resizer': lazy(() => import('./ImageResizer')),
 };
 
 // Componente de fallback para o Suspense
@@ -26,13 +26,14 @@ const LoadingFallback = () => (
 );
 
 
-const ToolLoader: React.FC<ToolLoaderProps> = ({ slug, lang }) => {
-  const Component = toolComponentMap[slug];
+const ToolLoader: React.FC<ToolLoaderProps> = ({ toolId, lang }) => {
+  const Component = toolComponentMap[toolId];
 
   if (!Component) {
     return (
       <div className="text-center bg-red-100 text-red-700 p-4 rounded-lg dark:bg-red-900 dark:text-red-200">
-        <p>A ferramenta para "{slug}" ainda não foi implementada.</p>
+        {/* Esta mensagem agora é genérica ou pode ser traduzida se necessário */}
+        <p>Error: Tool with ID "{toolId}" could not be found or is not implemented.</p>
       </div>
     );
   }

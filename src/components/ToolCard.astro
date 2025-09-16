@@ -1,23 +1,27 @@
 ---
-import type { Tool } from '../data/tools';
+import type { Tool, Language } from '../data/tools';
+import { useTranslations } from '../i18n/utils';
 
 interface Props {
   tool: Tool;
-  lang: string;
-  title: string;
-  description: string;
-  icon: string;
-  category: string;
+  lang: Language;
 }
 
-const { tool, lang, title, description, icon, category } = Astro.props;
+const { tool, lang } = Astro.props;
+const t = useTranslations(lang);
+
+const title = tool.title[lang];
+const description = tool.description[lang];
+const category = t(`categories.${tool.category}`);
+const slug = tool.slugs[lang];
+const basePath = lang === 'en' ? 'tools' : 'ferramentas';
 ---
 <a
-  href={`/${lang}/ferramentas/${tool.slug}`}
+  href={`/${lang}/${basePath}/${slug}`}
   class="group relative z-0 block rounded-lg border bg-white p-4 text-center shadow-md transition-all duration-300 hover:z-10 hover:scale-105 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800"
 >
   <div class="mb-2">
-    <span class="text-4xl">{icon}</span>
+    <span class="text-4xl">{tool.icon}</span>
   </div>
 
   {/* Container to standardize title height */}

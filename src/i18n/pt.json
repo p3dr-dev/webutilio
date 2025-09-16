@@ -7,7 +7,8 @@
   },
   "nav": {
     "feedback": "Feedback",
-    "support": "Apoie o Projeto"
+    "support": "Apoie o Projeto",
+    "openMenu": "Abrir menu"
   },
   "categories": {
     "images": "Imagens",
@@ -177,6 +178,8 @@
       "dragAndDrop": "Arraste e solte uma imagem aqui",
       "selectAnother": "Selecionar outra imagem",
       "errorInvalidFile": "Por favor, selecione um arquivo de imagem válido.",
+      "altResult": "Imagem com fundo removido",
+      "downloadName": "sem-fundo",
       "loadingPhrases": [
         "Aguarde um momento, a mágica está acontecendo...",
         "Estamos removendo o fundo, pixel por pixel!",

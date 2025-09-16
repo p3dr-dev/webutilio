@@ -7,7 +7,8 @@
   },
   "nav": {
     "feedback": "Feedback",
-    "support": "Support the Project"
+    "support": "Support the Project",
+    "openMenu": "Open menu"
   },
   "categories": {
     "images": "Images",
@@ -177,6 +178,8 @@
       "dragAndDrop": "Drag and drop an image here",
       "selectAnother": "Select another image",
       "errorInvalidFile": "Please select a valid image file.",
+      "altResult": "Image with background removed",
+      "downloadName": "no-background",
       "loadingPhrases": [
         "Hold on, the magic is happening...",
         "We're removing the background, pixel by pixel!",

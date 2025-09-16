@@ -13,7 +13,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "script-src 'self' 'unsafe-inline' 'unsafe-eval' blob;"
+          "value": "script-src 'self' blob;"
         }
       ]
     }
