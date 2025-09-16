@@ -99,11 +99,12 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   };
   
   const getDownloadName = () => {
+    const suffix = t('components.backgroundRemover.downloadName');
     if (originalFile) {
       const nameWithoutExt = originalFile.name.substring(0, originalFile.name.lastIndexOf('.'));
-      return `${nameWithoutExt}-sem-fundo.png`;
+      return `${nameWithoutExt}-${suffix}.png`;
     }
-    return 'imagem-sem-fundo.png';
+    return `image-${suffix}.png`;
   }
 
   const resetState = () => {
@@ -158,7 +159,7 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.backgroundRemover.result')}</h3>
                 <div className="mt-2 flex items-center justify-center h-80 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden" style={{backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'20\' height=\'20\' viewBox=\'0 0 20 20\'%3E%3Crect width=\'10\' height=\'10\' fill=\'%23eee\'/%3E%3Crect x=\'10\' y=\'10\' width=\'10\' height=\'10\' fill=\'%23eee\'/%3E%3C/svg%3E")'}}>
-                  {processedUrl ? <img src={processedUrl} alt="Fundo removido" className="max-h-full max-w-full" /> : <p className="text-gray-500 dark:text-gray-400">{t('components.backgroundRemover.resultHere')}</p>}
+                  {processedUrl ? <img src={processedUrl} alt={t('components.backgroundRemover.altResult')} className="max-h-full max-w-full" /> : <p className="text-gray-500 dark:text-gray-400">{t('components.backgroundRemover.resultHere')}</p>}
                 </div>
                 {processedUrl && (
                   <a
