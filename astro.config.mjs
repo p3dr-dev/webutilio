@@ -26,14 +26,18 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 40 * 1024 * 1024,
       },
       manifest: {
+        id: 'io.slit.app',
         name: 'SLIT.IO - Ferramentas Online',
         short_name: 'SLIT.IO',
         description: 'Coleção de ferramentas online rápidas, seguras e privadas que rodam direto no seu navegador.',
+        lang: 'pt-BR',
+        dir: 'ltr',
         theme_color: '#111827',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/',
+        start_url: '/pt/',
+        scope: '/',
         categories: ['utilities', 'productivity', 'education'],
         icons: [
           {
@@ -49,6 +53,22 @@ export default defineConfig({
             purpose: 'maskable'
           }
         ],
+        screenshots: [
+          {
+            src: '/og-image.png',
+            sizes: '1200x630',
+            type: 'image/png',
+            form_factor: 'wide',
+            label: 'SLIT.IO Homepage'
+          },
+          {
+            src: '/og-image.png',
+            sizes: '1200x630',
+            type: 'image/png',
+            form_factor: 'narrow',
+            label: 'SLIT.IO Mobile'
+          }
+        ]
       },
     }),
   ],
