@@ -18,6 +18,12 @@ export default defineConfig({
       scope: '/',
       includeAssets: ['favicon.svg'],
       registerType: 'autoUpdate',
+      injectRegister: 'script',
+      workbox: {
+        navigateFallback: '/404',
+        globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],
+        maximumFileSizeToCacheInBytes: 40 * 1024 * 1024,
+      },
       manifest: {
         name: 'SLIT.IO - Ferramentas Online',
         short_name: 'SLIT.IO',
@@ -26,6 +32,7 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
+        start_url: '/',
         categories: ['utilities', 'productivity', 'education'],
         icons: [
           {
@@ -41,15 +48,6 @@ export default defineConfig({
             purpose: 'maskable'
           }
         ],
-      },
-      workbox: {
-        navigateFallback: '/404',
-        globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],
-        maximumFileSizeToCacheInBytes: 40 * 1024 * 1024, // 40MB
-      },
-      devOptions: {
-        enabled: true,
-        navigateFallbackAllowlist: [/^\//],
       },
     }),
   ],
