@@ -19,23 +19,27 @@ export default defineConfig({
       includeAssets: ['favicon.svg'],
       registerType: 'autoUpdate',
       manifest: {
-        name: 'SLIT.IO',
-        short_name: 'SLIT',
-        description: 'Fast, secure, and private online tools',
-        theme_color: '#9333ea',
+        name: 'SLIT.IO - Ferramentas Online',
+        short_name: 'SLIT.IO',
+        description: 'Coleção de ferramentas online rápidas, seguras e privadas que rodam direto no seu navegador.',
+        theme_color: '#111827',
         background_color: '#ffffff',
         display: 'standalone',
+        orientation: 'portrait',
+        categories: ['utilities', 'productivity', 'education'],
         icons: [
           {
             src: 'favicon.svg',
             sizes: '192x192',
             type: 'image/svg+xml',
+            purpose: 'any'
           },
           {
             src: 'favicon.svg',
             sizes: '512x512',
             type: 'image/svg+xml',
-          },
+            purpose: 'maskable'
+          }
         ],
       },
       workbox: {
