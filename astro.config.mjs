@@ -37,15 +37,15 @@ export default defineConfig({
         categories: ['utilities', 'productivity', 'education'],
         icons: [
           {
-            src: 'favicon.svg',
-            sizes: '192x192',
-            type: 'image/svg+xml',
+            src: '/static/images/slit_preto.png',
+            sizes: '512x512',
+            type: 'image/png',
             purpose: 'any'
           },
           {
-            src: 'favicon.svg',
+            src: '/static/images/slit_preto.png',
             sizes: '512x512',
-            type: 'image/svg+xml',
+            type: 'image/png',
             purpose: 'maskable'
           }
         ],
