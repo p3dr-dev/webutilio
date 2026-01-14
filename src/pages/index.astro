@@ -1,20 +1,59 @@
 ---
-// This page now uses a client-side script for language-based redirection.
-// It's intentionally minimal to prevent any flash of content before the redirect.
+// Redirecionamento de idioma ultra-rápido e resiliente
 ---
-<html lang="en">
-  <head>
-    <title>Redirecting...</title>
-    <meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLIT.IO - Redirecionando / Redirecting</title>
+    
+    <!-- Redirecionamento instantâneo via JS -->
     <script is:inline>
-      const userLang = navigator.language || navigator.userLanguage;
-      // Default to 'pt' if the language is not English
-      const targetLang = userLang.startsWith('en') ? 'en' : 'pt';
-      // Use replace to avoid adding the root page to browser history
-      window.location.replace(`/${targetLang}/`);
+        (function() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const targetLang = userLang.toLowerCase().startsWith('en') ? 'en' : 'pt';
+            window.location.replace('/' + targetLang + '/');
+        })();
     </script>
-  </head>
-  <body>
-    <!-- Body is intentionally empty to prevent flash of content -->
-  </body>
+
+    <!-- Fallback caso o JS falhe (redireciona para PT após 2 segundos) -->
+    <meta http-equiv="refresh" content="2;url=/pt/">
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        .container { text-align: center; padding: 2rem; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #9333ea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .links { margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; }
+        a { color: #9333ea; text-decoration: none; font-weight: bold; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <p>Escolha seu idioma / Choose your language:</p>
+        <div class="links">
+            <a href="/pt/">Português (Brasil)</a>
+            <a href="/en/">English</a>
+        </div>
+    </div>
+</body>
 </html>
