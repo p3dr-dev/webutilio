@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Type",
-          "value": "application/xml"
+          "value": "application/xml; charset=utf-8"
         },
         {
           "key": "Access-Control-Allow-Origin",
@@ -14,31 +14,58 @@
       ]
     },
     {
-      "source": "/(.*)",
+      "source": "/favicon.svg",
       "headers": [
         {
-          "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin"
+          "key": "Content-Type",
+          "value": "image/svg+xml; charset=utf-8"
         },
         {
-          "key": "Cross-Origin-Embedder-Policy",
-          "value": "require-corp"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         },
         {
-          "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://*.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://*.vercel-analytics.com;"
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://*.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://*.vercel-analytics.com https://*.vitals.vercel-insights.com; frame-ancestors 'none';"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     }
