@@ -8,16 +8,16 @@ module.exports = {
         'fade-in-up': {
           '0%': {
             opacity: '0',
-            transform: 'translateY(10px)'
+            transform: 'translate3d(0, 10px, 0)'
           },
           '100%': {
             opacity: '1',
-            transform: 'translateY(0)'
+            transform: 'translate3d(0, 0, 0)'
           },
         }
       },
       animation: {
-        'fade-in-up': 'fade-in-up 0.3s ease-out'
+        'fade-in-up': 'fade-in-up 0.3s ease-out forwards'
       }
     },
   },

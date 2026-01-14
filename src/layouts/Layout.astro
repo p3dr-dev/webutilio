@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
 	title: string;
@@ -37,7 +38,8 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#9333ea" />
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
@@ -95,6 +97,7 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<link rel="alternate" hreflang="x-default" href={ptAlternate} />
 
 		<Analytics />
+		<SpeedInsights />
 	</head>
 	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
 		<Header lang={lang} /> {/* Passa o idioma para o Header */}
