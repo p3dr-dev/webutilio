@@ -19,6 +19,7 @@ export default defineConfig({
       includeAssets: ['favicon.svg'],
       registerType: 'autoUpdate',
       injectRegister: 'script',
+      manifestFilename: 'manifest.json',
       workbox: {
         navigateFallback: '/404',
         globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],

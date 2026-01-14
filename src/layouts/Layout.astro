@@ -45,6 +45,13 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 		<script is:inline>
+			// Register Service Worker
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+				});
+			}
+
 			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
 					return localStorage.getItem('theme');
