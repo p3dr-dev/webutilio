@@ -1,0 +1,49 @@
+---
+import { tools } from '../data/tools';
+
+const { lang } = Astro.props; // 'pt' ou 'en'
+const { pathname } = Astro.url;
+
+// Helper to find the current tool and its alternate slug
+const getTargetPath = (targetLang: string) => {
+  if (targetLang === lang) return '#';
+  
+  const parts = pathname.split('/').filter(Boolean);
+  // Expected structure: [lang, 'ferramentas'|'tools', slug]
+  if (parts.length >= 3) {
+    const currentSlug = parts[2];
+    const tool = tools.find(t => t.slugs.pt === currentSlug || t.slugs.en === currentSlug);
+    if (tool) {
+      const basePath = targetLang === 'en' ? 'tools' : 'ferramentas';
+      return `/${targetLang}/${basePath}/${tool.slugs[targetLang as 'pt' | 'en']}`;
+    }
+  }
+  
+  // Default to equivalent path or home
+  const pathWithoutLang = pathname.startsWith('/en') || pathname.startsWith('/pt') 
+    ? pathname.substring(3) 
+    : pathname;
+  return `/${targetLang}${pathWithoutLang}`;
+};
+---
+
+<div class="flex items-center space-x-2 border border-gray-300 dark:border-gray-600 rounded-full p-1">
+  <a 
+    href={getTargetPath('pt')} 
+    class:list={[
+      "px-3 py-1 text-sm rounded-full transition-colors",
+      lang === 'pt' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+    ]}
+  >
+    PT
+  </a>
+  <a 
+    href={getTargetPath('en')} 
+    class:list={[
+      "px-3 py-1 text-sm rounded-full transition-colors",
+      lang === 'en' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
+    ]}
+  >
+    EN
+  </a>
+</div>

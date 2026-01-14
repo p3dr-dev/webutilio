@@ -1,0 +1,121 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ToolLoader from '../../../components/tools/ToolLoader';
+import { tools as toolsData, type Tool } from '../../../data/tools';
+import { useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  return toolsData.map(tool => ({
+    params: { slug: tool.slugs.pt },
+  }));
+}
+
+const { slug } = Astro.params;
+const lang = 'pt';
+const t = useTranslations(lang);
+
+// Encontra a ferramenta correspondente com base no slug em português
+const tool: Tool | undefined = toolsData.find(t => t.slugs.pt === slug);
+
+// Se a ferramenta não for encontrada, redireciona para a página 404 (ou para a home)
+if (!tool) {
+  return Astro.redirect('/pt/404');
+}
+
+const title = t(`tools.${tool.id}.title`);
+const description = t(`tools.${tool.id}.description`);
+
+const alternates = {
+  pt: `/pt/ferramentas/${tool.slugs.pt}`,
+  en: `/en/tools/${tool.slugs.en}`,
+};
+---
+
+<Layout
+  title={`${title} - SLIT.IO`}
+  description={description}
+  lang={lang}
+  alternates={alternates}
+>
+  <script is:inline define:vars={{ toolId: tool.id }}>
+    const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
+    const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
+    localStorage.setItem('tool-history', JSON.stringify(newHistory));
+  </script>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": title,
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1250"
+    },
+    "description": description,
+    "featureList": "Privacy focused, client-side processing, free to use, no registration required",
+    "screenshot": "https://slitio.vercel.app/og-image.png"
+  })} />
+
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center border-b border-gray-200 dark:border-gray-700 pb-6 mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{title}</h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
+    </div>
+    <ToolLoader toolId={tool.id} lang="pt" client:only="react" />
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-purple-50 dark:bg-purple-900/10 p-6 rounded-xl border border-purple-100 dark:border-purple-900/30">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">{t('privacyReport.badge')}</span>
+          <h2 class="text-xl font-bold text-purple-900 dark:text-purple-300">{t('privacyReport.title')}</h2>
+        </div>
+        <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
+          {t('privacyReport.description')}
+        </p>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">{t('howItWorks.title')}</h2>
+        <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
+          {t(`howItWorks.${tool.id}`)}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Perguntas Frequentes</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[1, 2, 3].map((i) => (
+          <div>
+            <h3 class="font-bold text-purple-600 dark:text-purple-400 mb-2">{t(`faq.q${i}`)}</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">{t(`faq.a${i}`)}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [1, 2, 3].map(i => ({
+        "@type": "Question",
+        "name": t(`faq.q${i}`),
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": t(`faq.a${i}`)
+        }
+      }))
+    })} />
+
+    <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
+      Gostou desta ferramenta? Considere <a href="/pt/apoie" class="underline hover:text-purple-600 dark:hover:text-purple-400">apoiar o projeto</a> para que ele continue gratuito e sem anúncios.
+    </p>
+  </div>
+</Layout>

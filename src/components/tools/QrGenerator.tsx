@@ -1,0 +1,79 @@
+import React, { useState, useRef, useEffect } from 'react';
+import QRCode from 'qrcode';
+import { useTranslations } from '../../i18n/utils';
+import { useToast } from '../Toast';
+
+const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+  const t = useTranslations(lang);
+  const { showToast } = useToast();
+  const [text, setText] = useState('');
+  const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (text) {
+      generateQr();
+    } else {
+      setQrUrl(null);
+    }
+  }, [text]);
+
+  const generateQr = async () => {
+    try {
+      const url = await QRCode.toDataURL(text, {
+        width: 1024,
+        margin: 2,
+        color: {
+          dark: '#000000',
+          light: '#ffffff',
+        },
+      });
+      setQrUrl(url);
+    } catch (err) {
+      console.error(err);
+      showToast(t('components.qrGenerator.error'), 'error');
+    }
+  };
+
+  const handleDownload = () => {
+    if (!qrUrl) return;
+    const link = document.createElement('a');
+    link.href = qrUrl;
+    link.download = 'qrcode.png';
+    link.click();
+    showToast(t('components.hashGenerator.copied'), 'success'); // Reusing a success msg or could add a specific one
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800 text-center">
+      <input
+        type="text"
+        className="w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+        placeholder={t('components.qrGenerator.placeholder')}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+
+      <div className="mt-8 flex flex-col items-center">
+        <div className="bg-white p-4 rounded-lg shadow-inner dark:bg-gray-200 min-h-[200px] min-w-[200px] flex items-center justify-center">
+          {qrUrl ? (
+            <img src={qrUrl} alt="QR Code" className="w-64 h-64" />
+          ) : (
+            <div className="text-gray-400">QR Code Preview</div>
+          )}
+        </div>
+
+        {qrUrl && (
+          <button
+            onClick={handleDownload}
+            className="mt-6 bg-purple-600 text-white font-bold py-2 px-8 rounded-md hover:bg-purple-700 transition-colors"
+          >
+            {t('components.qrGenerator.download')}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default QrGenerator;

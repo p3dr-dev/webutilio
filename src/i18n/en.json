@@ -1,0 +1,347 @@
+{
+  "site": {
+    "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Fast & Secure Online Tools",
+    "plainTitle": "SLIT.IO - Fast & Secure Online Tools",
+    "description": "Your collection of utilities that run directly in your browser. Fast, secure, and private.",
+    "lang": "en-US"
+  },
+  "nav": {
+    "feedback": "Feedback",
+    "support": "Support the Project",
+    "openMenu": "Open menu"
+  },
+  "categories": {
+    "images": "Images",
+    "files": "Files",
+    "text": "Text",
+    "converters": "Converters",
+    "media": "Media"
+  },
+  "privacyReport": {
+    "title": "Verified Privacy",
+    "badge": "100% Local",
+    "description": "No data leaves your browser. Processing occurs entirely on your device using Web Crypto API, WebAssembly, and other cutting-edge modern technologies."
+  },
+      "howItWorks": {
+        "title": "How it works?",
+        "background-remover": "Uses the 'RMBG' AI model running locally in your browser via the ONNX Runtime Web library. Image processing happens on your CPU/GPU without sending anything to external servers.",
+        "file-decompressor": "Uses JSZip and js-untar libraries to read the binary structure of compressed files directly in the browser's memory, allowing individual file extraction.",
+        "media-compressor": "Employs FFmpeg compiled for WebAssembly (WASM). This brings the power of the world's most used video processing tool inside your browser.",
+        "file-encryptor": "Uses the browser's native Web Crypto API with the 256-bit AES-GCM algorithm. The password is derived using PBKDF2 with 100,000 iterations of SHA-256.",
+        "hash-generator": "Makes use of the 'subtle.digest' function of the Web Crypto API to calculate the SHA-256 hash of texts or files instantly and securely.",
+        "file-compressor": "Uses the JSZip library to create a new compressed file in memory, packaging the selected files with the maximum level of DEFLATE compression.",
+        "word-counter": "Applies regular expressions and JavaScript string processing logic to analyze the text and calculate detailed statistics in real-time.",
+        "file-converter": "Combines Canvas API for images and PDF.js for documents, allowing conversion of visual formats without depending on cloud processing.",
+        "image-resizer": "Uses the browser's Canvas API to redraw the image at the specified new dimensions, applying interpolation algorithms to maintain quality.",
+        "json-formatter": "Uses native JSON.parse and JSON.stringify methods with custom indentation to validate and organize JSON data structures instantly.",
+        "qr-generator": "Employs dot matrix generation algorithms to convert strings into visual QR Code patterns, rendering the result on a canvas for download.",
+        "exif-extractor": "Uses the exifr library to read image binary buffers and extract hidden metadata like GPS coordinates, camera model, and exposure settings."
+      },
+      "faq": {
+        "q1": "Is SLIT.IO safe to use?",
+        "a1": "Yes, it's 100% safe. All files and data are processed locally in your browser. Nothing is sent to our servers.",
+        "q2": "Do I need to pay to use it?",
+        "a2": "No, all tools are free and ad-free. The project is maintained by community donations.",
+        "q3": "Does it work offline?",
+        "a3": "Yes! Thanks to PWA technology, after the first access, most tools work even without an internet connection."
+      },
+      "tools": {    "background-remover": {
+      "title": "Online Background Remover Free",
+      "description": "Remove the background from images with a single click, using AI. Free online tool to remove photo backgrounds quickly without losing quality.",
+      "icon": "🖼️"
+    },
+    "file-decompressor": {
+      "title": "Online ZIP File Decompressor",
+      "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required.",
+      "icon": "📦"
+    },
+    "media-compressor": {
+      "title": "Free Online Media Compressor",
+      "description": "Reduce the size of your images (JPG, PNG, WEBP) and videos (MP4, WebM, OGG) without losing quality. Compress media online for free.",
+      "icon": "🗜️"
+    },
+    "file-encryptor": {
+      "title": "Online AES File Encryption",
+      "description": "Encrypt and decrypt files using the AES algorithm. Secure online tool to protect your files with a password.",
+      "icon": "🔒"
+    },
+    "hash-generator": {
+      "title": "Online SHA-256 Hash Generator",
+      "description": "Generate SHA-256 hashes for any text or file. Check file integrity online for free.",
+      "icon": "🔢"
+    },
+    "file-compressor": {
+      "title": "Online ZIP File Compressor",
+      "description": "Create ZIP archives from multiple files easily. Compress files online for free in the browser.",
+      "icon": "📁"
+    },
+    "word-counter": {
+      "title": "Free Online Word Counter",
+      "description": "Count words, characters, sentences, and paragraphs in a text. Fast and free online text analysis tool.",
+      "icon": "📝"
+    },
+    "file-converter": {
+      "title": "Online File Converter",
+      "description": "Convert files from one format to another. Starting with images. Free online file conversion tool.",
+      "icon": "🔄"
+    },
+    "image-resizer": {
+      "title": "Online Image Resizer",
+      "description": "Change the dimensions (width and height) of an image. Resize photos online for free without losing quality.",
+      "icon": "📏"
+    },
+    "json-formatter": {
+      "title": "JSON Formatter and Validator",
+      "description": "Validate, format, and beautify your JSON code instantly. An essential tool for developers that runs 100% in the browser.",
+      "icon": "{}"
+    },
+    "qr-generator": {
+      "title": "Online QR Code Generator",
+      "description": "Create custom QR codes for links, texts, or contacts. Generate and download your QR Code quickly and with total privacy.",
+      "icon": "📱"
+    },
+    "exif-extractor": {
+      "title": "EXIF Metadata Extractor",
+      "description": "View detailed information hidden in your photos, such as GPS location, date, and camera settings. Everything processed locally.",
+      "icon": "ℹ️"
+    }
+  },
+  "components": {
+    "jsonFormatter": {
+      "placeholder": "Paste your JSON here...",
+      "format": "Format JSON",
+      "minify": "Minify JSON",
+      "validate": "Validate JSON",
+      "invalid": "Invalid JSON!",
+      "valid": "Valid JSON!",
+      "clear": "Clear",
+      "copy": "Copy"
+    },
+    "qrGenerator": {
+      "placeholder": "Enter URL or text for QR Code...",
+      "download": "Download QR Code",
+      "error": "Error generating QR Code"
+    },
+    "exifExtractor": {
+      "selectImage": "Select Photo",
+      "noExif": "No EXIF metadata found in this image.",
+      "basicInfo": "Basic Information",
+      "cameraSettings": "Camera Settings",
+      "location": "Location",
+      "make": "Make",
+      "model": "Model",
+      "software": "Software",
+      "dateTime": "Date/Time",
+      "exposure": "Exposure",
+      "aperture": "Aperture",
+      "iso": "ISO",
+      "focalLength": "Focal Length",
+      "gps": "GPS Coordinates",
+      "readingMetadata": "Reading metadata...",
+      "viewOnMaps": "View on Google Maps",
+      "noGps": "No GPS coordinates found"
+    },
+    "loading": {
+      "message": "Loading tool...",
+      "error": "Error: Tool with ID \"{id}\" could not be found or is not implemented.",
+      "genericPhrases": [
+        "Wait a moment, magic is happening...",
+        "Processing your files...",
+        "Almost there! Grabbing a coffee while we process...",
+        "Working hard to make everything perfect.",
+        "Just a moment...",
+        "We're doing our best!",
+        "Counting pixels... there are many!",
+        "Compressing, encrypting, converting... phew!",
+        "Your files are in good hands."
+      ]
+    },
+    "fileCompressor": {
+      "selectFiles": "Select Files",
+      "filesSelected": "file(s) selected",
+      "compressButton": "Compress",
+      "compressing": "Compressing files...",
+      "selectedFilesTitle": "Selected Files:",
+      "compressedFileReadyTitle": "Compressed File Ready!",
+      "download": "Download",
+      "downloadNameZip": "files.zip",
+      "downloadNameTar": "files.tar",
+      "errorNoFiles": "Please select at least one file to compress.",
+      "dragAndDrop": "Drag and drop files here",
+      "clear": "Clear",
+      "outputFormat": "Output Format",
+      "errorCompressing": "An error occurred while compressing the files:"
+    },
+    "imageCompressor": {
+      "selectImage": "Select Image or Video",
+      "quality": "Quality",
+      "compressButton": "Compress Image",
+      "compressVideoButton": "Compress Video",
+      "compressing": "Compressing media...",
+      "original": "Original",
+      "compressed": "Compressed",
+      "reduction": "reduction",
+      "waiting": "Waiting for compression...",
+      "errorInvalidFile": "Please select a valid image (JPEG, PNG, WEBP) or video (MP4, WebM, OGG) file.",
+      "errorCanvas": "Could not get canvas context.",
+      "dragAndDrop": "Drag and drop an image or video here",
+      "selectAnother": "Select another file",
+      "downloadPrefix": "compressed",
+      "download": "Download"
+    },
+    "mediaCompressor": {
+      "selectImage": "Select Image or Video",
+      "quality": "Quality",
+      "compressButton": "Compress Image",
+      "compressVideoButton": "Compress Video",
+      "processing": "Compressing media...",
+      "original": "Original",
+      "compressed": "Compressed",
+      "reduction": "reduction",
+      "waiting": "Waiting for compression...",
+      "errorInvalidFile": "Please select a valid image (JPEG, PNG, WEBP) or video (MP4, WebM, OGG) file.",
+      "errorCanvas": "Could not get canvas context.",
+      "dragAndDrop": "Drag and drop an image or video here",
+      "selectAnother": "Select another file",
+      "downloadPrefix": "compressed",
+      "download": "Download",
+      "errorLoadFFmpeg": "Error loading video processor. Please try again.",
+      "errorCompressVideo": "Error compressing video. Please try again."
+    },
+    "fileConverter": {
+      "selectFile": "Select File",
+      "convertTo": "Convert to:",
+      "convert": "Convert",
+      "converting": "Converting file...",
+      "download": "Download",
+      "original": "Original",
+      "converted": "Converted",
+      "waiting": "Waiting for conversion...",
+      "errorInvalidFile": "Please select a valid file (image, PDF, JSON, CSV).",
+      "errorCanvas": "Could not get canvas context.",
+      "errorConversionFailed": "Conversion failed. Please try again.",
+      "errorConversion": "Error during conversion:",
+      "errorInvalidJson": "Invalid or empty JSON. Ensure it\u0027s an array of objects.",
+      "errorParsingJson": "Error parsing JSON. Check syntax.",
+      "errorInvalidCsv": "Invalid or empty CSV. Ensure it has headers and data.",
+      "errorParsingCsv": "Error parsing CSV. Check syntax.",
+      "noPreview": "No preview"
+    },
+    "fileEncryptor": {
+      "encrypt": "Encrypt File",
+      "decrypt": "Decrypt File",
+      "passwordPlaceholder": "Enter your secret password",
+      "processing": "Processing...",
+      "encryptButton": "Encrypt File",
+      "decryptButton": "Decrypt File",
+      "result": "Result:",
+      "errorFillFile": "Please select a file and enter the password.",
+      "errorFillEncryptedFile": "Please select an encrypted file and enter the password.",
+      "errorDecrypt": "Error decrypting. Check the password or the encrypted file.",
+      "errorEncrypt": "Error encrypting. Please try again.",
+      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS.",
+      "dragAndDrop": "Drag and drop a file here",
+      "selectFile": "Select File",
+      "download": "Download",
+      "passwordStrength": "Password Strength",
+      "strengthWeak": "Weak",
+      "strengthMedium": "Medium",
+      "strengthStrong": "Strong",
+      "strengthVeryStrong": "Very Strong"
+    },
+    "hashGenerator": {
+      "placeholder": "Enter text to generate SHA-256 hash...",
+      "generating": "Generating...",
+      "generateButton": "Generate Hash",
+      "generatedHash": "Generated SHA-256 Hash:",
+      "verifyOptional": "Verify Hash (Optional):",
+      "verifyPlaceholder": "Paste a hash to compare...",
+      "match": "✅ Hashes match!",
+      "noMatch": "❌ Hashes DO NOT match!",
+      "errorGeneratingHash": "Error generating hash.",
+      "errorCryptoNotAvailable": "Cryptography features are not available in this browser or context. Please ensure you are using a modern browser over HTTPS.",
+      "clear": "Clear",
+      "copy": "Copy",
+      "copied": "Copied!"
+    },
+    "backgroundRemover": {
+      "selectImage": "Select Image",
+      "processing": "Processing...",
+      "original": "Original",
+      "result": "Result",
+      "waiting": "Waiting for image...",
+      "resultHere": "The result will appear here.",
+      "download": "Download",
+      "errorProcessing": "Error: Image processing did not return a valid result.",
+      "dragAndDrop": "Drag and drop an image here",
+      "selectAnother": "Select another image",
+      "errorInvalidFile": "Please select a valid image file.",
+      "altResult": "Image with background removed",
+      "downloadName": "no-background",
+      "loadingPhrases": [
+        "Hold on, the magic is happening...",
+        "We're removing the background, pixel by pixel!",
+        "Almost there! Grabbing a coffee while we process...",
+        "Don't worry, we won't remove your good mood!",
+        "Counting the pixels... there are a lot!",
+        "Processing your image faster than lightning (almost)!",
+        "Preparing the image for your next big project.",
+        "Hang on, we're giving your photo a makeover.",
+        "Your background is about to disappear!",
+        "We're working hard to make your image perfect."
+      ]
+    },
+    "wordCounter": {
+      "placeholder": "Paste your text here...",
+      "words": "Words",
+      "characters": "Characters",
+      "sentences": "Sentences",
+      "paragraphs": "Paragraphs",
+      "readingTime": "Reading Time",
+      "speakingTime": "Speaking Time",
+      "minutes": "min",
+      "seconds": "sec",
+      "clear": "Clear"
+    },
+    "fileDecompressor": {
+      "readingArchive": "Reading archive...",
+      "selectArchive": "Select Archive",
+      "fileContents": "File Contents:",
+      "fileName": "File Name",
+      "size": "Size",
+      "action": "Action",
+      "folder": "Folder",
+      "download": "Download",
+      "errorInvalidArchive": "Please select a valid .zip or .tar file.",
+      "errorReadingArchive": "An error occurred while reading the file. It may be corrupted or not a supported format.",
+      "dragAndDrop": "Drag and drop a .zip or .tar file here",
+      "selectAnother": "Select another file"
+    },
+    "imageResizer": {
+      "selectImage": "Select Image",
+      "dragAndDrop": "Drag and drop an image here",
+      "errorInvalidFile": "Please select a valid image file.",
+      "original": "Original",
+      "resized": "Resized",
+      "waiting": "Waiting for resize...",
+      "width": "Width",
+      "height": "Height",
+      "resizeButton": "Resize Image",
+      "resizing": "Resizing image...",
+      "download": "Download",
+      "errorDimensions": "Please enter valid width and height.",
+      "errorCanvas": "Could not get canvas context.",
+      "errorLoadingImage": "Error loading image.",
+      "errorReadingFile": "Error reading file."
+    },
+    "feedbackForm": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name (optional)",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Your email (for contact)",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Your message...",
+      "submitButton": "Send Feedback by Email"
+    }
+  }
+}

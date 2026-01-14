@@ -1,0 +1,57 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import pt from '../i18n/pt.json';
+import en from '../i18n/en.json';
+
+const { lang } = Astro.props; // Recebe o idioma do Layout
+
+const i18n = lang === 'pt' ? pt : en;
+---
+<header class="bg-white shadow-md dark:bg-gray-800 dark:border-b dark:border-gray-700 relative">
+  <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+    <a href={`/${lang}/`} class="flex items-center space-x-1 text-2xl font-bold text-gray-800 dark:text-gray-100">
+      <img src="/static/images/slit_preto.png" alt="SLIT.IO Logo" class="h-8 dark:hidden" width="32" height="32" />
+      <img src="/static/images/slit_branco.png" alt="SLIT.IO Logo" class="h-8 hidden dark:block" width="32" height="32" />
+      <span>SLIT<span class="text-purple-500">.IO</span></span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center space-x-4 text-sm font-medium text-gray-600 dark:text-gray-300">
+      <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
+      <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
+      <ThemeToggle />
+      <LanguageSwitcher lang={lang} />
+    </nav>
+
+    <!-- Mobile Nav Button -->
+    <div class="md:hidden flex items-center space-x-2">
+      <ThemeToggle />
+      <button type="button" id="mobile-menu-button" class="text-gray-800 dark:text-gray-200 focus:outline-none" aria-label={i18n.nav.openMenu}>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t dark:border-gray-700">
+    <nav class="flex flex-col items-center space-y-4 py-4 text-base font-medium text-gray-600 dark:text-gray-300">
+      <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
+      <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
+      <LanguageSwitcher lang={lang} />
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  });
+</script>

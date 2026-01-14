@@ -1,0 +1,20 @@
+---
+// This page now uses a client-side script for language-based redirection.
+// It's intentionally minimal to prevent any flash of content before the redirect.
+---
+<html lang="en">
+  <head>
+    <title>Redirecting...</title>
+    <meta charset="UTF-8" />
+    <script is:inline>
+      const userLang = navigator.language || navigator.userLanguage;
+      // Default to 'pt' if the language is not English
+      const targetLang = userLang.startsWith('en') ? 'en' : 'pt';
+      // Use replace to avoid adding the root page to browser history
+      window.location.replace(`/${targetLang}/`);
+    </script>
+  </head>
+  <body>
+    <!-- Body is intentionally empty to prevent flash of content -->
+  </body>
+</html>

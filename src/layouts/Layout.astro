@@ -1,0 +1,98 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AppWrapper from '../components/AppWrapper';
+
+interface Props {
+	title: string;
+	description: string;
+	lang: 'pt' | 'en';
+	alternates?: {
+		pt: string;
+		en: string;
+	};
+}
+
+const { title, description, lang, alternates } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// Helper para obter o caminho base sem o idioma
+const getBasePath = (pathname: string) => {
+  const parts = pathname.split('/').filter(Boolean); // Remove partes vazias
+  if (parts.length > 0 && (parts[0] === 'en' || parts[0] === 'pt')) {
+    return '/' + parts.slice(1).join('/');
+  }
+  return pathname;
+};
+
+const basePath = getBasePath(Astro.url.pathname);
+
+const ptAlternate = alternates ? new URL(alternates.pt, Astro.site) : new URL('pt' + basePath, Astro.site);
+const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('en' + basePath, Astro.site);
+---
+<!doctype html>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en-US'}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#9333ea" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+
+			window.toggleTheme = () => {
+				document.documentElement.classList.toggle('dark');
+				const isDark = document.documentElement.classList.contains('dark');
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			};
+		</script>
+		
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={new URL('/og-image.png', Astro.site)} /> {/* Crie uma imagem de 1200x630px em public/ */}
+		
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
+
+		
+
+		<link rel="alternate" hreflang="pt-BR" href={ptAlternate} />
+		<link rel="alternate" hreflang="en-US" href={enAlternate} />
+		<link rel="alternate" hreflang="x-default" href={ptAlternate} />
+	</head>
+	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+		<Header lang={lang} /> {/* Passa o idioma para o Header */}
+		<AppWrapper client:load>
+			<main class="container mx-auto px-6 py-8 min-h-screen">
+				<slot />
+			</main>
+		</AppWrapper>
+		<Footer />
+	</body>
+</html>
