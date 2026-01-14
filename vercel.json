@@ -87,7 +87,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://staticimgly.com https://*.vercel-scripts.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://staticimgly.com; font-src 'self' data:; connect-src 'self' blob: https://staticimgly.com https://*.vercel-analytics.com https://*.vitals.vercel-insights.com https://*.vercel-scripts.com; worker-src 'self' blob: https://staticimgly.com; frame-ancestors 'none';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://*.staticimgly.com https://staticimgly.com https://*.vercel-scripts.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.staticimgly.com https://staticimgly.com; font-src 'self' data:; connect-src 'self' blob: https://*.staticimgly.com https://staticimgly.com https://*.vercel-analytics.com https://*.vitals.vercel-insights.com https://*.vercel-scripts.com; worker-src 'self' blob: https://*.staticimgly.com https://staticimgly.com; frame-ancestors 'none';"
         },
         {
           "key": "Cross-Origin-Opener-Policy",
@@ -116,7 +116,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://staticimgly.com https://*.vercel-scripts.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://staticimgly.com; font-src 'self' data:; connect-src 'self' blob: https://staticimgly.com https://*.vercel-analytics.com https://*.vitals.vercel-insights.com https://*.vercel-scripts.com; worker-src 'self' blob: https://staticimgly.com; frame-ancestors 'none';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://*.staticimgly.com https://staticimgly.com https://*.vercel-scripts.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.staticimgly.com https://staticimgly.com; font-src 'self' data:; connect-src 'self' blob: https://*.staticimgly.com https://staticimgly.com https://*.vercel-analytics.com https://*.vitals.vercel-insights.com https://*.vercel-scripts.com; worker-src 'self' blob: https://*.staticimgly.com https://staticimgly.com; frame-ancestors 'none';"
         },
         {
           "key": "Cross-Origin-Opener-Policy",
