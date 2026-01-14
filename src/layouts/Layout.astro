@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AppWrapper from '../components/AppWrapper';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
 	title: string;
@@ -85,6 +86,8 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<link rel="alternate" hreflang="pt-BR" href={ptAlternate} />
 		<link rel="alternate" hreflang="en-US" href={enAlternate} />
 		<link rel="alternate" hreflang="x-default" href={ptAlternate} />
+
+		<Analytics />
 	</head>
 	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
 		<Header lang={lang} /> {/* Passa o idioma para o Header */}
