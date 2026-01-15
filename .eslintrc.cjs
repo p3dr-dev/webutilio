@@ -14,6 +14,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  ignorePatterns: ['dist', 'node_modules', 'public'],
   rules: {
     // Adicione regras customizadas aqui se necessário
   },

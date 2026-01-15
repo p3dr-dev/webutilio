@@ -1,7 +1,7 @@
 import JSZip from 'jszip';
 
 self.onmessage = async (e) => {
-  const { files, options } = e.data;
+  const { files } = e.data;
   const zip = new JSZip();
 
   try {
@@ -23,7 +23,7 @@ self.onmessage = async (e) => {
     );
 
     self.postMessage({ type: 'result', blob });
-  } catch (error: any) {
-    self.postMessage({ type: 'error', error: error.message });
+  } catch (error) {
+    self.postMessage({ type: 'error', error: (error as Error).message });
   }
 };

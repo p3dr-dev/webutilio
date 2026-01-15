@@ -3,7 +3,8 @@
     "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Ferramentas Online Rápidas e Seguras",
     "plainTitle": "SLIT.IO - Ferramentas Online Rápidas e Seguras",
     "description": "Sua coleção de utilitários web que rodam diretamente no seu navegador. Rápido, seguro e privado.",
-    "lang": "pt-BR"
+    "lang": "pt-BR",
+    "allTools": "Todas as Ferramentas"
   },
   "nav": {
     "feedback": "Feedback",
@@ -16,6 +17,11 @@
     "text": "Texto",
     "converters": "Conversores",
     "media": "Mídia"
+  },
+  "donation": {
+    "title": "Apoie com Pix",
+    "description": "Aponte a câmera do seu celular para o QR Code abaixo. Rápido, fácil e sem taxas!",
+    "orKey": "Ou use a chave aleatória:"
   },
   "privacyReport": {
     "title": "Privacidade Verificada",

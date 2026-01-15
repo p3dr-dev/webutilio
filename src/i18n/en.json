@@ -3,7 +3,8 @@
     "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Fast & Secure Online Tools",
     "plainTitle": "SLIT.IO - Fast & Secure Online Tools",
     "description": "Your collection of utilities that run directly in your browser. Fast, secure, and private.",
-    "lang": "en-US"
+    "lang": "en-US",
+    "allTools": "All Tools"
   },
   "nav": {
     "feedback": "Feedback",
@@ -16,6 +17,11 @@
     "text": "Text",
     "converters": "Converters",
     "media": "Media"
+  },
+  "donation": {
+    "title": "Support with Pix",
+    "description": "Scan the QR Code below with your bank app. Fast, easy, and fee-free! (Available in Brazil)",
+    "orKey": "Or use the random key:"
   },
   "privacyReport": {
     "title": "Verified Privacy",

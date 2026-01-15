@@ -17,6 +17,7 @@ export function useTranslations(lang: keyof typeof languages) {
   return function t(key: string) {
     // Deeply nested key access
     const keys = key.split('.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = languages[lang];
     for (const k of keys) {
       if (value && typeof value === 'object' && k in value) {

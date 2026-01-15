@@ -71,7 +71,7 @@ self.onmessage = async (e) => {
       const blob = new Blob([decryptedData], { type: 'application/octet-stream' });
       self.postMessage({ type: 'result', blob, fileName: file.name.replace(/\.enc$/, '') });
     }
-  } catch (error: any) {
-    self.postMessage({ type: 'error', error: error.message });
+  } catch (error) {
+    self.postMessage({ type: 'error', error: (error as Error).message });
   }
 };

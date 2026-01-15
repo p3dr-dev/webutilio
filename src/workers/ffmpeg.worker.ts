@@ -27,8 +27,8 @@ async function initializeFFmpeg() {
       coreURL: '/ffmpeg/ffmpeg-core.js',
       wasmURL: '/ffmpeg/ffmpeg-core.wasm',
     });
-  } catch (e: any) {
-    self.postMessage({ type: 'error', message: `[ffmpeg.worker] Error loading FFmpeg core files: ${e.message}` });
+  } catch (e) {
+    self.postMessage({ type: 'error', message: `[ffmpeg.worker] Error loading FFmpeg core files: ${(e as Error).message}` });
     throw e; // Re-throw to propagate the error to the main thread's onerror handler
   }
 
