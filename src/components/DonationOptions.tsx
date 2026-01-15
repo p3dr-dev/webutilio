@@ -19,7 +19,7 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
         <div className="flex justify-center">
           {/* Substitua pelo caminho do seu QR Code na pasta 'public' */}
           <img 
-            src="/static/images/pix-qrcode.png" 
+            src="/static/images/pix_qrcode.png" 
             alt="QR Code Pix" 
             className="w-56 h-56 p-2 bg-white rounded-md shadow-inner" 
           />
