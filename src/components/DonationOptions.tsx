@@ -28,7 +28,7 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
           {t('donation.orKey')} <br/>
           <span className="font-mono bg-gray-100 dark:bg-gray-700 p-1 rounded">
             {/* SUBSTITUA PELA SUA CHAVE PIX */}
-            1064f891-4702-4fc0-b74b-d8ed30413f28
+            fe17002f-fd15-4a76-be58-b1bf811f799f
           </span>
         </p>
       </div>

@@ -42,24 +42,22 @@ const alternates = {
     const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
     localStorage.setItem('tool-history', JSON.stringify(newHistory));
   </script>
+  
+  {/* Primary Structured Data: SoftwareApplication */}
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": title,
-    "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Web",
+    "url": `https://slitio.vercel.app/en/tools/${tool.slugs.en}`,
+    "description": description,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "featureList": "Client-side processing, Privacy focused, Free to use, No registration",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "1250"
-    },
-    "description": description,
-    "featureList": "Privacy focused, client-side processing, free to use, no registration required",
     "screenshot": "https://slitio.vercel.app/og-image.png"
   })} />
 
