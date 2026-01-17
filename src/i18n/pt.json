@@ -57,18 +57,18 @@
       "icon": "🖼️"
     },
     "file-decompressor": {
-      "title": "Descompactador de Arquivos ZIP Online",
-      "description": "Extraia arquivos de um arquivo .zip diretamente no navegador. Descompacte ZIP online de forma segura e gratuita, sem instalar software.",
+      "title": "Descompactador de Arquivos ZIP e TAR Online Grátis",
+      "description": "Extraia arquivos ZIP e TAR diretamente no seu navegador de forma segura. Descompacte arquivos online sem precisar instalar programas, com total privacidade.",
       "icon": "📦"
     },
     "media-compressor": {
-      "title": "Compressor de Mídia Online Grátis",
-      "description": "Reduza o tamanho de suas imagens e vídeos JPG, PNG, WEBP, MP4, WebM sem perder qualidade. Comprima mídia online gratuitamente.",
+      "title": "Compressor de Vídeo e Imagem Online sem Perda de Qualidade",
+      "description": "Reduza o tamanho de vídeos MP4 e imagens PNG/JPG/WEBP mantendo a máxima qualidade. Compressor de mídia online gratuito e focado em privacidade.",
       "icon": "🗜️"
     },
     "file-encryptor": {
-      "title": "Criptografia de Arquivos AES Online",
-      "description": "Criptografe e descriptografe arquivos usando o algoritmo AES. Ferramenta segura online para proteger seus arquivos com senha.",
+      "title": "Criptografia de Arquivos AES-256 Online e Segura",
+      "description": "Proteja seus arquivos com criptografia militar AES-256 bits diretamente no navegador. Criptografe e descriptografe arquivos localmente com senha.",
       "icon": "🔒"
     },
     "hash-generator": {

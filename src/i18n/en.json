@@ -57,18 +57,18 @@
       "icon": "🖼️"
     },
     "file-decompressor": {
-      "title": "Online ZIP File Decompressor",
-      "description": "Extract files from a .zip archive directly in the browser. Unzip files online securely and for free, no software installation required.",
+      "title": "Free Online ZIP and TAR File Extractor",
+      "description": "Extract ZIP and TAR files directly in your browser securely. Unzip files online without software installation, ensuring 100% privacy.",
       "icon": "📦"
     },
     "media-compressor": {
-      "title": "Free Online Media Compressor",
-      "description": "Reduce the size of your images (JPG, PNG, WEBP) and videos (MP4, WebM, OGG) without losing quality. Compress media online for free.",
+      "title": "Online Video and Image Compressor - No Quality Loss",
+      "description": "Reduce the size of MP4 videos and PNG/JPG/WEBP images while maintaining high quality. Free online media compressor focused on privacy.",
       "icon": "🗜️"
     },
     "file-encryptor": {
-      "title": "Online AES File Encryption",
-      "description": "Encrypt and decrypt files using the AES algorithm. Secure online tool to protect your files with a password.",
+      "title": "Secure AES-256 File Encryption Online",
+      "description": "Protect your files with AES-256 bit encryption directly in the browser. Encrypt and decrypt files locally with a password safely.",
       "icon": "🔒"
     },
     "hash-generator": {

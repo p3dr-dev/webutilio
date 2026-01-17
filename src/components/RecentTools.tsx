@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { tools, Tool } from '../data/tools';
-import ToolCard from './ToolCard.astro';
 import { useTranslations } from '../i18n/utils';
 
 // Helper to get tool by id
