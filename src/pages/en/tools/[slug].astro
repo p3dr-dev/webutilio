@@ -95,6 +95,21 @@ const alternates = {
       <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{title}</h1>
       <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
     </div>
+
+    {/* Features List Section */}
+    {t(`tools.${tool.id}.features`) && Array.isArray(t(`tools.${tool.id}.features`)) && (
+      <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {(t(`tools.${tool.id}.features`) as string[]).map((feature: string) => (
+          <div class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{feature}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
     <div class="min-h-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-inner flex flex-col justify-center items-center">
       <ToolLoader toolId={tool.id} lang="en" client:only="react" />
     </div>
@@ -118,29 +133,64 @@ const alternates = {
       </div>
     </div>
 
+    {/* Dynamic FAQ Section */}
     <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Frequently Asked Questions</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {[1, 2, 3].map((i) => (
-          <div>
-            <h3 class="font-bold text-purple-600 dark:text-purple-400 mb-2">{t(`faq.q${i}`)}</h3>
-            <p class="text-gray-600 dark:text-gray-400 text-sm">{t(`faq.a${i}`)}</p>
-          </div>
-        ))}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {(() => {
+          const toolFaq = t(`tools.${tool.id}.faq`);
+          const displayFaq = Array.isArray(toolFaq) ? toolFaq : [
+            { q: t('faq.q1'), a: t('faq.a1') },
+            { q: t('faq.q2'), a: t('faq.a2') },
+            { q: t('faq.q3'), a: t('faq.a3') }
+          ];
+          
+          return displayFaq.map((item: any) => (
+            <div>
+              <h3 class="font-bold text-purple-600 dark:text-purple-400 mb-2">{item.q || item.name}</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{item.a || item.acceptedAnswer?.text}</p>
+            </div>
+          ));
+        })()}
+      </div>
+    </div>
+
+    {/* Related Tools Section */}
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Related Tools</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {toolsData
+          .filter(t => t.id !== tool.id && t.category === tool.category)
+          .slice(0, 3)
+          .map(relatedTool => (
+            <a href={`/en/tools/${relatedTool.slugs.en}`} class="p-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl hover:shadow-md transition-shadow text-center group">
+              <span class="text-3xl mb-2 block group-hover:scale-110 transition-transform">{relatedTool.icon}</span>
+              <span class="font-bold text-gray-800 dark:text-gray-200 text-sm">{t(`tools.${relatedTool.id}.title`)}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
 
     <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [1, 2, 3].map(i => ({
-        "@type": "Question",
-        "name": t(`faq.q${i}`),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": t(`faq.a${i}`)
-        }
-      }))
+      "mainEntity": (() => {
+        const toolFaq = t(`tools.${tool.id}.faq`);
+        const displayFaq = Array.isArray(toolFaq) ? toolFaq : [
+          { q: t('faq.q1'), a: t('faq.a1') },
+          { q: t('faq.q2'), a: t('faq.a2') },
+          { q: t('faq.q3'), a: t('faq.a3') }
+        ];
+        return displayFaq.map((item: any) => ({
+          "@type": "Question",
+          "name": item.q || item.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.a || item.acceptedAnswer?.text
+          }
+        }));
+      })()
     })} />
 
     <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">

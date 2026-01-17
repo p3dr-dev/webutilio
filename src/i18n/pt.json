@@ -79,57 +79,205 @@
     "file-decompressor": {
       "title": "Descompactador de Arquivos ZIP e TAR Online Grátis",
       "description": "Extraia arquivos ZIP e TAR diretamente no seu navegador de forma segura. Descompacte arquivos online sem precisar instalar programas, com total privacidade.",
-      "icon": "📦"
+      "icon": "📦",
+      "features": [
+        "Suporte a formatos .zip e .tar",
+        "Extração individual de arquivos",
+        "Processamento 100% local (sem upload)",
+        "Visualização prévia do conteúdo do pacote"
+      ],
+      "faq": [
+        {
+          "q": "Posso extrair arquivos grandes?",
+          "a": "Sim, desde que seu navegador tenha memória disponível. O SLIT.IO processa tudo localmente, então não há limites de upload."
+        },
+        {
+          "q": "O site suporta arquivos com senha?",
+          "a": "Atualmente suportamos extração de arquivos ZIP e TAR padrão. Suporte a senhas está em nosso roadmap."
+        }
+      ]
     },
     "media-compressor": {
       "title": "Compressor de Vídeo e Imagem Online sem Perda de Qualidade",
       "description": "Reduza o tamanho de vídeos MP4 e imagens PNG/JPG/WEBP mantendo a máxima qualidade. Compressor de mídia online gratuito e focado em privacidade.",
-      "icon": "🗜️"
+      "icon": "🗜️",
+      "features": [
+        "Compressão de vídeo via FFmpeg WASM",
+        "Ajuste de qualidade personalizado",
+        "Privacidade total: mídia processada localmente",
+        "Suporte a MP4, WebM, PNG, JPG e WEBP"
+      ],
+      "faq": [
+        {
+          "q": "A qualidade do vídeo diminui muito?",
+          "a": "Você tem controle total sobre o nível de qualidade. Nossa ferramenta busca o melhor equilíbrio entre tamanho e nitidez."
+        },
+        {
+          "q": "Quanto tempo demora para comprimir?",
+          "a": "Depende do poder de processamento do seu dispositivo, pois usamos o hardware local para garantir sua privacidade."
+        }
+      ]
     },
     "file-encryptor": {
       "title": "Criptografia de Arquivos AES-256 Online e Segura",
       "description": "Proteja seus arquivos com criptografia militar AES-256 bits diretamente no navegador. Criptografe e descriptografe arquivos localmente com senha.",
-      "icon": "🔒"
+      "icon": "🔒",
+      "features": [
+        "Algoritmo AES-GCM de 256 bits",
+        "Derivação de chave segura (PBKDF2)",
+        "Processamento local via Web Crypto API",
+        "Funciona totalmente offline após carregar"
+      ],
+      "faq": [
+        {
+          "q": "O SLIT.IO guarda minha senha?",
+          "a": "Nunca. Sua senha e seus arquivos nunca saem do seu computador. Se você esquecer a senha, não poderemos recuperar os dados."
+        },
+        {
+          "q": "É seguro enviar arquivos sensíveis?",
+          "a": "Sim, porque você não 'envia'. A criptografia acontece no seu navegador. É como usar um software local, mas sem instalar nada."
+        }
+      ]
     },
     "hash-generator": {
-      "title": "Gerador de Hash SHA-256 Online",
-      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo. Verifique integridade de arquivos online gratuitamente.",
-      "icon": "🔢"
+      "title": "Gerador de Hash SHA-256 Online e Seguro",
+      "description": "Gere hashes SHA-256 para qualquer texto ou arquivo. Verifique integridade de arquivos online gratuitamente com processamento 100% local.",
+      "icon": "🔢",
+      "features": [
+        "Hashes instantâneos para textos e arquivos",
+        "Comparação de hashes integrada",
+        "Privacidade total via Web Crypto API",
+        "Interface limpa e fácil de usar"
+      ],
+      "faq": [
+        {
+          "q": "O que é um hash SHA-256?",
+          "a": "É uma assinatura digital única para seus dados. Se um single bit mudar no arquivo, o hash será completamente diferente."
+        },
+        {
+          "q": "Posso gerar hash de arquivos grandes?",
+          "a": "Sim, nossa ferramenta processa o arquivo em blocos localmente, permitindo verificar arquivos de vários GBs com segurança."
+        }
+      ]
     },
     "file-compressor": {
-      "title": "Compressor de Arquivos ZIP Online",
-      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil. Comprima arquivos online gratuitamente no navegador.",
-      "icon": "📁"
+      "title": "Compressor de Arquivos ZIP Online Grátis",
+      "description": "Crie arquivos ZIP a partir de múltiplos arquivos de forma fácil e segura. Comprima arquivos online sem enviar seus dados para a nuvem.",
+      "icon": "📁",
+      "features": [
+        "Criação de pacotes ZIP em tempo real",
+        "Compressão DEFLATE de alta eficiência",
+        "Sem limites de quantidade de arquivos",
+        "Privacidade total: arquivos processados localmente"
+      ],
+      "faq": [
+        {
+          "q": "Existe limite de arquivos para o ZIP?",
+          "a": "Não impomos limites. O único limite é a capacidade de memória e processamento do seu dispositivo."
+        }
+      ]
     },
     "word-counter": {
-      "title": "Contador de Palavras Online Grátis",
-      "description": "Conte palavras, caracteres, sentenças e parágrafos em um texto. Ferramenta online para análise de texto rápida e gratuita.",
-      "icon": "📝"
+      "title": "Contador de Palavras e Caracteres Online Grátis",
+      "description": "Conte palavras, caracteres, sentenças e parágrafos em tempo real. Analise o tempo de leitura e fala do seu texto gratuitamente.",
+      "icon": "📝",
+      "features": [
+        "Contagem em tempo real",
+        "Estimativa de tempo de leitura e fala",
+        "Estatísticas detalhadas de parágrafos",
+        "Processamento local instantâneo"
+      ],
+      "faq": [
+        {
+          "q": "Meus textos são salvos?",
+          "a": "Não. Todo o processamento de texto ocorre na memória do seu navegador e é descartado assim que você fecha a página."
+        }
+      ]
     },
     "file-converter": {
-      "title": "Conversor de Arquivos Online",
-      "description": "Converta arquivos de um formato para outro. Começando com imagens. Ferramenta gratuita online para conversão de arquivos.",
-      "icon": "🔄"
+      "title": "Conversor de Arquivos Online Grátis - Imagem, PDF e JSON",
+      "description": "Converta imagens, PDFs, JSON e CSV diretamente no seu navegador. Conversor de arquivos seguro, rápido e sem necessidade de upload para nuvem.",
+      "icon": "🔄",
+      "features": [
+        "Conversão entre formatos de imagem (PNG, JPG, WEBP)",
+        "Extração de páginas de PDF para imagem",
+        "Conversor JSON para CSV e vice-versa",
+        "Processamento local via Canvas e PDF.js"
+      ],
+      "faq": [
+        {
+          "q": "Posso converter PDF para Word?",
+          "a": "Atualmente focamos em conversões visuais e de dados (PDF para Imagem, JSON para CSV). Mais formatos em breve!"
+        }
+      ]
     },
     "image-resizer": {
-      "title": "Redimensionador de Imagens Online",
-      "description": "Altere as dimensões (largura e altura) de uma imagem. Redimensione fotos online gratuitamente sem perder qualidade.",
-      "icon": "📏"
+      "title": "Redimensionador de Imagens Online Grátis",
+      "description": "Altere as dimensões de suas imagens sem perder qualidade. Redimensione fotos online de forma segura e rápida com processamento local.",
+      "icon": "📏",
+      "features": [
+        "Redimensionamento por largura e altura",
+        "Manutenção da proporção original",
+        "Processamento via Canvas API",
+        "Privacidade garantida: fotos não saem do PC"
+      ],
+      "faq": [
+        {
+          "q": "A imagem perde qualidade ao redimensionar?",
+          "a": "Usamos algoritmos de interpolação do navegador para garantir que a imagem permaneça nítida nas novas dimensões."
+        }
+      ]
     },
     "json-formatter": {
-      "title": "Formatador e Validador JSON",
-      "description": "Valide, formate e embeleze seu código JSON instantaneamente. Uma ferramenta essencial para desenvolvedores que roda 100% no navegador.",
-      "icon": "{}"
+      "title": "Formatador e Validador JSON Online",
+      "description": "Valide e formate seu código JSON instantaneamente. Ferramenta online gratuita para desenvolvedores com foco em velocidade e privacidade.",
+      "icon": "{}",
+      "features": [
+        "Embelezamento (Prettify) instantâneo",
+        "Minificação de JSON",
+        "Validação de sintaxe em tempo real",
+        "Processamento local seguro"
+      ],
+      "faq": [
+        {
+          "q": "É seguro colar dados de produção aqui?",
+          "a": "Sim. Diferente de outros formatadores, o SLIT.IO não envia seus dados para um servidor. O processamento é 100% no seu computador."
+        }
+      ]
     },
     "qr-generator": {
-      "title": "Gerador de QR Code Online",
-      "description": "Crie códigos QR personalizados para links, textos ou contatos. Gere e baixe seu QR Code rapidamente e com total privacidade.",
-      "icon": "📱"
+      "title": "Gerador de QR Code Online Grátis e Personalizado",
+      "description": "Crie códigos QR para links, textos ou Wi-Fi. Gere seu QR Code instantaneamente e com total privacidade, sem rastreamento.",
+      "icon": "📱",
+      "features": [
+        "Geração instantânea de QR Code",
+        "Download em formato PNG de alta resolução",
+        "Sem expiração: seus códigos duram para sempre",
+        "Privacidade total: dados não são rastreados"
+      ],
+      "faq": [
+        {
+          "q": "Os QR Codes expiram?",
+          "a": "Não. Os códigos gerados são estáticos e funcionarão para sempre, sem cobranças ou redirecionamentos."
+        }
+      ]
     },
     "exif-extractor": {
-      "title": "Extrator de Metadados EXIF",
-      "description": "Visualize informações detalhadas escondidas em suas fotos, como localização GPS, data e configurações da câmera. Tudo processado localmente.",
-      "icon": "ℹ️"
+      "title": "Leitor de Metadados EXIF Online - Ver GPS de Fotos",
+      "description": "Extraia informações ocultas de suas fotos, como coordenadas GPS, modelo da câmera e data. Visualize metadados EXIF com total privacidade.",
+      "icon": "ℹ️",
+      "features": [
+        "Visualização de coordenadas GPS no mapa",
+        "Dados técnicos da câmera (ISO, Foco, etc.)",
+        "Privacidade total: metadados lidos localmente",
+        "Suporte a JPEG, HEIC e muito mais"
+      ],
+      "faq": [
+        {
+          "q": "Como remover os metadados?",
+          "a": "Ao usar nosso Compressor de Mídia, os metadados sensíveis são removidos automaticamente para sua proteção."
+        }
+      ]
     }
   },
   "components": {

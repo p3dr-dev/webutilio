@@ -52,64 +52,212 @@
         "a3": "Yes! Thanks to PWA technology, after the first access, most tools work even without an internet connection."
       },
       "tools": {    "background-remover": {
-      "title": "Online Background Remover Free",
-      "description": "Remove the background from images with a single click, using AI. Free online tool to remove photo backgrounds quickly without losing quality.",
-      "icon": "🖼️"
+      "title": "Free Online Image Background Remover - 100% Automatic",
+      "description": "Remove background from photos instantly with AI. High quality, free, and no registration required. Processing is done 100% in your browser.",
+      "icon": "🖼️",
+      "features": [
+        "Local AI processing (ONNX Runtime)",
+        "Maintains original image resolution",
+        "Total privacy: photos don't leave your PC",
+        "Export in transparent PNG"
+      ],
+      "faq": [
+        {
+          "q": "Is the Background Remover free?",
+          "a": "Yes, SLIT.IO offers completely free and unlimited background removal, with no hidden fees or watermarks."
+        },
+        {
+          "q": "Are my photos sent to any server?",
+          "a": "No. Unlike other sites, our AI runs directly in your browser. Your images never leave your device."
+        }
+      ]
     },
     "file-decompressor": {
       "title": "Free Online ZIP and TAR File Extractor",
       "description": "Extract ZIP and TAR files directly in your browser securely. Unzip files online without software installation, ensuring 100% privacy.",
-      "icon": "📦"
+      "icon": "📦",
+      "features": [
+        "Support for .zip and .tar formats",
+        "Individual file extraction",
+        "100% local processing (no upload)",
+        "Preview of package content"
+      ],
+      "faq": [
+        {
+          "q": "Can I extract large files?",
+          "a": "Yes, as long as your browser has available memory. SLIT.IO processes everything locally, so there are no upload limits."
+        }
+      ]
     },
     "media-compressor": {
       "title": "Online Video and Image Compressor - No Quality Loss",
       "description": "Reduce the size of MP4 videos and PNG/JPG/WEBP images while maintaining high quality. Free online media compressor focused on privacy.",
-      "icon": "🗜️"
+      "icon": "🗜️",
+      "features": [
+        "Video compression via FFmpeg WASM",
+        "Custom quality adjustment",
+        "Total privacy: local media processing",
+        "Support for MP4, WebM, PNG, JPG, and WEBP"
+      ],
+      "faq": [
+        {
+          "q": "Does video quality drop significantly?",
+          "a": "You have full control over the quality level. Our tool seeks the best balance between size and clarity."
+        }
+      ]
     },
     "file-encryptor": {
       "title": "Secure AES-256 File Encryption Online",
       "description": "Protect your files with AES-256 bit encryption directly in the browser. Encrypt and decrypt files locally with a password safely.",
-      "icon": "🔒"
+      "icon": "🔒",
+      "features": [
+        "256-bit AES-GCM algorithm",
+        "Secure key derivation (PBKDF2)",
+        "Local processing via Web Crypto API",
+        "Works fully offline after loading"
+      ],
+      "faq": [
+        {
+          "q": "Does SLIT.IO store my password?",
+          "a": "Never. Your password and files never leave your computer. If you forget your password, we cannot recover your data."
+        }
+      ]
     },
     "hash-generator": {
-      "title": "Online SHA-256 Hash Generator",
-      "description": "Generate SHA-256 hashes for any text or file. Check file integrity online for free.",
-      "icon": "🔢"
+      "title": "Secure Online SHA-256 Hash Generator",
+      "description": "Generate SHA-256 hashes for any text or file. Verify file integrity online for free with 100% local processing.",
+      "icon": "🔢",
+      "features": [
+        "Instant hashes for text and files",
+        "Integrated hash comparison",
+        "Total privacy via Web Crypto API",
+        "Clean and easy-to-use interface"
+      ],
+      "faq": [
+        {
+          "q": "What is a SHA-256 hash?",
+          "a": "It is a unique digital signature for your data. If a single bit changes in the file, the hash will be completely different."
+        }
+      ]
     },
     "file-compressor": {
-      "title": "Online ZIP File Compressor",
-      "description": "Create ZIP archives from multiple files easily. Compress files online for free in the browser.",
-      "icon": "📁"
+      "title": "Free Online ZIP File Compressor",
+      "description": "Create ZIP files from multiple files easily and securely. Compress files online without sending your data to the cloud.",
+      "icon": "📁",
+      "features": [
+        "Real-time ZIP package creation",
+        "High-efficiency DEFLATE compression",
+        "No limits on the number of files",
+        "Total privacy: local file processing"
+      ],
+      "faq": [
+        {
+          "q": "Is there a file limit for ZIP?",
+          "a": "We do not impose limits. The only limit is your device's memory and processing capacity."
+        }
+      ]
     },
     "word-counter": {
-      "title": "Free Online Word Counter",
-      "description": "Count words, characters, sentences, and paragraphs in a text. Fast and free online text analysis tool.",
-      "icon": "📝"
+      "title": "Free Online Word and Character Counter",
+      "description": "Count words, characters, sentences, and paragraphs in real-time. Analyze reading and speaking time for your text for free.",
+      "icon": "📝",
+      "features": [
+        "Real-time counting",
+        "Reading and speaking time estimation",
+        "Detailed paragraph statistics",
+        "Instant local processing"
+      ],
+      "faq": [
+        {
+          "q": "Is my text saved?",
+          "a": "No. All text processing occurs in your browser's memory and is discarded as soon as you close the page."
+        }
+      ]
     },
     "file-converter": {
-      "title": "Online File Converter",
-      "description": "Convert files from one format to another. Starting with images. Free online file conversion tool.",
-      "icon": "🔄"
+      "title": "Free Online File Converter - Image, PDF, and JSON",
+      "description": "Convert images, PDFs, JSON, and CSV directly in your browser. Secure, fast file converter with no cloud upload required.",
+      "icon": "🔄",
+      "features": [
+        "Convert between image formats (PNG, JPG, WEBP)",
+        "Extract PDF pages to images",
+        "JSON to CSV converter and vice versa",
+        "Local processing via Canvas and PDF.js"
+      ],
+      "faq": [
+        {
+          "q": "Can I convert PDF to Word?",
+          "a": "Currently, we focus on visual and data conversions. More formats coming soon!"
+        }
+      ]
     },
     "image-resizer": {
-      "title": "Online Image Resizer",
-      "description": "Change the dimensions (width and height) of an image. Resize photos online for free without losing quality.",
-      "icon": "📏"
+      "title": "Free Online Image Resizer",
+      "description": "Change the dimensions of your images without losing quality. Resize photos online safely and quickly with local processing.",
+      "icon": "📏",
+      "features": [
+        "Resize by width and height",
+        "Maintain original aspect ratio",
+        "Processing via Canvas API",
+        "Guaranteed privacy: photos don't leave your PC"
+      ],
+      "faq": [
+        {
+          "q": "Does the image lose quality when resizing?",
+          "a": "We use browser interpolation algorithms to ensure the image remains sharp at new dimensions."
+        }
+      ]
     },
     "json-formatter": {
-      "title": "JSON Formatter and Validator",
-      "description": "Validate, format, and beautify your JSON code instantly. An essential tool for developers that runs 100% in the browser.",
-      "icon": "{}"
+      "title": "Online JSON Formatter and Validator",
+      "description": "Validate and format your JSON code instantly. Free online tool for developers focused on speed and privacy.",
+      "icon": "{}",
+      "features": [
+        "Instant Prettify",
+        "JSON Minification",
+        "Real-time syntax validation",
+        "Secure local processing"
+      ],
+      "faq": [
+        {
+          "q": "Is it safe to paste production data here?",
+          "a": "Yes. Unlike other formaters, SLIT.IO doesn't send your data to a server. Processing is 100% on your computer."
+        }
+      ]
     },
     "qr-generator": {
-      "title": "Online QR Code Generator",
-      "description": "Create custom QR codes for links, texts, or contacts. Generate and download your QR Code quickly and with total privacy.",
-      "icon": "📱"
+      "title": "Free and Custom Online QR Code Generator",
+      "description": "Create QR codes for links, text, or Wi-Fi. Generate your QR code instantly with total privacy and no tracking.",
+      "icon": "📱",
+      "features": [
+        "Instant QR Code generation",
+        "High-resolution PNG download",
+        "No expiration: your codes last forever",
+        "Total privacy: no data tracking"
+      ],
+      "faq": [
+        {
+          "q": "Do the QR codes expire?",
+          "a": "No. The generated codes are static and will work forever, with no fees or redirects."
+        }
+      ]
     },
     "exif-extractor": {
-      "title": "EXIF Metadata Extractor",
-      "description": "View detailed information hidden in your photos, such as GPS location, date, and camera settings. Everything processed locally.",
-      "icon": "ℹ️"
+      "title": "Online EXIF Metadata Reader - View Photo GPS",
+      "description": "Extract hidden info from your photos like GPS coordinates, camera model, and date. View EXIF metadata with total privacy.",
+      "icon": "ℹ️",
+      "features": [
+        "View GPS coordinates on maps",
+        "Technical camera data (ISO, Focus, etc.)",
+        "Total privacy: local metadata reading",
+        "Support for JPEG, HEIC, and more"
+      ],
+      "faq": [
+        {
+          "q": "How to remove metadata?",
+          "a": "By using our Media Compressor, sensitive metadata is automatically removed for your protection."
+        }
+      ]
     }
   },
   "components": {
