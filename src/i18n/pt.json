@@ -52,9 +52,29 @@
         "a3": "Sim! Graças à tecnologia PWA, após o primeiro acesso, a maioria das ferramentas funciona mesmo sem conexão com a internet."
       },
       "tools": {    "background-remover": {
-      "title": "Removedor de Fundo Online e Grátis",
-      "description": "Remova o fundo de imagens com um clique, usando IA. Ferramenta online gratuita para remover fundo de fotos rapidamente e sem perder qualidade.",
-      "icon": "🖼️"
+      "title": "Removedor de Fundo de Imagem Online Grátis - 100% Automático",
+      "description": "Remova o fundo de fotos instantaneamente com IA. Alta qualidade, grátis e sem necessidade de cadastro. O processamento é feito 100% no seu navegador.",
+      "icon": "🖼️",
+      "features": [
+        "Processamento local via IA (ONNX Runtime)",
+        "Mantém a resolução original da imagem",
+        "Privacidade total: suas fotos não saem do PC",
+        "Exportação em PNG transparente"
+      ],
+      "faq": [
+        {
+          "q": "O Removedor de Fundo é gratuito?",
+          "a": "Sim, o SLIT.IO oferece remoção de fundo totalmente gratuita e ilimitada, sem letras miúdas ou marcas d'água."
+        },
+        {
+          "q": "Minhas fotos são enviadas para algum servidor?",
+          "a": "Não. Diferente de outros sites, nossa IA roda diretamente no seu navegador. Suas imagens nunca saem do seu dispositivo."
+        },
+        {
+          "q": "Qual o limite de tamanho de imagem?",
+          "a": "Não impomos limites rígidos, mas o desempenho depende do seu hardware, já que o processamento é local."
+        }
+      ]
     },
     "file-decompressor": {
       "title": "Descompactador de Arquivos ZIP e TAR Online Grátis",
