@@ -27,7 +27,7 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
 const LoadingFallback: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
   return (
-    <div className="flex flex-col justify-center items-center p-10 min-h-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-inner">
+    <div className="flex flex-col justify-center items-center p-10 min-h-[600px] w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">
       <div className="relative w-16 h-16">
         <div className="absolute inset-0 border-4 border-purple-200 dark:border-purple-900 rounded-full"></div>
         <div className="absolute inset-0 border-4 border-t-purple-600 rounded-full animate-spin"></div>

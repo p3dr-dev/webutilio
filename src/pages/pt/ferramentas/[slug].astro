@@ -38,9 +38,21 @@ const alternates = {
   alternates={alternates}
 >
   <script is:inline define:vars={{ toolId: tool.id }}>
-    const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
-    const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
-    localStorage.setItem('tool-history', JSON.stringify(newHistory));
+    const updateHistory = () => {
+      try {
+        const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
+        const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
+        localStorage.setItem('tool-history', JSON.stringify(newHistory));
+      } catch (e) {
+        console.error('Failed to update tool history', e);
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(updateHistory);
+    } else {
+      setTimeout(updateHistory, 1000);
+    }
   </script>
   
   {/* Primary Structured Data: SoftwareApplication */}
@@ -110,7 +122,7 @@ const alternates = {
       </div>
     )}
 
-    <div class="min-h-[400px] bg-white dark:bg-gray-800 rounded-lg shadow-inner flex flex-col justify-center items-center">
+    <div class="min-h-[600px] flex flex-col justify-center">
       <ToolLoader toolId={tool.id} lang="pt" client:only="react" />
     </div>
 

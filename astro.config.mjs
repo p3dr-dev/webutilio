@@ -8,6 +8,7 @@ import AstroPWA from '@vite-pwa/astro';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://slitio.vercel.app', // Use a URL do seu site Vercel
+  prefetch: true,
   build: {
     inlineStylesheets: 'always',
   },
