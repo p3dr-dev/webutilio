@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import pt from '../../i18n/pt.json';
+import FeedbackForm from '../../components/FeedbackForm';
 ---
 
 <Layout title="Feedback - SLIT.IO" description="Deixe seu feedback e sugestões para o SLIT.IO." lang="pt">
@@ -11,24 +11,8 @@ import pt from '../../i18n/pt.json';
       relatar problemas ou simplesmente dizer qual sua ferramenta favorita.
     </p>
 
-    <div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-      <form id="feedback-form">
-        <div class="mb-6">
-          <label for="name" class="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">{pt.components.feedbackForm.nameLabel}</label>
-          <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder={pt.components.feedbackForm.namePlaceholder}>
-        </div>
-        <div class="mb-6">
-          <label for="email" class="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">{pt.components.feedbackForm.emailLabel}</label>
-          <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder={pt.components.feedbackForm.emailPlaceholder}>
-        </div>
-        <div class="mb-6">
-          <label for="message" class="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">{pt.components.feedbackForm.messageLabel}</label>
-          <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder={pt.components.feedbackForm.messagePlaceholder} required></textarea>
-        </div>
-        <button type="submit" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-md hover:bg-purple-700 transition-colors">
-          {pt.components.feedbackForm.submitButton}
-        </button>
-      </form>
+    <div class="max-w-2xl mx-auto">
+      <FeedbackForm client:load lang="pt" />
     </div>
 
     <p class="mt-12 text-gray-500 dark:text-gray-400">
@@ -36,26 +20,3 @@ import pt from '../../i18n/pt.json';
     </p>
   </section>
 </Layout>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('feedback-form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      const name = form.elements.name.value;
-      const email = form.elements.email.value;
-      const message = form.elements.message.value;
-      
-      const subject = `Feedback SLIT.IO - de ${name || 'Usuário Anônimo'}`;
-      
-      let body = `Feedback recebido:\n\n`;
-      body += `Nome: ${name || 'Não informado'}\n`;
-      body += `Email: ${email || 'Não informado'}\n`;
-      body += `-------------------------------------\n\n`;
-      body += `${message}`;
-      
-      window.location.href = `mailto:pedrosimoescontato17@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    });
-  });
-</script>

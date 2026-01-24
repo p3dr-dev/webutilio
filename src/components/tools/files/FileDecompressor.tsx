@@ -1,10 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
 import JSZip from 'jszip';
 import untar from 'js-untar';
-import LoadingSpinner from './LoadingSpinner';
-import { useTranslations } from '../../i18n/utils';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
 
-import { useLoadingPhrases } from './useLoadingPhrases';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 interface ExtractedFile {
   name: string;

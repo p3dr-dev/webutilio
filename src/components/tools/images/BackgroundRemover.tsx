@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { removeBackground } from '@imgly/background-removal';
-import LoadingSpinner from './LoadingSpinner';
-import { useTranslations } from '../../i18n/utils';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
 import * as ort from 'onnxruntime-web';
-import { useLoadingPhrases } from './useLoadingPhrases';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 // Configure o caminho do WASM uma vez fora do componente
 ort.env.wasm.wasmPath = '/models/';

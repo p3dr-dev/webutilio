@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useTranslations } from '../../i18n/utils';
-import LoadingSpinner from './LoadingSpinner';
-import { useLoadingPhrases } from './useLoadingPhrases';
+import { useTranslations } from '../../../i18n/utils';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 
 const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations } from '../../../i18n/utils';
 
 const WordCounter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);

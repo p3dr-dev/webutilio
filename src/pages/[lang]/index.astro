@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { tools } from '../../data/tools';
 import ToolCard from '../../components/ToolCard.astro';
 import RecentTools from '../../components/RecentTools';
+import HomeSearch from '../../components/HomeSearch';
 import { useTranslations, getStaticPaths as getLangStaticPaths } from '../../i18n/utils';
 
 export const getStaticPaths = getLangStaticPaths;
@@ -17,15 +18,7 @@ const t = useTranslations(lang);
     "@type": "WebSite",
     "name": "SLIT.IO",
     "url": `https://slitio.vercel.app/${lang}/`,
-    "description": t('site.description'),
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": `https://slitio.vercel.app/${lang}/#tools`
-      },
-      "query-input": "required name=search_term_string"
-    }
+    "description": t('site.description')
   })} />
 
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
@@ -48,6 +41,12 @@ const t = useTranslations(lang);
   </section>
 
   <RecentTools lang={lang} client:idle />
+
+  <HomeSearch 
+    client:load 
+    placeholder={t('home.searchPlaceholder')} 
+    noResultsText={t('home.noResults')} 
+  />
 
   <h2 id="tools" class="sr-only">{t('site.allTools')}</h2>
   <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 pb-20">

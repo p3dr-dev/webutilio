@@ -12,10 +12,19 @@ interface Props {
 		pt: string;
 		en: string;
 	};
+	keywords?: string[];
 }
 
-const { title, description, lang, alternates } = Astro.props;
+const { title, description, lang, alternates, keywords = [] } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const defaultKeywords = [
+	"online tools", "ferramentas online", "privacy", "privacidade", 
+	"local processing", "processamento local", "web utilities", "utilitarios web",
+	"pwa", "offline", "converter", "compressor", "editor"
+];
+
+const allKeywords = [...new Set([...defaultKeywords, ...keywords])].join(", ");
 
 // Helper para obter o caminho base sem o idioma
 const getBasePath = (pathname: string) => {
@@ -91,6 +100,7 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="keywords" content={allKeywords} />
 		<link rel="canonical" href={canonicalURL} />
 
 		<meta property="og:title" content={title} />

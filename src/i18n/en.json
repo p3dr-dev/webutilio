@@ -6,6 +6,10 @@
     "lang": "en-US",
     "allTools": "All Tools"
   },
+  "home": {
+    "searchPlaceholder": "Search for tools (e.g., PDF, image, converter)...",
+    "noResults": "Oops! No tools found matching your search."
+  },
   "nav": {
     "feedback": "Feedback",
     "support": "Support the Project",
@@ -21,7 +25,25 @@
   "donation": {
     "title": "Support with Pix",
     "description": "Scan the QR Code below with your bank app. Fast, easy, and fee-free! (Available in Brazil)",
-    "orKey": "Or use the random key:"
+    "orKey": "Or use the random key:",
+    "international": "International Support",
+    "crypto": "Cryptocurrencies",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "methods": {
+      "paypal": "PayPal",
+      "stripe": "Card (Stripe)",
+      "kofi": "Buy Me a Coffee / Ko-fi",
+      "btc": "Bitcoin (BTC)",
+      "eth": "Ethereum (ETH)",
+      "usdt": "USDT (TRC20)"
+    },
+    "descriptions": {
+      "paypal": "Fast and secure. Accepts balance and cards.",
+      "stripe": "Donate with credit/debit card.",
+      "kofi": "Buy a coffee for the developer.",
+      "crypto": "Total privacy and no intermediaries."
+    }
   },
   "privacyReport": {
     "title": "Verified Privacy",
@@ -495,7 +517,10 @@
       "emailPlaceholder": "Your email (for contact)",
       "messageLabel": "Message",
       "messagePlaceholder": "Your message...",
-      "submitButton": "Send Feedback by Email"
+      "submitButton": "Send Feedback",
+      "sending": "Sending...",
+      "successMessage": "Feedback sent successfully! Thank you.",
+      "errorMessage": "Error sending feedback. Please try again later."
     }
   }
 }

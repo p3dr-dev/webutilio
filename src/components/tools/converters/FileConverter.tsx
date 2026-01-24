@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import LoadingSpinner from './LoadingSpinner';
-import { useTranslations } from '../../i18n/utils';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
 import { Canvg } from 'canvg';
 import * as pdfjs from 'pdfjs-dist';
 
@@ -11,7 +11,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 type OutputFormat = 'jpeg' | 'png' | 'webp' | 'csv' | 'svg' | 'json';
 type InputType = 'image' | 'svg' | 'pdf' | 'json';
 
-import { useLoadingPhrases } from './useLoadingPhrases';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);

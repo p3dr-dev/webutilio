@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useTranslations } from '../../i18n/utils';
-import { useToast } from '../Toast';
+import { useTranslations } from '../../../i18n/utils';
+import { useToast } from '../../Toast';
 
 const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);

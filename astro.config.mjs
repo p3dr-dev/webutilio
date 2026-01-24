@@ -25,6 +25,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'script',
       manifestFilename: 'manifest.json',
+      devOptions: {
+        enabled: true,
+      },
       workbox: {
         navigateFallback: '/404',
         globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],

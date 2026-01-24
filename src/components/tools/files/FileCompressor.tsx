@@ -1,8 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import JSZip from 'jszip';
-import LoadingSpinner from './LoadingSpinner';
-import { useTranslations } from '../../i18n/utils';
-import { useLoadingPhrases } from './useLoadingPhrases';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -82,7 +82,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProcessedSize(null);
     setProgress(0);
 
-    const worker = new Worker(new URL('../../workers/compressor.worker.ts', import.meta.url), { type: 'module' });
+    const worker = new Worker(new URL('../../../workers/compressor.worker.ts', import.meta.url), { type: 'module' });
     worker.postMessage({ files });
 
     worker.onmessage = (e) => {

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useTranslations } from '../../i18n/utils';
-import { useLoadingPhrases } from './useLoadingPhrases';
-import LoadingSpinner from './LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -34,7 +34,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setError('');
     setProcessedFileUrl(null);
 
-    const worker = new Worker(new URL('../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
+    const worker = new Worker(new URL('../../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
     worker.postMessage({ file, password, mode: 'encrypt' });
 
     worker.onmessage = (e) => {
@@ -61,7 +61,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setError('');
     setProcessedFileUrl(null);
 
-    const worker = new Worker(new URL('../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
+    const worker = new Worker(new URL('../../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
     worker.postMessage({ file, password, mode: 'decrypt' });
 
     worker.onmessage = (e) => {

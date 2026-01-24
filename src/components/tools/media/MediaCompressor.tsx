@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import LoadingSpinner from './LoadingSpinner';
-import { useTranslations } from '../../i18n/utils';
-import { useLoadingPhrases } from './useLoadingPhrases';
+import LoadingSpinner from '../common/LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
+import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -14,6 +14,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [videoMeta, setVideoMeta] = useState<{ width: number; height: number; duration: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
   const workerRef = useRef<Worker | null>(null);
@@ -22,12 +23,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [estimatedSize, setEstimatedSize] = useState<number | null>(null);
 
   useEffect(() => {
-    // Initialize worker from src
-    workerRef.current = new Worker(new URL('../../workers/ffmpeg.worker.ts', import.meta.url), { type: 'module' });
+    workerRef.current = new Worker(new URL('../../../workers/ffmpeg.worker.ts', import.meta.url), { type: 'module' });
     const worker = workerRef.current;
 
     worker.onmessage = (event) => {
-      const { type, data, progress, time, message: workerMessage, outputFileName } = event.data;
+      const { type, data, progress, message: workerMessage } = event.data;
 
       switch (type) {
         case 'log':
@@ -37,7 +37,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           setProgress(progress);
           break;
         case 'result':
-          const blob = new Blob([data], { type: 'video/mp4' }); // Ajuste o tipo MIME conforme necessário
+          const blob = new Blob([data], { type: 'video/mp4' });
           const url = URL.createObjectURL(blob);
           setCompressedUrl(url);
           setCompressedSize(blob.size);
@@ -48,8 +48,6 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           setIsLoading(false);
           console.error('Worker error:', workerMessage);
           break;
-        default:
-          console.log('Message from worker:', event.data);
       }
     };
 
@@ -60,15 +58,9 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     };
 
     return () => {
-      if (workerRef.current) {
-        workerRef.current.terminate();
-      }
-      if (originalUrl) {
-        URL.revokeObjectURL(originalUrl);
-      }
-      if (compressedUrl) {
-        URL.revokeObjectURL(compressedUrl);
-      }
+      if (workerRef.current) workerRef.current.terminate();
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
+      if (compressedUrl) URL.revokeObjectURL(compressedUrl);
     };
   }, []);
 
@@ -88,6 +80,21 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setCompressedSize(null);
     setError('');
     setProgress(null);
+    setVideoMeta(null);
+  };
+
+  const loadVideoMetadata = (file: File) => {
+    const video = document.createElement('video');
+    video.preload = 'metadata';
+    video.onloadedmetadata = () => {
+      URL.revokeObjectURL(video.src);
+      setVideoMeta({
+        width: video.videoWidth,
+        height: video.videoHeight,
+        duration: video.duration
+      });
+    };
+    video.src = URL.createObjectURL(file);
   };
 
   const handleFileSelect = (file: File | null) => {
@@ -101,6 +108,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       setOriginalFile(file);
       setOriginalUrl(URL.createObjectURL(file));
       setOriginalSize(file.size);
+      
+      if (file.type.startsWith('video/')) {
+        loadVideoMetadata(file);
+      }
     } else {
       resetOriginalFileState();
       setError(t('components.mediaCompressor.errorInvalidFile'));
@@ -171,7 +182,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   }, [originalFile, quality, t]);
 
   const compressVideo = useCallback(async () => {
-    if (!originalFile) return;
+    if (!originalFile || !workerRef.current) return;
 
     setIsLoading(true);
     setCompressedUrl('');
@@ -179,7 +190,24 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProgress(null);
 
     const inputFileName = originalFile.name;
-    const outputFileName = `output-${originalFile.name.split('.').slice(0, -1).join('.')}.mp4`; // Exemplo: converter para mp4
+    const outputFileName = `output-${originalFile.name.split('.').slice(0, -1).join('.')}.mp4`;
+    
+    // Smart Bitrate Logic
+    // Base: 0.1 bits per pixel for reasonable quality x264
+    // If metadata is missing, fallback to linear 1000k * quality
+    let bitrate = `${Math.floor(quality * 1000)}k`;
+    let bufsize = `${Math.floor(quality * 1000)}k`;
+
+    if (videoMeta) {
+        const pixels = videoMeta.width * videoMeta.height;
+        // Formula: pixels * fps (assume 30) * bpp * quality_factor
+        // We map slider 0.1-1.0 to BPP range 0.05 - 0.2
+        const bpp = 0.05 + (quality * 0.15); // 0.1 => 0.065 bpp, 1.0 => 0.2 bpp
+        const targetBits = Math.floor(pixels * 30 * bpp);
+        bitrate = `${Math.floor(targetBits / 1000)}k`;
+        bufsize = `${Math.floor(targetBits / 500)}k`; // buffer size usually 2x bitrate
+        console.log(`Smart Bitrate: ${videoMeta.width}x${videoMeta.height} @ ${bpp.toFixed(3)} bpp = ${bitrate}`);
+    }
 
     workerRef.current.postMessage({
       type: 'run',
@@ -190,18 +218,19 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         args: [
           '-i', inputFileName,
           '-c:v', 'libx264',
-          '-b:v', `${Math.floor(quality * 1000)}k`,
-          '-bufsize', `${Math.floor(quality * 1000)}k`,
-          '-preset', 'fast',
-          '-c:a', 'aac', // Add audio codec
-          '-b:a', '128k', // Add audio bitrate (common default)
-          '-v', 'info', // Add verbose logging
-          '-y', // Overwrite output files
+          '-b:v', bitrate,
+          '-maxrate', bitrate,
+          '-bufsize', bufsize,
+          '-preset', 'ultrafast', // Faster for browser
+          '-c:a', 'aac',
+          '-b:a', '128k',
+          '-v', 'info',
+          '-y',
           outputFileName
-        ], // Exemplo: converter para mp4
+        ],
       },
     });
-  }, [originalFile, quality]);
+  }, [originalFile, quality, videoMeta]);
 
   const compressMedia = useCallback(async () => {
     if (!originalFile) return;

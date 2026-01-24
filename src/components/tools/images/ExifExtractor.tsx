@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import exifr from 'exifr';
-import { useTranslations } from '../../i18n/utils';
-import { useToast } from '../Toast';
-import LoadingSpinner from './LoadingSpinner';
+import { useTranslations } from '../../../i18n/utils';
+import { useToast } from '../../Toast';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);

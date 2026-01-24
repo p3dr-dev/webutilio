@@ -6,6 +6,10 @@
     "lang": "pt-BR",
     "allTools": "Todas as Ferramentas"
   },
+  "home": {
+    "searchPlaceholder": "Busque por ferramentas (ex: PDF, imagem, converter)...",
+    "noResults": "Ops! Nenhuma ferramenta encontrada com esse termo."
+  },
   "nav": {
     "feedback": "Feedback",
     "support": "Apoie o Projeto",
@@ -21,7 +25,25 @@
   "donation": {
     "title": "Apoie com Pix",
     "description": "Aponte a câmera do seu celular para o QR Code abaixo. Rápido, fácil e sem taxas!",
-    "orKey": "Ou use a chave aleatória:"
+    "orKey": "Ou use a chave aleatória:",
+    "international": "Doações Internacionais",
+    "crypto": "Criptomoedas",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "methods": {
+      "paypal": "PayPal",
+      "stripe": "Cartão (Stripe)",
+      "kofi": "Buy Me a Coffee / Ko-fi",
+      "btc": "Bitcoin (BTC)",
+      "eth": "Ethereum (ETH)",
+      "usdt": "USDT (TRC20)"
+    },
+    "descriptions": {
+      "paypal": "Rápido e seguro. Aceita saldo e cartões.",
+      "stripe": "Doe com cartão de crédito/débito.",
+      "kofi": "Pague um café para o desenvolvedor.",
+      "crypto": "Privacidade total e sem intermediários."
+    }
   },
   "privacyReport": {
     "title": "Privacidade Verificada",
@@ -515,7 +537,10 @@
       "emailPlaceholder": "Seu email (para contato)",
       "messageLabel": "Mensagem",
       "messagePlaceholder": "Sua mensagem...",
-      "submitButton": "Enviar Feedback por E-mail"
+      "submitButton": "Enviar Feedback",
+      "sending": "Enviando...",
+      "successMessage": "Feedback enviado com sucesso! Obrigado.",
+      "errorMessage": "Erro ao enviar. Tente novamente mais tarde."
     }
   }
 }

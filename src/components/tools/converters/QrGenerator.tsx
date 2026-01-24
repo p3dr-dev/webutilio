@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import QRCode from 'qrcode';
-import { useTranslations } from '../../i18n/utils';
-import { useToast } from '../Toast';
+import { useTranslations } from '../../../i18n/utils';
+import { useToast } from '../../Toast';
 
 const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);

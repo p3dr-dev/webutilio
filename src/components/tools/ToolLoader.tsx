@@ -9,18 +9,18 @@ interface ToolLoaderProps {
 
 // Mapeia o ID da ferramenta (que é neutro em relação ao idioma) para o componente React correspondente.
 const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.ComponentType<any>> } = {
-  'word-counter': lazy(() => import('./WordCounter')),
-  'hash-generator': lazy(() => import('./HashGenerator')),
-  'media-compressor': lazy(() => import('./MediaCompressor')),
-  'file-encryptor': lazy(() => import('./FileEncryptor')),
-  'file-converter': lazy(() => import('./FileConverter')),
-  'file-compressor': lazy(() => import('./FileCompressor')),
-  'file-decompressor': lazy(() => import('./FileDecompressor')),
-  'background-remover': lazy(() => import('./BackgroundRemover')),
-  'image-resizer': lazy(() => import('./ImageResizer')),
-  'json-formatter': lazy(() => import('./JsonFormatter')),
-  'qr-generator': lazy(() => import('./QrGenerator')),
-  'exif-extractor': lazy(() => import('./ExifExtractor')),
+  'word-counter': lazy(() => import('./text/WordCounter')),
+  'hash-generator': lazy(() => import('./text/HashGenerator')),
+  'media-compressor': lazy(() => import('./media/MediaCompressor')),
+  'file-encryptor': lazy(() => import('./files/FileEncryptor')),
+  'file-converter': lazy(() => import('./converters/FileConverter')),
+  'file-compressor': lazy(() => import('./files/FileCompressor')),
+  'file-decompressor': lazy(() => import('./files/FileDecompressor')),
+  'background-remover': lazy(() => import('./images/BackgroundRemover')),
+  'image-resizer': lazy(() => import('./images/ImageResizer')),
+  'json-formatter': lazy(() => import('./text/JsonFormatter')),
+  'qr-generator': lazy(() => import('./converters/QrGenerator')),
+  'exif-extractor': lazy(() => import('./images/ExifExtractor')),
 };
 
 // Componente de fallback para o Suspense
