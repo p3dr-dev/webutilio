@@ -13,6 +13,8 @@
   "nav": {
     "feedback": "Feedback",
     "support": "Support the Project",
+    "about": "About",
+    "privacy": "Privacy",
     "openMenu": "Open menu"
   },
   "categories": {
@@ -362,7 +364,8 @@
       "gps": "GPS Coordinates",
       "readingMetadata": "Reading metadata...",
       "viewOnMaps": "View on Google Maps",
-      "noGps": "No GPS coordinates found"
+      "noGps": "No GPS coordinates found",
+      "altPreview": "Photo preview"
     },
     "loading": {
       "message": "Loading tool...",
@@ -571,5 +574,35 @@
       "successMessage": "Feedback sent successfully! Thank you.",
       "errorMessage": "Error sending feedback. Please try again later."
     }
+  },
+  "privacyPage": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: July 2026",
+    "intro": "SLIT.IO is built on a foundation of privacy. This policy explains how we handle your data — or more precisely, how we don't.",
+    "section1Title": "1. No Data Collection",
+    "section1": "SLIT.IO does not collect, store, or transmit any personal data. All tools process files and text entirely within your browser using client-side JavaScript and WebAssembly. No data ever leaves your device.",
+    "section2Title": "2. No Server-Side Processing",
+    "section2": "When you use any tool on SLIT.IO — whether compressing an image, encrypting a file, counting words, or removing a background — the processing happens 100% locally in your web browser. Your files are never uploaded to any server.",
+    "section3Title": "3. Analytics",
+    "section3": "We use Vercel Web Analytics and Speed Insights, which collect anonymous, aggregated page-view and performance metrics (such as page load time). This data is non-personal and cannot be used to identify individual users. No cookies are set for analytics purposes.",
+    "section4Title": "4. Cookies",
+    "section4": "SLIT.IO uses only a single local storage entry to remember your theme preference (light/dark mode). No tracking cookies are used.",
+    "section5Title": "5. Third-Party Services",
+    "section5": "Some tools download processing models (such as ONNX models for background removal) from third-party CDNs. These downloads are anonymous — no personal information is sent. No other third-party services have access to your data.",
+    "section6Title": "6. Contact",
+    "section6": "If you have questions about this privacy policy, you can reach us through the feedback form."
+  },
+  "aboutPage": {
+    "title": "About SLIT.IO",
+    "description": "SLIT.IO is an open collection of web utilities that run entirely in your browser. Fast, secure, and private.",
+    "missionTitle": "Our Mission",
+    "mission": "To provide powerful, free, and privacy-respecting web tools that anyone can use without installing software or creating accounts.",
+    "howTitle": "How It Works",
+    "how": "Every tool uses modern web technologies — JavaScript, WebAssembly, Canvas, and the Web Crypto API — to process your files directly in your browser. Nothing is ever sent to a server.",
+    "openSourceTitle": "Open Source",
+    "openSource": "SLIT.IO is open source. You can view the code, report issues, or contribute on GitHub.",
+    "github": "View on GitHub",
+    "feedbackTitle": "Get in Touch",
+    "feedback": "Have a suggestion, found a bug, or want to collaborate? We'd love to hear from you."
   }
 }

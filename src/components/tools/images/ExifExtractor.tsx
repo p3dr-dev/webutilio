@@ -75,7 +75,7 @@ const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             className="w-full aspect-square border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center hover:border-purple-500 transition-colors group dark:border-gray-600"
           >
             {imageUrl ? (
-              <img src={imageUrl} alt="Preview" className="w-full h-full object-contain p-2" />
+              <img src={imageUrl} alt={t('components.exifExtractor.altPreview')} className="w-full h-full object-contain p-2" />
             ) : (
               <div className="text-center p-4">
                 <span className="text-4xl block mb-2 group-hover:scale-110 transition-transform">📷</span>

@@ -265,11 +265,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   }, [originalFile, compressImage, compressVideo, t]);
 
-  const renderMedia = (url: string, isVideo: boolean) => {
+  const renderMedia = (url: string, isVideo: boolean, altText: string) => {
     if (isVideo) {
-      return <video src={url} controls aria-label="Compressed video" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80"><track kind="captions" /></video>;
+      return <video src={url} controls aria-label={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80"><track kind="captions" /></video>;
     } else {
-      return <img src={url} alt="Media" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
+      return <img src={url} alt={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
     }
   };
 
@@ -352,14 +352,14 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             <div className="grid md:grid-cols-2 gap-6 mt-6 text-center">
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.mediaCompressor.original')}</h3>
-                {originalUrl && renderMedia(originalUrl, originalFile.type.startsWith('video/'))}
+                {originalUrl && renderMedia(originalUrl, originalFile.type.startsWith('video/'), t('components.mediaCompressor.original'))}
                 <p className="mt-2 font-medium text-gray-700 dark:text-gray-300">{formatBytes(originalSize)}</p>
               </div>
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.mediaCompressor.compressed')}</h3>
                 {compressedUrl ? (
                   <>
-                    {renderMedia(compressedUrl, originalFile.type.startsWith('video/'))}
+                    {renderMedia(compressedUrl, originalFile.type.startsWith('video/'), t('components.mediaCompressor.compressed'))}
                     <p className="mt-2 font-bold text-green-600 dark:text-green-400">
                       {formatBytes(compressedSize)}
                       {originalSize && compressedSize && (

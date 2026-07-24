@@ -153,7 +153,7 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               <div>
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.backgroundRemover.original')}</h3>
                 <div className="mt-2 flex items-center justify-center h-80 bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
-                  {originalUrl && <img src={originalUrl} alt="Original" className="max-h-full max-w-full" />}
+                  {originalUrl && <img src={originalUrl} alt={t('components.backgroundRemover.original')} className="max-h-full max-w-full" />}
                 </div>
               </div>
               <div>

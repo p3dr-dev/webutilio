@@ -16,7 +16,9 @@ export default defineConfig({
   integrations: [
     react(), 
     tailwind(), 
-    sitemap(),
+    sitemap({
+      filter: (page) => !page.includes('/404') && page !== 'https://slitio.vercel.app/',
+    }),
     AstroPWA({
       mode: 'production',
       base: '/',
@@ -35,10 +37,10 @@ export default defineConfig({
       },
       manifest: {
         id: 'io.slit.app',
-        name: 'SLIT.IO - Ferramentas Online',
+        name: 'SLIT.IO - Online Tools',
         short_name: 'SLIT.IO',
-        description: 'Coleção de ferramentas online rápidas, seguras e privadas que rodam direto no seu navegador.',
-        lang: 'pt-BR',
+        description: 'Collection of fast, secure, and private tools that run directly in your browser.',
+        lang: 'en',
         dir: 'ltr',
         theme_color: '#111827',
         background_color: '#ffffff',
@@ -48,6 +50,12 @@ export default defineConfig({
         scope: '/',
         categories: ['utilities', 'productivity', 'education'],
         icons: [
+          {
+            src: '/static/images/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any'
+          },
           {
             src: '/static/images/slit_preto.png',
             sizes: '512x512',

@@ -7,7 +7,14 @@ const lang = 'en';
 const t = useTranslations(lang);
 ---
 
-<Layout title={`${t('supportPage.title')} - SLIT.IO`} description={t('site.description')} lang={lang}>
+<Layout title={`${t('supportPage.title')} - SLIT.IO`} description={t('supportPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": t('supportPage.title'),
+    "description": t('supportPage.description'),
+    "url": "https://slitio.vercel.app/en/apoie"
+  })} />
   <section class="container mx-auto px-6 py-12 text-center">
     <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">{t('supportPage.title')}</h1>
     <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12" set:html={t('supportPage.description')} />

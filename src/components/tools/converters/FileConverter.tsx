@@ -367,7 +367,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             {inputType && (inputType === 'image' || inputType === 'svg' || inputType === 'pdf') && originalUrl ? (
               <div className="text-center">
                 <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.fileConverter.original')}</h3>
-                <img src={originalUrl} alt="Original" className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
+                <img src={originalUrl} alt={t('components.fileConverter.original')} className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
                 <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{originalFile.type}</p>
               </div>
             ) : (
@@ -394,7 +394,7 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                         {t('components.fileConverter.download')}
                       </a>
                     ) : (
-                      <img src={convertedUrl} alt="Convertido" className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
+                      <img src={convertedUrl} alt={t('components.fileConverter.converted')} className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
                     )
                 ) : (
                     <div className="mt-2 flex items-center justify-center h-60 w-80 bg-gray-100 rounded-lg dark:bg-gray-700">

@@ -169,7 +169,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
             <div className="text-center">
               <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageResizer.original')}</h3>
-              <img src={originalImageUrl || ''} alt="Original" className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
+              <img src={originalImageUrl || ''} alt={t('components.imageResizer.original')} className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
               <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{originalImage.name}</p>
             </div>
 

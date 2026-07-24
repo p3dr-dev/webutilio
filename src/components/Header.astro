@@ -23,6 +23,8 @@ const i18n = lang === 'pt' ? pt : en;
     <nav class="hidden md:flex items-center space-x-4 text-sm font-medium text-gray-600 dark:text-gray-300">
       <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
       <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
+      <a href={`/${lang === 'pt' ? 'sobre' : 'about'}`} class="hover:text-purple-500">{i18n.nav.about}</a>
+      <a href={`/${lang === 'pt' ? 'politica-privacidade' : 'privacy-policy'}`} class="hover:text-purple-500">{i18n.nav.privacy}</a>
       <ThemeToggle lang={lang} />
       <LanguageSwitcher lang={lang} />
     </nav>
@@ -38,14 +40,16 @@ const i18n = lang === 'pt' ? pt : en;
     </div>
   </div>
 
-  <!-- Mobile Nav -->
-  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t dark:border-gray-700">
-    <nav class="flex flex-col items-center space-y-4 py-4 text-base font-medium text-gray-600 dark:text-gray-300">
-      <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
-      <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
-      <LanguageSwitcher lang={lang} />
-    </nav>
-  </div>
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t dark:border-gray-700">
+      <nav class="flex flex-col items-center space-y-4 py-4 text-base font-medium text-gray-600 dark:text-gray-300">
+        <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
+        <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
+        <a href={`/${lang === 'pt' ? 'sobre' : 'about'}`} class="hover:text-purple-500">{i18n.nav.about}</a>
+        <a href={`/${lang === 'pt' ? 'politica-privacidade' : 'privacy-policy'}`} class="hover:text-purple-500">{i18n.nav.privacy}</a>
+        <LanguageSwitcher lang={lang} />
+      </nav>
+    </div>
 </header>
 
 <script is:inline>

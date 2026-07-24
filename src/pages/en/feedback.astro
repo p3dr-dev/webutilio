@@ -7,7 +7,14 @@ const lang = 'en';
 const t = useTranslations(lang);
 ---
 
-<Layout title={`Feedback - SLIT.IO`} description={t('site.description')} lang={lang}>
+<Layout title={`${t('feedbackPage.title')} - SLIT.IO`} description={t('feedbackPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Feedback - SLIT.IO",
+    "description": t('feedbackPage.description'),
+    "url": "https://slitio.vercel.app/en/feedback"
+  })} />
   <section class="container mx-auto px-6 py-12 text-center">
     <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">{t('feedbackPage.title')}</h1>
     <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
