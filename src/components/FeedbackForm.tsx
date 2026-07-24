@@ -5,15 +5,13 @@ interface FeedbackFormProps {
   lang: 'pt' | 'en';
 }
 
+const FORMSUBMIT_EMAIL = 'pedrosimoescontato17@gmail.com';
+
 const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
   const t = useTranslations(lang);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-
-  // IMPORTANT: Replace with your actual Web3Forms Access Key
-  // You can get one at https://web3forms.com/
-  const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,28 +21,28 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
 
     const form = e.currentTarget;
     const formData = new FormData(form);
-    
-    // Convert FormData to JSON
+
     const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
+    object['subject'] = `New Feedback from SLIT.IO (${lang.toUpperCase()})`;
+    object['from_name'] = 'SLIT.IO Feedback Form';
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_EMAIL}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: json
+        body: JSON.stringify(object)
       });
 
       const result = await response.json();
 
-      if (result.success) {
+      if (response.ok) {
         setSubmitStatus('success');
         form.reset();
       } else {
-        console.error('Web3Forms Error:', result);
+        console.error('FormSubmit Error:', result);
         setSubmitStatus('error');
         setErrorMessage(result.message || t('components.feedbackForm.errorMessage'));
       }
@@ -74,20 +72,10 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
 
   return (
     <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
-      {/* Aviso se a chave não estiver configurada (Apenas em DEV) */}
-      {ACCESS_KEY === undefined && import.meta.env.DEV && (
-        <div className="mb-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 text-sm">
-          <p className="font-bold">Developer Warning:</p>
-          <p>Web3Forms Access Key is missing. Add <code>PUBLIC_WEB3FORMS_KEY</code> to your .env file.</p>
-        </div>
-      )}
-
       <form onSubmit={handleSubmit}>
-        <input type="hidden" name="access_key" value={ACCESS_KEY} />
-        <input type="hidden" name="subject" value={`New Feedback from SLIT.IO (${lang.toUpperCase()})`} />
-        <input type="hidden" name="from_name" value="SLIT.IO Feedback Form" />
-        {/* Honeypot Spam Protection */}
-        <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_honey" value="" />
+        <input type="hidden" name="_template" value="box" />
 
         <div className="mb-6">
           <label htmlFor="name" className="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">
