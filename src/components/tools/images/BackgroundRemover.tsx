@@ -21,12 +21,12 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const phrases = t('components.backgroundRemover.loadingPhrases') as string[];
   const loadingText = useLoadingPhrases(isLoading, phrases);
 
+  const originalUrlRef = useRef<string | null>(null);
+
   useEffect(() => {
-    // This effect runs when the component unmounts or when processedUrl changes.
     return () => {
-      if (processedUrl) {
-        URL.revokeObjectURL(processedUrl);
-      }
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+      if (originalUrlRef.current) URL.revokeObjectURL(originalUrlRef.current);
     };
   }, [processedUrl]);
 
@@ -37,7 +37,10 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProcessedUrl(null);
     setError(null);
     
-    setOriginalUrl(URL.createObjectURL(file));
+    if (originalUrlRef.current) URL.revokeObjectURL(originalUrlRef.current);
+    const newUrl = URL.createObjectURL(file);
+    setOriginalUrl(newUrl);
+    originalUrlRef.current = newUrl;
     
     try {
       const resultBlob = await removeBackground(file, {
@@ -51,7 +54,6 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         setError(t('components.backgroundRemover.errorProcessing'));
       }
     } catch (err: unknown) {
-      console.error(err);
       setError(`${t('components.backgroundRemover.errorProcessing')}: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setIsLoading(false);

@@ -12,9 +12,13 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const lastSubmitTimeRef = React.useRef(0);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const now = Date.now();
+    if (now - lastSubmitTimeRef.current < 5000) return;
+    lastSubmitTimeRef.current = now;
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
@@ -42,12 +46,10 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
         setSubmitStatus('success');
         form.reset();
       } else {
-        console.error('FormSubmit Error:', result);
         setSubmitStatus('error');
         setErrorMessage(result.message || t('components.feedbackForm.errorMessage'));
       }
-    } catch (error) {
-      console.error('Submission Error:', error);
+    } catch {
       setSubmitStatus('error');
       setErrorMessage(t('components.feedbackForm.errorMessage'));
     } finally {

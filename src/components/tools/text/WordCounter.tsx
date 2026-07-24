@@ -35,7 +35,8 @@ const WordCounter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       const m = Math.floor(totalSeconds / 60);
       const s = totalSeconds % 60;
       let res = '';
-      if (m > 0) res += `${m}${t('components.wordCounter.minutes')} `;
+      if (m > 0) res += `${m}${t('components.wordCounter.minutes')}`;
+      if (m > 0 && s > 0) res += ' ';
       if (s > 0 || m === 0) res += `${s}${t('components.wordCounter.seconds')}`;
       return res;
     };

@@ -49,7 +49,7 @@ const getTargetPath = (targetLang: string) => {
   <a 
     href={getTargetPath('pt')} 
     aria-label="Switch to Portuguese"
-    aria-current={lang === 'pt' ? 'true' : undefined}
+    aria-current={lang === 'pt' ? 'page' : undefined}
     class:list={[
       "px-3 py-1 text-sm rounded-full transition-colors",
       lang === 'pt' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -60,7 +60,7 @@ const getTargetPath = (targetLang: string) => {
   <a 
     href={getTargetPath('en')} 
     aria-label="Switch to English"
-    aria-current={lang === 'en' ? 'true' : undefined}
+    aria-current={lang === 'en' ? 'page' : undefined}
     class:list={[
       "px-3 py-1 text-sm rounded-full transition-colors",
       lang === 'en' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'

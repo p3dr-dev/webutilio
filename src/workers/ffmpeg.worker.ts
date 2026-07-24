@@ -1,5 +1,4 @@
 // src/workers/ffmpeg.worker.ts
-console.log('[ffmpeg.worker] Worker script started.');
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 
 let ffmpeg: FFmpeg | null = null;

@@ -179,6 +179,9 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           }
 
           const v = await Canvg.from(ctx, svgString);
+          const viewBox = v.viewBox;
+          canvas.width = viewBox?.width ?? 800;
+          canvas.height = viewBox?.height ?? 600;
           await v.render();
 
           canvas.toBlob((blob) => {

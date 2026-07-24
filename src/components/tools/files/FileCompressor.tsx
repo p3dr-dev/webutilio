@@ -97,8 +97,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       }
     };
 
-    worker.onerror = (error) => {
-      console.error('Worker error:', error);
+    worker.onerror = () => {
       setError(t('components.fileCompressor.errorCompressing'));
       setIsLoading(false);
       worker.terminate();

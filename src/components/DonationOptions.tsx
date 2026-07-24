@@ -38,8 +38,8 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
       setToastMessage(`${label} ${t('donation.copied')}`);
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => setToastMessage(''), 3000);
-    } catch (err) {
-      console.error('Failed to copy', err);
+    } catch {
+      // clipboard not available
     }
   };
 
@@ -63,7 +63,7 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
           <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm">{t('donation.description')}</p>
           
           <div className="bg-white p-2 rounded-xl shadow-inner border border-gray-200 mb-6">
-            <img src="/static/images/pix_qrcode.png" alt="QR Code Pix" className="w-48 h-48 rounded-lg" />
+            <img src="/static/images/pix_qrcode.png" alt={t('donation.qrCodeAlt')} className="w-48 h-48 rounded-lg" />
           </div>
           
           <div className="w-full relative">
@@ -78,7 +78,7 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
               <span className="font-mono text-xs sm:text-sm text-gray-600 dark:text-gray-300 truncate mr-2 select-all">
                 {DONATION_LINKS.pixKey}
               </span>
-              <button className="text-gray-400 group-hover:text-green-500 transition-colors">
+              <button className="text-gray-400 group-hover:text-green-500 transition-colors" aria-label={t('donation.copy')}>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
               </button>
             </div>

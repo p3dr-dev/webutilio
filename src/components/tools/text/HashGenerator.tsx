@@ -57,8 +57,7 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       setHash(hashHex);
-    } catch (error) {
-      console.error('Error generating hash:', error);
+    } catch {
       setError(t('components.hashGenerator.errorGeneratingHash'));
     } finally {
       setIsLoading(false);
@@ -84,7 +83,7 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           style={{ resize: 'vertical', minHeight: '10rem' }}
           placeholder={t('components.hashGenerator.placeholder')}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => { setInput(e.target.value); setError(null); }}
           disabled={isLoading}
         ></textarea>
         {input && (

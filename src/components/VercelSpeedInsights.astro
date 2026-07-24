@@ -38,7 +38,7 @@ const paramsStr = JSON.stringify(Astro.params);
             beforeSend: (window as any).speedInsightsBeforeSend,
           });
         } catch (err) {
-          throw new Error(`Failed to parse SpeedInsights properties: ${err}`);
+          console.warn(`Failed to parse SpeedInsights properties: ${err}`);
         }
       }
     },

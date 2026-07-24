@@ -32,6 +32,7 @@
     "crypto": "Criptomoedas",
     "copy": "Copiar",
     "copied": "Copiado!",
+    "qrCodeAlt": "QR Code Pix",
     "methods": {
       "paypal": "PayPal",
       "stripe": "Cartão (Stripe)",

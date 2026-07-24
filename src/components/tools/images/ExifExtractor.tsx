@@ -40,8 +40,7 @@ const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       } else {
         showToast(t('components.exifExtractor.noExif'), 'info');
       }
-    } catch (err) {
-      console.error(err);
+    } catch {
       showToast(t('components.exifExtractor.errorParsing'), 'error');
     } finally {
       setIsLoading(false);

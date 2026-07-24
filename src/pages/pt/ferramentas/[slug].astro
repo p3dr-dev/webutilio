@@ -44,8 +44,8 @@ const alternates = {
         const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
         const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
         localStorage.setItem('tool-history', JSON.stringify(newHistory));
-      } catch (e) {
-        console.error('Failed to update tool history', e);
+      } catch {
+        // localStorage unavailable
       }
     };
 
@@ -61,7 +61,7 @@ const alternates = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": title,
-    "url": `${Astro.site}pt/ferramentas/${tool.slugs.pt}`,
+    "url": new URL(`pt/ferramentas/${tool.slugs.pt}`, Astro.site).href,
     "description": description,
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
@@ -75,7 +75,7 @@ const alternates = {
       "@type": "Organization",
       "name": "SLIT.IO"
     },
-    "screenshot": `${Astro.site}og-image.png`
+    "screenshot": new URL('og-image.png', Astro.site).href
   })} />
 
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
@@ -86,19 +86,19 @@ const alternates = {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": `${Astro.site}pt/`
+        "item": new URL('pt/', Astro.site).href
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Ferramentas",
-        "item": `${Astro.site}pt/#tools`
+        "item": new URL('pt/#tools', Astro.site).href
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": title,
-        "item": `${Astro.site}pt/ferramentas/${tool.slugs.pt}`
+        "item": new URL(`pt/ferramentas/${tool.slugs.pt}`, Astro.site).href
       }
     ]
   })} />
@@ -158,7 +158,7 @@ const alternates = {
             { q: t('faq.q3'), a: t('faq.a3') }
           ];
           
-          return displayFaq.map((item: any) => (
+          return displayFaq.map((item: { q?: string; name?: string; a?: string; acceptedAnswer?: { text?: string } }) => (
             <div>
               <h3 class="font-bold text-purple-600 dark:text-purple-400 mb-2">{item.q || item.name}</h3>
               <p class="text-gray-600 dark:text-gray-400 text-sm">{item.a || item.acceptedAnswer?.text}</p>

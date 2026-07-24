@@ -14,7 +14,8 @@ export function getLangFromUrl(url: URL) {
 }
 
 export function useTranslations(lang: keyof typeof languages) {
-  return function t(key: string) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return function t(key: string): any {
     // Deeply nested key access
     const keys = key.split('.');
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

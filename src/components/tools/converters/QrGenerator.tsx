@@ -28,8 +28,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         },
       });
       setQrUrl(url);
-    } catch (err) {
-      console.error(err);
+    } catch {
       setQrUrl(null);
       showToast(t('components.qrGenerator.error'), 'error');
     }

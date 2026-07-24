@@ -54,13 +54,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         case 'error':
           setError(workerMessage);
           setIsLoading(false);
-          console.error('Worker error:', workerMessage);
           break;
       }
     };
 
-    worker.onerror = (error) => {
-      console.error('Worker error event:', error);
+    worker.onerror = () => {
       setError(t('components.mediaCompressor.errorWorker'));
       setIsLoading(false);
     };
@@ -185,6 +183,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         }
         ctx.drawImage(img, 0, 0);
 
+        const mimeType = originalFile.type === 'image/png' ? 'image/png' : 'image/jpeg';
         canvas.toBlob(
           (blob) => {
             if (blob) {
@@ -195,7 +194,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             }
             setIsLoading(false);
           },
-          'image/jpeg',
+          mimeType,
           quality
         );
       };
@@ -331,7 +330,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             <div className="mb-4">
               <label htmlFor="quality" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {t('components.mediaCompressor.quality')}: {Math.round(quality * 100)}%
-                {estimatedSize && (
+                {estimatedSize && originalFile.type.startsWith('image/') && (
                   <span className="text-gray-500 dark:text-gray-400 ml-2">
                     ({t('components.mediaCompressor.estimated')}: {formatBytes(estimatedSize)})
                   </span>
