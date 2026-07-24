@@ -5,6 +5,15 @@ const { lang } = Astro.props; // 'pt' ou 'en'
 const { pathname } = Astro.url;
 
 // Helper to find the current tool and its alternate slug
+const pageSlugs: Record<string, Record<string, string>> = {
+  sobre: { pt: 'sobre', en: 'about' },
+  about: { pt: 'sobre', en: 'about' },
+  'politica-privacidade': { pt: 'politica-privacidade', en: 'privacy-policy' },
+  'privacy-policy': { pt: 'politica-privacidade', en: 'privacy-policy' },
+  feedback: { pt: 'feedback', en: 'feedback' },
+  apoie: { pt: 'apoie', en: 'apoie' },
+};
+
 const getTargetPath = (targetLang: string) => {
   if (targetLang === lang) return '#';
   
@@ -16,6 +25,14 @@ const getTargetPath = (targetLang: string) => {
     if (tool) {
       const basePath = targetLang === 'en' ? 'tools' : 'ferramentas';
       return `/${targetLang}/${basePath}/${tool.slugs[targetLang as 'pt' | 'en']}`;
+    }
+  }
+  
+  // Static page slug translation
+  if (parts.length === 2) {
+    const slug = parts[1];
+    if (pageSlugs[slug]) {
+      return `/${targetLang}/${pageSlugs[slug][targetLang as 'pt' | 'en']}`;
     }
   }
   
