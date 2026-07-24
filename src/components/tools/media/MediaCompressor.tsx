@@ -237,7 +237,6 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         const targetBits = Math.floor(pixels * 30 * bpp);
         bitrate = `${Math.floor(targetBits / 1000)}k`;
         bufsize = `${Math.floor(targetBits / 500)}k`; // buffer size usually 2x bitrate
-        console.log(`Smart Bitrate: ${videoMeta.width}x${videoMeta.height} @ ${bpp.toFixed(3)} bpp = ${bitrate}`);
     }
 
     workerRef.current.postMessage({

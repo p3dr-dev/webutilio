@@ -53,7 +53,9 @@ const WordCounter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
       <div className="relative">
+        <label htmlFor="word-counter-input" className="sr-only">{t('components.wordCounter.placeholder')}</label>
         <textarea
+          id="word-counter-input"
           className="w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           style={{ resize: 'vertical', minHeight: '16rem' }}          placeholder={t('components.wordCounter.placeholder')}
           value={text}

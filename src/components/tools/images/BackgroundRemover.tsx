@@ -123,6 +123,7 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         className="hidden"
         ref={fileInputRef}
         disabled={isLoading}
+        aria-label={t('components.backgroundRemover.selectImage')}
       />
 
       {!originalFile && (

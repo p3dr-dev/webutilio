@@ -19,7 +19,7 @@ const tool: Tool | undefined = toolsData.find(toolItem => toolItem.slugs.pt === 
 
 // Se a ferramenta não for encontrada, redireciona para a página 404 (ou para a home)
 if (!tool) {
-  return Astro.redirect('/pt/404');
+  return new Response(null, { status: 404 });
 }
 
 const title = t(`tools.${tool.id}.title`);

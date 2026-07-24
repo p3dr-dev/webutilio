@@ -77,7 +77,9 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
       {isLoading && <LoadingSpinner text={loadingText} />}
       <div className="relative">
+        <label htmlFor="hash-input" className="sr-only">{t('components.hashGenerator.placeholder')}</label>
         <textarea
+          id="hash-input"
           className="w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           style={{ resize: 'vertical', minHeight: '10rem' }}
           placeholder={t('components.hashGenerator.placeholder')}
@@ -123,7 +125,9 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
       <div className="mt-6">
         <h3 className="font-semibold text-gray-700 dark:text-gray-300">{t('components.hashGenerator.verifyOptional')}</h3>
+        <label htmlFor="hash-verify-input" className="sr-only">{t('components.hashGenerator.verifyPlaceholder')}</label>
         <input
+          id="hash-verify-input"
           type="text"
           className="mt-2 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           placeholder={t('components.hashGenerator.verifyPlaceholder')}

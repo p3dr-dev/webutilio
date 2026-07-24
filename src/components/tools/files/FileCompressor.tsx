@@ -125,6 +125,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         onChange={handleFileChange}
         className="hidden"
         ref={fileInputRef}
+        aria-label={t('components.fileCompressor.selectFiles')}
       />
 
       <div 

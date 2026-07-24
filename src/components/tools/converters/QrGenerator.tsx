@@ -46,7 +46,9 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800 text-center">
+      <label htmlFor="qr-input" className="sr-only">{t('components.qrGenerator.placeholder')}</label>
       <input
+        id="qr-input"
         type="text"
         className="w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
         placeholder={t('components.qrGenerator.placeholder')}

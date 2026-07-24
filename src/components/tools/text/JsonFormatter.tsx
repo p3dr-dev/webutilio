@@ -33,7 +33,9 @@ const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
       <div className="relative">
+        <label htmlFor="json-input" className="sr-only">{t('components.jsonFormatter.placeholder')}</label>
         <textarea
+          id="json-input"
           className="w-full p-4 border border-gray-300 rounded-md font-mono text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           style={{ resize: 'vertical', minHeight: '24rem' }}
           placeholder={t('components.jsonFormatter.placeholder')}

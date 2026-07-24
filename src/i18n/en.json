@@ -329,7 +329,7 @@
   "toolPage": {
     "faq": "Frequently Asked Questions",
     "related": "Related Tools",
-    "supportCta": "Liked this tool? Consider <a href=\"/en/apoie\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">supporting the project</a> to keep it free and ad-free."
+    "supportCta": "Liked this tool? Consider <a href=\"/en/support\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">supporting the project</a> to keep it free and ad-free."
   },
   "components": {
     "jsonFormatter": {
@@ -373,6 +373,7 @@
     "loading": {
       "message": "Loading tool...",
       "error": "Error: Tool with ID \"{id}\" could not be found or is not implemented.",
+      "fallbackError": "Something went wrong while loading this tool. Please try reloading the page.",
       "genericPhrases": [
         "Wait a moment, magic is happening...",
         "Processing your files...",
@@ -593,5 +594,12 @@
     "github": "View on GitHub",
     "feedbackTitle": "Get in Touch",
     "feedback": "Have a suggestion, found a bug, or want to collaborate? We'd love to hear from you."
+  },
+  "notFound": {
+    "title": "Page Not Found - SLIT.IO",
+    "description": "The page you are looking for does not exist.",
+    "heading": "404",
+    "message": "Page not found.",
+    "backHome": "Back to home"
   }
 }

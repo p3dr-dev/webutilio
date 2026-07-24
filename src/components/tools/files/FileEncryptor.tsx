@@ -144,6 +144,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           onChange={handleFileChange}
           className="hidden"
           ref={fileInputRef}
+          aria-label={t('components.fileEncryptor.selectFile')}
         />
 
         <div 
@@ -162,7 +163,9 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           {file && <p className="mt-4 text-sm text-gray-700 dark:text-gray-300">{file.name}</p>}
         </div>
         
+        <label htmlFor="encryptor-password" className="sr-only">{t('components.fileEncryptor.passwordPlaceholder')}</label>
         <input
+          id="encryptor-password"
           type="password"
           className="mt-4 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
           placeholder={t('components.fileEncryptor.passwordPlaceholder')}

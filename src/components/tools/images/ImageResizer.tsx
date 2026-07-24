@@ -144,14 +144,16 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         onChange={handleFileChange}
         className="hidden"
         ref={fileInputRef}
+        aria-label={t('components.imageResizer.selectImage')}
       />
 
-      <div
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        className={`flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors ${isDragging ? 'border-purple-600 bg-purple-50 dark:bg-gray-700' : 'border-gray-300 dark:border-gray-600'}`}
-      >
+      {!originalImage && (
+        <div
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          className={`flex flex-col items-center justify-center p-10 border-2 border-dashed rounded-lg transition-colors ${isDragging ? 'border-purple-600 bg-purple-50 dark:bg-gray-700' : 'border-gray-300 dark:border-gray-600'}`}
+        >
         <p className="text-gray-500 dark:text-gray-400 mb-4">{t('components.imageResizer.dragAndDrop')}</p>
         <button
           onClick={() => fileInputRef.current?.click()}
@@ -160,7 +162,8 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         >
           {t('components.imageResizer.selectImage')}
         </button>
-      </div>
+        </div>
+      )}
 
       {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 

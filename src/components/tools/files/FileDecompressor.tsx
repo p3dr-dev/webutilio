@@ -136,11 +136,12 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
       <input
         type="file"
-        accept=".zip,.tar,application/zip,application/x-tar"
+        accept=".zip,.tar,.gz,.tgz,application/zip,application/x-tar"
         onChange={handleFileChange}
         className="hidden"
         ref={fileInputRef}
         disabled={isLoading}
+        aria-label={t('components.fileDecompressor.selectArchive')}
       />
 
       {!archiveFile && (

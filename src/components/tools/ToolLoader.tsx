@@ -1,10 +1,26 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, Component, type ReactNode } from 'react';
 import { useTranslations } from '../../i18n/utils';
 import { ToastProvider } from '../Toast';
 
 interface ToolLoaderProps {
   toolId: string;
   lang: 'pt' | 'en';
+}
+
+class ErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
 }
 
 // Mapeia o ID da ferramenta (que é neutro em relação ao idioma) para o componente React correspondente.
@@ -53,9 +69,15 @@ const ToolLoader: React.FC<ToolLoaderProps> = ({ toolId, lang }) => {
 
   return (
     <ToastProvider>
-      <Suspense fallback={<LoadingFallback lang={lang} />}>
-        <Component lang={lang} />
-      </Suspense>
+      <ErrorBoundary fallback={
+        <div className="text-center bg-red-100 text-red-700 p-4 rounded-lg dark:bg-red-900 dark:text-red-200">
+          <p>{t('components.loading.fallbackError')}</p>
+        </div>
+      }>
+        <Suspense fallback={<LoadingFallback lang={lang} />}>
+          <Component lang={lang} />
+        </Suspense>
+      </ErrorBoundary>
     </ToastProvider>
   );
 };

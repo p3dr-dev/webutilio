@@ -11,7 +11,8 @@ const pageSlugs: Record<string, Record<string, string>> = {
   'politica-privacidade': { pt: 'politica-privacidade', en: 'privacy-policy' },
   'privacy-policy': { pt: 'politica-privacidade', en: 'privacy-policy' },
   feedback: { pt: 'feedback', en: 'feedback' },
-  apoie: { pt: 'apoie', en: 'apoie' },
+  apoie: { pt: 'apoie', en: 'support' },
+  support: { pt: 'apoie', en: 'support' },
 };
 
 const getTargetPath = (targetLang: string) => {
@@ -44,9 +45,11 @@ const getTargetPath = (targetLang: string) => {
 };
 ---
 
-<div class="flex items-center space-x-2 border border-gray-300 dark:border-gray-600 rounded-full p-1">
+<div class="flex items-center space-x-2 border border-gray-300 dark:border-gray-600 rounded-full p-1" role="group" aria-label="Language selector">
   <a 
     href={getTargetPath('pt')} 
+    aria-label="Switch to Portuguese"
+    aria-current={lang === 'pt' ? 'true' : undefined}
     class:list={[
       "px-3 py-1 text-sm rounded-full transition-colors",
       lang === 'pt' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -56,6 +59,8 @@ const getTargetPath = (targetLang: string) => {
   </a>
   <a 
     href={getTargetPath('en')} 
+    aria-label="Switch to English"
+    aria-current={lang === 'en' ? 'true' : undefined}
     class:list={[
       "px-3 py-1 text-sm rounded-full transition-colors",
       lang === 'en' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'

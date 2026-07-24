@@ -373,6 +373,7 @@
     "loading": {
       "message": "Carregando ferramenta...",
       "error": "Erro: A ferramenta com ID \"{id}\" não pôde ser encontrada ou não foi implementada.",
+      "fallbackError": "Algo deu errado ao carregar esta ferramenta. Por favor, tente recarregar a página.",
       "genericPhrases": [
         "Aguarde um momento, a mágica está acontecendo...",
         "Processando seus arquivos...",
@@ -593,5 +594,12 @@
     "github": "Ver no GitHub",
     "feedbackTitle": "Entre em Contato",
     "feedback": "Tem uma sugestão, encontrou um bug ou quer colaborar? Adoraríamos ouvir você."
+  },
+  "notFound": {
+    "title": "Página Não Encontrada - SLIT.IO",
+    "description": "A página que você procura não existe.",
+    "heading": "404",
+    "message": "Página não encontrada.",
+    "backHome": "Voltar ao início"
   }
 }

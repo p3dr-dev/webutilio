@@ -1,13 +1,14 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import pt from '../../i18n/pt.json';
 ---
 
-<Layout title="Página Não Encontrada - SLIT.IO" description="A página que você procura não existe." lang="pt" noindex={true}>
+<Layout title={pt.notFound.title} description={pt.notFound.description} lang="pt" noindex={true}>
   <section class="container mx-auto px-6 py-20 text-center">
-    <h1 class="text-6xl font-extrabold text-purple-600 mb-4">404</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">Página não encontrada.</p>
+    <h1 class="text-6xl font-extrabold text-purple-600 mb-4">{pt.notFound.heading}</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{pt.notFound.message}</p>
     <a href="/pt/" class="inline-block bg-purple-600 text-white font-bold py-3 px-6 rounded-md hover:bg-purple-700 transition-colors">
-      Voltar ao início
+      {pt.notFound.backHome}
     </a>
   </section>
 </Layout>
