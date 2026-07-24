@@ -2,8 +2,9 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
-import basicSsl from '@vitejs/plugin-basic-ssl';
 import AstroPWA from '@vite-pwa/astro';
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 // https://astro.build/config
 export default defineConfig({
@@ -103,7 +104,7 @@ export default defineConfig({
       },
     },
     plugins: [
-      basicSsl(),
+      ...(isDev ? [(await import('@vitejs/plugin-basic-ssl')).default()] : []),
       {
         name: 'add-coep-coop-headers',
         configureServer(server) {

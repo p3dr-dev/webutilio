@@ -340,12 +340,14 @@
       "invalid": "JSON Inválido!",
       "valid": "JSON Válido!",
       "clear": "Limpar",
-      "copy": "Copiar"
+      "copy": "Copiar",
+      "copied": "Copiado!"
     },
     "qrGenerator": {
       "placeholder": "Digite a URL ou texto para o QR Code...",
       "download": "Baixar QR Code",
-      "error": "Erro ao gerar QR Code"
+      "error": "Erro ao gerar QR Code",
+      "preview": "Pré-visualização do QR Code"
     },
     "exifExtractor": {
       "selectImage": "Selecionar Foto",
@@ -365,7 +367,8 @@
       "readingMetadata": "Lendo metadados...",
       "viewOnMaps": "Ver no Google Maps",
       "noGps": "Nenhuma coordenada GPS encontrada",
-      "altPreview": "Pré-visualização da foto"
+      "altPreview": "Pré-visualização da foto",
+      "errorParsing": "Erro ao analisar dados EXIF"
     },
     "loading": {
       "message": "Carregando ferramenta...",
@@ -398,23 +401,6 @@
       "outputFormat": "Formato de Saída",
       "errorCompressing": "Ocorreu um erro ao comprimir os arquivos:"
     },
-    "imageCompressor": {
-      "selectImage": "Selecionar Imagem ou Vídeo",
-      "quality": "Qualidade",
-      "compressButton": "Comprimir Imagem",
-      "compressVideoButton": "Comprimir Vídeo",
-      "compressing": "Comprimindo mídia...",
-      "original": "Original",
-      "compressed": "Comprimida",
-      "reduction": "de redução",
-      "waiting": "Aguardando compressão...",
-      "errorInvalidFile": "Por favor, selecione um arquivo de imagem ou vídeo válido (JPEG, PNG, WEBP, MP4, WebM, OGG).",
-      "errorCanvas": "Não foi possível obter o contexto do canvas.",
-      "dragAndDrop": "Arraste e solte uma imagem ou vídeo aqui",
-      "selectAnother": "Selecionar outro arquivo",
-      "downloadPrefix": "comprimido",
-      "download": "Download"
-    },
     "mediaCompressor": {
       "selectImage": "Selecionar Imagem ou Vídeo",
       "quality": "Qualidade",
@@ -431,8 +417,10 @@
       "selectAnother": "Selecionar outro arquivo",
       "downloadPrefix": "comprimido",
       "download": "Download",
+      "errorWorker": "Erro ao carregar o processador de mídia. Tente novamente.",
       "errorLoadFFmpeg": "Erro ao carregar o processador de vídeo. Tente novamente.",
-      "errorCompressVideo": "Erro ao comprimir o vídeo. Tente novamente."
+      "errorCompressVideo": "Erro ao comprimir o vídeo. Tente novamente.",
+      "estimated": "Estimado"
     },
     "fileConverter": {
       "selectFile": "Selecionar Arquivo",
@@ -572,7 +560,8 @@
       "submitButton": "Enviar Feedback",
       "sending": "Enviando...",
       "successMessage": "Feedback enviado com sucesso! Obrigado.",
-      "errorMessage": "Erro ao enviar. Tente novamente mais tarde."
+      "errorMessage": "Erro ao enviar. Tente novamente mais tarde.",
+      "successHeading": "Sucesso!"
     }
   },
   "privacyPage": {

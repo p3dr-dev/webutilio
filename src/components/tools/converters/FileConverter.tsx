@@ -38,10 +38,10 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   }, [originalUrl, convertedUrl]);
 
   const availableFormats: Record<string, OutputFormat[]> = {
-    'image/jpeg': ['png', 'webp', 'jpeg', 'svg'],
-    'image/png': ['jpeg', 'webp', 'png', 'svg'],
-    'image/webp': ['jpeg', 'png', 'webp', 'svg'],
-    'image/svg+xml': ['png', 'jpeg', 'webp', 'svg'],
+    'image/jpeg': ['png', 'webp', 'jpeg'],
+    'image/png': ['jpeg', 'webp', 'png'],
+    'image/webp': ['jpeg', 'png', 'webp'],
+    'image/svg+xml': ['png', 'jpeg', 'webp'],
     'application/pdf': ['png', 'jpeg', 'webp'],
     'application/json': ['csv'],
     'text/csv': ['json'], // Although not explicitly requested, it's good to have a reverse

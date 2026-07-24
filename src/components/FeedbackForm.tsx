@@ -58,7 +58,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
   if (submitStatus === 'success') {
     return (
       <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative text-center dark:bg-green-900 dark:text-green-200 dark:border-green-700">
-        <strong className="font-bold block mb-2">✅ Success!</strong>
+        <strong className="font-bold block mb-2">✅ {t('components.feedbackForm.successHeading')}</strong>
         <span className="block sm:inline">{t('components.feedbackForm.successMessage')}</span>
         <button 
           onClick={() => setSubmitStatus('idle')}
@@ -81,7 +81,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
           <label htmlFor="name" className="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">
             {t('components.feedbackForm.nameLabel')}
           </label>
-          <input type="text" id="name" name="name" required
+          <input type="text" id="name" name="name"
             className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white"
             placeholder={t('components.feedbackForm.namePlaceholder') as string}
           />

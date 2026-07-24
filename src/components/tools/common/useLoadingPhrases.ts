@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Um hook customizado que retorna uma frase de loading aleatória que muda em um intervalo.
@@ -8,21 +8,20 @@ import { useState, useEffect } from 'react';
  */
 export function useLoadingPhrases(isLoading: boolean, phrases: string[]) {
   const [currentPhrase, setCurrentPhrase] = useState(phrases[0] || '');
+  const phrasesRef = useRef(phrases);
+  phrasesRef.current = phrases;
 
   useEffect(() => {
-    if (isLoading && phrases.length > 0) {
-      // Define uma frase inicial aleatória imediatamente
-      setCurrentPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
+    if (isLoading && phrasesRef.current.length > 0) {
+      setCurrentPhrase(phrasesRef.current[Math.floor(Math.random() * phrasesRef.current.length)]);
 
-      // Configura o intervalo para mudar a frase
       const interval = setInterval(() => {
-        setCurrentPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
+        setCurrentPhrase(phrasesRef.current[Math.floor(Math.random() * phrasesRef.current.length)]);
       }, 3000);
 
-      // Limpa o intervalo quando o componente é desmontado ou isLoading se torna falso
       return () => clearInterval(interval);
     }
-  }, [isLoading, phrases]);
+  }, [isLoading]);
 
   return currentPhrase;
 }

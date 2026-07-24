@@ -37,28 +37,25 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProcessedUrl(null);
     setError(null);
     
-    const reader = new FileReader();
-    reader.onloadend = async () => {
-      setOriginalUrl(reader.result as string);
-      try {
-        const resultBlob = await removeBackground(file, {
-          onProgress: (progress) => {
-            setProgress(progress.value / progress.total);
-          },
-        });
-        if (resultBlob) {
-          setProcessedUrl(URL.createObjectURL(resultBlob));
-        } else {
-          setError(t('components.backgroundRemover.errorProcessing'));
-        }
-      } catch (err: unknown) {
-        console.error(err);
-        setError(`${t('components.backgroundRemover.errorProcessing')}: ${err instanceof Error ? err.message : String(err)}`);
-      } finally {
-        setIsLoading(false);
+    setOriginalUrl(URL.createObjectURL(file));
+    
+    try {
+      const resultBlob = await removeBackground(file, {
+        onProgress: (progress) => {
+          setProgress(progress.value / progress.total);
+        },
+      });
+      if (resultBlob) {
+        setProcessedUrl(URL.createObjectURL(resultBlob));
+      } else {
+        setError(t('components.backgroundRemover.errorProcessing'));
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (err: unknown) {
+      console.error(err);
+      setError(`${t('components.backgroundRemover.errorProcessing')}: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setIsLoading(false);
+    }
   }, [t, setProgress]);
 
   const handleFileSelect = (file: File | null) => {

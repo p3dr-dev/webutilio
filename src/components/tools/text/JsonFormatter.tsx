@@ -21,9 +21,13 @@ const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(json);
-    showToast(t('components.jsonFormatter.copied'), 'success');
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(json);
+      showToast(t('components.jsonFormatter.copied'), 'success');
+    } catch {
+      showToast(t('components.jsonFormatter.copy'), 'error');
+    }
   };
 
   return (

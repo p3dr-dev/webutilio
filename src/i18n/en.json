@@ -340,12 +340,14 @@
       "invalid": "Invalid JSON!",
       "valid": "Valid JSON!",
       "clear": "Clear",
-      "copy": "Copy"
+      "copy": "Copy",
+      "copied": "Copied!"
     },
     "qrGenerator": {
       "placeholder": "Enter URL or text for QR Code...",
       "download": "Download QR Code",
-      "error": "Error generating QR Code"
+      "error": "Error generating QR Code",
+      "preview": "QR Code Preview"
     },
     "exifExtractor": {
       "selectImage": "Select Photo",
@@ -365,7 +367,8 @@
       "readingMetadata": "Reading metadata...",
       "viewOnMaps": "View on Google Maps",
       "noGps": "No GPS coordinates found",
-      "altPreview": "Photo preview"
+      "altPreview": "Photo preview",
+      "errorParsing": "Error parsing EXIF data"
     },
     "loading": {
       "message": "Loading tool...",
@@ -398,23 +401,6 @@
       "outputFormat": "Output Format",
       "errorCompressing": "An error occurred while compressing the files:"
     },
-    "imageCompressor": {
-      "selectImage": "Select Image or Video",
-      "quality": "Quality",
-      "compressButton": "Compress Image",
-      "compressVideoButton": "Compress Video",
-      "compressing": "Compressing media...",
-      "original": "Original",
-      "compressed": "Compressed",
-      "reduction": "reduction",
-      "waiting": "Waiting for compression...",
-      "errorInvalidFile": "Please select a valid image (JPEG, PNG, WEBP) or video (MP4, WebM, OGG) file.",
-      "errorCanvas": "Could not get canvas context.",
-      "dragAndDrop": "Drag and drop an image or video here",
-      "selectAnother": "Select another file",
-      "downloadPrefix": "compressed",
-      "download": "Download"
-    },
     "mediaCompressor": {
       "selectImage": "Select Image or Video",
       "quality": "Quality",
@@ -431,8 +417,10 @@
       "selectAnother": "Select another file",
       "downloadPrefix": "compressed",
       "download": "Download",
+      "errorWorker": "Error loading the media processor. Please try again.",
       "errorLoadFFmpeg": "Error loading video processor. Please try again.",
-      "errorCompressVideo": "Error compressing video. Please try again."
+      "errorCompressVideo": "Error compressing video. Please try again.",
+      "estimated": "Estimated"
     },
     "fileConverter": {
       "selectFile": "Select File",
@@ -572,7 +560,8 @@
       "submitButton": "Send Feedback",
       "sending": "Sending...",
       "successMessage": "Feedback sent successfully! Thank you.",
-      "errorMessage": "Error sending feedback. Please try again later."
+      "errorMessage": "Error sending feedback. Please try again later.",
+      "successHeading": "Success!"
     }
   },
   "privacyPage": {

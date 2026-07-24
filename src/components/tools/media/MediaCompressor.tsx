@@ -83,6 +83,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   }, [quality, originalSize]);
 
   const resetOriginalFileState = () => {
+    const currentOriginal = originalUrlRef.current;
+    const currentCompressed = compressedUrlRef.current;
+    if (currentOriginal) URL.revokeObjectURL(currentOriginal);
+    if (currentCompressed) URL.revokeObjectURL(currentCompressed);
     setOriginalFile(null);
     setOriginalUrl('');
     originalUrlRef.current = '';
@@ -93,6 +97,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setError('');
     setProgress(null);
     setVideoMeta(null);
+    setFfmpegLogs([]);
   };
 
   const loadVideoMetadata = (file: File) => {
@@ -160,6 +165,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
     setIsLoading(true);
     setCompressedUrl('');
+    if (compressedUrlRef.current) URL.revokeObjectURL(compressedUrlRef.current);
     compressedUrlRef.current = '';
     setCompressedSize(null);
     setProgress(null);
@@ -198,6 +204,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         setIsLoading(false);
       };
       img.src = event.target?.result as string;
+    };
+    reader.onerror = () => {
+      setError(t('components.mediaCompressor.errorInvalidFile'));
+      setIsLoading(false);
     };
     reader.readAsDataURL(originalFile);
   }, [originalFile, quality, t]);
@@ -267,7 +277,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   const renderMedia = (url: string, isVideo: boolean, altText: string) => {
     if (isVideo) {
-      return <video src={url} controls aria-label={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80"><track kind="captions" /></video>;
+      return <video src={url} controls aria-label={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
     } else {
       return <img src={url} alt={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
     }
@@ -324,7 +334,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                 {t('components.mediaCompressor.quality')}: {Math.round(quality * 100)}%
                 {estimatedSize && (
                   <span className="text-gray-500 dark:text-gray-400 ml-2">
-                    (Estimado: {formatBytes(estimatedSize)})
+                    ({t('components.mediaCompressor.estimated')}: {formatBytes(estimatedSize)})
                   </span>
                 )}
               </label>

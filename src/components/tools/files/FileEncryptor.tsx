@@ -33,6 +33,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setError('');
     setProcessedFileUrl(null);
 
+    if (workerRef.current) workerRef.current.terminate();
     const worker = new Worker(new URL('../../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
     workerRef.current = worker;
     worker.postMessage({ file, password, mode: actionMode });

@@ -15,7 +15,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     } else {
       setQrUrl(null);
     }
-  }, [text]);
+  }, [text]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const generateQr = async () => {
     try {
@@ -30,6 +30,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       setQrUrl(url);
     } catch (err) {
       console.error(err);
+      setQrUrl(null);
       showToast(t('components.qrGenerator.error'), 'error');
     }
   };
@@ -58,7 +59,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           {qrUrl ? (
             <img src={qrUrl} alt="QR Code" className="w-64 h-64" />
           ) : (
-            <div className="text-gray-400">QR Code Preview</div>
+            <div className="text-gray-400">{t('components.qrGenerator.preview')}</div>
           )}
         </div>
 

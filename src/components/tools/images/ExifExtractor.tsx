@@ -42,14 +42,14 @@ const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       }
     } catch (err) {
       console.error(err);
-      showToast('Error parsing EXIF data', 'error');
+      showToast(t('components.exifExtractor.errorParsing'), 'error');
     } finally {
       setIsLoading(false);
     }
   };
 
   const InfoItem = ({ label, value }: { label: string; value: string | number | boolean | null | undefined }) => (
-    value ? (
+    value != null ? (
       <div className="flex flex-col border-b border-gray-100 py-2 dark:border-gray-700">
         <span className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-wider">{label}</span>
         <span className="text-sm text-gray-800 dark:text-gray-200 break-all">{String(value)}</span>

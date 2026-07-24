@@ -29,10 +29,14 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   }, [hash, compareHash]);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(hash);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(hash);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard not available
+    }
   };
 
   const generateHash = useCallback(async () => {
@@ -54,7 +58,7 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
       setHash(hashHex);
     } catch (error) {
-      console.error('Erro ao gerar hash:', error);
+      console.error('Error generating hash:', error);
       setError(t('components.hashGenerator.errorGeneratingHash'));
     } finally {
       setIsLoading(false);
