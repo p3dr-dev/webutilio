@@ -524,7 +524,9 @@
       "speakingTime": "Tempo de Fala",
       "minutes": "min",
       "seconds": "seg",
-      "clear": "Limpar"
+      "clear": "Limpar",
+      "copy": "Copiar",
+      "copied": "Copiado!"
     },
     "fileDecompressor": {
       "readingArchive": "Lendo arquivo...",
@@ -568,10 +570,6 @@
       "sending": "Enviando...",
       "successMessage": "Feedback enviado com sucesso! Obrigado.",
       "errorMessage": "Erro ao enviar. Tente novamente mais tarde."
-    },
-    "wordCounter": {
-      "copy": "Copiar",
-      "copied": "Copiado!"
     }
   }
 }

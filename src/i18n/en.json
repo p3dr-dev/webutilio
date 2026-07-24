@@ -524,7 +524,9 @@
       "speakingTime": "Speaking Time",
       "minutes": "min",
       "seconds": "sec",
-      "clear": "Clear"
+      "clear": "Clear",
+      "copy": "Copy",
+      "copied": "Copied!"
     },
     "fileDecompressor": {
       "readingArchive": "Reading archive...",
@@ -568,10 +570,6 @@
       "sending": "Sending...",
       "successMessage": "Feedback sent successfully! Thank you.",
       "errorMessage": "Error sending feedback. Please try again later."
-    },
-    "wordCounter": {
-      "copy": "Copy",
-      "copied": "Copied!"
     }
   }
 }
