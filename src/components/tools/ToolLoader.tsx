@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { useTranslations } from '../../i18n/utils';
+import { ToastProvider } from '../Toast';
 
 interface ToolLoaderProps {
   toolId: string;
@@ -51,9 +52,11 @@ const ToolLoader: React.FC<ToolLoaderProps> = ({ toolId, lang }) => {
   }
 
   return (
-    <Suspense fallback={<LoadingFallback lang={lang} />}>
-      <Component lang={lang} />
-    </Suspense>
+    <ToastProvider>
+      <Suspense fallback={<LoadingFallback lang={lang} />}>
+        <Component lang={lang} />
+      </Suspense>
+    </ToastProvider>
   );
 };
 
