@@ -74,7 +74,8 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       {isLoading && <LoadingSpinner text={loadingText} />}
       <div className="relative">
         <textarea
-          className="w-full h-40 p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 resize-y"
+          className="w-full p-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-shadow dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
+          style={{ resize: 'vertical', minHeight: '10rem' }}
           placeholder={t('components.hashGenerator.placeholder')}
           value={input}
           onChange={(e) => setInput(e.target.value)}
