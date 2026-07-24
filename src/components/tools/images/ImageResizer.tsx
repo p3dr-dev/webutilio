@@ -182,7 +182,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             <div className="text-center">
               <h3 className="text-lg font-semibold dark:text-gray-200">{t('components.imageResizer.resized')}</h3>
               {resizedImageUrl ? (
-                <img src={resizedImageUrl} alt="Redimensionada" className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
+                <img src={resizedImageUrl} alt={t('components.imageResizer.resized')} className="mt-2 rounded-lg shadow-sm mx-auto max-h-60" />
               ) : (
                 <div className="mt-2 flex items-center justify-center h-60 w-80 bg-gray-100 rounded-lg dark:bg-gray-700">
                   <p className="text-gray-500 dark:text-gray-400">{t('components.imageResizer.waiting')}</p>
@@ -199,7 +199,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               value={width}
               onChange={(e) => setWidth(e.target.value === '' ? '' : Number(e.target.value))}
               className="flex-grow p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-              placeholder="Largura"
+              placeholder={t('components.imageResizer.width')}
               min="1"
             />
             <label htmlFor="height-input" className="font-medium text-gray-700 dark:text-gray-300">{t('components.imageResizer.height')}:</label>
@@ -209,7 +209,7 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
               value={height}
               onChange={(e) => setHeight(e.target.value === '' ? '' : Number(e.target.value))}
               className="flex-grow p-2 border border-gray-300 rounded-md dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200"
-              placeholder="Altura"
+              placeholder={t('components.imageResizer.height')}
               min="1"
             />
             <button

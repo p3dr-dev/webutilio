@@ -58,12 +58,12 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     let detectedInputType: InputType | null = null;
     let defaultOutput: OutputFormat | null = null;
 
-    if (file.type.startsWith('image/')) {
-      detectedInputType = 'image';
+    if (file.type === 'image/svg+xml') {
+      detectedInputType = 'svg';
       setOriginalUrl(URL.createObjectURL(file));
       defaultOutput = availableFormats[file.type]?.[0] || 'png';
-    } else if (file.type === 'image/svg+xml') {
-      detectedInputType = 'svg';
+    } else if (file.type.startsWith('image/')) {
+      detectedInputType = 'image';
       setOriginalUrl(URL.createObjectURL(file));
       defaultOutput = availableFormats[file.type]?.[0] || 'png';
     } else if (file.type === 'application/pdf') {
@@ -124,8 +124,8 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       } else {
         setError(t('components.fileConverter.errorConversionFailed'));
       }
-    } catch (e: any) {
-      setError(`${t('components.fileConverter.errorConversion')} ${e.message}`);
+    } catch (e: unknown) {
+      setError(`${t('components.fileConverter.errorConversion')} ${e instanceof Error ? e.message : String(e)}`);
     } finally {
       setIsLoading(false);
     }
@@ -166,23 +166,27 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   
 
   const convertSvgToImage = async (file: File, format: OutputFormat): Promise<Blob | null> => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const svgString = event.target?.result as string;
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          reject(new Error(t('components.fileConverter.errorCanvas')));
-          return;
+        try {
+          const svgString = event.target?.result as string;
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject(new Error(t('components.fileConverter.errorCanvas')));
+            return;
+          }
+
+          const v = await Canvg.from(ctx, svgString);
+          await v.render();
+
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, `image/${format}`);
+        } catch (err) {
+          reject(err);
         }
-
-        const v = await Canvg.from(ctx, svgString);
-        await v.render();
-
-        canvas.toBlob((blob) => {
-          resolve(blob);
-        }, `image/${format}`);
       };
       reader.onerror = reject;
       reader.readAsText(file);
@@ -190,38 +194,50 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   };
 
   const convertPdfToImage = async (file: File, format: OutputFormat): Promise<Blob | null> => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const pdfData = new Uint8Array(event.target?.result as ArrayBuffer);
-        const loadingTask = pdfjs.getDocument({ data: pdfData });
-        const pdf = await loadingTask.promise;
-        const page = await pdf.getPage(1); // Get the first page
+        try {
+          const pdfData = new Uint8Array(event.target?.result as ArrayBuffer);
+          const loadingTask = pdfjs.getDocument({ data: pdfData });
+          const pdf = await loadingTask.promise;
+          const page = await pdf.getPage(1);
 
-        const viewport = page.getViewport({ scale: 1.5 });
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          reject(new Error(t('components.fileConverter.errorCanvas')));
-          return;
+          const viewport = page.getViewport({ scale: 1.5 });
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject(new Error(t('components.fileConverter.errorCanvas')));
+            return;
+          }
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          const renderContext = {
+            canvasContext: ctx,
+            viewport: viewport,
+            canvas: canvas,
+          };
+          await page.render(renderContext).promise;
+
+          canvas.toBlob((blob) => {
+            resolve(blob);
+          }, `image/${format}`);
+        } catch (err) {
+          reject(err);
         }
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport,
-          canvas: canvas,
-        };
-        await page.render(renderContext).promise;
-
-        canvas.toBlob((blob) => {
-          resolve(blob);
-        }, `image/${format}`);
       };
       reader.onerror = reject;
       reader.readAsArrayBuffer(file);
     });
+  };
+
+  const escapeCsvField = (value: unknown): string => {
+    const str = value === null || value === undefined ? '' : String(value);
+    if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+      return `"${str.replace(/"/g, '""')}"`;
+    }
+    return str;
   };
 
   const convertJsonToCsv = async (file: File): Promise<Blob | null> => {
@@ -239,18 +255,50 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
           const headers = Object.keys(data[0]);
           const csvRows = [
-            headers.join(','),
-            ...data.map(row => headers.map(header => JSON.stringify(row[header])).join(','))
+            headers.map(escapeCsvField).join(','),
+            ...data.map(row => headers.map(header => escapeCsvField(row[header])).join(','))
           ];
           const csvString = csvRows.join('\n');
           resolve(new Blob([csvString], { type: 'text/csv' }));
-        } catch (e) {
+        } catch {
           reject(new Error(t('components.fileConverter.errorParsingJson')));
         }
       };
       reader.onerror = reject;
       reader.readAsText(file);
     });
+  };
+
+  const parseCsvLine = (line: string): string[] => {
+    const result: string[] = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (inQuotes) {
+        if (char === '"') {
+          if (i + 1 < line.length && line[i + 1] === '"') {
+            current += '"';
+            i++;
+          } else {
+            inQuotes = false;
+          }
+        } else {
+          current += char;
+        }
+      } else {
+        if (char === '"') {
+          inQuotes = true;
+        } else if (char === ',') {
+          result.push(current.trim());
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+    }
+    result.push(current.trim());
+    return result;
   };
 
   const convertCsvToJson = async (file: File): Promise<Blob | null> => {
@@ -265,19 +313,19 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
             return;
           }
 
-          const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+          const headers = parseCsvLine(lines[0]);
           const result = [];
 
           for (let i = 1; i < lines.length; i++) {
-            const values = lines[i].split(',').map(v => v.trim().replace(/"/g, ''));
-            const obj: { [key: string]: any } = {};
+            const values = parseCsvLine(lines[i]);
+            const obj: { [key: string]: string } = {};
             headers.forEach((header, index) => {
-              obj[header] = values[index];
+              obj[header] = values[index] || '';
             });
             result.push(obj);
           }
           resolve(new Blob([JSON.stringify(result, null, 2)], { type: 'application/json' }));
-        } catch (e) {
+        } catch {
           reject(new Error(t('components.fileConverter.errorParsingCsv')));
         }
       };

@@ -1,14 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import FeedbackForm from '../../components/FeedbackForm';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'pt';
+const t = useTranslations(lang);
 ---
 
-<Layout title="Feedback - SLIT.IO" description="Deixe seu feedback e sugestões para o SLIT.IO." lang="pt">
+<Layout title={`Feedback - SLIT.IO`} description={t('site.description')} lang={lang}>
   <section class="container mx-auto px-6 py-12 text-center">
-    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">Deixe seu Feedback</h1>
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">{t('feedbackPage.title')}</h1>
     <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
-      Sua opinião é muito importante para nós! Use o formulário abaixo para sugerir novas ferramentas,
-      relatar problemas ou simplesmente dizer qual sua ferramenta favorita.
+      {t('feedbackPage.description')}
     </p>
 
     <div class="max-w-2xl mx-auto">
@@ -16,7 +19,7 @@ import FeedbackForm from '../../components/FeedbackForm';
     </div>
 
     <p class="mt-12 text-gray-500 dark:text-gray-400">
-      Agradecemos seu tempo e sua contribuição!
+      {t('feedbackPage.thanks')}
     </p>
   </section>
 </Layout>

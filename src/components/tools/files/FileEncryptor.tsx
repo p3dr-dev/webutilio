@@ -15,19 +15,18 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
+  const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => {
-    // This effect runs when the component unmounts or when processedFileUrl changes.
     return () => {
-      if (processedFileUrl) {
-        URL.revokeObjectURL(processedFileUrl);
-      }
+      if (processedFileUrl) URL.revokeObjectURL(processedFileUrl);
+      if (workerRef.current) workerRef.current.terminate();
     };
   }, [processedFileUrl]);
 
-  const handleEncrypt = () => {
+  const processFile = (actionMode: 'encrypt' | 'decrypt') => {
     if (!file || !password) {
-      setError(t('components.fileEncryptor.errorFillFile'));
+      setError(actionMode === 'encrypt' ? t('components.fileEncryptor.errorFillFile') : t('components.fileEncryptor.errorFillEncryptedFile'));
       return;
     }
     setIsLoading(true);
@@ -35,47 +34,27 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProcessedFileUrl(null);
 
     const worker = new Worker(new URL('../../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
-    worker.postMessage({ file, password, mode: 'encrypt' });
+    workerRef.current = worker;
+    worker.postMessage({ file, password, mode: actionMode });
 
     worker.onmessage = (e) => {
-      const { type, blob, fileName, error } = e.data;
+      const { type, blob, fileName } = e.data;
       if (type === 'result') {
         setProcessedFileUrl(URL.createObjectURL(blob));
         setProcessedFileName(fileName);
-        setIsLoading(false);
-        worker.terminate();
-      } else if (type === 'error') {
-        setError(t('components.fileEncryptor.errorEncrypt'));
-        setIsLoading(false);
-        worker.terminate();
+      } else {
+        setError(actionMode === 'encrypt' ? t('components.fileEncryptor.errorEncrypt') : t('components.fileEncryptor.errorDecrypt'));
       }
+      setIsLoading(false);
+      worker.terminate();
+      workerRef.current = null;
     };
-  };
 
-  const handleDecrypt = () => {
-    if (!file || !password) {
-      setError(t('components.fileEncryptor.errorFillEncryptedFile'));
-      return;
-    }
-    setIsLoading(true);
-    setError('');
-    setProcessedFileUrl(null);
-
-    const worker = new Worker(new URL('../../../workers/encryptor.worker.ts', import.meta.url), { type: 'module' });
-    worker.postMessage({ file, password, mode: 'decrypt' });
-
-    worker.onmessage = (e) => {
-      const { type, blob, fileName, error } = e.data;
-      if (type === 'result') {
-        setProcessedFileUrl(URL.createObjectURL(blob));
-        setProcessedFileName(fileName);
-        setIsLoading(false);
-        worker.terminate();
-      } else if (type === 'error') {
-        setError(t('components.fileEncryptor.errorDecrypt'));
-        setIsLoading(false);
-        worker.terminate();
-      }
+    worker.onerror = () => {
+      setError(actionMode === 'encrypt' ? t('components.fileEncryptor.errorEncrypt') : t('components.fileEncryptor.errorDecrypt'));
+      setIsLoading(false);
+      worker.terminate();
+      workerRef.current = null;
     };
   };
 
@@ -138,11 +117,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (mode === 'encrypt') {
-      handleEncrypt();
-    } else {
-      handleDecrypt();
-    }
+    processFile(mode);
   };
 
   return (
@@ -151,7 +126,7 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <fieldset className="flex space-x-4">
-            <legend className="sr-only">Modo</legend>
+            <legend className="sr-only">{t('components.fileEncryptor.encrypt')} / {t('components.fileEncryptor.decrypt')}</legend>
             <div>
               <input type="radio" id="encrypt" name="mode" value="encrypt" checked={mode === 'encrypt'} onChange={() => setMode('encrypt')} className="h-4 w-4 text-purple-600 border-gray-300 focus:ring-purple-500 dark:border-gray-600" />
               <label htmlFor="encrypt" className="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">{t('components.fileEncryptor.encrypt')}</label>

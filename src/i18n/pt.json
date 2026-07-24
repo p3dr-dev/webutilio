@@ -302,6 +302,33 @@
       ]
     }
   },
+  "footer": {
+    "rights": "Todos os direitos reservados."
+  },
+  "theme": {
+    "toggle": "Alternar tema"
+  },
+  "search": {
+    "clear": "Limpar busca"
+  },
+  "recentTools": {
+    "title": "Usados Recentemente"
+  },
+  "feedbackPage": {
+    "title": "Deixe seu Feedback",
+    "description": "Sua opinião é muito importante para nós! Use o formulário abaixo para sugerir novas ferramentas, relatar problemas ou simplesmente dizer qual sua ferramenta favorita.",
+    "thanks": "Agradecemos seu tempo e sua contribuição!",
+    "sendAnother": "Enviar outro"
+  },
+  "supportPage": {
+    "title": "Apoie o SLIT.IO",
+    "description": "O SLIT.IO é um projeto independente, mantido com o objetivo de fornecer ferramentas úteis, gratuitas e que respeitam sua privacidade. Se você acha este site útil, considere fazer uma pequena contribuição. Sua ajuda é fundamental para cobrir os custos de manutenção e para o desenvolvimento de novas funcionalidades!"
+  },
+  "toolPage": {
+    "faq": "Perguntas Frequentes",
+    "related": "Ferramentas Relacionadas",
+    "supportCta": "Gostou desta ferramenta? Considere <a href=\"/pt/apoie\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">apoiar o projeto</a> para que ele continue gratuito e sem anúncios."
+  },
   "components": {
     "jsonFormatter": {
       "placeholder": "Cole seu JSON aqui...",
@@ -541,6 +568,10 @@
       "sending": "Enviando...",
       "successMessage": "Feedback enviado com sucesso! Obrigado.",
       "errorMessage": "Erro ao enviar. Tente novamente mais tarde."
+    },
+    "wordCounter": {
+      "copy": "Copiar",
+      "copied": "Copiado!"
     }
   }
 }

@@ -65,7 +65,7 @@ const WordCounter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500'
               }`}
             >
-              {copied ? t('components.hashGenerator.copied') : t('components.hashGenerator.copy')}
+              {copied ? t('components.wordCounter.copied') : t('components.wordCounter.copy')}
             </button>
             <button
               onClick={() => setText('')}

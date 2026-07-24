@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { tools, Tool } from '../data/tools';
+import { tools } from '../data/tools';
 import { useTranslations } from '../i18n/utils';
 
 // Helper to get tool by id
@@ -10,8 +10,12 @@ const RecentTools: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
 
   useEffect(() => {
-    const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
-    setRecentIds(history.slice(0, 3)); // Only show top 3
+    try {
+      const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
+      setRecentIds(history.slice(0, 3)); // Only show top 3
+    } catch {
+      setRecentIds([]);
+    }
   }, []);
 
   if (recentIds.length === 0) return null;
@@ -21,7 +25,7 @@ const RecentTools: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 flex items-center">
           <span className="w-8 h-8 flex items-center justify-center bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-lg mr-3 text-lg">🕒</span>
-          {lang === 'pt' ? 'Usados Recentemente' : 'Recently Used'}
+          {t('recentTools.title')}
         </h2>
         <div className="h-px flex-grow mx-4 bg-gray-100 dark:bg-gray-800 hidden sm:block"></div>
       </div>

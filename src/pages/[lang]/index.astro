@@ -43,9 +43,10 @@ const t = useTranslations(lang);
   <RecentTools lang={lang} client:idle />
 
   <HomeSearch 
-    client:load 
+    client:idle 
     placeholder={t('home.searchPlaceholder')} 
     noResultsText={t('home.noResults')} 
+    clearText={t('search.clear')} 
   />
 
   <h2 id="tools" class="sr-only">{t('site.allTools')}</h2>

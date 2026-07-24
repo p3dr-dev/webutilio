@@ -1,8 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Analytics from '@vercel/analytics/astro';
-import SpeedInsights from '@vercel/speed-insights/astro';
+import VercelAnalytics from '../components/VercelAnalytics.astro';
+import VercelSpeedInsights from '../components/VercelSpeedInsights.astro';
 
 interface Props {
 	title: string;
@@ -47,6 +47,8 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<meta name="viewport" content="width=device-width" />
 		<meta name="google-site-verification" content="1RTffR8nOmJXM4zANfuZp4wVtcRpKgrJGJw0VPlNOq0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="512x512" href="/static/images/slit_preto.png" />
+		<link rel="apple-touch-icon" href="/static/images/slit_preto.png" />
 		<link rel="manifest" href="/manifest.json" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -55,15 +57,12 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 		
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/png" sizes="512x512" href="/static/images/slit_preto.png" />
-		<link rel="apple-touch-icon" href="/static/images/slit_preto.png" />
 
 		<script is:inline>
 			// Register Service Worker
 			if ('serviceWorker' in navigator) {
 				window.addEventListener('load', () => {
-					navigator.serviceWorker.register('/sw.js').catch(err => console.log('SW registration failed: ', err));
+					navigator.serviceWorker.register('/sw.js').catch(() => {});
 				});
 			}
 
@@ -121,8 +120,8 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<link rel="alternate" hreflang="x-default" href={ptAlternate} />
 
 		{/* Vercel Monitoring */}
-		<Analytics />
-		<SpeedInsights />
+		<VercelAnalytics />
+		<VercelSpeedInsights />
 	</head>
 	<body class="bg-gray-50 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-0 focus:left-0 focus:p-4 focus:bg-white focus:text-purple-600 focus:font-bold focus:ring-2 focus:ring-purple-500">
@@ -132,6 +131,6 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 		<main id="main-content" class="container mx-auto px-6 py-8 min-h-screen">
 			<slot />
 		</main>
-		<Footer />
+		<Footer lang={lang} />
 	</body>
 </html>

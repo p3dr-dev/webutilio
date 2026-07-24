@@ -51,9 +51,9 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         } else {
           setError(t('components.backgroundRemover.errorProcessing'));
         }
-      } catch (err: any) {
-        console.error(err); // Log do erro para depuração
-        setError(`${t('components.backgroundRemover.errorProcessing')}: ${err.message}`);
+      } catch (err: unknown) {
+        console.error(err);
+        setError(`${t('components.backgroundRemover.errorProcessing')}: ${err instanceof Error ? err.message : String(err)}`);
       } finally {
         setIsLoading(false);
       }

@@ -3,9 +3,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 interface Props {
   placeholder: string;
   noResultsText: string;
+  clearText: string;
 }
 
-export default function HomeSearch({ placeholder, noResultsText }: Props) {
+export default function HomeSearch({ placeholder, noResultsText, clearText }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [hasResults, setHasResults] = useState(true);
 
@@ -47,12 +48,13 @@ export default function HomeSearch({ placeholder, noResultsText }: Props) {
           placeholder={placeholder}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          aria-label="Search tools"
+          aria-label={placeholder}
         />
         {searchTerm && (
           <button
             onClick={() => setSearchTerm('')}
             className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+            aria-label={clearText}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -73,7 +75,7 @@ export default function HomeSearch({ placeholder, noResultsText }: Props) {
             onClick={() => setSearchTerm('')}
             className="mt-4 text-sm text-purple-600 hover:text-purple-700 font-medium hover:underline"
           >
-            Clear search
+            {clearText}
           </button>
         </div>
       )}

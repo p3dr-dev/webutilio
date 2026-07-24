@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, ReactNode } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 interface Toast {
   id: number;
@@ -10,31 +10,43 @@ interface ToastContextType {
   showToast: (message: string, type?: 'success' | 'error' | 'info') => void;
 }
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
+const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
 
 export const useToast = () => {
-  const context = useContext(ToastContext);
+  const context = React.useContext(ToastContext);
   if (!context) {
     throw new Error('useToast must be used within a ToastProvider');
   }
   return context;
 };
 
-export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  const timersRef = useRef<Map<number, ReturnType<typeof setTimeout>>>(new Map());
+  const nextId = useRef(0);
 
   const showToast = useCallback((message: string, type: 'success' | 'error' | 'info' = 'success') => {
-    const id = Date.now();
+    const id = ++nextId.current;
     setToasts((prev) => [...prev, { id, message, type }]);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
+      timersRef.current.delete(id);
     }, 3000);
+    timersRef.current.set(id, timer);
+  }, []);
+
+  useEffect(() => {
+    const timers = timersRef.current;
+    return () => {
+      timers.forEach((timer) => clearTimeout(timer));
+      timers.clear();
+    };
   }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col space-y-2">
+      <div className="fixed bottom-5 right-5 z-50 flex flex-col space-y-2" role="alert" aria-live="assertive">
         {toasts.map((toast) => (
           <div
             key={toast.id}

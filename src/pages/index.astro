@@ -1,13 +1,11 @@
 ---
-// Redirecionamento agora é feito via vercel.json (Edge)
-// Este arquivo serve como um fallback invisível e instantâneo
+// Redirecionamento via vercel.json (Edge) + fallback JS
 ---
 <!DOCTYPE html>
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
     <title>SLIT.IO</title>
-    <meta http-equiv="refresh" content="0;url=/pt/">
     <script is:inline>
         const userLang = navigator.language || navigator.userLanguage;
         window.location.replace(userLang.toLowerCase().startsWith('en') ? '/en/' : '/pt/');

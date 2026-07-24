@@ -13,7 +13,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
 
   // IMPORTANT: Replace with your actual Web3Forms Access Key
   // You can get one at https://web3forms.com/
-  const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE';
+  const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,7 +66,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
           onClick={() => setSubmitStatus('idle')}
           className="mt-4 text-sm underline hover:text-green-900 dark:hover:text-green-100"
         >
-          Enviar outro / Send another
+          {t('feedbackPage.sendAnother')}
         </button>
       </div>
     );
@@ -75,7 +75,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
   return (
     <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
       {/* Aviso se a chave não estiver configurada (Apenas em DEV) */}
-      {ACCESS_KEY === 'YOUR_ACCESS_KEY_HERE' && import.meta.env.DEV && (
+      {ACCESS_KEY === undefined && import.meta.env.DEV && (
         <div className="mb-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 text-sm">
           <p className="font-bold">Developer Warning:</p>
           <p>Web3Forms Access Key is missing. Add <code>PUBLIC_WEB3FORMS_KEY</code> to your .env file.</p>
@@ -93,10 +93,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
           <label htmlFor="name" className="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">
             {t('components.feedbackForm.nameLabel')}
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
+          <input type="text" id="name" name="name" required
             className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white"
             placeholder={t('components.feedbackForm.namePlaceholder') as string}
           />
@@ -106,10 +103,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
           <label htmlFor="email" className="block text-left text-gray-700 dark:text-gray-200 font-bold mb-2">
             {t('components.feedbackForm.emailLabel')}
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
+          <input type="email" id="email" name="email" required
             className="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-900 dark:text-white"
             placeholder={t('components.feedbackForm.emailPlaceholder') as string}
           />
@@ -130,7 +124,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({ lang }) => {
         </div>
 
         {submitStatus === 'error' && (
-          <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative dark:bg-red-900 dark:text-red-200 dark:border-red-700">
+          <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative dark:bg-red-900 dark:text-red-200 dark:border-red-700" role="alert">
             {errorMessage}
           </div>
         )}

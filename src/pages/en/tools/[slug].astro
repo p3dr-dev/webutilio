@@ -15,7 +15,7 @@ const lang = 'en';
 const t = useTranslations(lang);
 
 // Find the corresponding tool based on the English slug
-const tool: Tool | undefined = toolsData.find(t => t.slugs.en === slug);
+const tool: Tool | undefined = toolsData.find(toolItem => toolItem.slugs.en === slug);
 
 // If the tool is not found, redirect to the 404 page
 if (!tool) {
@@ -61,7 +61,7 @@ const alternates = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": title,
-    "url": `https://slitio.vercel.app/en/tools/${tool.slugs.en}`,
+    "url": `${Astro.site}en/tools/${tool.slugs.en}`,
     "description": description,
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
@@ -75,7 +75,7 @@ const alternates = {
       "@type": "Organization",
       "name": "SLIT.IO"
     },
-    "screenshot": "https://slitio.vercel.app/og-image.png"
+    "screenshot": `${Astro.site}og-image.png`
   })} />
 
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
@@ -86,19 +86,19 @@ const alternates = {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://slitio.vercel.app/en/"
+        "item": `${Astro.site}en/`
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Tools",
-        "item": "https://slitio.vercel.app/en/#tools"
+        "item": `${Astro.site}en/#tools`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": title,
-        "item": `https://slitio.vercel.app/en/tools/${tool.slugs.en}`
+        "item": `${Astro.site}en/tools/${tool.slugs.en}`
       }
     ]
   })} />
@@ -148,7 +148,7 @@ const alternates = {
 
     {/* Dynamic FAQ Section */}
     <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Frequently Asked Questions</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.faq')}</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         {(() => {
           const toolFaq = t(`tools.${tool.id}.faq`);
@@ -170,10 +170,10 @@ const alternates = {
 
     {/* Related Tools Section */}
     <div class="mt-12">
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">Related Tools</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.related')}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {toolsData
-          .filter(t => t.id !== tool.id && t.category === tool.category)
+          .filter(relatedTool => relatedTool.id !== tool.id && relatedTool.category === tool.category)
           .slice(0, 3)
           .map(relatedTool => (
             <a href={`/en/tools/${relatedTool.slugs.en}`} class="p-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl hover:shadow-md transition-shadow text-center group">
@@ -206,8 +206,6 @@ const alternates = {
       })()
     })} />
 
-    <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
-      Liked this tool? Consider <a href="/en/apoie" class="underline hover:text-purple-600 dark:hover:text-purple-400">supporting the project</a> to keep it free and ad-free.
-    </p>
+    <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8" set:html={t('toolPage.supportCta')} />
   </div>
 </Layout>

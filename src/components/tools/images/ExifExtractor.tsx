@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import exifr from 'exifr';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
@@ -7,10 +7,16 @@ import LoadingSpinner from '../common/LoadingSpinner';
 const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
-  const [exifData, setExifData] = useState<any>(null);
+  const [exifData, setExifData] = useState<Record<string, unknown> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (imageUrl) URL.revokeObjectURL(imageUrl);
+    };
+  }, [imageUrl]);
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -18,6 +24,7 @@ const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
     setIsLoading(true);
     setExifData(null);
+    if (imageUrl) URL.revokeObjectURL(imageUrl);
     setImageUrl(URL.createObjectURL(file));
 
     try {
@@ -41,7 +48,7 @@ const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   };
 
-  const InfoItem = ({ label, value }: { label: string; value: any }) => (
+  const InfoItem = ({ label, value }: { label: string; value: string | number | boolean | null | undefined }) => (
     value ? (
       <div className="flex flex-col border-b border-gray-100 py-2 dark:border-gray-700">
         <span className="text-xs text-gray-500 dark:text-gray-400 uppercase font-bold tracking-wider">{label}</span>

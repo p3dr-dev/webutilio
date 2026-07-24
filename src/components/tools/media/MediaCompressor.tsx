@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
+import { formatBytes } from '../../../utils/format';
 
 const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -18,6 +19,8 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
   const workerRef = useRef<Worker | null>(null);
+  const originalUrlRef = useRef<string>('');
+  const compressedUrlRef = useRef<string>('');
   const [ffmpegLogs, setFfmpegLogs] = useState<string[]>([]);
   const [progress, setProgress] = useState<number | null>(null);
   const [estimatedSize, setEstimatedSize] = useState<number | null>(null);
@@ -31,18 +34,23 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
       switch (type) {
         case 'log':
-          setFfmpegLogs((prev) => [...prev, workerMessage]);
+          setFfmpegLogs((prev) => {
+          const next = [...prev, workerMessage];
+          return next.length > 100 ? next.slice(-100) : next;
+        });
           break;
         case 'progress':
           setProgress(progress);
           break;
-        case 'result':
+        case 'result': {
           const blob = new Blob([data], { type: 'video/mp4' });
           const url = URL.createObjectURL(blob);
           setCompressedUrl(url);
+          compressedUrlRef.current = url;
           setCompressedSize(blob.size);
           setIsLoading(false);
           break;
+        }
         case 'error':
           setError(workerMessage);
           setIsLoading(false);
@@ -59,8 +67,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
     return () => {
       if (workerRef.current) workerRef.current.terminate();
-      if (originalUrl) URL.revokeObjectURL(originalUrl);
-      if (compressedUrl) URL.revokeObjectURL(compressedUrl);
+      const currentOriginal = originalUrlRef.current;
+      const currentCompressed = compressedUrlRef.current;
+      if (currentOriginal) URL.revokeObjectURL(currentOriginal);
+      if (currentCompressed) URL.revokeObjectURL(currentCompressed);
     };
   }, []);
 
@@ -75,8 +85,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const resetOriginalFileState = () => {
     setOriginalFile(null);
     setOriginalUrl('');
+    originalUrlRef.current = '';
     setOriginalSize(null);
     setCompressedUrl('');
+    compressedUrlRef.current = '';
     setCompressedSize(null);
     setError('');
     setProgress(null);
@@ -106,7 +118,9 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
       resetOriginalFileState();
       setOriginalFile(file);
-      setOriginalUrl(URL.createObjectURL(file));
+      const url = URL.createObjectURL(file);
+      setOriginalUrl(url);
+      originalUrlRef.current = url;
       setOriginalSize(file.size);
       
       if (file.type.startsWith('video/')) {
@@ -146,6 +160,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
     setIsLoading(true);
     setCompressedUrl('');
+    compressedUrlRef.current = '';
     setCompressedSize(null);
     setProgress(null);
 
@@ -167,7 +182,9 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         canvas.toBlob(
           (blob) => {
             if (blob) {
-              setCompressedUrl(URL.createObjectURL(blob));
+              const url = URL.createObjectURL(blob);
+              setCompressedUrl(url);
+              compressedUrlRef.current = url;
               setCompressedSize(blob.size);
             }
             setIsLoading(false);
@@ -175,6 +192,10 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           'image/jpeg',
           quality
         );
+      };
+      img.onerror = () => {
+        setError(t('components.mediaCompressor.errorInvalidFile'));
+        setIsLoading(false);
       };
       img.src = event.target?.result as string;
     };
@@ -244,18 +265,9 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     }
   }, [originalFile, compressImage, compressVideo, t]);
 
-  const formatBytes = (bytes: number | null) => {
-    if (bytes === null) return '0 Bytes';
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
   const renderMedia = (url: string, isVideo: boolean) => {
     if (isVideo) {
-      return <video src={url} controls className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
+      return <video src={url} controls aria-label="Compressed video" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80"><track kind="captions" /></video>;
     } else {
       return <img src={url} alt="Media" className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
     }
@@ -279,7 +291,7 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         onChange={handleFileChange}
         className="hidden"
         ref={fileInputRef}
-        aria-label="Selecionar arquivo de mídia"
+        aria-label={t('components.mediaCompressor.selectImage')}
       />
 
       {!originalFile && (

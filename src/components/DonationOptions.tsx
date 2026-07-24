@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from '../i18n/utils';
 
 interface DonationOptionsProps {
@@ -24,12 +24,20 @@ const DONATION_LINKS = {
 const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
   const t = useTranslations(lang);
   const [toastMessage, setToastMessage] = useState('');
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const handleCopy = async (text: string, label: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setToastMessage(`${label} ${t('donation.copied')}`);
-      setTimeout(() => setToastMessage(''), 3000);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setToastMessage(''), 3000);
     } catch (err) {
       console.error('Failed to copy', err);
     }
@@ -59,8 +67,11 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
           </div>
           
           <div className="w-full relative">
-            <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block text-left pl-1">Pix Key</label>
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block text-left pl-1">Pix Key</span>
             <div 
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(DONATION_LINKS.pixKey, 'Pix'); }}
               className="flex items-center justify-between w-full p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors group"
               onClick={() => handleCopy(DONATION_LINKS.pixKey, 'Pix')}
             >
@@ -131,6 +142,9 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
                   <div key={coin.id} className="group">
                     <label className={`text-xs font-bold ${coin.color} uppercase tracking-wider mb-1 block pl-1`}>{coin.label}</label>
                     <div 
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(coin.addr, coin.label); }}
                       className="flex items-center justify-between w-full p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-gray-400 transition-all"
                       onClick={() => handleCopy(coin.addr, coin.label)}
                     >

@@ -11,7 +11,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ text, progress }) => {
   const offset = progress != null ? circumference - progress * circumference : 0;
 
   return (
-    <div className="absolute inset-0 bg-white/80 dark:bg-gray-800/80 flex flex-col justify-center items-center z-10 rounded-lg">
+    <div className="absolute inset-0 bg-white/80 dark:bg-gray-800/80 flex flex-col justify-center items-center z-10 rounded-lg" role="status" aria-live="polite">
       <div className="relative w-24 h-24">
         {progress != null ? (
           <>

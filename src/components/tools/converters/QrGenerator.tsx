@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
@@ -8,11 +8,10 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const { showToast } = useToast();
   const [text, setText] = useState('');
   const [qrUrl, setQrUrl] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (text) {
-      generateQr();
+      void generateQr();
     } else {
       setQrUrl(null);
     }
@@ -41,7 +40,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     link.href = qrUrl;
     link.download = 'qrcode.png';
     link.click();
-    showToast(t('components.hashGenerator.copied'), 'success'); // Reusing a success msg or could add a specific one
+    showToast(t('components.qrGenerator.download'), 'success');
   };
 
   return (

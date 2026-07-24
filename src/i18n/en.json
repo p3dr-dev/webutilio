@@ -91,6 +91,10 @@
         {
           "q": "Are my photos sent to any server?",
           "a": "No. Unlike other sites, our AI runs directly in your browser. Your images never leave your device."
+        },
+        {
+          "q": "Is there an image size limit?",
+          "a": "We don't impose strict limits, but performance depends on your hardware since processing is local."
         }
       ]
     },
@@ -108,6 +112,10 @@
         {
           "q": "Can I extract large files?",
           "a": "Yes, as long as your browser has available memory. SLIT.IO processes everything locally, so there are no upload limits."
+        },
+        {
+          "q": "Does the site support password-protected files?",
+          "a": "Currently we support standard ZIP and TAR extraction. Password support is on our roadmap."
         }
       ]
     },
@@ -125,6 +133,10 @@
         {
           "q": "Does video quality drop significantly?",
           "a": "You have full control over the quality level. Our tool seeks the best balance between size and clarity."
+        },
+        {
+          "q": "How long does compression take?",
+          "a": "It depends on your device's processing power, as we use local hardware to ensure your privacy."
         }
       ]
     },
@@ -142,6 +154,10 @@
         {
           "q": "Does SLIT.IO store my password?",
           "a": "Never. Your password and files never leave your computer. If you forget your password, we cannot recover your data."
+        },
+        {
+          "q": "Is it safe for sensitive files?",
+          "a": "Yes, because you don't 'send' anything. Encryption happens in your browser. It's like using local software, but without installing anything."
         }
       ]
     },
@@ -159,6 +175,10 @@
         {
           "q": "What is a SHA-256 hash?",
           "a": "It is a unique digital signature for your data. If a single bit changes in the file, the hash will be completely different."
+        },
+        {
+          "q": "Can I generate hashes for large files?",
+          "a": "Yes, our tool processes files in blocks locally, allowing you to verify files of several GB safely."
         }
       ]
     },
@@ -281,6 +301,33 @@
         }
       ]
     }
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "theme": {
+    "toggle": "Toggle theme"
+  },
+  "search": {
+    "clear": "Clear search"
+  },
+  "recentTools": {
+    "title": "Recently Used"
+  },
+  "feedbackPage": {
+    "title": "Leave your Feedback",
+    "description": "Your opinion is very important to us! Use the form below to suggest new tools, report problems, or simply tell us your favorite tool.",
+    "thanks": "We appreciate your time and contribution!",
+    "sendAnother": "Send another"
+  },
+  "supportPage": {
+    "title": "Support SLIT.IO",
+    "description": "SLIT.IO is an independent project, maintained with the goal of providing useful, free, and privacy-respecting tools. If you find this site useful, please consider making a small contribution. Your help is essential to cover maintenance costs and for the development of new features!"
+  },
+  "toolPage": {
+    "faq": "Frequently Asked Questions",
+    "related": "Related Tools",
+    "supportCta": "Liked this tool? Consider <a href=\"/en/apoie\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">supporting the project</a> to keep it free and ad-free."
   },
   "components": {
     "jsonFormatter": {
@@ -521,6 +568,10 @@
       "sending": "Sending...",
       "successMessage": "Feedback sent successfully! Thank you.",
       "errorMessage": "Error sending feedback. Please try again later."
+    },
+    "wordCounter": {
+      "copy": "Copy",
+      "copied": "Copied!"
     }
   }
 }

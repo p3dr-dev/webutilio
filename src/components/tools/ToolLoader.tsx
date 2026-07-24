@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from 'react';
-import { ToastProvider } from '../Toast';
 import { useTranslations } from '../../i18n/utils';
 
 interface ToolLoaderProps {
@@ -8,6 +7,7 @@ interface ToolLoaderProps {
 }
 
 // Mapeia o ID da ferramenta (que é neutro em relação ao idioma) para o componente React correspondente.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.ComponentType<any>> } = {
   'word-counter': lazy(() => import('./text/WordCounter')),
   'hash-generator': lazy(() => import('./text/HashGenerator')),
@@ -51,11 +51,9 @@ const ToolLoader: React.FC<ToolLoaderProps> = ({ toolId, lang }) => {
   }
 
   return (
-    <ToastProvider>
-      <Suspense fallback={<LoadingFallback lang={lang} />}>
-        <Component lang={lang} />
-      </Suspense>
-    </ToastProvider>
+    <Suspense fallback={<LoadingFallback lang={lang} />}>
+      <Component lang={lang} />
+    </Suspense>
   );
 };
 

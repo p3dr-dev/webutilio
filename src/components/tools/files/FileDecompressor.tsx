@@ -3,6 +3,7 @@ import JSZip from 'jszip';
 import untar from 'js-untar';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import { formatBytes } from '../../../utils/format';
 
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
@@ -23,14 +24,6 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [progress, setProgress] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
-
-  const formatBytes = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
 
   const processArchiveFile = useCallback(async (file: File) => {
     setArchiveFile(file);
@@ -65,7 +58,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         const extractedFiles = await untar(buffer);
         const entries: ExtractedFile[] = [];
 
-        extractedFiles.forEach((extractedFile: any) => {
+        extractedFiles.forEach((extractedFile: { name: string; type: string; size?: number; blob?: Blob | null }) => {
           entries.push({
             name: extractedFile.name,
             isDirectory: extractedFile.type === 'directory',
@@ -81,7 +74,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         return;
       }
 
-    } catch (err: any) {
+    } catch {
       setError(t('components.fileDecompressor.errorReadingArchive'));
     } finally {
       setIsLoading(false);
@@ -122,7 +115,7 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
       const url = URL.createObjectURL(file.blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = file.name.split('/').pop() || 'arquivo';
+      link.download = file.name.split('/').pop() || 'file';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -174,11 +167,12 @@ const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           <h2 className="text-xl font-semibold mb-2 dark:text-gray-200">{t('components.fileDecompressor.fileContents')}</h2>
           <div className="border rounded-lg dark:border-gray-600 max-h-96 overflow-y-auto">
             <table className="w-full text-left">
+              <caption className="sr-only">{t('components.fileDecompressor.fileContents')}</caption>
               <thead className="bg-gray-50 dark:bg-gray-700 sticky top-0">
                 <tr>
-                  <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.fileName')}</th>
-                  <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.size')}</th>
-                  <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.action')}</th>
+                  <th scope="col" className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.fileName')}</th>
+                  <th scope="col" className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.size')}</th>
+                  <th scope="col" className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-300">{t('components.fileDecompressor.action')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 dark:divide-gray-600">

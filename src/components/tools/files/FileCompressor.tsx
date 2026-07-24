@@ -1,8 +1,8 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
-import JSZip from 'jszip';
+import React, { useState, useRef, useEffect } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
+import { formatBytes } from '../../../utils/format';
 
 const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const t = useTranslations(lang);
@@ -17,21 +17,22 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [progress, setProgress] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
+  const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => {
-    // This effect runs when the component unmounts or when processedUrl changes.
     return () => {
-      if (processedUrl) {
-        URL.revokeObjectURL(processedUrl);
-      }
+      if (processedUrl) URL.revokeObjectURL(processedUrl);
+      if (workerRef.current) workerRef.current.terminate();
     };
   }, [processedUrl]);
 
-  
-
   const handleFileSelect = (selectedFiles: FileList | null) => {
     if (selectedFiles && selectedFiles.length > 0) {
-      setFiles(prevFiles => [...prevFiles, ...Array.from(selectedFiles)]);
+      setFiles(prevFiles => {
+        const existingNames = new Set(prevFiles.map(f => f.name));
+        const newFiles = Array.from(selectedFiles).filter(f => !existingNames.has(f.name));
+        return [...prevFiles, ...newFiles];
+      });
       setProcessedUrl(null);
       setProcessedSize(null);
       setError('');
@@ -61,15 +62,6 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setIsDragging(false);
   };
 
-  const formatBytes = (bytes: number | null) => {
-    if (bytes === null) return '0 Bytes';
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
   const compressFiles = async () => {
     if (!files || files.length === 0) {
       setError(t('components.fileCompressor.errorNoFiles'));
@@ -83,6 +75,7 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     setProgress(0);
 
     const worker = new Worker(new URL('../../../workers/compressor.worker.ts', import.meta.url), { type: 'module' });
+    workerRef.current = worker;
     worker.postMessage({ files });
 
     worker.onmessage = (e) => {
@@ -95,10 +88,12 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
         setOutputFileName('compressed.zip');
         setIsLoading(false);
         worker.terminate();
+        workerRef.current = null;
       } else if (type === 'error') {
         setError(`${t('components.fileCompressor.errorCompressing')} ${workerError}`);
         setIsLoading(false);
         worker.terminate();
+        workerRef.current = null;
       }
     };
   };
@@ -138,8 +133,6 @@ const FileCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
           {t('components.fileCompressor.selectFiles')}
         </button>
       </div>
-
-      
 
       {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
 

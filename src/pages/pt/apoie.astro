@@ -1,16 +1,16 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import DonationOptions from '../../components/DonationOptions';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'pt';
+const t = useTranslations(lang);
 ---
 
-<Layout title="Apoie o Projeto - SLIT.IO" description="Apoie o desenvolvimento de ferramentas online gratuitas e seguras." lang="pt">
+<Layout title={`${t('supportPage.title')} - SLIT.IO`} description={t('site.description')} lang={lang}>
   <section class="container mx-auto px-6 py-12 text-center">
-    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">Apoie o SLIT.IO</h1>
-    <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
-      O SLIT.IO é um projeto independente, mantido com o objetivo de fornecer ferramentas úteis, gratuitas e que respeitam sua privacidade.
-      <br/>
-      Se você acha este site útil, considere fazer uma pequena contribuição. Sua ajuda é fundamental para cobrir os custos de manutenção e para o desenvolvimento de novas funcionalidades!
-    </p>
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">{t('supportPage.title')}</h1>
+    <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12" set:html={t('supportPage.description')} />
 
     <DonationOptions client:load lang="pt" />
 

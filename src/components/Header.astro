@@ -23,13 +23,13 @@ const i18n = lang === 'pt' ? pt : en;
     <nav class="hidden md:flex items-center space-x-4 text-sm font-medium text-gray-600 dark:text-gray-300">
       <a href={`/${lang}/feedback`} class="hover:text-purple-500">{i18n.nav.feedback}</a>
       <a href={`/${lang}/apoie`} class="hover:text-purple-500">{i18n.nav.support}</a>
-      <ThemeToggle />
+      <ThemeToggle lang={lang} />
       <LanguageSwitcher lang={lang} />
     </nav>
 
     <!-- Mobile Nav Button -->
     <div class="md:hidden flex items-center space-x-2">
-      <ThemeToggle />
+      <ThemeToggle lang={lang} />
       <button type="button" id="mobile-menu-button" class="text-gray-800 dark:text-gray-200 focus:outline-none" aria-label={i18n.nav.openMenu}>
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>

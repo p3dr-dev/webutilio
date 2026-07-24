@@ -8,35 +8,22 @@ const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
   const [json, setJson] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const formatJson = (spaces: number = 2) => {
+  const processJson = (spaces?: number) => {
     try {
       if (!json.trim()) return;
       const obj = JSON.parse(json);
-      setJson(JSON.stringify(obj, null, spaces));
+      setJson(spaces !== undefined ? JSON.stringify(obj, null, spaces) : JSON.stringify(obj));
       setError(null);
       showToast(t('components.jsonFormatter.valid'), 'success');
-    } catch (e: any) {
-      setError(e.message);
-      showToast(t('components.jsonFormatter.invalid'), 'error');
-    }
-  };
-
-  const minifyJson = () => {
-    try {
-      if (!json.trim()) return;
-      const obj = JSON.parse(json);
-      setJson(JSON.stringify(obj));
-      setError(null);
-      showToast(t('components.jsonFormatter.valid'), 'success');
-    } catch (e: any) {
-      setError(e.message);
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e));
       showToast(t('components.jsonFormatter.invalid'), 'error');
     }
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(json);
-    showToast(t('components.hashGenerator.copied'), 'success');
+    showToast(t('components.jsonFormatter.copied'), 'success');
   };
 
   return (
@@ -66,13 +53,13 @@ const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
       <div className="mt-4 flex flex-wrap gap-2">
         <button
-          onClick={() => formatJson(2)}
+          onClick={() => processJson(2)}
           className="bg-purple-600 text-white font-bold py-2 px-4 rounded-md hover:bg-purple-700 transition-colors"
         >
           {t('components.jsonFormatter.format')}
         </button>
         <button
-          onClick={minifyJson}
+          onClick={() => processJson()}
           className="bg-gray-600 text-white font-bold py-2 px-4 rounded-md hover:bg-gray-700 transition-colors"
         >
           {t('components.jsonFormatter.minify')}

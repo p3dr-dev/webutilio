@@ -59,7 +59,7 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [input, t]);
+  }, [input]);
 
   const handleClear = () => {
     setInput('');

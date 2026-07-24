@@ -29,7 +29,7 @@ export default defineConfig({
         enabled: true,
       },
       workbox: {
-        navigateFallback: '/404',
+        navigateFallback: '/',
         globPatterns: ['**/*.{js,css,html,svg,png,wasm}'],
         maximumFileSizeToCacheInBytes: 40 * 1024 * 1024,
       },
@@ -44,7 +44,7 @@ export default defineConfig({
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
-        start_url: '/pt/',
+        start_url: '/',
         scope: '/',
         categories: ['utilities', 'productivity', 'education'],
         icons: [
