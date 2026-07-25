@@ -64,8 +64,8 @@ export default defineConfig({
             purpose: 'any'
           },
           {
-            src: '/static/images/slit_preto.png',
-            sizes: '512x512',
+            src: '/static/images/icon-192.png',
+            sizes: '192x192',
             type: 'image/png',
             purpose: 'maskable'
           }

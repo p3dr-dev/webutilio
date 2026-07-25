@@ -27,3 +27,11 @@ pnpm-debug.log*
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Internal docs (not for repo)
+PLAN-*.md
+ANALYSIS_*.md
+TECH_REPORT.md
+GEMINI.md
+CLAUDE.md
+tickets/
