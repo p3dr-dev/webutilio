@@ -15,6 +15,7 @@
     "support": "Apoie o Projeto",
     "about": "Sobre",
     "privacy": "Privacidade",
+    "blog": "Blog",
     "openMenu": "Abrir menu"
   },
   "categories": {
@@ -22,7 +23,8 @@
     "files": "Arquivos",
     "text": "Texto",
     "converters": "Conversores",
-    "media": "Mídia"
+    "media": "Mídia",
+    "generators": "Geradores"
   },
   "donation": {
     "title": "Apoie com Pix",
@@ -462,6 +464,11 @@
         }
       ]
     }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Artigos sobre privacidade, processamento client-side e ferramentas de desenvolvimento web.",
+    "backToList": "Voltar para todos os artigos"
   },
   "footer": {
     "rights": "Todos os direitos reservados.",

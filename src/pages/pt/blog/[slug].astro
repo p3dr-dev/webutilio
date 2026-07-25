@@ -1,0 +1,80 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getBlogPosts } from '../../../lib/blog';
+import type { BlogPost } from '../../../lib/blog';
+import { useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: BlogPost };
+const { Content } = await post.render();
+
+const lang = 'pt';
+const t = useTranslations(lang);
+
+const alternates = {
+  pt: `/pt/blog/${post.id}`,
+  en: `/en/blog/${post.id}`,
+};
+---
+
+<Layout
+  title={`${post.data.title} - SLIT.IO`}
+  description={post.data.description}
+  lang={lang}
+  alternates={alternates}
+  keywords={post.data.tags}
+>
+  <article class="max-w-3xl mx-auto">
+    <header class="mb-8 text-center border-b border-gray-200 dark:border-gray-700 pb-6">
+      <time class="text-sm text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mt-2">{post.data.title}</h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{post.data.description}</p>
+      <div class="flex flex-wrap justify-center gap-2 mt-4">
+        {post.data.tags.map((tag: string) => (
+          <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded dark:bg-purple-900/30 dark:text-purple-300">{tag}</span>
+        ))}
+      </div>
+    </header>
+
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <Content />
+    </div>
+
+    <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
+      <a href="/pt/blog" class="text-purple-600 hover:text-purple-700 font-bold">
+        ← {t('blog.backToList')}
+      </a>
+    </footer>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": post.data.title,
+      "description": post.data.description,
+      "datePublished": post.data.pubDate.toISOString(),
+      "dateModified": (post.data.updatedDate || post.data.pubDate).toISOString(),
+      "author": {
+        "@type": "Organization",
+        "name": "SLIT.IO"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SLIT.IO",
+        "url": "https://slitio.vercel.app"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://slitio.vercel.app/pt/blog/${post.id}`
+      }
+    })} />
+  </article>
+</Layout>
