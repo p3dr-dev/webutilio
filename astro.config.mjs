@@ -37,7 +37,7 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 40 * 1024 * 1024,
       },
       manifest: {
-        id: 'io.slit.app',
+        id: 'slitio.vercel.app',
         name: 'SLIT.IO - Online Tools',
         short_name: 'SLIT.IO',
         description: 'Collection of fast, secure, and private tools that run directly in your browser.',

@@ -76,7 +76,8 @@ O site fica disponível em `https://localhost:4321` (SSL autoassinado).
 | `npm run lint:fix` | Corrigir código automaticamente |
 | `npm run format` | Formatar com Prettier |
 | `npm run check` | Type checking com Astro |
-| `npm run test` | Rodar testes com Vitest |
+| `npm run test` | Rodar testes com Vitest (watch mode) |
+| `npm run test:run` | Rodar testes uma vez (CI) |
 
 ## Estrutura do Projeto
 

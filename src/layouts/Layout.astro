@@ -47,11 +47,15 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="color-scheme" content="dark light" />
 		<meta name="google-site-verification" content="1RTffR8nOmJXM4zANfuZp4wVtcRpKgrJGJw0VPlNOq0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="192x192" href="/static/images/icon-192.png" />
 		<link rel="icon" type="image/png" sizes="512x512" href="/static/images/slit_preto.png" />
-		<link rel="apple-touch-icon" href="/static/images/slit_preto.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/static/images/icon-192.png" />
 		<link rel="manifest" href="/manifest.json" />
+		<link rel="dns-prefetch" href="https://vercel.speed-insights.com" />
+		<link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
