@@ -1,6 +1,7 @@
 ---
 import type { Tool, Language } from '../data/tools';
 import { useTranslations } from '../i18n/utils';
+import { toolBasePath } from '../lib/slugs';
 
 interface Props {
   tool: Tool;
@@ -14,14 +15,14 @@ const title = t(`tools.${tool.id}.title`);
 const description = t(`tools.${tool.id}.description`);
 const category = t(`categories.${tool.category}`);
 const slug = tool.slugs[lang];
-const basePath = lang === 'en' ? 'tools' : 'ferramentas';
+const basePath = toolBasePath[lang];
 
 // Combine title, description, and specific keywords for search
 const searchTerms = [
   title, 
   description, 
   ...(tool.keywords || []),
-  t(`tools.${tool.id}.keywords`) // Try to get localized keywords from i18n if they existed (future proofing)
+  t(`tools.${tool.id}.keywords`)
 ].join(' ').toLowerCase();
 ---
 <a

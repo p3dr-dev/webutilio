@@ -1,6 +1,6 @@
 export type ToolCategory = 'images' | 'files' | 'text' | 'converters' | 'media' | 'generators';
 
-export type Language = 'pt' | 'en' | 'es' | 'fr' | 'de' | 'es' | 'fr' | 'de';
+export type Language = 'pt' | 'en' | 'es' | 'fr' | 'de';
 
 export interface Tool {
   id: string;

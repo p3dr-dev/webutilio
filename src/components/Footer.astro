@@ -1,8 +1,9 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { pageSlugs, type Language } from '../lib/slugs';
 
 interface Props {
-  lang?: 'pt' | 'en' | 'es' | 'fr' | 'de';
+  lang?: Language;
 }
 
 const { lang = 'pt' } = Astro.props;
@@ -11,12 +12,12 @@ const year = new Date().getFullYear();
 
 const navLinks = [
   { label: t('footer.tools'), href: `/${lang}/#tools` },
-  { label: t('footer.feedback'), href: `/${lang}/feedback` },
-  { label: t('footer.about'), href: `/${lang}/${lang === 'pt' ? 'sobre' : 'about'}` },
-  { label: t('footer.privacy'), href: `/${lang}/${lang === 'pt' ? 'politica-privacidade' : 'privacy-policy'}` },
+  { label: t('footer.feedback'), href: `/${lang}/${pageSlugs.feedback[lang]}` },
+  { label: t('footer.about'), href: `/${lang}/${pageSlugs.about[lang]}` },
+  { label: t('footer.privacy'), href: `/${lang}/${pageSlugs.privacy[lang]}` },
 ];
 
-const supportUrl = lang === 'pt' ? '/pt/apoie' : '/en/support';
+const supportUrl = `/${lang}/${pageSlugs.support[lang]}`;
 ---
 
 <footer class="bg-gray-100 mt-12 dark:bg-gray-800 dark:border-t dark:border-gray-700">

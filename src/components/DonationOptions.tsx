@@ -68,19 +68,20 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
           
           <div className="w-full relative">
             <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block text-left pl-1">Pix Key</span>
-            <div 
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(DONATION_LINKS.pixKey, 'Pix'); }}
-              className="flex items-center justify-between w-full p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-green-500 transition-colors group"
-              onClick={() => handleCopy(DONATION_LINKS.pixKey, 'Pix')}
-            >
+            <div className="flex items-center justify-between w-full p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-green-500 transition-colors group">
               <span className="font-mono text-xs sm:text-sm text-gray-600 dark:text-gray-300 truncate mr-2 select-all">
                 {DONATION_LINKS.pixKey}
               </span>
-              <button className="text-gray-400 group-hover:text-green-500 transition-colors" aria-label={t('donation.copy')}>
+              <span
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(DONATION_LINKS.pixKey, 'Pix'); }}
+                className="text-gray-400 group-hover:text-green-500 transition-colors cursor-pointer shrink-0"
+                aria-label={t('donation.copy')}
+                onClick={() => handleCopy(DONATION_LINKS.pixKey, 'Pix')}
+              >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-              </button>
+              </span>
             </div>
           </div>
         </div>
@@ -141,19 +142,20 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
                 ].map((coin) => (
                   <div key={coin.id} className="group">
                     <label className={`text-xs font-bold ${coin.color} uppercase tracking-wider mb-1 block pl-1`}>{coin.label}</label>
-                    <div 
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(coin.addr, coin.label); }}
-                      className="flex items-center justify-between w-full p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-gray-400 transition-all"
-                      onClick={() => handleCopy(coin.addr, coin.label)}
-                    >
+                    <div className="flex items-center justify-between w-full p-2.5 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-gray-400 transition-all">
                       <span className="font-mono text-xs text-gray-600 dark:text-gray-400 truncate mr-2 select-all w-full">
                         {coin.addr}
                       </span>
-                      <button className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200" aria-label={t('donation.copy')}>
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCopy(coin.addr, coin.label); }}
+                        className="text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-200 cursor-pointer shrink-0"
+                        aria-label={t('donation.copy')}
+                        onClick={() => handleCopy(coin.addr, coin.label)}
+                      >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-                      </button>
+                      </span>
                     </div>
                   </div>
                 ))}

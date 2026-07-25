@@ -61,7 +61,7 @@ const alternates = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": title,
-    "url": new URL(`de/werkzeuge/${tool.slugs.de}`, Astro.site).href,
+    "url": new URL(`/de/werkzeuge/${tool.slugs.de}`, Astro.site).href,
     "description": description,
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
@@ -75,7 +75,7 @@ const alternates = {
       "@type": "Organization",
       "name": "SLIT.IO"
     },
-    "screenshot": new URL('og-image.png', Astro.site).href
+    "screenshot": new URL('/og-image.png', Astro.site).href
   })} />
 
   <script is:inline type="application/ld+json" set:html={JSON.stringify({
@@ -86,19 +86,19 @@ const alternates = {
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": new URL('de/', Astro.site).href
+        "item": new URL('/de/', Astro.site).href
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Werkzeuge",
-        "item": new URL('de/#tools', Astro.site).href
+        "item": new URL('/de/#tools', Astro.site).href
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": title,
-        "item": new URL(`de/werkzeuge/${tool.slugs.de}`, Astro.site).href
+        "item": new URL(`/de/werkzeuge/${tool.slugs.de}`, Astro.site).href
       }
     ]
   })} />

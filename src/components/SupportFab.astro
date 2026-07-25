@@ -1,15 +1,16 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { pageSlugs, type Language } from '../lib/slugs';
 
 interface Props {
-  lang?: 'pt' | 'en' | 'es' | 'fr' | 'de';
+  lang?: Language;
 }
 
 const { lang = 'pt' } = Astro.props;
 const t = useTranslations(lang);
 
 const PIX_KEY = 'fe17002f-fd15-4a76-be58-b1bf811f799f';
-const supportPageUrl = lang === 'pt' ? '/pt/apoie' : '/en/support';
+const supportPageUrl = `/${lang}/${pageSlugs.support[lang]}`;
 ---
 
 <div id="support-fab-container" class="fixed bottom-6 right-6 z-50">
