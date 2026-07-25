@@ -3,8 +3,9 @@ import pt from './pt.json';
 import es from './es.json';
 import fr from './fr.json';
 import de from './de.json';
+import ru from './ru.json';
 
-export const languages = { en, pt, es, fr, de };
+export const languages = { en, pt, es, fr, de, ru };
 
 export function getStaticPaths() {
   return [
@@ -13,6 +14,7 @@ export function getStaticPaths() {
     { params: { lang: 'es' } },
     { params: { lang: 'fr' } },
     { params: { lang: 'de' } },
+    { params: { lang: 'ru' } },
   ];
 }
 

@@ -15,6 +15,7 @@ describe('tools data', () => {
       expect(tool.slugs.es).toBeTruthy();
       expect(tool.slugs.fr).toBeTruthy();
       expect(tool.slugs.de).toBeTruthy();
+      expect(tool.slugs.ru).toBeTruthy();
       expect(tool.icon).toBeTruthy();
       expect(tool.keywords.length).toBeGreaterThan(0);
     }
@@ -47,6 +48,11 @@ describe('tools data', () => {
 
   it('all DE slugs are unique', () => {
     const slugs = tools.map(t => t.slugs.de);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+
+  it('all RU slugs are unique', () => {
+    const slugs = tools.map(t => t.slugs.ru);
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 

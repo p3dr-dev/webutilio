@@ -1,0 +1,62 @@
+---
+interface Props {
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+const { headings } = Astro.props;
+const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{filteredHeadings.length > 0 && (
+  <nav class="hidden xl:block sticky top-24 w-56 shrink-0" aria-label="Table of contents">
+    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">Contents</p>
+    <ul class="space-y-1 border-l border-gray-200 dark:border-gray-700" id="toc-list">
+      {filteredHeadings.map(h => (
+        <li>
+          <a
+            href={`#${h.slug}`}
+            class:list={[
+              "block text-sm py-1 transition-colors border-l-2 -ml-[2px]",
+              h.depth === 3 ? "pl-6" : "pl-4",
+              "text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 border-transparent hover:border-purple-400",
+              "toc-item"
+            ]}
+            data-heading={h.slug}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<script is:inline>
+  (() => {
+    const items = document.querySelectorAll('.toc-item');
+    if (!items.length) return;
+    const slugs = Array.from(items).map(el => el.getAttribute('data-heading'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const slug = entry.target.id;
+          items.forEach(item => {
+            const isActive = item.getAttribute('data-heading') === slug;
+            item.classList.toggle('text-purple-600', isActive);
+            item.classList.toggle('dark:text-purple-400', isActive);
+            item.classList.toggle('border-purple-500', isActive);
+            item.classList.toggle('font-semibold', isActive);
+            if (!isActive) {
+              item.classList.remove('text-purple-600', 'dark:text-purple-400', 'border-purple-500', 'font-semibold');
+            }
+          });
+        }
+      });
+    }, { rootMargin: '-80px 0px -80% 0px', threshold: 0 });
+
+    slugs.forEach(slug => {
+      const el = document.getElementById(slug);
+      if (el) observer.observe(el);
+    });
+  })();
+</script>

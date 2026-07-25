@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ru from '../../i18n/ru.json';
+---
+
+<Layout title={ru.notFound.title} description={ru.notFound.description} lang="ru" noindex={true}>
+  <section class="container mx-auto px-6 py-20 text-center">
+    <h1 class="text-6xl font-extrabold text-purple-600 mb-4">{ru.notFound.heading}</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{ru.notFound.message}</p>
+    <a href="/ru/" class="inline-block bg-purple-600 text-white font-bold py-3 px-6 rounded-md hover:bg-purple-700 transition-colors">
+      {ru.notFound.backHome}
+    </a>
+  </section>
+</Layout>

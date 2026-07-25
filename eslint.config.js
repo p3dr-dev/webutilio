@@ -31,6 +31,9 @@ export default tseslint.config(
         process: 'readonly',
       },
     },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
   },
   {
     files: ['**/*.ts', '**/*.tsx'],

@@ -3,9 +3,6 @@ import Layout from '../../../layouts/Layout.astro';
 import { getBlogPosts, renderBlogPost } from '../../../lib/blog';
 import type { BlogPost } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/utils';
-import BlogTableOfContents from '../../../components/BlogTableOfContents.astro';
-import { getReadingTime, getHeadings } from '../../../lib/blog';
-import { toolBasePath } from '../../../lib/slugs';
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
@@ -17,10 +14,8 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props as { post: BlogPost };
 const { Content } = await renderBlogPost(post);
-const readingTime = getReadingTime(post.body || '');
-const headings = getHeadings(post.body || '');
 
-const lang = 'fr';
+const lang = 'ru';
 const t = useTranslations(lang);
 
 const alternates = {
@@ -40,15 +35,11 @@ const alternates = {
   alternates={alternates}
   keywords={post.data.tags}
 >
-  <article class="max-w-5xl mx-auto">
+  <article class="max-w-3xl mx-auto">
     <header class="mb-8 text-center border-b border-gray-200 dark:border-gray-700 pb-6">
       <time class="text-sm text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
-        {post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
+        {post.data.pubDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}
       </time>
-      <span class="inline-flex items-center gap-1.5 text-sm text-purple-600 dark:text-purple-400 font-medium">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        {readingTime} min read
-      </span>
       <h1 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mt-2">{post.data.title}</h1>
       <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{post.data.description}</p>
       <div class="flex flex-wrap justify-center gap-2 mt-4">
@@ -58,24 +49,12 @@ const alternates = {
       </div>
     </header>
 
-    <div class="flex gap-8 items-start">
-      <BlogTableOfContents headings={headings} />
-      <div class="prose prose-lg dark:prose-invert max-w-none flex-1 min-w-0">
-        <Content />
-      </div>
-    </div>
-
-    <div class="mt-12 p-6 bg-purple-50 dark:bg-purple-900/20 rounded-2xl border border-purple-100 dark:border-purple-800/30 text-center">
-      <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">{t('toolPage.whyChoose')}</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">{t('toolPage.whyLocal')}</p>
-      <a href={`/${lang}/${toolBasePath[lang]}`}
-         class="inline-block bg-purple-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors text-sm">
-        {t('site.allTools')}
-      </a>
+    <div class="prose prose-lg dark:prose-invert max-w-none">
+      <Content />
     </div>
 
     <footer class="mt-12 pt-6 border-t border-gray-200 dark:border-gray-700 text-center">
-      <a href="/fr/blog" class="text-purple-600 hover:text-purple-700 font-bold">
+      <a href="/ru/blog" class="text-purple-600 hover:text-purple-700 font-bold">
         ← {t('blog.backToList')}
       </a>
     </footer>
@@ -98,7 +77,7 @@ const alternates = {
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://slitio.vercel.app/fr/blog/${post.id}`
+        "@id": `https://slitio.vercel.app/ru/blog/${post.id}`
       }
     })} />
   </article>

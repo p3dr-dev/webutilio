@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'ru';
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('aboutPage.title')} - SLIT.IO`} description={t('aboutPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": t('aboutPage.title'),
+    "description": t('aboutPage.description'),
+    "url": "https://slitio.vercel.app/ru/o-nas"
+  })} />
+
+  <article class="max-w-3xl mx-auto py-12 px-6">
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">{t('aboutPage.title')}</h1>
+    <p class="text-lg text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">{t('aboutPage.description')}</p>
+
+    <div class="space-y-8">
+      <section>
+        <h2 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('aboutPage.missionTitle')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('aboutPage.mission')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('aboutPage.howTitle')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('aboutPage.how')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('aboutPage.openSourceTitle')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{t('aboutPage.openSource')}</p>
+        <a href="https://github.com/p3dr-dev/webutilio" target="_blank" rel="noopener noreferrer"
+           class="inline-block bg-gray-800 text-white font-bold py-2 px-6 rounded-md hover:bg-gray-700 transition-colors dark:bg-gray-700 dark:hover:bg-gray-600">
+          {t('aboutPage.github')}
+        </a>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('aboutPage.feedbackTitle')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{t('aboutPage.feedback')}</p>
+        <a href="/ru/obratnaya-svyaz"
+           class="inline-block bg-purple-600 text-white font-bold py-2 px-6 rounded-md hover:bg-purple-700 transition-colors">
+          {t('feedbackPage.title')}
+        </a>
+      </section>
+    </div>
+  </article>
+</Layout>

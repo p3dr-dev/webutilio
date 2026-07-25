@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DonationOptions from '../../components/DonationOptions';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'ru';
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('supportPage.title')} - SLIT.IO`} description={t('supportPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": t('supportPage.title'),
+    "description": t('supportPage.description'),
+    "url": "https://slitio.vercel.app/ru/podderzhat"
+  })} />
+  <section class="container mx-auto px-6 py-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">{t('supportPage.title')}</h1>
+    <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">{t('supportPage.description')}</p>
+
+    <DonationOptions client:load lang="ru" />
+
+  </section>
+</Layout>

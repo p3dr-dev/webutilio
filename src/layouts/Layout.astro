@@ -36,13 +36,14 @@ const getBasePath = (pathname: string) => {
 
 const basePath = getBasePath(Astro.url.pathname);
 
-const skipText: Record<Language, string> = {
-  en: 'Skip to content',
-  pt: 'Pular para o conteúdo',
-  es: 'Saltar al contenido',
-  fr: 'Passer au contenu',
-  de: 'Zum Inhalt springen',
-};
+	const skipText: Record<Language, string> = {
+		en: 'Skip to content',
+		pt: 'Pular para o conteúdo',
+		es: 'Saltar al contenido',
+		fr: 'Passer au contenu',
+		de: 'Zum Inhalt springen',
+		ru: 'Перейти к содержанию',
+	};
 ---
 <!doctype html>
 <html lang={langLocale[lang]}>

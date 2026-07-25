@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslations } from '../i18n/utils';
 
 interface FeedbackFormProps {
-  lang: 'pt' | 'en' | 'es' | 'fr' | 'de';
+  lang: 'pt' | 'en' | 'es' | 'fr' | 'de' | 'ru';
 }
 
 const FORMSUBMIT_EMAIL = 'pedrosimoescontato17@gmail.com';

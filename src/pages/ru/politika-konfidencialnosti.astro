@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'ru';
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('privacyPage.title')} - SLIT.IO`} description={t('privacyPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": t('privacyPage.title'),
+    "description": t('privacyPage.description'),
+    "url": "https://slitio.vercel.app/ru/politika-konfidencialnosti"
+  })} />
+
+  <article class="max-w-3xl mx-auto py-12 px-6">
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-2">{t('privacyPage.title')}</h1>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mb-8">{t('privacyPage.lastUpdated')}</p>
+
+    <p class="text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">{t('privacyPage.intro')}</p>
+
+    <div class="space-y-8">
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section1Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section1')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section2Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section2')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section3Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section3')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section4Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section4')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section5Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section5')}</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-purple-600 dark:text-purple-400 mb-3">{t('privacyPage.section6Title')}</h2>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">{t('privacyPage.section6')}</p>
+      </section>
+    </div>
+  </article>
+</Layout>

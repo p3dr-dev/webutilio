@@ -1,4 +1,5 @@
 import { getCollection, render } from 'astro:content';
+import { estimateReadingTime, extractHeadings, type Heading } from './blog-utils';
 
 export interface BlogPostData {
   title: string;
@@ -8,6 +9,7 @@ export interface BlogPostData {
   author: string;
   tags: string[];
   image?: string;
+  readingTime?: number;
 }
 
 export interface BlogPost {
@@ -17,6 +19,14 @@ export interface BlogPost {
   collection: 'blog';
   rendered?: { html: string; metadata?: Record<string, unknown> };
   filePath?: string;
+}
+
+export function getReadingTime(body: string): number {
+  return estimateReadingTime(body);
+}
+
+export function getHeadings(body: string): Heading[] {
+  return extractHeadings(body);
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {

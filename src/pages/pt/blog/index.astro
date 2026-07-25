@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts } from '../../../lib/blog';
+import { getBlogPosts, getReadingTime } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/utils';
 
 const lang = 'pt';
@@ -10,12 +10,18 @@ const posts = (await getBlogPosts()).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
+const postsWithReadingTime = posts.map(post => ({
+  ...post,
+  readingTime: getReadingTime(post.body || ''),
+}));
+
 const alternates = {
   pt: '/pt/blog',
   en: '/en/blog',
   es: '/es/blog',
   fr: '/fr/blog',
   de: '/de/blog',
+  ru: '/ru/blog',
 };
 ---
 
@@ -27,21 +33,30 @@ const alternates = {
     </div>
 
     <div class="space-y-8">
-      {posts.map((post) => (
-        <a href={`/pt/blog/${post.id}`} class="block p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
-          <div class="flex items-center gap-2 mb-2">
-            <time class="text-sm text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
+      {postsWithReadingTime.map((post) => (
+        <a href={`/pt/blog/${post.id}`} class="group block p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-purple-200 dark:hover:border-purple-800/50 transition-all duration-300">
+          <div class="flex flex-wrap items-center gap-2 mb-3 text-sm">
+            <time class="text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
             </time>
             <span class="text-gray-300 dark:text-gray-600">·</span>
-            <span class="text-sm text-gray-500 dark:text-gray-400">{post.data.author}</span>
+            <span class="text-gray-500 dark:text-gray-400">{post.data.author}</span>
+            <span class="text-gray-300 dark:text-gray-600">·</span>
+            <span class="inline-flex items-center gap-1 text-purple-600 dark:text-purple-400 font-medium">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              {post.readingTime} min
+            </span>
           </div>
-          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{post.data.title}</h2>
-          <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{post.data.description}</p>
-          <div class="flex flex-wrap gap-2 mt-3">
-            {post.data.tags.map((tag) => (
-              <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded dark:bg-purple-900/30 dark:text-purple-300">{tag}</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">{post.data.title}</h2>
+          <p class="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed line-clamp-2">{post.data.description}</p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            {post.data.tags.map((tag: string) => (
+              <span class="text-xs px-2.5 py-1 bg-purple-50 text-purple-700 rounded-full dark:bg-purple-900/30 dark:text-purple-300 font-medium">{tag}</span>
             ))}
+          </div>
+          <div class="mt-4 flex items-center text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform">
+            Read more
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
           </div>
         </a>
       ))}
