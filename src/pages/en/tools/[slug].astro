@@ -206,6 +206,11 @@ const alternates = {
       })()
     })} />
 
-    <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-8" set:html={t('toolPage.supportCta')} />
+    <div class="mt-8 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border border-purple-100 dark:border-purple-800/30 rounded-xl p-6 text-center">
+      <p class="text-gray-700 dark:text-gray-300 mb-3">{t('toolPage.supportCta')}</p>
+      <a href="/en/support" class="inline-block bg-purple-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors">
+        {t('toolPage.supportButton')}
+      </a>
+    </div>
   </div>
 </Layout>

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SupportFab from '../components/SupportFab.astro';
 import VercelAnalytics from '../components/VercelAnalytics.astro';
 import VercelSpeedInsights from '../components/VercelSpeedInsights.astro';
 
@@ -139,5 +140,6 @@ const enAlternate = alternates ? new URL(alternates.en, Astro.site) : new URL('e
 			<slot />
 		</main>
 		<Footer lang={lang} />
+		<SupportFab lang={lang} />
 	</body>
 </html>

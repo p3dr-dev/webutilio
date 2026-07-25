@@ -306,7 +306,15 @@
     }
   },
   "footer": {
-    "rights": "Todos os direitos reservados."
+    "rights": "Todos os direitos reservados.",
+    "navigation": "Navegação",
+    "community": "Comunidade",
+    "supportTitle": "Apoie-nos",
+    "supportText": "Gostou do SLIT.IO? Considere apoiar o projeto!",
+    "tools": "Ferramentas",
+    "feedback": "Feedback",
+    "about": "Sobre",
+    "privacy": "Privacidade"
   },
   "theme": {
     "toggle": "Alternar tema"
@@ -330,7 +338,8 @@
   "toolPage": {
     "faq": "Perguntas Frequentes",
     "related": "Ferramentas Relacionadas",
-    "supportCta": "Gostou desta ferramenta? Considere <a href=\"/pt/apoie\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">apoiar o projeto</a> para que ele continue gratuito e sem anúncios."
+    "supportCta": "Gostou desta ferramenta? Considere apoiar o projeto para que ele continue gratuito e sem anúncios.",
+    "supportButton": "Apoiar o Projeto"
   },
   "components": {
     "jsonFormatter": {
@@ -602,5 +611,15 @@
     "heading": "404",
     "message": "Página não encontrada.",
     "backHome": "Voltar ao início"
+  },
+  "supportFab": {
+    "openLabel": "Apoiar o projeto",
+    "title": "Apoie o SLIT.IO",
+    "description": "Ajude a manter o projeto gratuito e sem anúncios.",
+    "kofi": "Pague um café",
+    "pix": "Copiar chave PIX",
+    "paypal": "PayPal",
+    "viewAll": "Ver todas as opções",
+    "copied": "Copiado!"
   }
 }

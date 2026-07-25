@@ -306,7 +306,15 @@
     }
   },
   "footer": {
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "navigation": "Navigation",
+    "community": "Community",
+    "supportTitle": "Support us",
+    "supportText": "Liked SLIT.IO? Consider supporting the project!",
+    "tools": "Tools",
+    "feedback": "Feedback",
+    "about": "About",
+    "privacy": "Privacy"
   },
   "theme": {
     "toggle": "Toggle theme"
@@ -330,7 +338,8 @@
   "toolPage": {
     "faq": "Frequently Asked Questions",
     "related": "Related Tools",
-    "supportCta": "Liked this tool? Consider <a href=\"/en/support\" class=\"underline hover:text-purple-600 dark:hover:text-purple-400\">supporting the project</a> to keep it free and ad-free."
+    "supportCta": "Liked this tool? Consider supporting the project to keep it free and ad-free.",
+    "supportButton": "Support the Project"
   },
   "components": {
     "jsonFormatter": {
@@ -602,5 +611,15 @@
     "heading": "404",
     "message": "Page not found.",
     "backHome": "Back to home"
+  },
+  "supportFab": {
+    "openLabel": "Support the project",
+    "title": "Support SLIT.IO",
+    "description": "Help keep the project free and ad-free.",
+    "kofi": "Buy me a coffee",
+    "pix": "Copy PIX key",
+    "paypal": "PayPal",
+    "viewAll": "See all options",
+    "copied": "Copied!"
   }
 }
