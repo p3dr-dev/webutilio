@@ -34,6 +34,7 @@
     "crypto": "Cryptomonnaies",
     "copy": "Copier",
     "copied": "Copié !",
+    "pixKeyLabel": "Clé Pix",
     "qrCodeAlt": "QR Code Pix",
     "methods": {
       "paypal": "PayPal",
@@ -469,7 +470,10 @@
   "blog": {
     "title": "Blog",
     "description": "Articles sur la confidentialité, le traitement côté client et les outils de développement web.",
-    "backToList": "Retour à tous les articles"
+    "backToList": "Retour à tous les articles",
+    "readMore": "Lire la suite",
+    "minRead": "min de lecture",
+    "minutesShort": "min"
   },
   "footer": {
     "rights": "Tous droits réservés.",
@@ -879,5 +883,27 @@
     "paypal": "PayPal",
     "viewAll": "Voir toutes les options",
     "copied": "Copié !"
+  },
+  "homepage": {
+    "openSource": "Open Source sur GitHub",
+    "mitLicense": "Licence MIT",
+    "clientSide": "100% Côté Client",
+    "whyTitle": "Pourquoi SLIT.IO?",
+    "ffmpegTitle": "FFmpeg dans le Navigateur",
+    "ffmpegDesc": "Compression vidéo avec FFmpeg compilé en WebAssembly. Traitez MP4, WebM et plus sans rien télécharger.",
+    "aiTitle": "Suppression d'Arrière-plan par IA",
+    "aiDesc": "Supprimez les arrière-plans d'images en utilisant les modèles d'IA ONNX Runtime entièrement dans votre navigateur. Pas de serveur, pas d'upload.",
+    "zeroTitle": "Zéro Collecte de Données",
+    "zeroDesc": "Pas de comptes, pas de suivi, pas de cookies. Tout s'exécute localement avec Web Crypto API et les APIs modernes du navigateur.",
+    "techTitle": "Stack Technologique Fiable",
+    "videoProcessing": "Traitement vidéo",
+    "aiInference": "Inférence IA",
+    "modernFramework": "Framework moderne"
+  },
+  "a11y": {
+    "tocTitle": "Table des matières",
+    "close": "Fermer",
+    "languageSelector": "Sélecteur de langue",
+    "switchTo": "Changer pour"
   }
 }

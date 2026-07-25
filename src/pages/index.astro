@@ -8,10 +8,16 @@
     <title>SLIT.IO - Ferramentas Online Rápidas e Privadas</title>
     <meta name="description" content="Coleção de utilitários web que rodam direto no navegador. Rápidos, seguros e privados." />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://slitio.vercel.app/pt/" />
+    <link rel="canonical" href="https://slitio.vercel.app/" />
     <script is:inline>
         const userLang = navigator.language || navigator.userLanguage;
-        window.location.replace(userLang.toLowerCase().startsWith('en') ? '/en/' : '/pt/');
+        const lang = userLang.toLowerCase().startsWith('en') ? 'en'
+          : userLang.toLowerCase().startsWith('es') ? 'es'
+          : userLang.toLowerCase().startsWith('fr') ? 'fr'
+          : userLang.toLowerCase().startsWith('de') ? 'de'
+          : userLang.toLowerCase().startsWith('ru') ? 'ru'
+          : 'pt';
+        window.location.replace(`/${lang}/`);
     </script>
 </head>
 <body style="background: #f9fafb;"></body>

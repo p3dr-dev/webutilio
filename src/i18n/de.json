@@ -34,6 +34,7 @@
     "crypto": "Kryptowährungen",
     "copy": "Kopieren",
     "copied": "Kopiert!",
+    "pixKeyLabel": "Pix-Schlüssel",
     "qrCodeAlt": "Pix QR-Code",
     "methods": {
       "paypal": "PayPal",
@@ -549,7 +550,10 @@
   "blog": {
     "title": "Blog",
     "description": "Artikel über Privatsphäre, clientseitige Verarbeitung und Webentwicklungswerkzeuge.",
-    "backToList": "Zurück zu allen Artikeln"
+    "backToList": "Zurück zu allen Artikeln",
+    "readMore": "Weiterlesen",
+    "minRead": "Min. Lesezeit",
+    "minutesShort": "Min."
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten.",
@@ -959,5 +963,27 @@
     "paypal": "PayPal",
     "viewAll": "Alle Optionen anzeigen",
     "copied": "Kopiert!"
+  },
+  "homepage": {
+    "openSource": "Open Source auf GitHub",
+    "mitLicense": "MIT-Lizenz",
+    "clientSide": "100% Client-seitig",
+    "whyTitle": "Warum SLIT.IO?",
+    "ffmpegTitle": "FFmpeg im Browser",
+    "ffmpegDesc": "Videokompression mit FFmpeg, kompiliert zu WebAssembly. Verarbeiten Sie MP4, WebM und mehr ohne etwas hochzuladen.",
+    "aiTitle": "KI-Hintergrundentfernung",
+    "aiDesc": "Entfernen Sie Bildhintergründe mit ONNX Runtime KI-Modellen, die vollständig in Ihrem Browser laufen. Kein Server, kein Upload.",
+    "zeroTitle": "Keine Datenerfassung",
+    "zeroDesc": "Keine Konten, kein Tracking, keine Cookies. Alles läuft lokal mit Web Crypto API und modernen Browser-APIs.",
+    "techTitle": "Vertrauenswürdiger Technologie-Stack",
+    "videoProcessing": "Videoverarbeitung",
+    "aiInference": "KI-Inferenz",
+    "modernFramework": "Modernes Framework"
+  },
+  "a11y": {
+    "tocTitle": "Inhaltsverzeichnis",
+    "close": "Schließen",
+    "languageSelector": "Sprachauswahl",
+    "switchTo": "Wechseln zu"
   }
 }

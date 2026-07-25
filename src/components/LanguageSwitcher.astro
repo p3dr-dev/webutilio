@@ -1,7 +1,9 @@
 ---
 import { tools } from '../data/tools';
+import { useTranslations } from '../i18n/utils';
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 const { pathname } = Astro.url;
 
 const allLangs = ['en', 'pt', 'es', 'fr', 'de', 'ru'] as const;
@@ -65,11 +67,11 @@ const getTargetPath = (targetLang: LangCode): string => {
 };
 ---
 
-<div class="flex items-center space-x-1 border border-gray-300 dark:border-gray-600 rounded-full p-1" role="group" aria-label="Language selector">
+<div class="flex items-center space-x-1 border border-gray-300 dark:border-gray-600 rounded-full p-1" role="group" aria-label={t('a11y.languageSelector')}>
   {allLangs.map((l) => (
     <a
       href={getTargetPath(l)}
-      aria-label={`Switch to ${langNames[l]}`}
+      aria-label={`${t('a11y.switchTo')} ${langNames[l]}`}
       aria-current={lang === l ? 'page' : undefined}
       class:list={[
         "px-2 py-1 text-xs font-medium rounded-full transition-colors",

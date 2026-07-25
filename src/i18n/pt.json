@@ -34,6 +34,7 @@
     "crypto": "Criptomoedas",
     "copy": "Copiar",
     "copied": "Copiado!",
+    "pixKeyLabel": "Chave Pix",
     "qrCodeAlt": "QR Code Pix",
     "methods": {
       "paypal": "PayPal",
@@ -468,7 +469,10 @@
   "blog": {
     "title": "Blog",
     "description": "Artigos sobre privacidade, processamento client-side e ferramentas de desenvolvimento web.",
-    "backToList": "Voltar para todos os artigos"
+    "backToList": "Voltar para todos os artigos",
+    "readMore": "Leia mais",
+    "minRead": "min de leitura",
+    "minutesShort": "min"
   },
   "footer": {
     "rights": "Todos os direitos reservados.",
@@ -878,5 +882,27 @@
     "paypal": "PayPal",
     "viewAll": "Ver todas as opções",
     "copied": "Copiado!"
+  },
+  "homepage": {
+    "openSource": "Código Aberto no GitHub",
+    "mitLicense": "Licença MIT",
+    "clientSide": "100% no Cliente",
+    "whyTitle": "Por que o SLIT.IO?",
+    "ffmpegTitle": "FFmpeg no Navegador",
+    "ffmpegDesc": "Compressão de vídeo com FFmpeg compilado para WebAssembly. Processe MP4, WebM e mais sem enviar nada.",
+    "aiTitle": "Remoção de Fundo com IA",
+    "aiDesc": "Remova fundos de imagens usando modelos de IA ONNX Runtime rodando inteiramente no seu navegador. Sem servidor, sem envio.",
+    "zeroTitle": "Zero Coleta de Dados",
+    "zeroDesc": "Sem contas, sem rastreamento, sem cookies. Tudo roda localmente usando Web Crypto API e APIs modernas do navegador.",
+    "techTitle": "Stack Tecnológico Confiável",
+    "videoProcessing": "Processamento de vídeo",
+    "aiInference": "Inferência de IA",
+    "modernFramework": "Framework moderno"
+  },
+  "a11y": {
+    "tocTitle": "Índice",
+    "close": "Fechar",
+    "languageSelector": "Seletor de idioma",
+    "switchTo": "Mudar para"
   }
 }

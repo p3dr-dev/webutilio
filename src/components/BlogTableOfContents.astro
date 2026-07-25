@@ -1,14 +1,18 @@
 ---
+import { useTranslations } from '../i18n/utils';
+
 interface Props {
   headings: Array<{ depth: number; slug: string; text: string }>;
+  lang?: string;
 }
-const { headings } = Astro.props;
+const { headings, lang = 'en' } = Astro.props;
+const t = useTranslations(lang as any);
 const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
 ---
 
 {filteredHeadings.length > 0 && (
-  <nav class="hidden xl:block sticky top-24 w-56 shrink-0" aria-label="Table of contents">
-    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">Contents</p>
+  <nav class="hidden xl:block sticky top-24 w-56 shrink-0" aria-label={t('a11y.tocTitle')}>
+    <p class="text-xs font-bold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">{t('a11y.tocTitle')}</p>
     <ul class="space-y-1 border-l border-gray-200 dark:border-gray-700" id="toc-list">
       {filteredHeadings.map(h => (
         <li>

@@ -34,6 +34,7 @@
     "crypto": "Cryptocurrencies",
     "copy": "Copy",
     "copied": "Copied!",
+    "pixKeyLabel": "Pix Key",
     "qrCodeAlt": "Pix QR Code",
     "methods": {
       "paypal": "PayPal",
@@ -468,7 +469,10 @@
   "blog": {
     "title": "Blog",
     "description": "Articles about privacy, client-side processing, and web development tools.",
-    "backToList": "Back to all articles"
+    "backToList": "Back to all articles",
+    "readMore": "Read more",
+    "minRead": "min read",
+    "minutesShort": "min"
   },
   "footer": {
     "rights": "All rights reserved.",
@@ -878,5 +882,27 @@
     "paypal": "PayPal",
     "viewAll": "See all options",
     "copied": "Copied!"
+  },
+  "homepage": {
+    "openSource": "Open Source on GitHub",
+    "mitLicense": "MIT License",
+    "clientSide": "100% Client-Side",
+    "whyTitle": "Why SLIT.IO?",
+    "ffmpegTitle": "FFmpeg in the Browser",
+    "ffmpegDesc": "Video compression powered by FFmpeg compiled to WebAssembly. Process MP4, WebM, and more without uploading anything.",
+    "aiTitle": "AI Background Removal",
+    "aiDesc": "Remove image backgrounds using ONNX Runtime AI models running entirely in your browser. No server, no upload.",
+    "zeroTitle": "Zero Data Collection",
+    "zeroDesc": "No accounts, no tracking, no cookies. Everything runs locally using Web Crypto API and modern browser APIs.",
+    "techTitle": "Trusted Technology Stack",
+    "videoProcessing": "Video processing",
+    "aiInference": "AI inference",
+    "modernFramework": "Modern framework"
+  },
+  "a11y": {
+    "tocTitle": "Table of contents",
+    "close": "Close",
+    "languageSelector": "Language selector",
+    "switchTo": "Switch to"
   }
 }

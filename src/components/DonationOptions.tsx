@@ -67,7 +67,7 @@ const DonationOptions: React.FC<DonationOptionsProps> = ({ lang }) => {
           </div>
           
           <div className="w-full relative">
-            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block text-left pl-1">Pix Key</span>
+            <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1 block text-left pl-1">{t('donation.pixKeyLabel')}</span>
             <div className="flex items-center justify-between w-full p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-green-500 transition-colors group">
               <span className="font-mono text-xs sm:text-sm text-gray-600 dark:text-gray-300 truncate mr-2 select-all">
                 {DONATION_LINKS.pixKey}

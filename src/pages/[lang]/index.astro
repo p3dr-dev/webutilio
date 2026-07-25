@@ -8,7 +8,7 @@ import { useTranslations, getStaticPaths as getLangStaticPaths } from '../../i18
 
 export const getStaticPaths = getLangStaticPaths;
 
-const { lang } = Astro.params as { lang: 'en' | 'pt' | 'es' | 'fr' | 'de' };
+const { lang } = Astro.params as { lang: 'en' | 'pt' | 'es' | 'fr' | 'de' | 'ru' };
 const t = useTranslations(lang);
 ---
 
@@ -44,15 +44,15 @@ const t = useTranslations(lang);
       <a href="https://github.com/p3dr-dev/webutilio" target="_blank" rel="noopener noreferrer"
          class="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 dark:bg-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-colors">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        Open Source on GitHub
+        {t('homepage.openSource')}
       </a>
       <span class="inline-flex items-center gap-1.5 px-3 py-2 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300 text-sm font-medium rounded-lg border border-yellow-200 dark:border-yellow-800">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.193-5.934 5.782 1.4 8.176L12 19.896l-7.334 3.273 1.4-8.176L.132 9.211l8.2-1.193z"/></svg>
-        <span id="gh-stars" class="font-bold">MIT License</span>
+        <span id="gh-stars" class="font-bold">{t('homepage.mitLicense')}</span>
       </span>
       <span class="inline-flex items-center gap-1.5 px-3 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 text-sm font-medium rounded-lg border border-green-200 dark:border-green-800">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-        100% Client-Side
+        {t('homepage.clientSide')}
       </span>
     </div>
   </section>
@@ -77,44 +77,44 @@ const t = useTranslations(lang);
   </section>
 
   <section class="mt-12 mb-8 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl p-8 md:p-12 border border-purple-100 dark:border-purple-800/30">
-    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Why SLIT.IO?</h2>
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">{t('homepage.whyTitle')}</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="text-center">
         <div class="w-14 h-14 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
         </div>
-        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">FFmpeg in the Browser</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Video compression powered by FFmpeg compiled to WebAssembly. Process MP4, WebM, and more without uploading anything.</p>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('homepage.ffmpegTitle')}</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t('homepage.ffmpegDesc')}</p>
       </div>
       <div class="text-center">
         <div class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
         </div>
-        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">AI Background Removal</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Remove image backgrounds using ONNX Runtime AI models running entirely in your browser. No server, no upload.</p>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('homepage.aiTitle')}</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t('homepage.aiDesc')}</p>
       </div>
       <div class="text-center">
         <div class="w-14 h-14 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
           <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
         </div>
-        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">Zero Data Collection</h3>
-        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">No accounts, no tracking, no cookies. Everything runs locally using Web Crypto API and modern browser APIs.</p>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('homepage.zeroTitle')}</h3>
+        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t('homepage.zeroDesc')}</p>
       </div>
     </div>
   </section>
 
   <section class="mb-20 bg-white dark:bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-100 dark:border-gray-700 shadow-sm">
-    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">Trusted Technology Stack</h2>
+    <h2 class="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">{t('homepage.techTitle')}</h2>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div class="p-4">
         <div class="text-3xl mb-2">🔧</div>
         <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">FFmpeg.wasm</h3>
-        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Video processing</p>
+        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">{t('homepage.videoProcessing')}</p>
       </div>
       <div class="p-4">
         <div class="text-3xl mb-2">🧠</div>
         <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">ONNX Runtime</h3>
-        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">AI inference</p>
+        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">{t('homepage.aiInference')}</p>
       </div>
       <div class="p-4">
         <div class="text-3xl mb-2">🔐</div>
@@ -124,7 +124,7 @@ const t = useTranslations(lang);
       <div class="p-4">
         <div class="text-3xl mb-2">⚛️</div>
         <h3 class="font-bold text-gray-800 dark:text-gray-200 text-sm">React + Astro</h3>
-        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">Modern framework</p>
+        <p class="text-gray-500 dark:text-gray-400 text-xs mt-1">{t('homepage.modernFramework')}</p>
       </div>
     </div>
   </section>
