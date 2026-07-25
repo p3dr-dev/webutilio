@@ -1,71 +1,81 @@
 ---
 import { tools } from '../data/tools';
 
-const { lang } = Astro.props; // 'pt' ou 'en'
+const { lang } = Astro.props;
 const { pathname } = Astro.url;
 
-// Helper to find the current tool and its alternate slug
-const pageSlugs: Record<string, Record<string, string>> = {
-  sobre: { pt: 'sobre', en: 'about' },
-  about: { pt: 'sobre', en: 'about' },
-  'politica-privacidade': { pt: 'politica-privacidade', en: 'privacy-policy' },
-  'privacy-policy': { pt: 'politica-privacidade', en: 'privacy-policy' },
-  feedback: { pt: 'feedback', en: 'feedback' },
-  apoie: { pt: 'apoie', en: 'support' },
-  support: { pt: 'apoie', en: 'support' },
+const allLangs = ['en', 'pt', 'es', 'fr', 'de'] as const;
+type LangCode = typeof allLangs[number];
+
+const langLabels: Record<LangCode, string> = { en: 'EN', pt: 'PT', es: 'ES', fr: 'FR', de: 'DE' };
+const langNames: Record<LangCode, string> = { en: 'English', pt: 'Portugues', es: 'Espanol', fr: 'Francais', de: 'Deutsch' };
+
+const basePathMap: Record<LangCode, string> = {
+  en: 'tools',
+  pt: 'ferramentas',
+  es: 'herramientas',
+  fr: 'outils',
+  de: 'werkzeuge',
 };
 
-const getTargetPath = (targetLang: string) => {
+const pageSlugs: Record<string, Record<LangCode, string>> = {
+  sobre:    { en: 'about', pt: 'sobre', es: 'sobre', fr: 'a-propos', de: 'ueber-uns' },
+  about:    { en: 'about', pt: 'sobre', es: 'sobre', fr: 'a-propos', de: 'ueber-uns' },
+  'politica-privacidade': { en: 'privacy-policy', pt: 'politica-privacidade', es: 'politica-privacidad', fr: 'politique-confidentialite', de: 'datenschutzrichtlinie' },
+  'privacy-policy': { en: 'privacy-policy', pt: 'politica-privacidade', es: 'politica-privacidad', fr: 'politique-confidentialite', de: 'datenschutzrichtlinie' },
+  feedback: { en: 'feedback', pt: 'feedback', es: 'feedback', fr: 'retour', de: 'feedback' },
+  apoie:    { en: 'support', pt: 'apoie', es: 'apoyar', fr: 'soutenir', de: 'unterstuetzen' },
+  support:  { en: 'support', pt: 'apoie', es: 'apoyar', fr: 'soutenir', de: 'unterstuetzen' },
+};
+
+const getTargetPath = (targetLang: LangCode): string => {
   if (targetLang === lang) return '#';
-  
+
   const parts = pathname.split('/').filter(Boolean);
-  // Expected structure: [lang, 'ferramentas'|'tools', slug]
-  if (parts.length >= 3) {
+  const currentLang = parts[0] as LangCode;
+
+  // Tool page: [lang]/[toolsBase]/[slug]
+  if (parts.length >= 3 && allLangs.includes(currentLang)) {
     const currentSlug = parts[2];
-    const tool = tools.find(t => t.slugs.pt === currentSlug || t.slugs.en === currentSlug);
+    const tool = tools.find(t => (Object.values(t.slugs) as string[]).includes(currentSlug));
     if (tool) {
-      const basePath = targetLang === 'en' ? 'tools' : 'ferramentas';
-      return `/${targetLang}/${basePath}/${tool.slugs[targetLang as 'pt' | 'en']}`;
+      return `/${targetLang}/${basePathMap[targetLang]}/${tool.slugs[targetLang]}`;
     }
   }
-  
-  // Static page slug translation
-  if (parts.length === 2) {
+
+  // Static page: [lang]/[slug]
+  if (parts.length === 2 && allLangs.includes(currentLang)) {
     const slug = parts[1];
     if (pageSlugs[slug]) {
-      return `/${targetLang}/${pageSlugs[slug][targetLang as 'pt' | 'en']}`;
+      return `/${targetLang}/${pageSlugs[slug][targetLang]}`;
     }
   }
-  
-  // Default to equivalent path or home
-  const pathWithoutLang = pathname.startsWith('/en') || pathname.startsWith('/pt') 
-    ? pathname.substring(3) 
+
+  // Blog pages: /{lang}/blog(/...)
+  if (parts.length >= 2 && parts[1] === 'blog') {
+    return `/${targetLang}/blog${parts.length > 2 ? '/' + parts.slice(2).join('/') : ''}`;
+  }
+
+  // Fallback: strip current lang prefix, prepend target
+  const pathWithoutLang = allLangs.some(l => pathname.startsWith(`/${l}`))
+    ? '/' + parts.slice(1).join('/')
     : pathname;
   return `/${targetLang}${pathWithoutLang}`;
 };
 ---
 
-<div class="flex items-center space-x-2 border border-gray-300 dark:border-gray-600 rounded-full p-1" role="group" aria-label="Language selector">
-  <a 
-    href={getTargetPath('pt')} 
-    aria-label="Switch to Portuguese"
-    aria-current={lang === 'pt' ? 'page' : undefined}
-    class:list={[
-      "px-3 py-1 text-sm rounded-full transition-colors",
-      lang === 'pt' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-    ]}
-  >
-    PT
-  </a>
-  <a 
-    href={getTargetPath('en')} 
-    aria-label="Switch to English"
-    aria-current={lang === 'en' ? 'page' : undefined}
-    class:list={[
-      "px-3 py-1 text-sm rounded-full transition-colors",
-      lang === 'en' ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700'
-    ]}
-  >
-    EN
-  </a>
+<div class="flex items-center space-x-1 border border-gray-300 dark:border-gray-600 rounded-full p-1" role="group" aria-label="Language selector">
+  {allLangs.map((l) => (
+    <a
+      href={getTargetPath(l)}
+      aria-label={`Switch to ${langNames[l]}`}
+      aria-current={lang === l ? 'page' : undefined}
+      class:list={[
+        "px-2 py-1 text-xs font-medium rounded-full transition-colors",
+        lang === l ? 'bg-purple-500 text-white cursor-default' : 'hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
+      ]}
+    >
+      {langLabels[l]}
+    </a>
+  ))}
 </div>

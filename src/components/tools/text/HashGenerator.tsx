@@ -4,7 +4,7 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 
-const HashGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const HashGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [input, setInput] = useState('');
   const [hash, setHash] = useState('');

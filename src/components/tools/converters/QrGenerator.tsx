@@ -3,7 +3,7 @@ import QRCode from 'qrcode';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
 
-const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const QrGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [text, setText] = useState('');

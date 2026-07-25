@@ -1,4 +1,4 @@
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export interface BlogPostData {
   title: string;
@@ -17,13 +17,13 @@ export interface BlogPost {
   collection: 'blog';
   rendered?: { html: string; metadata?: Record<string, unknown> };
   filePath?: string;
-  render(): Promise<{
-    Content: import('astro').AstroComponentFactory;
-    headings: import('astro').MarkdownHeading[];
-  }>;
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   const posts = await getCollection('blog' as never);
   return posts as unknown as BlogPost[];
+}
+
+export async function renderBlogPost(post: BlogPost) {
+  return render(post as any);
 }

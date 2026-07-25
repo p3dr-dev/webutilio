@@ -3,7 +3,7 @@ import { useTranslations } from '../../../i18n/utils';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 import LoadingSpinner from '../common/LoadingSpinner';
 
-const FileEncryptor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const FileEncryptor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState('');

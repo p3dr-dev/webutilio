@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FeedbackForm from '../../components/FeedbackForm';
+import { useTranslations } from '../../i18n/utils';
+
+const lang = 'fr';
+const t = useTranslations(lang);
+---
+
+<Layout title={`${t('feedbackPage.title')} - SLIT.IO`} description={t('feedbackPage.description')} lang={lang}>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Retour - SLIT.IO",
+    "description": t('feedbackPage.description'),
+    "url": "https://slitio.vercel.app/fr/retour"
+  })} />
+  <section class="container mx-auto px-6 py-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-6">{t('feedbackPage.title')}</h1>
+    <p class="max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-300 mb-12">
+      {t('feedbackPage.description')}
+    </p>
+
+    <div class="max-w-2xl mx-auto">
+      <FeedbackForm client:load lang="fr" />
+    </div>
+
+    <p class="mt-12 text-gray-500 dark:text-gray-400">
+      {t('feedbackPage.thanks')}
+    </p>
+  </section>
+</Layout>

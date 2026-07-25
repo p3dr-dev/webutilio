@@ -3,7 +3,7 @@ import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
-const ImageResizer: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const ImageResizer: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalImage, setOriginalImage] = useState<File | null>(null);
   const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);

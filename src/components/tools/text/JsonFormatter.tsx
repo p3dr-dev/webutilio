@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
 
-const JsonFormatter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const JsonFormatter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [json, setJson] = useState('');

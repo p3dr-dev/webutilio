@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts } from '../../../lib/blog';
+import { getBlogPosts, renderBlogPost } from '../../../lib/blog';
 import type { BlogPost } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/utils';
 
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props as { post: BlogPost };
-const { Content } = await post.render();
+const { Content } = await renderBlogPost(post);
 
 const lang = 'en';
 const t = useTranslations(lang);

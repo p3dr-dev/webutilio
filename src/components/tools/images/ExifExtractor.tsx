@@ -4,7 +4,7 @@ import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
 import LoadingSpinner from '../common/LoadingSpinner';
 
-const ExifExtractor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const ExifExtractor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [exifData, setExifData] = useState<Record<string, unknown> | null>(null);

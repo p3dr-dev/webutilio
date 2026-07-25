@@ -9,7 +9,7 @@ function generateUuid(): string {
   }));
 }
 
-const UuidGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const UuidGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [uuids, setUuids] = useState<string[]>([]);

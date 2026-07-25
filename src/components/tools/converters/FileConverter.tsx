@@ -13,7 +13,7 @@ type InputType = 'image' | 'svg' | 'pdf' | 'json';
 
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
-const FileConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const FileConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string>('');

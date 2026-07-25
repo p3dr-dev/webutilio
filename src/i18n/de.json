@@ -1,0 +1,963 @@
+{
+  "site": {
+    "title": "SLIT<span class=\"text-purple-500\">.IO</span> - Schnelle & sichere Online-Werkzeuge",
+    "plainTitle": "SLIT.IO - Schnelle & sichere Online-Werkzeuge",
+    "description": "Ihre Sammlung von Werkzeugen, die direkt im Browser laufen. Schnell, sicher und privat.",
+    "lang": "de-DE",
+    "allTools": "Alle Werkzeuge"
+  },
+  "home": {
+    "searchPlaceholder": "Nach Werkzeugen suchen (z. B. PDF, Bild, Konverter)...",
+    "noResults": "Ups! Keine Werkzeuge gefunden, die zu Ihrer Suche passen."
+  },
+  "nav": {
+    "feedback": "Feedback",
+    "support": "Projekt unterstützen",
+    "about": "Über uns",
+    "privacy": "Datenschutz",
+    "blog": "Blog",
+    "openMenu": "Menü öffnen"
+  },
+  "categories": {
+    "images": "Bilder",
+    "files": "Dateien",
+    "text": "Text",
+    "converters": "Konverter",
+    "media": "Medien",
+    "generators": "Generatoren"
+  },
+  "donation": {
+    "title": "Mit Pix unterstützen",
+    "description": "Scannen Sie den untenstehenden QR-Code mit Ihrer Banking-App. Schnell, einfach und gebührenfrei! (Verfügbar in Brasilien)",
+    "orKey": "Oder verwenden Sie den Zufallsschlüssel:",
+    "international": "Internationale Unterstützung",
+    "crypto": "Kryptowährungen",
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "qrCodeAlt": "Pix QR-Code",
+    "methods": {
+      "paypal": "PayPal",
+      "stripe": "Karte (Stripe)",
+      "kofi": "Kauf mir einen Kaffee / Ko-fi",
+      "btc": "Bitcoin (BTC)",
+      "eth": "Ethereum (ETH)",
+      "usdt": "USDT (TRC20)"
+    },
+    "descriptions": {
+      "paypal": "Schnell und sicher. Akzeptiert Guthaben und Karten.",
+      "stripe": "Mit Kredit-/Debitkarte spenden.",
+      "kofi": "Kaufen Sie dem Entwickler einen Kaffee.",
+      "crypto": "Volle Privatsphäre und keine Vermittler."
+    }
+  },
+  "privacyReport": {
+    "title": "Verifizierte Privatsphäre",
+    "badge": "100% lokal",
+    "description": "Keine Daten verlassen Ihren Browser. Die Verarbeitung erfolgt vollständig auf Ihrem Gerät mithilfe der Web Crypto API, WebAssembly und anderer modernster Technologien."
+  },
+  "howItWorks": {
+    "title": "So funktioniert es",
+    "background-remover": "Verwendet das KI-Modell „RMBG“, das lokal in Ihrem Browser über die ONNX Runtime Web-Bibliothek läuft. Die Bildverarbeitung erfolgt auf Ihrer CPU/GPU, ohne dass etwas an externe Server gesendet wird.",
+    "file-decompressor": "Verwendet JSZip- und js-untar-Bibliotheken, um die Binärstruktur komprimierter Dateien direkt im Browser-Speicher zu lesen und eine einzelne Dateiextraktion zu ermöglichen.",
+    "media-compressor": "Nutzt FFmpeg, das für WebAssembly (WASM) kompiliert wurde. Dies bringt die Leistung des weltweit meistgenutzten Videobearbeitungstools in Ihren Browser.",
+    "file-encryptor": "Verwendet die native Web Crypto API des Browsers mit dem 256-Bit AES-GCM-Algorithmus. Das Passwort wird mithilfe von PBKDF2 mit 100.000 Iterationen von SHA-256 abgeleitet.",
+    "hash-generator": "Nutzt die Funktion „subtle.digest“ der Web Crypto API, um den SHA-256-Hash von Texten oder Dateien sofort und sicher zu berechnen.",
+    "file-compressor": "Verwendet die JSZip-Bibliothek, um eine neue komprimierte Datei im Speicher zu erstellen und die ausgewählten Dateien mit dem maximalen DEFLATE-Komprimierungslevel zu pakieren.",
+    "word-counter": "Wendet reguläre Ausdrücke und JavaScript-String-Verarbeitungslogik an, um den Text zu analysieren und detaillierte Statistiken in Echtzeit zu berechnen.",
+    "file-converter": "Kombiniert die Canvas API für Bilder und PDF.js für Dokumente und ermöglicht die Konvertierung visueller Formate ohne Abhängigkeit von Cloud-Verarbeitung.",
+    "image-resizer": "Verwendet die Canvas API des Browsers, um das Bild in den neuen angegebenen Abmessungen neu zu zeichnen, und wendet Interpolationsalgorithmen an, um die Qualität zu erhalten.",
+    "json-formatter": "Nutzt die nativen JSON.parse- und JSON.stringify-Methoden mit benutzerdefiniertem Einzug, um JSON-Datenstrukturen sofort zu validieren und zu formatieren.",
+    "qr-generator": "Verwendet Punktmatrix-Generierungsalgorithmen, um Zeichenketten in visuelle QR-Code-Muster umzuwandeln, und rendert das Ergebnis auf einem Canvas zum Download.",
+    "exif-extractor": "Verwendet die exifr-Bibliothek, um Binärpuffer von Bildern zu lesen und versteckte Metadaten wie GPS-Koordinaten, Kameramodell und Belichtungseinstellungen zu extrahieren."
+  },
+  "howToUse": {
+    "background-remover": [
+      "Klicken Sie auf „Bild auswählen“ oder ziehen Sie ein Foto per Drag-and-Drop hierher",
+      "Warten Sie einige Sekunden, während die KI Ihr Bild verarbeitet",
+      "Laden Sie das Ergebnis mit transparentem Hintergrund herunter"
+    ],
+    "file-decompressor": [
+      "Klicken Sie auf „Archiv auswählen“ oder ziehen Sie eine .zip- oder .tar-Datei per Drag-and-Drop hierher",
+      "Durchsuchen Sie den Inhalt des Archivs",
+      "Laden Sie einzelne Dateien herunter oder extrahieren Sie alle"
+    ],
+    "media-compressor": [
+      "Wählen Sie eine Bild- oder Videodatei aus",
+      "Passen Sie bei Bedarf den Qualitätsregler an",
+      "Klicken Sie auf „Komprimieren“ und laden Sie die optimierte Datei herunter"
+    ],
+    "file-encryptor": [
+      "Wählen Sie eine Datei aus und geben Sie ein starkes Passwort ein",
+      "Wählen Sie zwischen Ver- und Entschlüsselungsmodus",
+      "Laden Sie die ver-/entschlüsselte Datei sicher herunter"
+    ],
+    "hash-generator": [
+      "Geben Sie Text ein oder wählen Sie eine Datei zum Hashen aus",
+      "Der SHA-256-Hash wird sofort generiert",
+      "Kopieren Sie den Hash oder vergleichen Sie ihn mit einem anderen Wert"
+    ],
+    "file-compressor": [
+      "Wählen Sie eine oder mehrere Dateien zum Komprimieren aus",
+      "Wählen Sie zwischen ZIP- und TAR-Format",
+      "Laden Sie das komprimierte Archiv herunter"
+    ],
+    "word-counter": [
+      "Fügen Sie Ihren Text im Eingabebereich ein oder tippen Sie ihn ein",
+      "Sehen Sie Statistiken in Echtzeit (Wörter, Zeichen, Sätze)",
+      "Kopieren Sie die Ergebnisse oder löschen Sie sie zum Neustart"
+    ],
+    "file-converter": [
+      "Wählen Sie eine Datei zum Konvertieren aus",
+      "Wählen Sie das Ausgabeformat",
+      "Laden Sie die konvertierte Datei herunter"
+    ],
+    "image-resizer": [
+      "Wählen Sie ein Bild zum Ändern der Größe aus",
+      "Geben Sie die gewünschte Breite und Höhe ein",
+      "Laden Sie das Bild in der neuen Größe herunter"
+    ],
+    "json-formatter": [
+      "Fügen Sie Ihre JSON-Daten in den Editor ein",
+      "Klicken Sie auf „Formatieren“ zum Verschönern oder „Minimieren“ zum Komprimieren",
+      "Kopieren Sie das Ergebnis in die Zwischenablage"
+    ],
+    "qr-generator": [
+      "Geben Sie eine URL, Text oder Wi-Fi-Zugangsdaten ein",
+      "Der QR-Code wird sofort generiert",
+      "Laden Sie den QR-Code als PNG-Bild herunter"
+    ],
+    "exif-extractor": [
+      "Wählen Sie ein Foto aus (JPEG, HEIC usw.)",
+      "Sehen Sie GPS-Koordinaten, Kameraeinstellungen und mehr",
+      "Optional: Standort auf Google Maps anzeigen"
+    ],
+    "password-generator": [
+      "Stellen Sie die gewünschte Passwortlänge ein",
+      "Wählen Sie aus, welche Zeichentypen enthalten sein sollen",
+      "Klicken Sie auf „Generieren“ und kopieren Sie Ihr sicheres Passwort"
+    ],
+    "base64-tool": [
+      "Geben Sie Ihren Text ein oder fügen Sie eine Base64-Zeichenkette ein",
+      "Wählen Sie zwischen Kodierungs- oder Dekodierungsmodus",
+      "Kopieren Sie das Ergebnis in die Zwischenablage"
+    ],
+    "uuid-generator": [
+      "Legen Sie die Anzahl der zu generierenden UUIDs fest",
+      "Wählen Sie Groß- oder Kleinschreibung",
+      "Klicken Sie auf „Generieren“ und kopieren Sie einzelne oder alle UUIDs"
+    ],
+    "timestamp-converter": [
+      "Sehen Sie den aktuellen Unix-Zeitstempel in Echtzeit",
+      "Geben Sie einen Zeitstempel ein, um ihn in ein Datum umzuwandeln",
+      "Oder wählen Sie ein Datum, um dessen Unix-Zeitstempel zu erhalten"
+    ],
+    "lorem-generator": [
+      "Legen Sie die Anzahl der zu generierenden Wörter fest",
+      "Aktivieren Sie die Option „Mit Lorem ipsum beginnen“",
+      "Klicken Sie auf „Generieren“ und kopieren Sie den Platzhaltertext"
+    ],
+    "case-converter": [
+      "Fügen Sie Ihren Text im Eingabebereich ein oder tippen Sie ihn ein",
+      "Wählen Sie den gewünschten Schreibstil aus den Optionen aus",
+      "Kopieren Sie das konvertierte Ergebnis"
+    ],
+    "color-picker": [
+      "Verwenden Sie die Farbauswahl, um eine Farbe auszuwählen",
+      "Sehen Sie HEX-, RGB- und HSL-Werte sofort",
+      "Kopieren Sie jedes Format mit einem Klick"
+    ],
+    "markdown-preview": [
+      "Schreiben Sie Ihr Markdown auf der linken Seite",
+      "Sehen Sie die Live-Vorschau auf der rechten Seite",
+      "Unterstützt Überschriften, Fett, Kursiv, Code und Links"
+    ]
+  },
+  "faq": {
+    "q1": "Ist SLIT.IO sicher zu verwenden?",
+    "a1": "Ja, es ist zu 100 % sicher. Alle Dateien und Daten werden lokal in Ihrem Browser verarbeitet. Nichts wird an unsere Server gesendet.",
+    "q2": "Muss ich dafür bezahlen?",
+    "a2": "Nein, alle Werkzeuge sind kostenlos und werbefrei. Das Projekt wird durch Spenden der Community finanziert.",
+    "q3": "Funktioniert es offline?",
+    "a3": "Ja! Dank PWA-Technologie funktionieren die meisten Werkzeuge nach dem ersten Zugriff auch ohne Internetverbindung."
+  },
+  "tools": {
+    "background-remover": {
+      "title": "Kostenloser Online-Bildhintergrundentferner - 100% automatisch",
+      "description": "Hintergründe von Fotos sofort mit KI entfernen. Hohe Qualität, kostenlos und ohne Registrierung. Verarbeitung erfolgt zu 100% in Ihrem Browser.",
+      "icon": "🖼️",
+      "features": [
+        "Lokale KI-Verarbeitung (ONNX Runtime)",
+        "Erhält die ursprüngliche Bildauflösung",
+        "Volle Privatsphäre: Fotos verlassen Ihren PC nicht",
+        "Export als transparentes PNG"
+      ],
+      "faq": [
+        {
+          "q": "Ist der Hintergrundentferner kostenlos?",
+          "a": "Ja, SLIT.IO bietet eine komplett kostenlose und unbegrenzte Hintergrundentfernung ohne versteckte Gebühren oder Wasserzeichen."
+        },
+        {
+          "q": "Werden meine Fotos an einen Server gesendet?",
+          "a": "Nein. Im Gegensatz zu anderen Seiten läuft unsere KI direkt in Ihrem Browser. Ihre Bilder verlassen Ihr Gerät nie."
+        },
+        {
+          "q": "Gibt es eine Größenbeschränkung für Bilder?",
+          "a": "Wir setzen keine strengen Grenzen, aber die Leistung hängt von Ihrer Hardware ab, da die Verarbeitung lokal erfolgt."
+        }
+      ]
+    },
+    "file-decompressor": {
+      "title": "Kostenloser Online-ZIP- und TAR-Dateiextraktor",
+      "description": "Entpacken Sie ZIP- und TAR-Dateien direkt und sicher in Ihrem Browser. Dateien online entpacken ohne Softwareinstallation, mit 100% Privatsphäre.",
+      "icon": "📦",
+      "features": [
+        "Unterstützung für .zip- und .tar-Formate",
+        "Einzelne Dateien extrahieren",
+        "100% lokale Verarbeitung (kein Upload)",
+        "Vorschau des Paketinhalts"
+      ],
+      "faq": [
+        {
+          "q": "Kann ich große Dateien entpacken?",
+          "a": "Ja, solange Ihr Browser genügend Speicher hat. SLIT.IO verarbeitet alles lokal, daher gibt es keine Upload-Limits."
+        },
+        {
+          "q": "Unterstützt die Seite passwortgeschützte Dateien?",
+          "a": "Derzeit unterstützen wir die Standard-ZIP- und TAR-Extraktion. Passwortunterstützung steht auf unserer Roadmap."
+        }
+      ]
+    },
+    "media-compressor": {
+      "title": "Online-Video- und Bildkompressor - Ohne Qualitätsverlust",
+      "description": "Reduzieren Sie die Größe von MP4-Videos und PNG/JPG/WEBP-Bildern bei hochwertiger Qualität. Kostenloser Online-Medienkompressor mit Fokus auf Privatsphäre.",
+      "icon": "🗜️",
+      "features": [
+        "Videokomprimierung über FFmpeg WASM",
+        "Benutzerdefinierte Qualitätsanpassung",
+        "Volle Privatsphäre: lokale Medienverarbeitung",
+        "Unterstützung für MP4, WebM, PNG, JPG und WEBP"
+      ],
+      "faq": [
+        {
+          "q": "Sinkt die Videoqualität deutlich?",
+          "a": "Sie haben die volle Kontrolle über den Qualitätsgrad. Unser Tool sucht das beste Gleichgewicht zwischen Größe und Klarheit."
+        },
+        {
+          "q": "Wie lange dauert die Komprimierung?",
+          "a": "Das hängt von der Verarbeitungsleistung Ihres Geräts ab, da wir lokale Hardware verwenden, um Ihre Privatsphäre zu schützen."
+        }
+      ]
+    },
+    "file-encryptor": {
+      "title": "Sichere AES-256-Dateiverschlüsselung online",
+      "description": "Schützen Sie Ihre Dateien mit AES-256-Bit-Verschlüsselung direkt im Browser. Verschlüsseln und entschlüsseln Sie Dateien lokal mit einem Passwort sicher.",
+      "icon": "🔒",
+      "features": [
+        "256-Bit AES-GCM-Algorithmus",
+        "Sichere Schlüsselableitung (PBKDF2)",
+        "Lokale Verarbeitung über Web Crypto API",
+        "Funktioniert nach dem Laden vollständig offline"
+      ],
+      "faq": [
+        {
+          "q": "Speichert SLIT.IO mein Passwort?",
+          "a": "Niemals. Ihr Passwort und Ihre Dateien verlassen Ihren Computer nie. Wenn Sie Ihr Passwort vergessen, können wir Ihre Daten nicht wiederherstellen."
+        },
+        {
+          "q": "Ist es sicher für sensible Dateien?",
+          "a": "Ja, weil Sie nichts „senden“. Die Verschlüsselung erfolgt in Ihrem Browser. Es ist wie die Verwendung lokaler Software, aber ohne etwas installieren zu müssen."
+        }
+      ]
+    },
+    "hash-generator": {
+      "title": "Sicherer Online-SHA-256-Hash-Generator",
+      "description": "Generieren Sie SHA-256-Hashes für beliebigen Text oder Dateien. Überprüfen Sie die Dateiintegrität online kostenlos mit 100% lokaler Verarbeitung.",
+      "icon": "🔢",
+      "features": [
+        "Sofortige Hashes für Text und Dateien",
+        "Integrierter Hash-Vergleich",
+        "Volle Privatsphäre über Web Crypto API",
+        "Aufgeräumte und einfach zu bedienende Oberfläche"
+      ],
+      "faq": [
+        {
+          "q": "Was ist ein SHA-256-Hash?",
+          "a": "Es ist eine eindeutige digitale Signatur für Ihre Daten. Wenn sich auch nur ein Bit in der Datei ändert, ist der Hash völlig anders."
+        },
+        {
+          "q": "Kann ich Hashes für große Dateien generieren?",
+          "a": "Ja, unser Tool verarbeitet Dateien lokal in Blöcken, sodass Sie auch Dateien von mehreren GB sicher überprüfen können."
+        }
+      ]
+    },
+    "file-compressor": {
+      "title": "Kostenloser Online-ZIP-Dateikompressor",
+      "description": "Erstellen Sie ZIP-Dateien aus mehreren Dateien einfach und sicher. Komprimieren Sie Dateien online, ohne Ihre Daten in die Cloud zu senden.",
+      "icon": "📁",
+      "features": [
+        "ZIP-Paketierung in Echtzeit",
+        "Hocheffiziente DEFLATE-Komprimierung",
+        "Keine Grenzen bei der Anzahl der Dateien",
+        "Volle Privatsphäre: lokale Dateiverarbeitung"
+      ],
+      "faq": [
+        {
+          "q": "Gibt es eine Dateibegrenzung für ZIP?",
+          "a": "Wir setzen keine Grenzen. Die einzige Grenze ist der Speicher und die Verarbeitungskapazität Ihres Geräts."
+        }
+      ]
+    },
+    "word-counter": {
+      "title": "Kostenloser Online-Wörter- und Zeichenzähler",
+      "description": "Zählen Sie Wörter, Zeichen, Sätze und Absätze in Echtzeit. Analysieren Sie Lese- und Sprechzeit für Ihren Text kostenlos.",
+      "icon": "📝",
+      "features": [
+        "Zählung in Echtzeit",
+        "Schätzung von Lese- und Sprechzeit",
+        "Detaillierte Absatzstatistiken",
+        "Sofortige lokale Verarbeitung"
+      ],
+      "faq": [
+        {
+          "q": "Wird mein Text gespeichert?",
+          "a": "Nein. Die gesamte Textverarbeitung erfolgt im Speicher Ihres Browsers und wird beim Schließen der Seite verworfen."
+        }
+      ]
+    },
+    "file-converter": {
+      "title": "Kostenloser Online-Dateikonverter - Bild, PDF und JSON",
+      "description": "Konvertieren Sie Bilder, PDFs, JSON und CSV direkt in Ihrem Browser. Schneller, sicherer Dateikonverter ohne Cloud-Upload.",
+      "icon": "🔄",
+      "features": [
+        "Konvertierung zwischen Bildformaten (PNG, JPG, WEBP)",
+        "PDF-Seiten als Bilder extrahieren",
+        "JSON-zu-CSV-Konverter und umgekehrt",
+        "Lokale Verarbeitung über Canvas und PDF.js"
+      ],
+      "faq": [
+        {
+          "q": "Kann ich PDF in Word konvertieren?",
+          "a": "Derzeit konzentrieren wir uns auf visuelle und Datenkonvertierungen. Weitere Formate kommen bald!"
+        }
+      ]
+    },
+    "image-resizer": {
+      "title": "Kostenloser Online-Bildgrößenänderer",
+      "description": "Ändern Sie die Abmessungen Ihrer Bilder ohne Qualitätsverlust. Ändern Sie Fotos online sicher und schnell mit lokaler Verarbeitung.",
+      "icon": "📏",
+      "features": [
+        "Größenänderung nach Breite und Höhe",
+        "Seitenverhältnis beibehalten",
+        "Verarbeitung über Canvas API",
+        "Garantierte Privatsphäre: Fotos verlassen Ihren PC nicht"
+      ],
+      "faq": [
+        {
+          "q": "Verliert das Bild bei der Größenänderung an Qualität?",
+          "a": "Wir verwenden Interpolationsalgorithmen des Browsers, um sicherzustellen, dass das Bild in den neuen Abmessungen scharf bleibt."
+        }
+      ]
+    },
+    "json-formatter": {
+      "title": "Online-JSON-Formatter und -Validator",
+      "description": "Validieren und formatieren Sie Ihren JSON-Code sofort. Kostenloses Online-Werkzeug für Entwickler mit Fokus auf Geschwindigkeit und Privatsphäre.",
+      "icon": "{}",
+      "features": [
+        "Sofortiges Verschönern",
+        "JSON-Minimierung",
+        "Echtzeit-Syntaxvalidierung",
+        "Sichere lokale Verarbeitung"
+      ],
+      "faq": [
+        {
+          "q": "Ist es sicher, Produktionsdaten hier einzufügen?",
+          "a": "Ja. Im Gegensatz zu anderen Formatern sendet SLIT.IO Ihre Daten nicht an einen Server. Die Verarbeitung erfolgt zu 100% auf Ihrem Computer."
+        }
+      ]
+    },
+    "qr-generator": {
+      "title": "Kostenloser und anpassbarer Online-QR-Code-Generator",
+      "description": "Erstellen Sie QR-Codes für Links, Text oder Wi-Fi. Generieren Sie Ihren QR-Code sofort mit voller Privatsphäre und ohne Tracking.",
+      "icon": "📱",
+      "features": [
+        "Sofortige QR-Code-Generierung",
+        "Hochauflösender PNG-Download",
+        "Kein Ablauf: Ihre Codes halten ewig",
+        "Volle Privatsphäre: kein Datentracking"
+      ],
+      "faq": [
+        {
+          "q": "Laufen die QR-Codes ab?",
+          "a": "Nein. Die generierten Codes sind statisch und funktionieren ewig, ohne Gebühren oder Weiterleitungen."
+        }
+      ]
+    },
+    "exif-extractor": {
+      "title": "Online-EXIF-Metadatenleser - Foto-GPS anzeigen",
+      "description": "Extrahieren Sie versteckte Informationen aus Ihren Fotos wie GPS-Koordinaten, Kameramodell und Datum. Sehen Sie EXIF-Metadaten mit voller Privatsphäre.",
+      "icon": "ℹ️",
+      "features": [
+        "GPS-Koordinaten auf Karten anzeigen",
+        "Technische Kameradaten (ISO, Fokus usw.)",
+        "Volle Privatsphäre: lokales Lesen von Metadaten",
+        "Unterstützung für JPEG, HEIC und mehr"
+      ],
+      "faq": [
+        {
+          "q": "Wie entferne ich Metadaten?",
+          "a": "Durch die Verwendung unseres Medienkompressors werden sensible Metadaten zu Ihrem Schutz automatisch entfernt."
+        }
+      ]
+    },
+    "password-generator": {
+      "title": "Kostenloser Online-Passwortgenerator - Stark & sicher",
+      "description": "Generieren Sie sofort starke, zufällige Passwörter. Kontrollieren Sie Länge, Großbuchstaben, Kleinbuchstaben, Zahlen und Symbole. Alles wird in Ihrem Browser generiert.",
+      "icon": "🔑",
+      "features": [
+        "Kryptographisch sichere Zufallsgenerierung",
+        "Anpassbare Länge (8-64 Zeichen)",
+        "Großbuchstaben, Zahlen, Symbole ein-/ausschließen",
+        "Sofortige Stärkeanzeige"
+      ],
+      "faq": [
+        {
+          "q": "Sind generierte Passwörter sicher?",
+          "a": "Ja. Passwörter werden mit crypto.getRandomValues() generiert, das den kryptographischen Zufallsgenerator des Betriebssystems verwendet."
+        }
+      ]
+    },
+    "base64-tool": {
+      "title": "Kostenloser Online-Base64-Encoder & -Decoder",
+      "description": "Kodieren Sie Text in Base64 oder dekodieren Sie Base64 in Text sofort. Unterstützt volles Unicode einschließlich Emoji. Alle Verarbeitung läuft lokal in Ihrem Browser.",
+      "icon": "🔐",
+      "features": [
+        "Base64 kodieren und dekodieren",
+        "Volle Unicode-Unterstützung einschließlich Emoji",
+        "Sofortige Konvertierung",
+        "100% clientseitige Verarbeitung"
+      ],
+      "faq": [
+        {
+          "q": "Was ist Base64?",
+          "a": "Base64 ist ein Kodierungsschema, das Binärdaten als ASCII-Text darstellt und häufig zum Einbetten von Daten in URLs und E-Mails verwendet wird."
+        }
+      ]
+    },
+    "uuid-generator": {
+      "title": "Kostenloser Online-UUID-v4-Generator",
+      "description": "Generieren Sie UUID v4 (zufällig) sofort. Wählen Sie Groß- oder Kleinschreibung, generieren Sie mehrere UUIDs auf einmal. Alle Verarbeitung ist lokal und privat.",
+      "icon": "🆔",
+      "features": [
+        "UUID v4 generieren (kryptographisch zufällig)",
+        "Groß-/Kleinschreibung-Option",
+        "Bis zu 100 UUIDs auf einmal generieren",
+        "Kopieren mit einem Klick in die Zwischenablage"
+      ],
+      "faq": [
+        {
+          "q": "Was ist eine UUID?",
+          "a": "Eine UUID (Universally Unique Identifier) ist ein 128-Bit-Identifikator, der zur eindeutigen Identifizierung von Informationen in Computersystemen verwendet wird."
+        }
+      ]
+    },
+    "timestamp-converter": {
+      "title": "Kostenloser Online-Unix-Zeitstempel-Konverter",
+      "description": "Konvertieren Sie sofort zwischen Unix-Zeitstempeln und menschenlesbaren Daten. Aktueller Zeitstempel in Echtzeit. Alle Verarbeitung ist lokal.",
+      "icon": "⏱️",
+      "features": [
+        "Aktueller Unix-Zeitstempel in Echtzeit",
+        "Zeitstempel-zu-Datum-Konvertierung",
+        "Datum-zu-Zeitstempel-Konvertierung",
+        "Sofortige Ergebnisse, kein Upload"
+      ],
+      "faq": [
+        {
+          "q": "Was ist ein Unix-Zeitstempel?",
+          "a": "Ein Unix-Zeitstempel ist die Anzahl der Sekunden seit dem 1. Januar 1970 (UTC), auch bekannt als Unix-Epoche."
+        }
+      ]
+    },
+    "lorem-generator": {
+      "title": "Kostenloser Online-Lorem-Ipsum-Generator",
+      "description": "Generieren Sie sofort Platzhaltertext. Wählen Sie die Anzahl der Wörter. Perfekt für Designtemplate und Layouttests.",
+      "icon": "📄",
+      "features": [
+        "Benutzerdefinierte Wortanzahl (10-5000)",
+        "Option zum Starten mit „Lorem ipsum“",
+        "Sofortige Generierung",
+        "Kopieren mit einem Klick"
+      ],
+      "faq": [
+        {
+          "q": "Was ist Lorem Ipsum?",
+          "a": "Lorem Ipsum ist ein Platzhaltertext, der häufig in der Design- und Druckindustrie verwendet wird, um die visuelle Form eines Dokuments zu demonstrieren."
+        }
+      ]
+    },
+    "case-converter": {
+      "title": "Kostenloser Online-Textschreibstil-Konverter",
+      "description": "Konvertieren Sie Text in GROSSBUCHSTABEN, kleinbuchstaben, camelCase, snake_case, kebab-case, PascalCase und mehr. Sofortige Konvertierung in Ihrem Browser.",
+      "icon": "🔤",
+      "features": [
+        "8 Schreibstile: lower, upper, title, sentence, camel, snake, kebab, pascal",
+        "Sofortige Konvertierung",
+        "Kopieren mit einem Klick",
+        "Funktioniert mit jedem Text"
+      ],
+      "faq": [
+        {
+          "q": "Was ist camelCase?",
+          "a": "camelCase ist eine Namenskonvention, bei der jedes Wort mit einem Großbuchstaben beginnt, außer dem ersten Wort, wie z. B. „meinVariablenname“."
+        }
+      ]
+    },
+    "color-picker": {
+      "title": "Kostenloser Online-Farbwähler - HEX, RGB, HSL",
+      "description": "Wählen Sie eine Farbe und sehen Sie sofort deren HEX-, RGB- und HSL-Werte. Visuelle Farbvorschau. Alle Verarbeitung läuft lokal in Ihrem Browser.",
+      "icon": "🎨",
+      "features": [
+        "Nativer Farbwähler",
+        "HEX-, RGB-, HSL-Konvertierung",
+        "Live-Farbvorschau",
+        "Werte mit einem Klick kopieren"
+      ],
+      "faq": [
+        {
+          "q": "Was ist HEX-Farbe?",
+          "a": "HEX-Farbe ist eine 6-stellige hexadezimale Zahl, die RGB-Werte darstellt, wie z. B. #6b21a8 für Lila."
+        }
+      ]
+    },
+    "markdown-preview": {
+      "title": "Kostenloser Online-Markdown-Vorschau-Editor",
+      "description": "Schreiben Sie Markdown auf der linken Seite, sehen Sie die gerenderte Vorschau auf der rechten Seite. Unterstützt Überschriften, Fett, Kursiv, Code, Links und Listen. Alles in Ihrem Browser.",
+      "icon": "📑",
+      "features": [
+        "Live-Vorschau",
+        "Unterstützt Überschriften, Fett, Kursiv, Code",
+        "Unterstützung für Links und Listen",
+        "Editor und Vorschau nebeneinander"
+      ],
+      "faq": [
+        {
+          "q": "Was ist Markdown?",
+          "a": "Markdown ist eine leichtgewichtige Auszeichnungssprache zur Formatierung von Klartext, häufig verwendet für Dokumentation, READMEs und Foren."
+        }
+      ]
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Artikel über Privatsphäre, clientseitige Verarbeitung und Webentwicklungswerkzeuge.",
+    "backToList": "Zurück zu allen Artikeln"
+  },
+  "footer": {
+    "rights": "Alle Rechte vorbehalten.",
+    "navigation": "Navigation",
+    "community": "Community",
+    "supportTitle": "Unterstützen Sie uns",
+    "supportText": "Gefällt Ihnen SLIT.IO? Erwägen Sie, das Projekt zu unterstützen!",
+    "tools": "Werkzeuge",
+    "feedback": "Feedback",
+    "about": "Über uns",
+    "privacy": "Datenschutz"
+  },
+  "theme": {
+    "toggle": "Design wechseln"
+  },
+  "search": {
+    "clear": "Suche löschen"
+  },
+  "recentTools": {
+    "title": "Kürzlich verwendet"
+  },
+  "feedbackPage": {
+    "title": "Hinterlassen Sie Ihr Feedback",
+    "description": "Ihre Meinung ist uns sehr wichtig! Verwenden Sie das untenstehende Formular, um neue Werkzeuge vorzuschlagen, Probleme zu melden oder uns einfach Ihr Lieblingswerkzeug zu verraten.",
+    "thanks": "Wir schätzen Ihre Zeit und Ihren Beitrag!",
+    "sendAnother": "Weiteres senden"
+  },
+  "supportPage": {
+    "title": "SLIT.IO unterstützen",
+    "description": "SLIT.IO ist ein unabhängiges Projekt, das mit dem Ziel betrieben wird, nützliche, kostenlose und datenschutzkonforme Werkzeuge bereitzustellen. Wenn Sie diese Seite nützlich finden, erwägen Sie bitte eine kleine Spende. Ihre Hilfe ist essenziell, um Wartungskosten zu decken und neue Funktionen zu entwickeln!"
+  },
+  "toolPage": {
+    "faq": "Häufig gestellte Fragen",
+    "related": "Verwandte Werkzeuge",
+    "howToUse": "Anleitung",
+    "whyChoose": "Warum SLIT.IO wählen",
+    "step1": "Schritt 1",
+    "step2": "Schritt 2",
+    "step3": "Schritt 3",
+    "whyLocal": "100% lokale Verarbeitung",
+    "whyLocalDesc": "Ihre Dateien verlassen Ihren Browser nie. Alles wird lokal mit JavaScript und WebAssembly verarbeitet.",
+    "whyFree": "Komplett kostenlos",
+    "whyFreeDesc": "Keine versteckten Gebühren, keine Wasserzeichen, keine Registrierung erforderlich. Alle Werkzeuge sind zu 100% kostenlos.",
+    "whyPrivacy": "Datenschutz an erster Stelle",
+    "whyPrivacyDesc": "Keine Datenerfassung, keine Tracking-Cookies, keine serverseitige Verarbeitung. Ihre Privatsphäre ist garantiert.",
+    "supportCta": "Gefällt Ihnen dieses Werkzeug? Erwägen Sie, das Projekt zu unterstützen, damit es kostenlos und werbefrei bleibt.",
+    "supportButton": "Projekt unterstützen"
+  },
+  "components": {
+    "jsonFormatter": {
+      "placeholder": "Fügen Sie Ihr JSON hier ein...",
+      "format": "JSON formatieren",
+      "minify": "JSON minimieren",
+      "validate": "JSON validieren",
+      "invalid": "Ungültiges JSON!",
+      "valid": "Gültiges JSON!",
+      "clear": "Löschen",
+      "copy": "Kopieren",
+      "copied": "Kopiert!"
+    },
+    "qrGenerator": {
+      "placeholder": "URL oder Text für QR-Code eingeben...",
+      "download": "QR-Code herunterladen",
+      "error": "Fehler beim Generieren des QR-Codes",
+      "preview": "QR-Code-Vorschau"
+    },
+    "exifExtractor": {
+      "selectImage": "Foto auswählen",
+      "noExif": "Keine EXIF-Metadaten in diesem Bild gefunden.",
+      "basicInfo": "Grundlegende Informationen",
+      "cameraSettings": "Kameraeinstellungen",
+      "location": "Standort",
+      "make": "Hersteller",
+      "model": "Modell",
+      "software": "Software",
+      "dateTime": "Datum/Uhrzeit",
+      "exposure": "Belichtung",
+      "aperture": "Blende",
+      "iso": "ISO",
+      "focalLength": "Brennweite",
+      "gps": "GPS-Koordinaten",
+      "readingMetadata": "Metadaten werden gelesen...",
+      "viewOnMaps": "Auf Google Maps anzeigen",
+      "noGps": "Keine GPS-Koordinaten gefunden",
+      "altPreview": "Fotovorschau",
+      "errorParsing": "Fehler beim Lesen der EXIF-Daten"
+    },
+    "loading": {
+      "message": "Werkzeug wird geladen...",
+      "error": "Fehler: Werkzeug mit ID „{id}“ wurde nicht gefunden oder ist nicht implementiert.",
+      "fallbackError": "Beim Laden dieses Werkzeugs ist ein Fehler aufgetreten. Bitte versuchen Sie, die Seite neu zu laden.",
+      "genericPhrases": [
+        "Einen Moment bitte, Magie passiert...",
+        "Ihre Dateien werden verarbeitet...",
+        "Fast geschafft! Wir trinken gerade einen Kaffee während der Verarbeitung...",
+        "Wir geben unser Bestes, damit alles perfekt wird.",
+        "Nur einen Moment...",
+        "Wir geben unser Bestes!",
+        "Pixel werden gezählt... es sind eine Menge!",
+        "Komprimieren, verschlüsseln, konvertieren... puh!",
+        "Ihre Dateien sind in guten Händen."
+      ]
+    },
+    "fileCompressor": {
+      "selectFiles": "Dateien auswählen",
+      "filesSelected": "Datei(en) ausgewählt",
+      "compressButton": "Komprimieren",
+      "compressing": "Dateien werden komprimiert...",
+      "selectedFilesTitle": "Ausgewählte Dateien:",
+      "compressedFileReadyTitle": "Komprimierte Datei bereit!",
+      "download": "Herunterladen",
+      "downloadNameZip": "dateien.zip",
+      "downloadNameTar": "dateien.tar",
+      "errorNoFiles": "Bitte wählen Sie mindestens eine Datei zum Komprimieren aus.",
+      "dragAndDrop": "Dateien per Drag-and-Drop hierher ziehen",
+      "clear": "Löschen",
+      "outputFormat": "Ausgabeformat",
+      "errorCompressing": "Beim Komprimieren der Dateien ist ein Fehler aufgetreten:"
+    },
+    "mediaCompressor": {
+      "selectImage": "Bild oder Video auswählen",
+      "quality": "Qualität",
+      "compressButton": "Bild komprimieren",
+      "compressVideoButton": "Video komprimieren",
+      "processing": "Medien werden komprimiert...",
+      "original": "Original",
+      "compressed": "Komprimiert",
+      "reduction": "Reduzierung",
+      "waiting": "Warten auf Komprimierung...",
+      "errorInvalidFile": "Bitte wählen Sie eine gültige Bilddatei (JPEG, PNG, WEBP) oder Videodatei (MP4, WebM, OGG) aus.",
+      "errorCanvas": "Canvas-Kontext konnte nicht abgerufen werden.",
+      "dragAndDrop": "Bild oder Video per Drag-and-Drop hierher ziehen",
+      "selectAnother": "Andere Datei auswählen",
+      "downloadPrefix": "komprimiert",
+      "download": "Herunterladen",
+      "errorWorker": "Fehler beim Laden des Medienprozessors. Bitte versuchen Sie es erneut.",
+      "errorLoadFFmpeg": "Fehler beim Laden des Videoprozessors. Bitte versuchen Sie es erneut.",
+      "errorCompressVideo": "Fehler bei der Videokomprimierung. Bitte versuchen Sie es erneut.",
+      "estimated": "Geschätzt"
+    },
+    "fileConverter": {
+      "selectFile": "Datei auswählen",
+      "convertTo": "Konvertieren in:",
+      "convert": "Konvertieren",
+      "converting": "Datei wird konvertiert...",
+      "download": "Herunterladen",
+      "original": "Original",
+      "converted": "Konvertiert",
+      "waiting": "Warten auf Konvertierung...",
+      "errorInvalidFile": "Bitte wählen Sie eine gültige Datei aus (Bild, PDF, JSON, CSV).",
+      "errorCanvas": "Canvas-Kontext konnte nicht abgerufen werden.",
+      "errorConversionFailed": "Konvertierung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "errorConversion": "Fehler bei der Konvertierung:",
+      "errorInvalidJson": "Ungültiges oder leeres JSON. Stellen Sie sicher, dass es sich um ein Array von Objekten handelt.",
+      "errorParsingJson": "Fehler beim Lesen von JSON. Überprüfen Sie die Syntax.",
+      "errorInvalidCsv": "Ungültiges oder leeres CSV. Stellen Sie sicher, dass es Header und Daten enthält.",
+      "errorParsingCsv": "Fehler beim Lesen von CSV. Überprüfen Sie die Syntax.",
+      "noPreview": "Keine Vorschau"
+    },
+    "fileEncryptor": {
+      "encrypt": "Datei verschlüsseln",
+      "decrypt": "Datei entschlüsseln",
+      "passwordPlaceholder": "Geben Sie Ihr geheimes Passwort ein",
+      "processing": "Verarbeitung...",
+      "encryptButton": "Datei verschlüsseln",
+      "decryptButton": "Datei entschlüsseln",
+      "result": "Ergebnis:",
+      "errorFillFile": "Bitte wählen Sie eine Datei aus und geben Sie das Passwort ein.",
+      "errorFillEncryptedFile": "Bitte wählen Sie eine verschlüsselte Datei aus und geben Sie das Passwort ein.",
+      "errorDecrypt": "Fehler bei der Entschlüsselung. Überprüfen Sie das Passwort oder die verschlüsselte Datei.",
+      "errorEncrypt": "Fehler bei der Verschlüsselung. Bitte versuchen Sie es erneut.",
+      "errorCryptoNotAvailable": "Kryptografiefunktionen sind in diesem Browser oder Kontext nicht verfügbar. Bitte stellen Sie sicher, dass Sie einen modernen Browser über HTTPS verwenden.",
+      "dragAndDrop": "Datei per Drag-and-Drop hierher ziehen",
+      "selectFile": "Datei auswählen",
+      "download": "Herunterladen",
+      "passwordStrength": "Passwortstärke",
+      "strengthWeak": "Schwach",
+      "strengthMedium": "Mittel",
+      "strengthStrong": "Stark",
+      "strengthVeryStrong": "Sehr stark"
+    },
+    "passwordGenerator": {
+      "placeholder": "Klicken Sie auf „Generieren“, um ein Passwort zu erstellen",
+      "generate": "Passwort generieren",
+      "length": "Länge",
+      "uppercase": "Großbuchstaben (A-Z)",
+      "lowercase": "Kleinbuchstaben (a-z)",
+      "numbers": "Zahlen (0-9)",
+      "symbols": "Symbole (!@#$...)",
+      "copied": "Kopiert!",
+      "outputLabel": "Generiertes Passwort",
+      "noCharset": "Wählen Sie mindestens einen Zeichentyp aus",
+      "strength": {
+        "weak": "Schwach",
+        "medium": "Mittel",
+        "strong": "Stark"
+      }
+    },
+    "base64": {
+      "encode": "Kodieren",
+      "decode": "Dekodieren",
+      "inputLabel": "Eingabetext",
+      "inputPlaceholder": "Text zum Kodieren eingeben...",
+      "inputPlaceholderDecode": "Base64-Zeichenkette zum Dekodieren eingeben...",
+      "encodeButton": "In Base64 kodieren",
+      "decodeButton": "Aus Base64 dekodieren",
+      "result": "Ergebnis",
+      "copy": "Kopieren",
+      "copied": "Kopiert!",
+      "error": "Ungültige Eingabe. Bitte überprüfen Sie Ihren Text."
+    },
+    "uuid": {
+      "count": "Anzahl",
+      "uppercase": "Großbuchstaben",
+      "generate": "Generieren",
+      "copyAll": "Alle kopieren",
+      "copied": "Kopiert!",
+      "copiedAll": "Alle UUIDs kopiert!"
+    },
+    "timestamp": {
+      "current": "Aktueller Unix-Zeitstempel",
+      "tsToDate": "Zeitstempel → Datum",
+      "tsPlaceholder": "Unix-Zeitstempel eingeben...",
+      "dateToTs": "Datum → Zeitstempel",
+      "invalidTimestamp": "Ungültiger Zeitstempel",
+      "invalidDate": "Ungültiges Datum",
+      "copied": "Kopiert!"
+    },
+    "lorem": {
+      "wordCount": "Wortanzahl",
+      "startLorem": "Mit „Lorem ipsum“ beginnen",
+      "generate": "Generieren",
+      "copy": "Kopieren",
+      "copied": "Kopiert!",
+      "charCount": "Zeichen"
+    },
+    "caseConverter": {
+      "inputLabel": "Eingabetext",
+      "placeholder": "Text zum Konvertieren eingeben...",
+      "result": "Ergebnis",
+      "copy": "Kopieren",
+      "copied": "Kopiert!",
+      "cases": {
+        "lowercase": "kleinbuchstaben",
+        "uppercase": "GROSSBUCHSTABEN",
+        "titlecase": "Titel Fall",
+        "sentencecase": "Satzanfang groß",
+        "camelcase": "camelCase",
+        "snakecase": "snake_case",
+        "kebabcase": "kebab-case",
+        "pascalcase": "PascalCase"
+      }
+    },
+    "colorPicker": {
+      "pickerLabel": "Farbwähler",
+      "preview": "Farbvorschau",
+      "copied": "Kopiert!"
+    },
+    "markdown": {
+      "input": "Markdown",
+      "preview": "Vorschau"
+    },
+    "hashGenerator": {
+      "placeholder": "Text zum Generieren eines SHA-256-Hashes eingeben...",
+      "generating": "Generierung...",
+      "generateButton": "Hash generieren",
+      "generatedHash": "Generierter SHA-256-Hash:",
+      "verifyOptional": "Hash überprüfen (optional):",
+      "verifyPlaceholder": "Hash zum Vergleichen einfügen...",
+      "match": "✅ Hashes stimmen überein!",
+      "noMatch": "❌ Hashes stimmen NICHT überein!",
+      "errorGeneratingHash": "Fehler beim Generieren des Hashes.",
+      "errorCryptoNotAvailable": "Kryptografiefunktionen sind in diesem Browser oder Kontext nicht verfügbar. Bitte stellen Sie sicher, dass Sie einen modernen Browser über HTTPS verwenden.",
+      "clear": "Löschen",
+      "copy": "Kopieren",
+      "copied": "Kopiert!"
+    },
+    "backgroundRemover": {
+      "selectImage": "Bild auswählen",
+      "processing": "Verarbeitung...",
+      "original": "Original",
+      "result": "Ergebnis",
+      "waiting": "Warten auf Bild...",
+      "resultHere": "Das Ergebnis erscheint hier.",
+      "download": "Herunterladen",
+      "errorProcessing": "Fehler: Die Bildverarbeitung hat kein gültiges Ergebnis geliefert.",
+      "dragAndDrop": "Bild per Drag-and-Drop hierher ziehen",
+      "selectAnother": "Anderes Bild auswählen",
+      "errorInvalidFile": "Bitte wählen Sie eine gültige Bilddatei aus.",
+      "altResult": "Bild mit entferntem Hintergrund",
+      "downloadName": "ohne-hintergrund",
+      "loadingPhrases": [
+        "Geduld, die Magie passiert...",
+        "Wir entfernen den Hintergrund, Pixel für Pixel!",
+        "Fast geschafft! Wir trinken gerade einen Kaffee während der Verarbeitung...",
+        "Keine Sorge, wir entfernen nicht Ihre gute Laune!",
+        "Die Pixel werden gezählt... es sind eine Menge!",
+        "Wir verarbeiten Ihr Bild schneller als der Blitz (fast)!",
+        "Wir bereiten das Bild für Ihr nächstes großes Projekt vor.",
+        "Bleiben Sie dran, wir geben Ihrem Foto ein neues Gewand.",
+        "Ihr Hintergrund verschwindet gleich!",
+        "Wir geben unser Bestes, um Ihr Bild perfekt zu machen."
+      ]
+    },
+    "wordCounter": {
+      "placeholder": "Fügen Sie Ihren Text hier ein...",
+      "words": "Wörter",
+      "characters": "Zeichen",
+      "sentences": "Sätze",
+      "paragraphs": "Absätze",
+      "readingTime": "Lesezeit",
+      "speakingTime": "Sprechzeit",
+      "minutes": "Min.",
+      "seconds": "Sek.",
+      "clear": "Löschen",
+      "copy": "Kopieren",
+      "copied": "Kopiert!"
+    },
+    "fileDecompressor": {
+      "readingArchive": "Archiv wird gelesen...",
+      "selectArchive": "Archiv auswählen",
+      "fileContents": "Dateiinhalt:",
+      "fileName": "Dateiname",
+      "size": "Größe",
+      "action": "Aktion",
+      "folder": "Ordner",
+      "download": "Herunterladen",
+      "errorInvalidArchive": "Bitte wählen Sie eine gültige .zip- oder .tar-Datei aus.",
+      "errorReadingArchive": "Beim Lesen der Datei ist ein Fehler aufgetreten. Sie ist möglicherweise beschädigt oder kein unterstütztes Format.",
+      "dragAndDrop": ".zip- oder .tar-Datei per Drag-and-Drop hierher ziehen",
+      "selectAnother": "Andere Datei auswählen"
+    },
+    "imageResizer": {
+      "selectImage": "Bild auswählen",
+      "dragAndDrop": "Bild per Drag-and-Drop hierher ziehen",
+      "errorInvalidFile": "Bitte wählen Sie eine gültige Bilddatei aus.",
+      "original": "Original",
+      "resized": "Größe geändert",
+      "waiting": "Warten auf Größenänderung...",
+      "width": "Breite",
+      "height": "Höhe",
+      "resizeButton": "Bildgröße ändern",
+      "resizing": "Bildgröße wird geändert...",
+      "download": "Herunterladen",
+      "errorDimensions": "Bitte geben Sie gültige Breite und Höhe ein.",
+      "errorCanvas": "Canvas-Kontext konnte nicht abgerufen werden.",
+      "errorLoadingImage": "Fehler beim Laden des Bildes.",
+      "errorReadingFile": "Fehler beim Lesen der Datei."
+    },
+    "feedbackForm": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Ihr Name (optional)",
+      "emailLabel": "E-Mail",
+      "emailPlaceholder": "Ihre E-Mail (zur Kontaktaufnahme)",
+      "messageLabel": "Nachricht",
+      "messagePlaceholder": "Ihre Nachricht...",
+      "submitButton": "Feedback senden",
+      "sending": "Senden...",
+      "successMessage": "Feedback erfolgreich gesendet! Vielen Dank.",
+      "errorMessage": "Fehler beim Senden des Feedbacks. Bitte versuchen Sie es später erneut.",
+      "successHeading": "Erfolgreich!"
+    }
+  },
+  "privacyPage": {
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert: Juli 2026",
+    "intro": "SLIT.IO basiert auf einem Fundament der Privatsphäre. Diese Erklärung beschreibt, wie wir mit Ihren Daten umgehen — oder genauer gesagt, wie wir es nicht tun.",
+    "section1Title": "1. Keine Datenerfassung",
+    "section1": "SLIT.IO erhebt, speichert oder übermittelt keine personenbezogenen Daten. Alle Werkzeuge verarbeiten Dateien und Text vollständig in Ihrem Browser mithilfe von clientseitigem JavaScript und WebAssembly. Keine Daten verlassen jemals Ihr Gerät.",
+    "section2Title": "2. Keine serverseitige Verarbeitung",
+    "section2": "Wenn Sie ein Werkzeug auf SLIT.IO verwenden — ob Komprimierung eines Bildes, Verschlüsselung einer Datei, Wörterzählen oder Hintergrundentfernung — die Verarbeitung erfolgt zu 100% lokal in Ihrem Webbrowser. Ihre Dateien werden nie auf einen Server hochgeladen.",
+    "section3Title": "3. Analyse",
+    "section3": "Wir verwenden Vercel Web Analytics und Speed Insights, die anonyme, aggregierte Seitenaufruf- und Leistungsmetriken (wie Seitenladezeit) erfassen. Diese Daten sind nicht persönlich und können nicht zur Identifizierung einzelner Nutzer verwendet werden. Für Analysezwecke werden keine Cookies gesetzt.",
+    "section4Title": "4. Cookies",
+    "section4": "SLIT.IO verwendet nur einen einzigen lokalen Speichereintrag, um Ihre Designpräferenz (heller/dunkler Modus) zu merken. Es werden keine Tracking-Cookies verwendet.",
+    "section5Title": "5. Drittanbieter-Dienste",
+    "section5": "Einige Werkzeuge laden Verarbeitungsmodelle (wie ONNX-Modelle zur Hintergrundentfernung) von Drittanbieter-CDNs herunter. Diese Downloads sind anonym — es werden keine persönlichen Daten gesendet. Keine anderen Drittanbieter-Dienste haben Zugriff auf Ihre Daten.",
+    "section6Title": "6. Kontakt",
+    "section6": "Wenn Sie Fragen zu dieser Datenschutzerklärung haben, erreichen Sie uns über das Feedbackformular."
+  },
+  "aboutPage": {
+    "title": "Über SLIT.IO",
+    "description": "SLIT.IO ist eine offene Sammlung von Web-Werkzeugen, die vollständig in Ihrem Browser laufen. Schnell, sicher und privat.",
+    "missionTitle": "Unsere Mission",
+    "mission": "Kraftvolle, kostenlose und datenschutzkonforme Web-Werkzeuge bereitzustellen, die jeder verwenden kann, ohne Software zu installieren oder Konten anzulegen.",
+    "howTitle": "So funktioniert es",
+    "how": "Jedes Werkzeug nutzt moderne Web-Technologien — JavaScript, WebAssembly, Canvas und die Web Crypto API — um Ihre Dateien direkt in Ihrem Browser zu verarbeiten. Es wird nichts an einen Server gesendet.",
+    "openSourceTitle": "Open Source",
+    "openSource": "SLIT.IO ist Open Source. Sie können den Code einsehen, Probleme melden oder auf GitHub beitragen.",
+    "github": "Auf GitHub ansehen",
+    "feedbackTitle": "Kontakt aufnehmen",
+    "feedback": "Haben Sie einen Vorschlag, einen Fehler gefunden oder möchten Sie zusammenarbeiten? Wir würden uns freuen, von Ihnen zu hören."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden - SLIT.IO",
+    "description": "Die gesuchte Seite existiert nicht.",
+    "heading": "404",
+    "message": "Seite nicht gefunden.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "supportFab": {
+    "openLabel": "Projekt unterstützen",
+    "title": "SLIT.IO unterstützen",
+    "description": "Helfen Sie uns, das Projekt kostenlos und werbefrei zu halten.",
+    "kofi": "Kauf mir einen Kaffee",
+    "pix": "PIX-Schlüssel kopieren",
+    "paypal": "PayPal",
+    "viewAll": "Alle Optionen anzeigen",
+    "copied": "Kopiert!"
+  }
+}

@@ -4,7 +4,7 @@ import { useTranslations } from '../../../i18n/utils';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 import { formatBytes } from '../../../utils/format';
 
-const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const MediaCompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string>('');

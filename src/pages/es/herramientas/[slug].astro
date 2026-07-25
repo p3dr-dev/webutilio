@@ -1,0 +1,264 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ToolLoader from '../../../components/tools/ToolLoader';
+import { tools as toolsData, type Tool } from '../../../data/tools';
+import { useTranslations } from '../../../i18n/utils';
+
+export async function getStaticPaths() {
+  return toolsData.map(tool => ({
+    params: { slug: tool.slugs.es },
+  }));
+}
+
+const { slug } = Astro.params;
+const lang = 'es';
+const t = useTranslations(lang);
+
+const tool: Tool | undefined = toolsData.find(toolItem => toolItem.slugs.es === slug);
+
+if (!tool) {
+  return new Response(null, { status: 404 });
+}
+
+const title = t(`tools.${tool.id}.title`);
+const description = t(`tools.${tool.id}.description`);
+
+const alternates = {
+  pt: `/pt/ferramentas/${tool.slugs.pt}`,
+  en: `/en/tools/${tool.slugs.en}`,
+  es: `/es/herramientas/${tool.slugs.es}`,
+  fr: `/fr/outils/${tool.slugs.fr}`,
+  de: `/de/werkzeuge/${tool.slugs.de}`,
+};
+---
+
+<Layout
+  title={`${title} - SLIT.IO`}
+  description={description}
+  lang={lang}
+  alternates={alternates}
+  keywords={tool.keywords}
+>
+  <script is:inline define:vars={{ toolId: tool.id }}>
+    const updateHistory = () => {
+      try {
+        const history = JSON.parse(localStorage.getItem('tool-history') || '[]');
+        const newHistory = [toolId, ...history.filter(id => id !== toolId)].slice(0, 10);
+        localStorage.setItem('tool-history', JSON.stringify(newHistory));
+      } catch {
+        // localStorage unavailable
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(updateHistory);
+    } else {
+      setTimeout(updateHistory, 1000);
+    }
+  </script>
+  
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": title,
+    "url": new URL(`es/herramientas/${tool.slugs.es}`, Astro.site).href,
+    "description": description,
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "featureList": "Client-side processing, Privacy focused, Free to use, No registration, Works offline",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "SLIT.IO"
+    },
+    "screenshot": new URL('og-image.png', Astro.site).href
+  })} />
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": new URL('es/', Astro.site).href
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Herramientas",
+        "item": new URL('es/#tools', Astro.site).href
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": title,
+        "item": new URL(`es/herramientas/${tool.slugs.es}`, Astro.site).href
+      }
+    ]
+  })} />
+
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center border-b border-gray-200 dark:border-gray-700 pb-6 mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{title}</h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
+    </div>
+
+    <div class="mb-8 text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+      <p>{t(`tools.${tool.id}.description`)}</p>
+    </div>
+
+    {t(`tools.${tool.id}.howToUse`) && Array.isArray(t(`tools.${tool.id}.howToUse`)) && (
+      <div class="mb-8 bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">{t('toolPage.howToUse')}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {(t(`tools.${tool.id}.howToUse`) as string[]).map((step: string, index: number) => (
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">{index + 1}</span>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{step}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {t(`tools.${tool.id}.features`) && Array.isArray(t(`tools.${tool.id}.features`)) && (
+      <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {(t(`tools.${tool.id}.features`) as string[]).map((feature: string) => (
+          <div class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>{feature}</span>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="min-h-[600px] flex flex-col justify-center">
+      <ToolLoader toolId={tool.id} lang="es" client:only="react" />
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-purple-50 dark:bg-purple-900/10 p-6 rounded-xl border border-purple-100 dark:border-purple-900/30">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">{t('privacyReport.badge')}</span>
+          <h2 class="text-xl font-bold text-purple-900 dark:text-purple-300">{t('privacyReport.title')}</h2>
+        </div>
+        <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
+          {t('privacyReport.description')}
+        </p>
+      </div>
+
+      <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">{t('howItWorks.title')}</h2>
+        <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
+          {t(`howItWorks.${tool.id}`)}
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-2xl border border-purple-100 dark:border-purple-800/30">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.whyChoose')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyLocal')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyLocalDesc')}</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyFree')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyFreeDesc')}</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyPrivacy')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyPrivacyDesc')}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.faq')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {(() => {
+          const toolFaq = t(`tools.${tool.id}.faq`);
+          const displayFaq = Array.isArray(toolFaq) ? toolFaq : [
+            { q: t('faq.q1'), a: t('faq.a1') },
+            { q: t('faq.q2'), a: t('faq.a2') },
+            { q: t('faq.q3'), a: t('faq.a3') }
+          ];
+          
+          return displayFaq.map((item: { q?: string; name?: string; a?: string; acceptedAnswer?: { text?: string } }) => (
+            <div>
+              <h3 class="font-bold text-purple-600 dark:text-purple-400 mb-2">{item.q || item.name}</h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm">{item.a || item.acceptedAnswer?.text}</p>
+            </div>
+          ));
+        })()}
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.related')}</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {toolsData
+          .filter(relatedTool => relatedTool.id !== tool.id && relatedTool.category === tool.category)
+          .slice(0, 3)
+          .map(relatedTool => (
+            <a href={`/es/herramientas/${relatedTool.slugs.es}`} class="p-4 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl hover:shadow-md transition-shadow text-center group">
+              <span class="text-3xl mb-2 block group-hover:scale-110 transition-transform">{relatedTool.icon}</span>
+              <span class="font-bold text-gray-800 dark:text-gray-200 text-sm">{t(`tools.${relatedTool.id}.title`)}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": (() => {
+        const toolFaq = t(`tools.${tool.id}.faq`);
+        const displayFaq = Array.isArray(toolFaq) ? toolFaq : [
+          { q: t('faq.q1'), a: t('faq.a1') },
+          { q: t('faq.q2'), a: t('faq.a2') },
+          { q: t('faq.q3'), a: t('faq.a3') }
+        ];
+        return displayFaq.map((item: any) => ({
+          "@type": "Question",
+          "name": item.q || item.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.a || item.acceptedAnswer?.text
+          }
+        }));
+      })()
+    })} />
+
+    <div class="mt-8 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 border border-purple-100 dark:border-purple-800/30 rounded-xl p-6 text-center">
+      <p class="text-gray-700 dark:text-gray-300 mb-3">{t('toolPage.supportCta')}</p>
+      <a href="/es/apoyar" class="inline-block bg-purple-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors">
+        {t('toolPage.supportButton')}
+      </a>
+    </div>
+  </div>
+</Layout>

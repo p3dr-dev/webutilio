@@ -8,7 +8,7 @@ import { useLoadingPhrases } from '../common/useLoadingPhrases';
 // Configure o caminho do WASM uma vez fora do componente
 ort.env.wasm.wasmPath = '/models/';
 
-const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);

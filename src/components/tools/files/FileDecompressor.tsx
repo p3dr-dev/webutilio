@@ -14,7 +14,7 @@ interface ExtractedFile {
   blob: Blob | null;
 }
 
-const FileDecompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const FileDecompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [archiveFile, setArchiveFile] = useState<File | null>(null);
   const [fileList, setFileList] = useState<ExtractedFile[]>([]);

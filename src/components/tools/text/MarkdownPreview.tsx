@@ -17,7 +17,7 @@ function renderMarkdown(text: string): string {
     .replace(/\n/g, '<br/>');
 }
 
-const MarkdownPreview: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const MarkdownPreview: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [input, setInput] = useState('# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n`code example`');
 

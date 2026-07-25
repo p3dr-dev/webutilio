@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import es from '../../i18n/es.json';
+---
+
+<Layout title={es.notFound.title} description={es.notFound.description} lang="es" noindex={true}>
+  <section class="container mx-auto px-6 py-20 text-center">
+    <h1 class="text-6xl font-extrabold text-purple-600 mb-4">{es.notFound.heading}</h1>
+    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">{es.notFound.message}</p>
+    <a href="/es/" class="inline-block bg-purple-600 text-white font-bold py-3 px-6 rounded-md hover:bg-purple-700 transition-colors">
+      {es.notFound.backHome}
+    </a>
+  </section>
+</Layout>

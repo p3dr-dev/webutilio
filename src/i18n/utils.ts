@@ -1,10 +1,19 @@
 import en from './en.json';
 import pt from './pt.json';
+import es from './es.json';
+import fr from './fr.json';
+import de from './de.json';
 
-export const languages = { en, pt };
+export const languages = { en, pt, es, fr, de };
 
 export function getStaticPaths() {
-  return [{ params: { lang: 'en' } }, { params: { lang: 'pt' } }];
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } },
+    { params: { lang: 'es' } },
+    { params: { lang: 'fr' } },
+    { params: { lang: 'de' } },
+  ];
 }
 
 export function getLangFromUrl(url: URL) {

@@ -22,7 +22,7 @@ function rgbToHsl(r: number, g: number, b: number): { h: number; s: number; l: n
   return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
-const ColorPicker: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const ColorPicker: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [hex, setHex] = useState('#6b21a8');

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
 
-const TimestampConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const TimestampConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [now, setNow] = useState(Math.floor(Date.now() / 1000));

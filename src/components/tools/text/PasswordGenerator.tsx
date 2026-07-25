@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useTranslations } from '../../../i18n/utils';
 import { useToast } from '../../Toast';
 
-const PasswordGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const PasswordGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [password, setPassword] = useState('');

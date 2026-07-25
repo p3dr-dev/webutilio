@@ -1,0 +1,50 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getBlogPosts } from '../../../lib/blog';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = 'es';
+const t = useTranslations(lang);
+
+const posts = (await getBlogPosts()).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const alternates = {
+  pt: '/pt/blog',
+  en: '/en/blog',
+  es: '/es/blog',
+  fr: '/fr/blog',
+  de: '/de/blog',
+};
+---
+
+<Layout title={`Blog - SLIT.IO`} description="Artículos sobre privacidad, procesamiento del lado del cliente y herramientas de desarrollo web." lang={lang} alternates={alternates}>
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold text-gray-800 dark:text-gray-100">{t('blog.title')}</h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{t('blog.description')}</p>
+    </div>
+
+    <div class="space-y-8">
+      {posts.map((post) => (
+        <a href={`/es/blog/${post.id}`} class="block p-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+          <div class="flex items-center gap-2 mb-2">
+            <time class="text-sm text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <span class="text-gray-300 dark:text-gray-600">·</span>
+            <span class="text-sm text-gray-500 dark:text-gray-400">{post.data.author}</span>
+          </div>
+          <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{post.data.title}</h2>
+          <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{post.data.description}</p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            {post.data.tags.map((tag) => (
+              <span class="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded dark:bg-purple-900/30 dark:text-purple-300">{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

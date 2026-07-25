@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from '../i18n/utils';
 
 interface DonationOptionsProps {
-  lang: 'pt' | 'en';
+  lang: 'pt' | 'en' | 'es' | 'fr' | 'de';
 }
 
 // ----------------------------------------------------------------------

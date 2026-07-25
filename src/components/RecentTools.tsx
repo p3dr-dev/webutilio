@@ -5,7 +5,7 @@ import { useTranslations } from '../i18n/utils';
 // Helper to get tool by id
 const getToolById = (id: string) => tools.find(t => t.id === id);
 
-const RecentTools: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const RecentTools: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const [recentIds, setRecentIds] = useState<string[]>([]);
   const t = useTranslations(lang);
 

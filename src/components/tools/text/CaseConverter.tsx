@@ -18,7 +18,7 @@ function toCase(text: string, caseType: string): string {
   }
 }
 
-const CaseConverter: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const CaseConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [input, setInput] = useState('');

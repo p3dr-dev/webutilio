@@ -19,7 +19,7 @@ function generateLorem(count: number, startWithLorem: boolean): string {
   return result.slice(0, count);
 }
 
-const LoremGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
+const LoremGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [wordCount, setWordCount] = useState(50);
