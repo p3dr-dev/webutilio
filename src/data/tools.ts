@@ -1,4 +1,4 @@
-export type ToolCategory = 'images' | 'files' | 'text' | 'converters' | 'media';
+export type ToolCategory = 'images' | 'files' | 'text' | 'converters' | 'media' | 'generators';
 
 export type Language = 'pt' | 'en';
 
@@ -130,5 +130,85 @@ export const tools: Tool[] = [
     },
     icon: 'ℹ️',
     keywords: ['exif reader', 'read metadata', 'ler metadados', 'gps photos', 'camera info'],
+  },
+  {
+    id: 'password-generator',
+    category: 'generators',
+    slugs: {
+      pt: 'gerador-senha',
+      en: 'password-generator',
+    },
+    icon: '🔑',
+    keywords: ['password generator', 'strong password', 'gerador de senha', 'senha segura', 'random password'],
+  },
+  {
+    id: 'base64-tool',
+    category: 'text',
+    slugs: {
+      pt: 'base64',
+      en: 'base64',
+    },
+    icon: '🔐',
+    keywords: ['base64 encode', 'base64 decode', 'base64 converter', 'codificar base64', 'decodificar base64'],
+  },
+  {
+    id: 'uuid-generator',
+    category: 'generators',
+    slugs: {
+      pt: 'gerador-uuid',
+      en: 'uuid-generator',
+    },
+    icon: '🆔',
+    keywords: ['uuid generator', 'uuid v4', 'gerador uuid', 'unique id', '.randomUUID'],
+  },
+  {
+    id: 'timestamp-converter',
+    category: 'text',
+    slugs: {
+      pt: 'conversor-timestamp',
+      en: 'timestamp-converter',
+    },
+    icon: '⏱️',
+    keywords: ['unix timestamp', 'timestamp converter', 'epoch converter', 'converter timestamp', 'unix time'],
+  },
+  {
+    id: 'lorem-generator',
+    category: 'text',
+    slugs: {
+      pt: 'gerador-lorem',
+      en: 'lorem-generator',
+    },
+    icon: '📄',
+    keywords: ['lorem ipsum', 'placeholder text', 'lorem gerador', 'texto placeholder', 'dummy text'],
+  },
+  {
+    id: 'case-converter',
+    category: 'text',
+    slugs: {
+      pt: 'conversor-caso',
+      en: 'case-converter',
+    },
+    icon: '🔤',
+    keywords: ['case converter', 'camelcase', 'snakecase', 'converter caixa', 'uppercase lowercase'],
+  },
+  {
+    id: 'color-picker',
+    category: 'generators',
+    slugs: {
+      pt: 'seletor-cor',
+      en: 'color-picker',
+    },
+    icon: '🎨',
+    keywords: ['color picker', 'hex color', 'rgb color', 'seletor de cores', 'cor hexadecimal'],
+  },
+  {
+    id: 'markdown-preview',
+    category: 'text',
+    slugs: {
+      pt: 'preview-markdown',
+      en: 'markdown-preview',
+    },
+    icon: '📑',
+    keywords: ['markdown preview', 'markdown editor', 'preview markdown', 'editor markdown', 'md preview'],
   },
 ];

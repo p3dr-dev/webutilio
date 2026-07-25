@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { tools, type ToolCategory } from '../tools';
 
 describe('tools data', () => {
-  it('has 12 tools', () => {
-    expect(tools).toHaveLength(12);
+  it('has 20 tools', () => {
+    expect(tools).toHaveLength(20);
   });
 
   it('all tools have required fields', () => {
@@ -33,7 +33,7 @@ describe('tools data', () => {
   });
 
   it('all categories are valid', () => {
-    const validCategories: ToolCategory[] = ['images', 'files', 'text', 'converters', 'media'];
+    const validCategories: ToolCategory[] = ['images', 'files', 'text', 'converters', 'media', 'generators'];
     for (const tool of tools) {
       expect(validCategories).toContain(tool.category);
     }

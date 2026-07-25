@@ -38,6 +38,14 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
   'json-formatter': lazy(() => import('./text/JsonFormatter')),
   'qr-generator': lazy(() => import('./converters/QrGenerator')),
   'exif-extractor': lazy(() => import('./images/ExifExtractor')),
+  'password-generator': lazy(() => import('./text/PasswordGenerator')),
+  'base64-tool': lazy(() => import('./text/Base64Tool')),
+  'uuid-generator': lazy(() => import('./text/UuidGenerator')),
+  'timestamp-converter': lazy(() => import('./text/TimestampConverter')),
+  'lorem-generator': lazy(() => import('./text/LoremGenerator')),
+  'case-converter': lazy(() => import('./text/CaseConverter')),
+  'color-picker': lazy(() => import('./text/ColorPicker')),
+  'markdown-preview': lazy(() => import('./text/MarkdownPreview')),
 };
 
 // Componente de fallback para o Suspense

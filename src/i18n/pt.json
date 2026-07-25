@@ -80,7 +80,15 @@
         "image-resizer": ["Selecione uma imagem para redimensionar", "Insira a largura e altura desejadas", "Baixe a imagem redimensionada"],
         "json-formatter": ["Cole seus dados JSON no editor", "Clique em 'Formatar' para organizar ou 'Minificar' para comprimir", "Copie o resultado para sua área de transferência"],
         "qr-generator": ["Insira uma URL, texto ou credenciais de Wi-Fi", "O QR Code é gerado instantaneamente", "Baixe o QR Code como imagem PNG"],
-        "exif-extractor": ["Selecione uma foto (JPEG, HEIC, etc.)", "Visualize coordenadas GPS, configurações da câmera e mais", "Opcionalmente visualise a localização no Google Maps"]
+        "exif-extractor": ["Selecione uma foto (JPEG, HEIC, etc.)", "Visualize coordenadas GPS, configurações da câmera e mais", "Opcionalmente visualise a localização no Google Maps"],
+        "password-generator": ["Defina o comprimento desejado da senha", "Escolha quais tipos de caracteres incluir", "Clique em 'Gerar' e copie sua senha segura"],
+        "base64-tool": ["Digite seu texto ou cole uma string Base64", "Escolha entre os modos Codificar ou Decodificar", "Copie o resultado para sua área de transferência"],
+        "uuid-generator": ["Defina a quantidade de UUIDs a gerar", "Escolha a opção de maiúsculas ou minúsculas", "Clique em 'Gerar' e copie individualmente ou todos"],
+        "timestamp-converter": ["Veja o timestamp Unix atual ao vivo", "Digite um timestamp para converter em data", "Ou escolha uma data para obter seu timestamp Unix"],
+        "lorem-generator": ["Defina o número de palavras a gerar", "Ative a opção 'Começar com Lorem ipsum'", "Clique em 'Gerar' e copie o texto placeholder"],
+        "case-converter": ["Cole ou digite seu texto na área de entrada", "Selecione o estilo de caixa desejado nas opções", "Copie o resultado convertido"],
+        "color-picker": ["Use o seletor de cores para escolher uma cor", "Veja os valores HEX, RGB e HSL instantaneamente", "Copie qualquer formato com um clique"],
+        "markdown-preview": ["Escreva seu Markdown no lado esquerdo", "Veja o preview renderizado ao vivo à direita", "Suporta títulos, negrito, itálico, código e links"]
       },
       "faq": {
         "q1": "É seguro usar o SLIT.IO?",
@@ -317,6 +325,142 @@
           "a": "Ao usar nosso Compressor de Mídia, os metadados sensíveis são removidos automaticamente para sua proteção."
         }
       ]
+    },
+    "password-generator": {
+      "title": "Gerador de Senha Online Grátis - Forte e Seguro",
+      "description": "Gere senhas fortes e aleatórias instantaneamente. Controle o comprimento, maiúsculas, minúsculas, números e símbolos. Tudo gerado no seu navegador.",
+      "icon": "🔑",
+      "features": [
+        "Geração aleatória criptograficamente segura",
+        "Comprimento personalizável (8-64 caracteres)",
+        "Incluir/excluir maiúsculas, números, símbolos",
+        "Indicador de força instantâneo"
+      ],
+      "faq": [
+        {
+          "q": "As senhas geradas são seguras?",
+          "a": "Sim. As senhas são geradas usando crypto.getRandomValues(), que utiliza a fonte aleatória criptográfica do sistema operacional."
+        }
+      ]
+    },
+    "base64-tool": {
+      "title": "Codificador e Decodificador Base64 Online Grátis",
+      "description": "Codifique texto em Base64 ou decodifique Base64 para texto instantaneamente. Suporte completo a Unicode incluindo emojis. Tudo processado localmente.",
+      "icon": "🔐",
+      "features": [
+        "Codificar e decodificar Base64",
+        "Suporte completo a Unicode incluindo emojis",
+        "Conversão instantânea",
+        "Processamento 100% no navegador"
+      ],
+      "faq": [
+        {
+          "q": "O que é Base64?",
+          "a": "Base64 é um esquema de codificação que representa dados binários como texto ASCII, comumente usado para incorporar dados em URLs e emails."
+        }
+      ]
+    },
+    "uuid-generator": {
+      "title": "Gerador de UUID v4 Online Grátis",
+      "description": "Gere UUID v4 (aleatório) instantaneamente. Escolha maiúsculas ou minúsculas, gere múltiplos UUIDs de uma vez. Tudo local e privado.",
+      "icon": "🆔",
+      "features": [
+        "Gerar UUID v4 (criptograficamente aleatório)",
+        "Opção de maiúsculas/minúsculas",
+        "Gere até 100 UUIDs de uma vez",
+        "Copiar com um clique"
+      ],
+      "faq": [
+        {
+          "q": "O que é um UUID?",
+          "a": "Um UUID (Identificador Universalmente Único) é um identificador de 128 bits usado para identificar informações de forma única em sistemas de computador."
+        }
+      ]
+    },
+    "timestamp-converter": {
+      "title": "Conversor de Timestamp Unix Online Grátis",
+      "description": "Converta entre timestamps Unix e datas legíveis instantaneamente. Timestamp atual ao vivo. Tudo local.",
+      "icon": "⏱️",
+      "features": [
+        "Timestamp Unix atual ao vivo",
+        "Conversão de timestamp para data",
+        "Conversão de data para timestamp",
+        "Resultados instantâneos, sem upload"
+      ],
+      "faq": [
+        {
+          "q": "O que é um timestamp Unix?",
+          "a": "Um timestamp Unix é o número de segundos desde 1 de janeiro de 1970 (UTC), também conhecido como época Unix."
+        }
+      ]
+    },
+    "lorem-generator": {
+      "title": "Gerador Lorem Ipsum Online Grátis",
+      "description": "Gere texto placeholder instantaneamente. Escolha a quantidade de palavras. Perfeito para layouts e testes de design.",
+      "icon": "📄",
+      "features": [
+        "Contagem de palavras personalizável (10-5000)",
+        "Opção de começar com 'Lorem ipsum'",
+        "Geração instantânea",
+        "Copiar com um clique"
+      ],
+      "faq": [
+        {
+          "q": "O que é Lorem Ipsum?",
+          "a": "Lorem Ipsum é um texto placeholder amplamente utilizado na indústria de design e impressão para demonstrar a forma visual de um documento."
+        }
+      ]
+    },
+    "case-converter": {
+      "title": "Conversor de Caixa de Texto Online Grátis",
+      "description": "Converta texto para minúsculas, MAIÚSCULAS, camelCase, snake_case, kebab-case, PascalCase e muito mais. Conversão instantânea.",
+      "icon": "🔤",
+      "features": [
+        "8 estilos: minúscula, maiúscula, título, frase, camel, snake, kebab, pascal",
+        "Conversão instantânea",
+        "Copiar com um clique",
+        "Funciona com qualquer texto"
+      ],
+      "faq": [
+        {
+          "q": "O que é camelCase?",
+          "a": "camelCase é uma convenção de nomenclatura onde cada palavra começa com letra maiúscula, exceto a primeira, como 'meuNomeVariavel'."
+        }
+      ]
+    },
+    "color-picker": {
+      "title": "Seletor de Cores Online Grátis - HEX, RGB, HSL",
+      "description": "Escolha qualquer cor e veja instantaneamente seus valores HEX, RGB e HSL. Pré-visualização visual. Tudo no navegador.",
+      "icon": "🎨",
+      "features": [
+        "Seletor de cores nativo",
+        "Conversão HEX, RGB, HSL",
+        "Pré-visualização ao vivo",
+        "Copiar valores com um clique"
+      ],
+      "faq": [
+        {
+          "q": "O que é cor HEX?",
+          "a": "Cor HEX é um número hexadecimal de 6 dígitos representando valores RGB, como #6b21a8 para roxo."
+        }
+      ]
+    },
+    "markdown-preview": {
+      "title": "Editor e Preview Markdown Online Grátis",
+      "description": "Escreva Markdown à esquerda, veja o resultado renderizado à direita. Suporta títulos, negrito, itálico, código, links e listas. Tudo no navegador.",
+      "icon": "📑",
+      "features": [
+        "Preview em tempo real",
+        "Suporta títulos, negrito, itálico, código",
+        "Suporte a links e listas",
+        "Editor e preview lado a lado"
+      ],
+      "faq": [
+        {
+          "q": "O que é Markdown?",
+          "a": "Markdown é uma linguagem de formatação leve usada para formatar texto simples, comumente usada em documentação, READMEs e fóruns."
+        }
+      ]
     }
   },
   "footer": {
@@ -498,6 +642,87 @@
       "strengthMedium": "Média",
       "strengthStrong": "Forte",
       "strengthVeryStrong": "Muito Forte"
+    },
+    "passwordGenerator": {
+      "placeholder": "Clique em 'Gerar' para criar uma senha",
+      "generate": "Gerar Senha",
+      "length": "Comprimento",
+      "uppercase": "Maiúsculas (A-Z)",
+      "lowercase": "Minúsculas (a-z)",
+      "numbers": "Números (0-9)",
+      "symbols": "Símbolos (!@#$...)",
+      "copied": "Copiado!",
+      "outputLabel": "Senha gerada",
+      "noCharset": "Selecione pelo menos um tipo de caractere",
+      "strength": {
+        "weak": "Fraca",
+        "medium": "Média",
+        "strong": "Forte"
+      }
+    },
+    "base64": {
+      "encode": "Codificar",
+      "decode": "Decodificar",
+      "inputLabel": "Texto de entrada",
+      "inputPlaceholder": "Digite o texto para codificar...",
+      "inputPlaceholderDecode": "Digite a string Base64 para decodificar...",
+      "encodeButton": "Codificar em Base64",
+      "decodeButton": "Decodificar de Base64",
+      "result": "Resultado",
+      "copy": "Copiar",
+      "copied": "Copiado!",
+      "error": "Entrada inválida. Verifique seu texto."
+    },
+    "uuid": {
+      "count": "Quantidade",
+      "uppercase": "Maiúsculas",
+      "generate": "Gerar",
+      "copyAll": "Copiar Todos",
+      "copied": "Copiado!",
+      "copiedAll": "Todos os UUIDs copiados!"
+    },
+    "timestamp": {
+      "current": "Timestamp Unix Atual",
+      "tsToDate": "Timestamp → Data",
+      "tsPlaceholder": "Digite o timestamp Unix...",
+      "dateToTs": "Data → Timestamp",
+      "invalidTimestamp": "Timestamp inválido",
+      "invalidDate": "Data inválida",
+      "copied": "Copiado!"
+    },
+    "lorem": {
+      "wordCount": "Contagem de palavras",
+      "startLorem": "Começar com 'Lorem ipsum'",
+      "generate": "Gerar",
+      "copy": "Copiar",
+      "copied": "Copiado!",
+      "charCount": "Caracteres"
+    },
+    "caseConverter": {
+      "inputLabel": "Texto de entrada",
+      "placeholder": "Digite o texto para converter...",
+      "result": "Resultado",
+      "copy": "Copiar",
+      "copied": "Copiado!",
+      "cases": {
+        "lowercase": "minúsculas",
+        "uppercase": "MAIÚSCULAS",
+        "titlecase": "Primeira Maiúscula",
+        "sentencecase": "Primeira letra da frase",
+        "camelcase": "camelCase",
+        "snakecase": "snake_case",
+        "kebabcase": "kebab-case",
+        "pascalcase": "PascalCase"
+      }
+    },
+    "colorPicker": {
+      "pickerLabel": "Seletor de cores",
+      "preview": "Pré-visualização da Cor",
+      "copied": "Copiado!"
+    },
+    "markdown": {
+      "input": "Markdown",
+      "preview": "Pré-visualização"
     },
     "hashGenerator": {
       "placeholder": "Digite o texto para gerar o hash SHA-256...",

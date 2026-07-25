@@ -80,7 +80,15 @@
         "image-resizer": ["Select an image to resize", "Enter the desired width and height", "Download the resized image"],
         "json-formatter": ["Paste your JSON data into the editor", "Click 'Format' to prettify or 'Minify' to compress", "Copy the result to your clipboard"],
         "qr-generator": ["Enter a URL, text, or Wi-Fi credentials", "The QR code is generated instantly", "Download the QR code as a PNG image"],
-        "exif-extractor": ["Select a photo (JPEG, HEIC, etc.)", "View GPS coordinates, camera settings, and more", "Optionally view location on Google Maps"]
+        "exif-extractor": ["Select a photo (JPEG, HEIC, etc.)", "View GPS coordinates, camera settings, and more", "Optionally view location on Google Maps"],
+        "password-generator": ["Set your desired password length", "Choose which character types to include", "Click 'Generate' and copy your secure password"],
+        "base64-tool": ["Enter your text or paste Base64 string", "Choose between Encode or Decode mode", "Copy the result to your clipboard"],
+        "uuid-generator": ["Set the quantity of UUIDs to generate", "Choose uppercase or lowercase option", "Click 'Generate' and copy individual or all UUIDs"],
+        "timestamp-converter": ["See the live current Unix timestamp", "Enter a timestamp to convert to date", "Or pick a date to get its Unix timestamp"],
+        "lorem-generator": ["Set the number of words to generate", "Toggle 'Start with Lorem ipsum' option", "Click 'Generate' and copy the placeholder text"],
+        "case-converter": ["Paste or type your text in the input area", "Select the desired case style from the options", "Copy the converted result"],
+        "color-picker": ["Use the color picker to select a color", "View HEX, RGB, and HSL values instantly", "Copy any format with one click"],
+        "markdown-preview": ["Write your Markdown on the left side", "See the live rendered preview on the right", "Supports headings, bold, italic, code, and links"]
       },
       "faq": {
         "q1": "Is SLIT.IO safe to use?",
@@ -317,6 +325,142 @@
           "a": "By using our Media Compressor, sensitive metadata is automatically removed for your protection."
         }
       ]
+    },
+    "password-generator": {
+      "title": "Free Online Password Generator - Strong & Secure",
+      "description": "Generate strong, random passwords instantly. Control length, uppercase, lowercase, numbers, and symbols. All generated in your browser.",
+      "icon": "🔑",
+      "features": [
+        "Cryptographically secure random generation",
+        "Customizable length (8-64 characters)",
+        "Include/exclude uppercase, numbers, symbols",
+        "Instant strength indicator"
+      ],
+      "faq": [
+        {
+          "q": "Are generated passwords secure?",
+          "a": "Yes. Passwords are generated using crypto.getRandomValues(), which uses the operating system's cryptographic random source."
+        }
+      ]
+    },
+    "base64-tool": {
+      "title": "Free Online Base64 Encoder & Decoder",
+      "description": "Encode text to Base64 or decode Base64 to text instantly. Supports full Unicode including emoji. All processing runs locally in your browser.",
+      "icon": "🔐",
+      "features": [
+        "Encode and decode Base64",
+        "Full Unicode support including emoji",
+        "Instant conversion",
+        "100% client-side processing"
+      ],
+      "faq": [
+        {
+          "q": "What is Base64?",
+          "a": "Base64 is a encoding scheme that represents binary data as ASCII text, commonly used for embedding data in URLs and emails."
+        }
+      ]
+    },
+    "uuid-generator": {
+      "title": "Free Online UUID v4 Generator",
+      "description": "Generate UUID v4 (random) instantly. Choose uppercase or lowercase, generate multiple UUIDs at once. All processing is local and private.",
+      "icon": "🆔",
+      "features": [
+        "Generate UUID v4 (cryptographically random)",
+        "Uppercase/lowercase option",
+        "Generate up to 100 UUIDs at once",
+        "One-click copy to clipboard"
+      ],
+      "faq": [
+        {
+          "q": "What is a UUID?",
+          "a": "A UUID (Universally Unique Identifier) is a 128-bit identifier used to uniquely identify information in computer systems."
+        }
+      ]
+    },
+    "timestamp-converter": {
+      "title": "Free Online Unix Timestamp Converter",
+      "description": "Convert between Unix timestamps and human-readable dates instantly. Live current timestamp. All processing is local.",
+      "icon": "⏱️",
+      "features": [
+        "Live current Unix timestamp",
+        "Timestamp to date conversion",
+        "Date to timestamp conversion",
+        "Instant results, no upload"
+      ],
+      "faq": [
+        {
+          "q": "What is a Unix timestamp?",
+          "a": "A Unix timestamp is the number of seconds that have elapsed since January 1, 1970 (UTC), also known as the Unix epoch."
+        }
+      ]
+    },
+    "lorem-generator": {
+      "title": "Free Online Lorem Ipsum Generator",
+      "description": "Generate placeholder text instantly. Choose the number of words. Perfect for design mockups and testing layouts.",
+      "icon": "📄",
+      "features": [
+        "Custom word count (10-5000)",
+        "Option to start with 'Lorem ipsum'",
+        "Instant generation",
+        "One-click copy"
+      ],
+      "faq": [
+        {
+          "q": "What is Lorem Ipsum?",
+          "a": "Lorem Ipsum is placeholder text commonly used in the design and printing industry to demonstrate the visual form of a document."
+        }
+      ]
+    },
+    "case-converter": {
+      "title": "Free Online Text Case Converter",
+      "description": "Convert text to UPPERCASE, lowercase, camelCase, snake_case, kebab-case, PascalCase, and more. Instant conversion in your browser.",
+      "icon": "🔤",
+      "features": [
+        "8 case styles: lower, upper, title, sentence, camel, snake, kebab, pascal",
+        "Instant conversion",
+        "One-click copy",
+        "Works with any text"
+      ],
+      "faq": [
+        {
+          "q": "What is camelCase?",
+          "a": "camelCase is a naming convention where each word begins with a capital letter except the first word, like 'myVariableName'."
+        }
+      ]
+    },
+    "color-picker": {
+      "title": "Free Online Color Picker - HEX, RGB, HSL",
+      "description": "Pick any color and instantly see its HEX, RGB, and HSL values. Visual color preview. All processing runs locally in your browser.",
+      "icon": "🎨",
+      "features": [
+        "Native color picker",
+        "HEX, RGB, HSL conversion",
+        "Live color preview",
+        "Copy values with one click"
+      ],
+      "faq": [
+        {
+          "q": "What is HEX color?",
+          "a": "HEX color is a 6-digit hexadecimal number representing RGB values, like #6b21a8 for purple."
+        }
+      ]
+    },
+    "markdown-preview": {
+      "title": "Free Online Markdown Preview Editor",
+      "description": "Write Markdown on the left, see the rendered preview on the right. Supports headings, bold, italic, code, links, and lists. All in your browser.",
+      "icon": "📑",
+      "features": [
+        "Real-time preview",
+        "Supports headings, bold, italic, code",
+        "Links and lists support",
+        "Side-by-side editor and preview"
+      ],
+      "faq": [
+        {
+          "q": "What is Markdown?",
+          "a": "Markdown is a lightweight markup language used to format plain text, commonly used for documentation, READMEs, and forums."
+        }
+      ]
     }
   },
   "footer": {
@@ -498,6 +642,87 @@
       "strengthMedium": "Medium",
       "strengthStrong": "Strong",
       "strengthVeryStrong": "Very Strong"
+    },
+    "passwordGenerator": {
+      "placeholder": "Click 'Generate' to create a password",
+      "generate": "Generate Password",
+      "length": "Length",
+      "uppercase": "Uppercase (A-Z)",
+      "lowercase": "Lowercase (a-z)",
+      "numbers": "Numbers (0-9)",
+      "symbols": "Symbols (!@#$...)",
+      "copied": "Copied!",
+      "outputLabel": "Generated password",
+      "noCharset": "Select at least one character type",
+      "strength": {
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+      }
+    },
+    "base64": {
+      "encode": "Encode",
+      "decode": "Decode",
+      "inputLabel": "Input text",
+      "inputPlaceholder": "Enter text to encode...",
+      "inputPlaceholderDecode": "Enter Base64 string to decode...",
+      "encodeButton": "Encode to Base64",
+      "decodeButton": "Decode from Base64",
+      "result": "Result",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "error": "Invalid input. Please check your text."
+    },
+    "uuid": {
+      "count": "Quantity",
+      "uppercase": "Uppercase",
+      "generate": "Generate",
+      "copyAll": "Copy All",
+      "copied": "Copied!",
+      "copiedAll": "All UUIDs copied!"
+    },
+    "timestamp": {
+      "current": "Current Unix Timestamp",
+      "tsToDate": "Timestamp → Date",
+      "tsPlaceholder": "Enter Unix timestamp...",
+      "dateToTs": "Date → Timestamp",
+      "invalidTimestamp": "Invalid timestamp",
+      "invalidDate": "Invalid date",
+      "copied": "Copied!"
+    },
+    "lorem": {
+      "wordCount": "Word count",
+      "startLorem": "Start with 'Lorem ipsum'",
+      "generate": "Generate",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "charCount": "Characters"
+    },
+    "caseConverter": {
+      "inputLabel": "Input text",
+      "placeholder": "Enter text to convert...",
+      "result": "Result",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "cases": {
+        "lowercase": "lowercase",
+        "uppercase": "UPPERCASE",
+        "titlecase": "Title Case",
+        "sentencecase": "Sentence case",
+        "camelcase": "camelCase",
+        "snakecase": "snake_case",
+        "kebabcase": "kebab-case",
+        "pascalcase": "PascalCase"
+      }
+    },
+    "colorPicker": {
+      "pickerLabel": "Color picker",
+      "preview": "Color Preview",
+      "copied": "Copied!"
+    },
+    "markdown": {
+      "input": "Markdown",
+      "preview": "Preview"
     },
     "hashGenerator": {
       "placeholder": "Enter text to generate SHA-256 hash...",
