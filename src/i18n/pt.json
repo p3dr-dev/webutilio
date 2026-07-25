@@ -68,6 +68,20 @@
         "qr-generator": "Emprega algoritmos de geração de matriz de pontos para converter strings em padrões visuais de QR Code, renderizando o resultado em um canvas para download.",
         "exif-extractor": "Utiliza a biblioteca exifr para ler os buffers binários de imagens e extrair metadados ocultos como coordenadas GPS, modelo da câmera e configurações de exposição."
       },
+      "howToUse": {
+        "background-remover": ["Clique em 'Selecionar Imagem' ou arraste e solte uma foto", "Aguarde alguns segundos enquanto a IA processa sua imagem", "Baixe o resultado com fundo transparente"],
+        "file-decompressor": ["Clique em 'Selecionar Arquivo' ou arraste e solte um arquivo .zip ou .tar", "Navegue pelo conteúdo do arquivo compactado", "Baixe arquivos individualmente ou extraia todos"],
+        "media-compressor": ["Selecione um arquivo de imagem ou vídeo", "Ajuste o controle deslizante de qualidade se necessário", "Clique em 'Comprimir' e baixe o arquivo otimizado"],
+        "file-encryptor": ["Selecione um arquivo e insira uma senha forte", "Escolha entre os modos de criptografia e descriptografia", "Baixe o arquivo criptografado/descriptografado com segurança"],
+        "hash-generator": ["Digite texto ou selecione um arquivo para gerar o hash", "O hash SHA-256 é gerado instantaneamente", "Copie o hash ou compare com outro valor"],
+        "file-compressor": ["Selecione um ou mais arquivos para compactar", "Escolha entre o formato ZIP e TAR", "Baixe o arquivo compactado"],
+        "word-counter": ["Cole ou digite seu texto na área de entrada", "Visualize estatísticas em tempo real (palavras, caracteres, frases)", "Copie os resultados ou limpe para recomeçar"],
+        "file-converter": ["Selecione um arquivo para converter", "Escolha o formato de saída", "Baixe o arquivo convertido"],
+        "image-resizer": ["Selecione uma imagem para redimensionar", "Insira a largura e altura desejadas", "Baixe a imagem redimensionada"],
+        "json-formatter": ["Cole seus dados JSON no editor", "Clique em 'Formatar' para organizar ou 'Minificar' para comprimir", "Copie o resultado para sua área de transferência"],
+        "qr-generator": ["Insira uma URL, texto ou credenciais de Wi-Fi", "O QR Code é gerado instantaneamente", "Baixe o QR Code como imagem PNG"],
+        "exif-extractor": ["Selecione uma foto (JPEG, HEIC, etc.)", "Visualize coordenadas GPS, configurações da câmera e mais", "Opcionalmente visualise a localização no Google Maps"]
+      },
       "faq": {
         "q1": "É seguro usar o SLIT.IO?",
         "a1": "Sim, é 100% seguro. Todos os arquivos e dados são processados localmente no seu navegador. Nada é enviado para nossos servidores.",
@@ -338,6 +352,17 @@
   "toolPage": {
     "faq": "Perguntas Frequentes",
     "related": "Ferramentas Relacionadas",
+    "howToUse": "Como Usar",
+    "whyChoose": "Por que Escolher o SLIT.IO",
+    "step1": "Passo 1",
+    "step2": "Passo 2",
+    "step3": "Passo 3",
+    "whyLocal": "100% Local",
+    "whyLocalDesc": "Seus arquivos nunca saem do seu navegador. Tudo é processado localmente usando JavaScript e WebAssembly.",
+    "whyFree": "Totalmente Gratuito",
+    "whyFreeDesc": "Sem taxas ocultas, sem marcas d'água, sem cadastro necessário. Todas as ferramentas são 100% gratuitas.",
+    "whyPrivacy": "Privacidade em Primeiro Lugar",
+    "whyPrivacyDesc": "Sem coleta de dados, sem cookies de rastreamento, sem processamento no servidor. Sua privacidade é garantida.",
     "supportCta": "Gostou desta ferramenta? Considere apoiar o projeto para que ele continue gratuito e sem anúncios.",
     "supportButton": "Apoiar o Projeto"
   },

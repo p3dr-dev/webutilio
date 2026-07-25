@@ -109,6 +109,26 @@ const alternates = {
       <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
     </div>
 
+    {/* Introductory Paragraph for SEO */}
+    <div class="mb-8 text-gray-700 dark:text-gray-300 text-base leading-relaxed">
+      <p>{t(`tools.${tool.id}.description`)}</p>
+    </div>
+
+    {/* How to Use Section */}
+    {t(`tools.${tool.id}.howToUse`) && Array.isArray(t(`tools.${tool.id}.howToUse`)) && (
+      <div class="mb-8 bg-gray-50 dark:bg-gray-800/50 p-6 rounded-xl border border-gray-100 dark:border-gray-700">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">{t('toolPage.howToUse')}</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {(t(`tools.${tool.id}.howToUse`) as string[]).map((step: string, index: number) => (
+            <div class="flex items-start space-x-3">
+              <span class="flex-shrink-0 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-bold">{index + 1}</span>
+              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{step}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
     {/* Features List Section */}
     {t(`tools.${tool.id}.features`) && Array.isArray(t(`tools.${tool.id}.features`)) && (
       <div class="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -143,6 +163,40 @@ const alternates = {
         <p class="text-gray-700 dark:text-gray-400 text-sm leading-relaxed">
           {t(`howItWorks.${tool.id}`)}
         </p>
+      </div>
+    </div>
+
+    {/* Why Choose SLIT.IO Section */}
+    <div class="mt-12 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 p-8 rounded-2xl border border-purple-100 dark:border-purple-800/30">
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">{t('toolPage.whyChoose')}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyLocal')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyLocalDesc')}</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyFree')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyFreeDesc')}</p>
+        </div>
+        <div class="text-center">
+          <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-gray-800 dark:text-gray-200 mb-2">{t('toolPage.whyPrivacy')}</h3>
+          <p class="text-gray-600 dark:text-gray-400 text-sm">{t('toolPage.whyPrivacyDesc')}</p>
+        </div>
       </div>
     </div>
 

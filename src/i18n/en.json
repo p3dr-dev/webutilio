@@ -68,6 +68,20 @@
         "qr-generator": "Employs dot matrix generation algorithms to convert strings into visual QR Code patterns, rendering the result on a canvas for download.",
         "exif-extractor": "Uses the exifr library to read image binary buffers and extract hidden metadata like GPS coordinates, camera model, and exposure settings."
       },
+      "howToUse": {
+        "background-remover": ["Click 'Select Image' or drag and drop a photo", "Wait a few seconds while the AI processes your image", "Download the result with transparent background"],
+        "file-decompressor": ["Click 'Select Archive' or drag and drop a .zip or .tar file", "Browse the contents of the archive", "Download individual files or extract them all"],
+        "media-compressor": ["Select an image or video file", "Adjust the quality slider if needed", "Click 'Compress' and download the optimized file"],
+        "file-encryptor": ["Select a file and enter a strong password", "Choose between encryption and decryption mode", "Download the encrypted/decrypted file securely"],
+        "hash-generator": ["Enter text or select a file to hash", "The SHA-256 hash is generated instantly", "Copy the hash or compare it with another value"],
+        "file-compressor": ["Select one or more files to compress", "Choose between ZIP and TAR format", "Download the compressed archive"],
+        "word-counter": ["Paste or type your text in the input area", "View real-time statistics (words, characters, sentences)", "Copy results or clear to start over"],
+        "file-converter": ["Select a file to convert", "Choose the output format", "Download the converted file"],
+        "image-resizer": ["Select an image to resize", "Enter the desired width and height", "Download the resized image"],
+        "json-formatter": ["Paste your JSON data into the editor", "Click 'Format' to prettify or 'Minify' to compress", "Copy the result to your clipboard"],
+        "qr-generator": ["Enter a URL, text, or Wi-Fi credentials", "The QR code is generated instantly", "Download the QR code as a PNG image"],
+        "exif-extractor": ["Select a photo (JPEG, HEIC, etc.)", "View GPS coordinates, camera settings, and more", "Optionally view location on Google Maps"]
+      },
       "faq": {
         "q1": "Is SLIT.IO safe to use?",
         "a1": "Yes, it's 100% safe. All files and data are processed locally in your browser. Nothing is sent to our servers.",
@@ -338,6 +352,17 @@
   "toolPage": {
     "faq": "Frequently Asked Questions",
     "related": "Related Tools",
+    "howToUse": "How to Use",
+    "whyChoose": "Why Choose SLIT.IO",
+    "step1": "Step 1",
+    "step2": "Step 2",
+    "step3": "Step 3",
+    "whyLocal": "100% Local Processing",
+    "whyLocalDesc": "Your files never leave your browser. Everything is processed locally using JavaScript and WebAssembly.",
+    "whyFree": "Completely Free",
+    "whyFreeDesc": "No hidden fees, no watermarks, no registration required. All tools are 100% free.",
+    "whyPrivacy": "Privacy First",
+    "whyPrivacyDesc": "No data collection, no tracking cookies, no server-side processing. Your privacy is guaranteed.",
     "supportCta": "Liked this tool? Consider supporting the project to keep it free and ad-free.",
     "supportButton": "Support the Project"
   },
