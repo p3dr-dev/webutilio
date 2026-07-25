@@ -275,7 +275,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
 
   const renderMedia = (url: string, isVideo: boolean, altText: string) => {
     if (isVideo) {
-      return <video src={url} controls aria-label={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
+      return (
+        <video src={url} controls aria-label={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80">
+          <track kind="captions" />
+        </video>
+      );
     } else {
       return <img src={url} alt={altText} className="mt-2 rounded-lg shadow-sm mx-auto max-h-80" />;
     }

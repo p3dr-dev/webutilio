@@ -15,7 +15,7 @@ const QrGenerator: React.FC<{ lang: 'pt' | 'en' }> = ({ lang }) => {
     } else {
       setQrUrl(null);
     }
-  }, [text]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [text]);
 
   const generateQr = async () => {
     try {

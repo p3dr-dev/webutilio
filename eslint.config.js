@@ -12,6 +12,14 @@ export default tseslint.config(
   ...astro.configs['flat/recommended'],
   jsxA11y.flatConfigs.recommended,
   {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+      },
+    },
+  },
+  {
     files: ['**/*.cjs'],
     languageOptions: {
       globals: {
