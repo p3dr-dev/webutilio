@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts, renderBlogPost } from '../../../lib/blog';
+import { getBlogPosts, renderBlogPost, getPostSlug } from '../../../lib/blog';
 import type { BlogPost } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/utils';
 import BlogTableOfContents from '../../../components/BlogTableOfContents.astro';
@@ -8,9 +8,9 @@ import { getReadingTime, getHeadings } from '../../../lib/blog';
 import { toolBasePath } from '../../../lib/slugs';
 
 export async function getStaticPaths() {
-  const posts = await getBlogPosts();
+  const posts = await getBlogPosts('es');
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: getPostSlug(post) },
     props: { post },
   }));
 }
@@ -23,13 +23,15 @@ const headings = getHeadings(post.body || '');
 const lang = 'es';
 const t = useTranslations(lang);
 
+const slug = getPostSlug(post);
+
 const alternates = {
-  pt: `/pt/blog/${post.id}`,
-  en: `/en/blog/${post.id}`,
-  es: `/es/blog/${post.id}`,
-  fr: `/fr/blog/${post.id}`,
-  de: `/de/blog/${post.id}`,
-  ru: `/ru/blog/${post.id}`,
+  pt: `/pt/blog/${slug}`,
+  en: `/en/blog/${slug}`,
+  es: `/es/blog/${slug}`,
+  fr: `/fr/blog/${slug}`,
+  de: `/de/blog/${slug}`,
+  ru: `/ru/blog/${slug}`,
 };
 ---
 
@@ -98,7 +100,7 @@ const alternates = {
       },
       "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": `https://slitio.vercel.app/es/blog/${post.id}`
+        "@id": `https://slitio.vercel.app/es/blog/${slug}`
       }
     })} />
   </article>

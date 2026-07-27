@@ -1,12 +1,12 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getBlogPosts, getReadingTime } from '../../../lib/blog';
+import { getBlogPosts, getReadingTime, getPostSlug } from '../../../lib/blog';
 import { useTranslations } from '../../../i18n/utils';
 
 const lang = 'fr';
 const t = useTranslations(lang);
 
-const posts = (await getBlogPosts()).sort(
+const posts = (await getBlogPosts(lang)).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
@@ -34,7 +34,7 @@ const alternates = {
 
     <div class="space-y-8">
       {postsWithReadingTime.map((post) => (
-        <a href={`/fr/blog/${post.id}`} class="group block p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-purple-200 dark:hover:border-purple-800/50 transition-all duration-300">
+        <a href={`/fr/blog/${getPostSlug(post)}`} class="group block p-6 sm:p-8 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:border-purple-200 dark:hover:border-purple-800/50 transition-all duration-300">
           <div class="flex flex-wrap items-center gap-2 mb-3 text-sm">
             <time class="text-gray-500 dark:text-gray-400" datetime={post.data.pubDate.toISOString()}>
               {post.data.pubDate.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}

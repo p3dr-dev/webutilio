@@ -11,6 +11,7 @@ const blogCollection = defineCollection({
     author: z.string().default('SLIT.IO'),
     tags: z.array(z.string()).default([]),
     image: z.string().optional(),
+    lang: z.enum(['en', 'pt', 'es', 'fr', 'de', 'ru']).default('en'),
   }),
 });
 
