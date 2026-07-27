@@ -570,7 +570,8 @@
     "toggle": "Design wechseln"
   },
   "search": {
-    "clear": "Suche löschen"
+    "clear": "Suche löschen",
+    "noResultsFeedback": "Finden Sie kein Werkzeug? Schlagen Sie eines vor!"
   },
   "recentTools": {
     "title": "Kürzlich verwendet"
@@ -978,7 +979,10 @@
     "techTitle": "Vertrauenswürdiger Technologie-Stack",
     "videoProcessing": "Videoverarbeitung",
     "aiInference": "KI-Inferenz",
-    "modernFramework": "Modernes Framework"
+    "modernFramework": "Modernes Framework",
+    "feedbackTitle": "Haben Sie nicht gefunden, was Sie gesucht haben?",
+    "feedbackDesc": "Hinterlassen Sie bitte Ihr Feedback und Ihre Anfrage. Wir werden so schnell wie möglich antworten.",
+    "feedbackCta": "Feedback hinterlassen"
   },
   "a11y": {
     "tocTitle": "Inhaltsverzeichnis",

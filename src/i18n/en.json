@@ -489,7 +489,8 @@
     "toggle": "Toggle theme"
   },
   "search": {
-    "clear": "Clear search"
+    "clear": "Clear search",
+    "noResultsFeedback": "Can't find a tool? Suggest one!"
   },
   "recentTools": {
     "title": "Recently Used"
@@ -897,7 +898,10 @@
     "techTitle": "Trusted Technology Stack",
     "videoProcessing": "Video processing",
     "aiInference": "AI inference",
-    "modernFramework": "Modern framework"
+    "modernFramework": "Modern framework",
+    "feedbackTitle": "Didn't find what you were looking for?",
+    "feedbackDesc": "Consider leaving your feedback and request. We'll respond as soon as possible.",
+    "feedbackCta": "Leave your feedback"
   },
   "a11y": {
     "tocTitle": "Table of contents",
