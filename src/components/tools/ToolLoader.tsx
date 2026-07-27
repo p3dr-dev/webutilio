@@ -47,6 +47,9 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
   'case-converter': lazy(() => import('./text/CaseConverter')),
   'color-picker': lazy(() => import('./text/ColorPicker')),
   'markdown-preview': lazy(() => import('./text/MarkdownPreview')),
+  'jwt-decoder': lazy(() => import('./text/JwtDecoder')),
+  'regex-tester': lazy(() => import('./text/RegexTester')),
+  'text-diff': lazy(() => import('./text/TextDiff')),
 };
 
 // Componente de fallback para o Suspense

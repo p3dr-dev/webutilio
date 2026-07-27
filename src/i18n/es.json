@@ -72,26 +72,106 @@
     "exif-extractor": "Usa la librería exifr para leer buffers binarios de imágenes y extraer metadatos ocultos como coordenadas GPS, modelo de cámara y ajustes de exposición."
   },
   "howToUse": {
-    "background-remover": ["Haz clic en 'Seleccionar Imagen' o arrastra y suelta una foto", "Espera unos segundos mientras la IA procesa tu imagen", "Descarga el resultado con fondo transparente"],
-    "file-decompressor": ["Haz clic en 'Seleccionar Archivo' o arrastra y suelta un archivo .zip o .tar", "Explora el contenido del archivo comprimido", "Descarga archivos individuales o extrae todos"],
-    "media-compressor": ["Selecciona un archivo de imagen o video", "Ajusta el control deslizante de calidad si es necesario", "Haz clic en 'Comprimir' y descarga el archivo optimizado"],
-    "file-encryptor": ["Selecciona un archivo e ingresa una contraseña segura", "Elige entre el modo de cifrado o descifrado", "Descarga el archivo cifrado/descifrado de forma segura"],
-    "hash-generator": ["Ingresa texto o selecciona un archivo para generar el hash", "El hash SHA-256 se genera instantáneamente", "Copia el hash o compáralo con otro valor"],
-    "file-compressor": ["Selecciona uno o más archivos para comprimir", "Elige entre el formato ZIP o TAR", "Descarga el archivo comprimido"],
-    "word-counter": ["Pega o escribe tu texto en el área de entrada", "Consulta las estadísticas en tiempo real (palabras, caracteres, oraciones)", "Copia los resultados o limpia para empezar de nuevo"],
-    "file-converter": ["Selecciona un archivo para convertir", "Elige el formato de salida", "Descarga el archivo convertido"],
-    "image-resizer": ["Selecciona una imagen para redimensionar", "Ingresa el ancho y alto deseados", "Descarga la imagen redimensionada"],
-    "json-formatter": ["Pega tus datos JSON en el editor", "Haz clic en 'Formatear' para embellecer o 'Minimizar' para comprimir", "Copia el resultado a tu portapapeles"],
-    "qr-generator": ["Ingresa una URL, texto o credenciales de Wi-Fi", "El código QR se genera instantáneamente", "Descarga el código QR como imagen PNG"],
-    "exif-extractor": ["Selecciona una foto (JPEG, HEIC, etc.)", "Consulta las coordenadas GPS, ajustes de cámara y más", "Opcionalmente consulta la ubicación en Google Maps"],
-    "password-generator": ["Configura la longitud de contraseña deseada", "Elige qué tipos de caracteres incluir", "Haz clic en 'Generar' y copia tu contraseña segura"],
-    "base64-tool": ["Ingresa tu texto o pega una cadena Base64", "Elige entre el modo Codificar o Decodificar", "Copia el resultado a tu portapapeles"],
-    "uuid-generator": ["Establece la cantidad de UUID a generar", "Elige la opción en mayúsculas o minúsculas", "Haz clic en 'Generar' y copia los UUID individuales o todos"],
-    "timestamp-converter": ["Consulta el timestamp Unix actual en tiempo real", "Ingresa un timestamp para convertir a fecha", "O elige una fecha para obtener su timestamp Unix"],
-    "lorem-generator": ["Establece la cantidad de palabras a generar", "Activa la opción 'Empezar con Lorem ipsum'", "Haz clic en 'Generar' y copia el texto de prueba"],
-    "case-converter": ["Pega o escribe tu texto en el área de entrada", "Selecciona el estilo de caso deseado de las opciones", "Copia el resultado convertido"],
-    "color-picker": ["Usa el selector de color para elegir un color", "Consulta los valores HEX, RGB e HSL instantáneamente", "Copia cualquier formato con un clic"],
-    "markdown-preview": ["Escribe tu Markdown en el lado izquierdo", "Consulta la vista previa renderizada en tiempo real a la derecha", "Soporta encabezados, negrita, cursiva, código y enlaces"]
+    "background-remover": [
+      "Haz clic en 'Seleccionar Imagen' o arrastra y suelta una foto",
+      "Espera unos segundos mientras la IA procesa tu imagen",
+      "Descarga el resultado con fondo transparente"
+    ],
+    "file-decompressor": [
+      "Haz clic en 'Seleccionar Archivo' o arrastra y suelta un archivo .zip o .tar",
+      "Explora el contenido del archivo comprimido",
+      "Descarga archivos individuales o extrae todos"
+    ],
+    "media-compressor": [
+      "Selecciona un archivo de imagen o video",
+      "Ajusta el control deslizante de calidad si es necesario",
+      "Haz clic en 'Comprimir' y descarga el archivo optimizado"
+    ],
+    "file-encryptor": [
+      "Selecciona un archivo e ingresa una contraseña segura",
+      "Elige entre el modo de cifrado o descifrado",
+      "Descarga el archivo cifrado/descifrado de forma segura"
+    ],
+    "hash-generator": [
+      "Ingresa texto o selecciona un archivo para generar el hash",
+      "El hash SHA-256 se genera instantáneamente",
+      "Copia el hash o compáralo con otro valor"
+    ],
+    "file-compressor": [
+      "Selecciona uno o más archivos para comprimir",
+      "Elige entre el formato ZIP o TAR",
+      "Descarga el archivo comprimido"
+    ],
+    "word-counter": [
+      "Pega o escribe tu texto en el área de entrada",
+      "Consulta las estadísticas en tiempo real (palabras, caracteres, oraciones)",
+      "Copia los resultados o limpia para empezar de nuevo"
+    ],
+    "file-converter": [
+      "Selecciona un archivo para convertir",
+      "Elige el formato de salida",
+      "Descarga el archivo convertido"
+    ],
+    "image-resizer": [
+      "Selecciona una imagen para redimensionar",
+      "Ingresa el ancho y alto deseados",
+      "Descarga la imagen redimensionada"
+    ],
+    "json-formatter": [
+      "Pega tus datos JSON en el editor",
+      "Haz clic en 'Formatear' para embellecer o 'Minimizar' para comprimir",
+      "Copia el resultado a tu portapapeles"
+    ],
+    "qr-generator": [
+      "Ingresa una URL, texto o credenciales de Wi-Fi",
+      "El código QR se genera instantáneamente",
+      "Descarga el código QR como imagen PNG"
+    ],
+    "exif-extractor": [
+      "Selecciona una foto (JPEG, HEIC, etc.)",
+      "Consulta las coordenadas GPS, ajustes de cámara y más",
+      "Opcionalmente consulta la ubicación en Google Maps"
+    ],
+    "password-generator": [
+      "Configura la longitud de contraseña deseada",
+      "Elige qué tipos de caracteres incluir",
+      "Haz clic en 'Generar' y copia tu contraseña segura"
+    ],
+    "base64-tool": [
+      "Ingresa tu texto o pega una cadena Base64",
+      "Elige entre el modo Codificar o Decodificar",
+      "Copia el resultado a tu portapapeles"
+    ],
+    "uuid-generator": [
+      "Establece la cantidad de UUID a generar",
+      "Elige la opción en mayúsculas o minúsculas",
+      "Haz clic en 'Generar' y copia los UUID individuales o todos"
+    ],
+    "timestamp-converter": [
+      "Consulta el timestamp Unix actual en tiempo real",
+      "Ingresa un timestamp para convertir a fecha",
+      "O elige una fecha para obtener su timestamp Unix"
+    ],
+    "lorem-generator": [
+      "Establece la cantidad de palabras a generar",
+      "Activa la opción 'Empezar con Lorem ipsum'",
+      "Haz clic en 'Generar' y copia el texto de prueba"
+    ],
+    "case-converter": [
+      "Pega o escribe tu texto en el área de entrada",
+      "Selecciona el estilo de caso deseado de las opciones",
+      "Copia el resultado convertido"
+    ],
+    "color-picker": [
+      "Usa el selector de color para elegir un color",
+      "Consulta los valores HEX, RGB e HSL instantáneamente",
+      "Copia cualquier formato con un clic"
+    ],
+    "markdown-preview": [
+      "Escribe tu Markdown en el lado izquierdo",
+      "Consulta la vista previa renderizada en tiempo real a la derecha",
+      "Soporta encabezados, negrita, cursiva, código y enlaces"
+    ]
   },
   "faq": {
     "q1": "¿Es seguro usar SLIT.IO?",
@@ -465,6 +545,69 @@
           "a": "Markdown es un lenguaje de marcado ligero utilizado para formatear texto plano, comúnmente usado para documentación, READMEs y foros."
         }
       ]
+    },
+    "jwt-decoder": {
+      "title": "Decodificador JWT",
+      "description": "Decodifica e inspecciona tokens JWT al instante en tu navegador. Visualiza encabezado, payload y firma.",
+      "icon": "🔑",
+      "features": [
+        "Decodifica tokens JWT al instante",
+        "Muestra encabezado, payload y firma",
+        "Formatea fechas automáticamente",
+        "100% lado del cliente"
+      ],
+      "faq": [
+        {
+          "q": "¿Qué es un JWT?",
+          "a": "JSON Web Token es un medio compacto y URL-safe de representar declaraciones entre dos partes."
+        },
+        {
+          "q": "¿Se envían mis datos a un servidor?",
+          "a": "No. Todo se decodifica localmente en tu navegador."
+        }
+      ]
+    },
+    "regex-tester": {
+      "title": "Probador de Regex",
+      "description": "Prueba expresiones regulares al instante con coincidencia y resaltado en vivo.",
+      "icon": "🔍",
+      "features": [
+        "Coincidencia en vivo con resaltado",
+        "Soporta flags g, i, m, s",
+        "Muestra grupos e índices",
+        "Muestra de errores para patrones inválidos"
+      ],
+      "faq": [
+        {
+          "q": "¿Qué sintaxe regex se soporta?",
+          "a": "Sintaxe regex completa de JavaScript incluyendo grupos de captura."
+        },
+        {
+          "q": "¿Se resaltan las coincidencias?",
+          "a": "Sí, todas las coincidencias se resaltan en amarillo en el texto de prueba."
+        }
+      ]
+    },
+    "text-diff": {
+      "title": "Comparador de Diferencias",
+      "description": "Compara dos textos lado a lado con diferencias codificadas por colores.",
+      "icon": "📊",
+      "features": [
+        "Comparación lado a lado",
+        "Adiciones y eliminaciones codificadas por colores",
+        "Opción de formato JSON",
+        "Intercambia paneles con un clic"
+      ],
+      "faq": [
+        {
+          "q": "¿Cómo funciona el algoritmo?",
+          "a": "Usa el algoritmo LCS para encontrar la edición mínima."
+        },
+        {
+          "q": "¿Puedo comparar JSON?",
+          "a": "Sí, usa el botón Formatear antes de comparar."
+        }
+      ]
     }
   },
   "blog": {
@@ -836,6 +979,40 @@
       "successMessage": "¡Opinión enviada con éxito! Gracias.",
       "errorMessage": "Error al enviar la opinión. Por favor, inténtalo de nuevo más tarde.",
       "successHeading": "¡Éxito!"
+    },
+    "jwt": {
+      "placeholder": "Pega tu token JWT aquí...",
+      "decodeButton": "Decodificar JWT",
+      "paste": "Pegar del Portapapeles",
+      "copied": "Copiado al portapapeles",
+      "empty": "Por favor, ingresa un token JWT",
+      "invalid": "Formato JWT inválido. Se esperan 3 partes separadas por puntos.",
+      "decodeError": "Error al decodificar el token. Verifica el formato.",
+      "copy": "Copiar"
+    },
+    "regex": {
+      "pattern": "Patrón Regex",
+      "patternPlaceholder": "ej. ^\\d{3}-\\d{4}$",
+      "testString": "Texto de Prueba",
+      "testPlaceholder": "Escribe el texto para probar contra el patrón...",
+      "result": "Resultado de Coincidencia",
+      "matchDetails": "Detalles de Coincidencia",
+      "invalidPattern": "Patrón de expresión regular inválido",
+      "copied": "Copiado al portapapeles"
+    },
+    "diff": {
+      "left": "Original",
+      "right": "Modificado",
+      "leftPlaceholder": "Pega el texto original aquí...",
+      "rightPlaceholder": "Pega el texto modificado aquí...",
+      "compare": "Comparar",
+      "swap": "Intercambiar",
+      "clear": "Limpiar",
+      "formatJson": "Formatear JSON",
+      "formatted": "Texto formateado como JSON",
+      "added": "añadidos",
+      "removed": "eliminados",
+      "unchanged": "sin cambios"
     }
   },
   "privacyPage": {
