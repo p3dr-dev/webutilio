@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { tools, type ToolCategory } from '../tools';
 
 describe('tools data', () => {
-  it('has 20 tools', () => {
-    expect(tools).toHaveLength(20);
+  it('has 23 tools', () => {
+    expect(tools).toHaveLength(23);
   });
 
   it('all tools have required fields', () => {

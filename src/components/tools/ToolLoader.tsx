@@ -4,7 +4,7 @@ import { ToastProvider } from '../Toast';
 
 interface ToolLoaderProps {
   toolId: string;
-  lang: 'pt' | 'en' | 'es' | 'fr' | 'de';
+  lang: 'pt' | 'en' | 'es' | 'fr' | 'de' | 'ru';
 }
 
 class ErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
@@ -46,10 +46,13 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
   'case-converter': lazy(() => import('./text/CaseConverter')),
   'color-picker': lazy(() => import('./text/ColorPicker')),
   'markdown-preview': lazy(() => import('./text/MarkdownPreview')),
+  'jwt-decoder': lazy(() => import('./text/JwtDecoder')),
+  'regex-tester': lazy(() => import('./text/RegexTester')),
+  'text-diff': lazy(() => import('./text/TextDiff')),
 };
 
 // Componente de fallback para o Suspense
-const LoadingFallback: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const LoadingFallback: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' | 'ru' }> = ({ lang }) => {
   const t = useTranslations(lang);
   return (
     <div className="flex flex-col justify-center items-center p-10 min-h-[600px] w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">

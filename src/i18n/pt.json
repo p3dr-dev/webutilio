@@ -56,52 +56,133 @@
     "badge": "100% Local",
     "description": "Nenhum dado sai do seu navegador. O processamento ocorre inteiramente no seu dispositivo usando Web Crypto API, WebAssembly e outras tecnologias modernas de ponta."
   },
-      "howItWorks": {
-        "title": "Como funciona?",
-        "background-remover": "Utiliza o modelo de IA 'RMBG' rodando localmente no seu navegador através da biblioteca ONNX Runtime Web. O processamento de imagem acontece na sua CPU/GPU sem enviar nada para servidores externos.",
-        "file-decompressor": "Usa as bibliotecas JSZip e js-untar para ler a estrutura binária dos arquivos comprimidos diretamente na memória do navegador, permitindo a extração individual de arquivos.",
-        "media-compressor": "Emprega o FFmpeg compilado para WebAssembly (WASM). Isso traz o poder da ferramenta de processamento de vídeo mais usada do mundo para dentro do seu navegador.",
-        "file-encryptor": "Utiliza a Web Crypto API nativa do navegador com o algoritmo AES-GCM de 256 bits. A senha é derivada usando PBKDF2 com 100.000 iterações de SHA-256.",
-        "hash-generator": "Faz uso da função 'subtle.digest' da Web Crypto API para calcular o resumo SHA-256 de textos ou arquivos de forma instantânea e segura.",
-        "file-compressor": "Utiliza a biblioteca JSZip para criar um novo arquivo comprimido em memória, empacotando os arquivos selecionados com o nível máximo de compressão DEFLATE.",
-        "word-counter": "Aplica expressões regulares e lógica de processamento de strings em JavaScript para analisar o texto e calcular estatísticas detalhadas em tempo real.",
-        "file-converter": "Combina Canvas API para imagens e PDF.js para documentos, permitindo converter formatos visuais sem depender de processamento em nuvem.",
-        "image-resizer": "Usa a Canvas API do navegador para redesenhar a imagem nas novas dimensões especificadas, aplicando algoritmos de interpolação para manter a qualidade.",
-        "json-formatter": "Utiliza os métodos nativos JSON.parse e JSON.stringify com indentação customizada para validar e organizar estruturas de dados JSON instantaneamente.",
-        "qr-generator": "Emprega algoritmos de geração de matriz de pontos para converter strings em padrões visuais de QR Code, renderizando o resultado em um canvas para download.",
-        "exif-extractor": "Utiliza a biblioteca exifr para ler os buffers binários de imagens e extrair metadados ocultos como coordenadas GPS, modelo da câmera e configurações de exposição."
-      },
-      "howToUse": {
-        "background-remover": ["Clique em 'Selecionar Imagem' ou arraste e solte uma foto", "Aguarde alguns segundos enquanto a IA processa sua imagem", "Baixe o resultado com fundo transparente"],
-        "file-decompressor": ["Clique em 'Selecionar Arquivo' ou arraste e solte um arquivo .zip ou .tar", "Navegue pelo conteúdo do arquivo compactado", "Baixe arquivos individualmente ou extraia todos"],
-        "media-compressor": ["Selecione um arquivo de imagem ou vídeo", "Ajuste o controle deslizante de qualidade se necessário", "Clique em 'Comprimir' e baixe o arquivo otimizado"],
-        "file-encryptor": ["Selecione um arquivo e insira uma senha forte", "Escolha entre os modos de criptografia e descriptografia", "Baixe o arquivo criptografado/descriptografado com segurança"],
-        "hash-generator": ["Digite texto ou selecione um arquivo para gerar o hash", "O hash SHA-256 é gerado instantaneamente", "Copie o hash ou compare com outro valor"],
-        "file-compressor": ["Selecione um ou mais arquivos para compactar", "Escolha entre o formato ZIP e TAR", "Baixe o arquivo compactado"],
-        "word-counter": ["Cole ou digite seu texto na área de entrada", "Visualize estatísticas em tempo real (palavras, caracteres, frases)", "Copie os resultados ou limpe para recomeçar"],
-        "file-converter": ["Selecione um arquivo para converter", "Escolha o formato de saída", "Baixe o arquivo convertido"],
-        "image-resizer": ["Selecione uma imagem para redimensionar", "Insira a largura e altura desejadas", "Baixe a imagem redimensionada"],
-        "json-formatter": ["Cole seus dados JSON no editor", "Clique em 'Formatar' para organizar ou 'Minificar' para comprimir", "Copie o resultado para sua área de transferência"],
-        "qr-generator": ["Insira uma URL, texto ou credenciais de Wi-Fi", "O QR Code é gerado instantaneamente", "Baixe o QR Code como imagem PNG"],
-        "exif-extractor": ["Selecione uma foto (JPEG, HEIC, etc.)", "Visualize coordenadas GPS, configurações da câmera e mais", "Opcionalmente visualise a localização no Google Maps"],
-        "password-generator": ["Defina o comprimento desejado da senha", "Escolha quais tipos de caracteres incluir", "Clique em 'Gerar' e copie sua senha segura"],
-        "base64-tool": ["Digite seu texto ou cole uma string Base64", "Escolha entre os modos Codificar ou Decodificar", "Copie o resultado para sua área de transferência"],
-        "uuid-generator": ["Defina a quantidade de UUIDs a gerar", "Escolha a opção de maiúsculas ou minúsculas", "Clique em 'Gerar' e copie individualmente ou todos"],
-        "timestamp-converter": ["Veja o timestamp Unix atual ao vivo", "Digite um timestamp para converter em data", "Ou escolha uma data para obter seu timestamp Unix"],
-        "lorem-generator": ["Defina o número de palavras a gerar", "Ative a opção 'Começar com Lorem ipsum'", "Clique em 'Gerar' e copie o texto placeholder"],
-        "case-converter": ["Cole ou digite seu texto na área de entrada", "Selecione o estilo de caixa desejado nas opções", "Copie o resultado convertido"],
-        "color-picker": ["Use o seletor de cores para escolher uma cor", "Veja os valores HEX, RGB e HSL instantaneamente", "Copie qualquer formato com um clique"],
-        "markdown-preview": ["Escreva seu Markdown no lado esquerdo", "Veja o preview renderizado ao vivo à direita", "Suporta títulos, negrito, itálico, código e links"]
-      },
-      "faq": {
-        "q1": "É seguro usar o SLIT.IO?",
-        "a1": "Sim, é 100% seguro. Todos os arquivos e dados são processados localmente no seu navegador. Nada é enviado para nossos servidores.",
-        "q2": "Preciso pagar para usar?",
-        "a2": "Não, todas as ferramentas são gratuitas e sem anúncios. O projeto é mantido por doações da comunidade.",
-        "q3": "Funciona offline?",
-        "a3": "Sim! Graças à tecnologia PWA, após o primeiro acesso, a maioria das ferramentas funciona mesmo sem conexão com a internet."
-      },
-      "tools": {    "background-remover": {
+  "howItWorks": {
+    "title": "Como funciona?",
+    "background-remover": "Utiliza o modelo de IA 'RMBG' rodando localmente no seu navegador através da biblioteca ONNX Runtime Web. O processamento de imagem acontece na sua CPU/GPU sem enviar nada para servidores externos.",
+    "file-decompressor": "Usa as bibliotecas JSZip e js-untar para ler a estrutura binária dos arquivos comprimidos diretamente na memória do navegador, permitindo a extração individual de arquivos.",
+    "media-compressor": "Emprega o FFmpeg compilado para WebAssembly (WASM). Isso traz o poder da ferramenta de processamento de vídeo mais usada do mundo para dentro do seu navegador.",
+    "file-encryptor": "Utiliza a Web Crypto API nativa do navegador com o algoritmo AES-GCM de 256 bits. A senha é derivada usando PBKDF2 com 100.000 iterações de SHA-256.",
+    "hash-generator": "Faz uso da função 'subtle.digest' da Web Crypto API para calcular o resumo SHA-256 de textos ou arquivos de forma instantânea e segura.",
+    "file-compressor": "Utiliza a biblioteca JSZip para criar um novo arquivo comprimido em memória, empacotando os arquivos selecionados com o nível máximo de compressão DEFLATE.",
+    "word-counter": "Aplica expressões regulares e lógica de processamento de strings em JavaScript para analisar o texto e calcular estatísticas detalhadas em tempo real.",
+    "file-converter": "Combina Canvas API para imagens e PDF.js para documentos, permitindo converter formatos visuais sem depender de processamento em nuvem.",
+    "image-resizer": "Usa a Canvas API do navegador para redesenhar a imagem nas novas dimensões especificadas, aplicando algoritmos de interpolação para manter a qualidade.",
+    "json-formatter": "Utiliza os métodos nativos JSON.parse e JSON.stringify com indentação customizada para validar e organizar estruturas de dados JSON instantaneamente.",
+    "qr-generator": "Emprega algoritmos de geração de matriz de pontos para converter strings em padrões visuais de QR Code, renderizando o resultado em um canvas para download.",
+    "exif-extractor": "Utiliza a biblioteca exifr para ler os buffers binários de imagens e extrair metadados ocultos como coordenadas GPS, modelo da câmera e configurações de exposição."
+  },
+  "howToUse": {
+    "background-remover": [
+      "Clique em 'Selecionar Imagem' ou arraste e solte uma foto",
+      "Aguarde alguns segundos enquanto a IA processa sua imagem",
+      "Baixe o resultado com fundo transparente"
+    ],
+    "file-decompressor": [
+      "Clique em 'Selecionar Arquivo' ou arraste e solte um arquivo .zip ou .tar",
+      "Navegue pelo conteúdo do arquivo compactado",
+      "Baixe arquivos individualmente ou extraia todos"
+    ],
+    "media-compressor": [
+      "Selecione um arquivo de imagem ou vídeo",
+      "Ajuste o controle deslizante de qualidade se necessário",
+      "Clique em 'Comprimir' e baixe o arquivo otimizado"
+    ],
+    "file-encryptor": [
+      "Selecione um arquivo e insira uma senha forte",
+      "Escolha entre os modos de criptografia e descriptografia",
+      "Baixe o arquivo criptografado/descriptografado com segurança"
+    ],
+    "hash-generator": [
+      "Digite texto ou selecione um arquivo para gerar o hash",
+      "O hash SHA-256 é gerado instantaneamente",
+      "Copie o hash ou compare com outro valor"
+    ],
+    "file-compressor": [
+      "Selecione um ou mais arquivos para compactar",
+      "Escolha entre o formato ZIP e TAR",
+      "Baixe o arquivo compactado"
+    ],
+    "word-counter": [
+      "Cole ou digite seu texto na área de entrada",
+      "Visualize estatísticas em tempo real (palavras, caracteres, frases)",
+      "Copie os resultados ou limpe para recomeçar"
+    ],
+    "file-converter": [
+      "Selecione um arquivo para converter",
+      "Escolha o formato de saída",
+      "Baixe o arquivo convertido"
+    ],
+    "image-resizer": [
+      "Selecione uma imagem para redimensionar",
+      "Insira a largura e altura desejadas",
+      "Baixe a imagem redimensionada"
+    ],
+    "json-formatter": [
+      "Cole seus dados JSON no editor",
+      "Clique em 'Formatar' para organizar ou 'Minificar' para comprimir",
+      "Copie o resultado para sua área de transferência"
+    ],
+    "qr-generator": [
+      "Insira uma URL, texto ou credenciais de Wi-Fi",
+      "O QR Code é gerado instantaneamente",
+      "Baixe o QR Code como imagem PNG"
+    ],
+    "exif-extractor": [
+      "Selecione uma foto (JPEG, HEIC, etc.)",
+      "Visualize coordenadas GPS, configurações da câmera e mais",
+      "Opcionalmente visualise a localização no Google Maps"
+    ],
+    "password-generator": [
+      "Defina o comprimento desejado da senha",
+      "Escolha quais tipos de caracteres incluir",
+      "Clique em 'Gerar' e copie sua senha segura"
+    ],
+    "base64-tool": [
+      "Digite seu texto ou cole uma string Base64",
+      "Escolha entre os modos Codificar ou Decodificar",
+      "Copie o resultado para sua área de transferência"
+    ],
+    "uuid-generator": [
+      "Defina a quantidade de UUIDs a gerar",
+      "Escolha a opção de maiúsculas ou minúsculas",
+      "Clique em 'Gerar' e copie individualmente ou todos"
+    ],
+    "timestamp-converter": [
+      "Veja o timestamp Unix atual ao vivo",
+      "Digite um timestamp para converter em data",
+      "Ou escolha uma data para obter seu timestamp Unix"
+    ],
+    "lorem-generator": [
+      "Defina o número de palavras a gerar",
+      "Ative a opção 'Começar com Lorem ipsum'",
+      "Clique em 'Gerar' e copie o texto placeholder"
+    ],
+    "case-converter": [
+      "Cole ou digite seu texto na área de entrada",
+      "Selecione o estilo de caixa desejado nas opções",
+      "Copie o resultado convertido"
+    ],
+    "color-picker": [
+      "Use o seletor de cores para escolher uma cor",
+      "Veja os valores HEX, RGB e HSL instantaneamente",
+      "Copie qualquer formato com um clique"
+    ],
+    "markdown-preview": [
+      "Escreva seu Markdown no lado esquerdo",
+      "Veja o preview renderizado ao vivo à direita",
+      "Suporta títulos, negrito, itálico, código e links"
+    ]
+  },
+  "faq": {
+    "q1": "É seguro usar o SLIT.IO?",
+    "a1": "Sim, é 100% seguro. Todos os arquivos e dados são processados localmente no seu navegador. Nada é enviado para nossos servidores.",
+    "q2": "Preciso pagar para usar?",
+    "a2": "Não, todas as ferramentas são gratuitas e sem anúncios. O projeto é mantido por doações da comunidade.",
+    "q3": "Funciona offline?",
+    "a3": "Sim! Graças à tecnologia PWA, após o primeiro acesso, a maioria das ferramentas funciona mesmo sem conexão com a internet."
+  },
+  "tools": {
+    "background-remover": {
       "title": "Removedor de Fundo de Imagem Online Grátis - 100% Automático",
       "description": "Remova o fundo de fotos instantaneamente com IA. Alta qualidade, grátis e sem necessidade de cadastro. O processamento é feito 100% no seu navegador.",
       "icon": "🖼️",
@@ -462,6 +543,69 @@
         {
           "q": "O que é Markdown?",
           "a": "Markdown é uma linguagem de formatação leve usada para formatar texto simples, comumente usada em documentação, READMEs e fóruns."
+        }
+      ]
+    },
+    "jwt-decoder": {
+      "title": "Decodificador JWT",
+      "description": "Decodifique e inspecione tokens JWT instantaneamente no seu navegador. Visualize cabeçalho, payload e assinatura.",
+      "icon": "🔑",
+      "features": [
+        "Decodifica tokens JWT instantaneamente",
+        "Mostra cabeçalho, payload e assinatura",
+        "Formata datas automaticamente",
+        "100% no lado do cliente"
+      ],
+      "faq": [
+        {
+          "q": "O que é um JWT?",
+          "a": "JSON Web Token é um meio compacto e URL-safe de representar declarações entre duas partes."
+        },
+        {
+          "q": "Meus dados são enviados para um servidor?",
+          "a": "Não. Tudo é decodificado localmente no seu navegador."
+        }
+      ]
+    },
+    "regex-tester": {
+      "title": "Testador de Regex",
+      "description": "Teste expressões regulares instantaneamente com correspondência e destaque ao vivo.",
+      "icon": "🔍",
+      "features": [
+        "Correspondência ao vivo com destaque",
+        "Suporta flags g, i, m, s",
+        "Mostra grupos e índices",
+        "Exibição de erro para padrões inválidos"
+      ],
+      "faq": [
+        {
+          "q": "Que sintaxe regex é suportada?",
+          "a": "Sintaxe regex completa do JavaScript incluindo grupos de captura e quantificadores."
+        },
+        {
+          "q": "As correspondências são destacadas?",
+          "a": "Sim, todas as correspondências são destacadas em amarelo no texto de teste."
+        }
+      ]
+    },
+    "text-diff": {
+      "title": "Comparador de Diferenças",
+      "description": "Compare dois textos lado a lado com diferenças codificadas por cores.",
+      "icon": "📊",
+      "features": [
+        "Comparação lado a lado",
+        "Adições e remoções codificadas por cores",
+        "Opção de formatação JSON",
+        "Inverta painéis com um clique"
+      ],
+      "faq": [
+        {
+          "q": "Como funciona o algoritmo?",
+          "a": "Usa o algoritmo LCS (Longest Common Subsequence) para encontrar a edição mínima."
+        },
+        {
+          "q": "Posso comparar JSON?",
+          "a": "Sim, use o botão Formatar para formatar o JSON antes de comparar."
         }
       ]
     }
@@ -834,6 +978,40 @@
       "successMessage": "Feedback enviado com sucesso! Obrigado.",
       "errorMessage": "Erro ao enviar. Tente novamente mais tarde.",
       "successHeading": "Sucesso!"
+    },
+    "jwt": {
+      "placeholder": "Cole seu token JWT aqui...",
+      "decodeButton": "Decodificar JWT",
+      "paste": "Colar da Área de Transferência",
+      "copied": "Copiado para a área de transferência",
+      "empty": "Por favor, insira um token JWT",
+      "invalid": "Formato JWT inválido. Esperado 3 partes separadas por pontos.",
+      "decodeError": "Falha ao decodificar o token. Verifique o formato.",
+      "copy": "Copiar"
+    },
+    "regex": {
+      "pattern": "Padrão Regex",
+      "patternPlaceholder": "ex. ^\\d{3}-\\d{4}$",
+      "testString": "Texto de Teste",
+      "testPlaceholder": "Digite o texto para testar contra o padrão...",
+      "result": "Resultado da Correspondência",
+      "matchDetails": "Detalhes da Correspondência",
+      "invalidPattern": "Padrão de expressão regular inválido",
+      "copied": "Copiado para a área de transferência"
+    },
+    "diff": {
+      "left": "Original",
+      "right": "Modificado",
+      "leftPlaceholder": "Cole o texto original aqui...",
+      "rightPlaceholder": "Cole o texto modificado aqui...",
+      "compare": "Comparar",
+      "swap": "Inverter",
+      "clear": "Limpar",
+      "formatJson": "Formatar JSON",
+      "formatted": "Texto formatado como JSON",
+      "added": "adicionados",
+      "removed": "removidos",
+      "unchanged": "inalterados"
     }
   },
   "privacyPage": {

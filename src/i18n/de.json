@@ -545,6 +545,69 @@
           "a": "Markdown ist eine leichtgewichtige Auszeichnungssprache zur Formatierung von Klartext, häufig verwendet für Dokumentation, READMEs und Foren."
         }
       ]
+    },
+    "jwt-decoder": {
+      "title": "JWT-Decoder",
+      "description": "Dekodieren und inspizieren Sie JSON Web Tokens (JWT) sofort in Ihrem Browser.",
+      "icon": "🔑",
+      "features": [
+        "Dekodiert JWT-Tokens sofort",
+        "Zeigt Header, Payload und Signatur",
+        "Formatiert Daten automatisch",
+        "100% clientseitig"
+      ],
+      "faq": [
+        {
+          "q": "Was ist ein JWT?",
+          "a": "JSON Web Token ist ein kompaktes, URL-sicheres Mittel, Ansprüche zwischen zwei Parteien darzustellen."
+        },
+        {
+          "q": "Werden meine Daten an einen Server gesendet?",
+          "a": "Nein. Alles wird lokal im Browser dekodiert."
+        }
+      ]
+    },
+    "regex-tester": {
+      "title": "Regex-Tester",
+      "description": "Testen Sie reguläre Ausdrücke sofort mit Live-Matching und Hervorhebung.",
+      "icon": "🔍",
+      "features": [
+        "Live-Matching mit Hervorhebung",
+        "Unterstützt g, i, m, s Flags",
+        "Zeigt Gruppen und Indizes",
+        "Fehleranzeige für ungültige Muster"
+      ],
+      "faq": [
+        {
+          "q": "Welche Regex-Syntax wird unterstützt?",
+          "a": "Vollständige JavaScript-Regex-Syntax inklusive Capture-Gruppen."
+        },
+        {
+          "q": "Werden Übereinstimmungen hervorgehoben?",
+          "a": "Ja, alle Übereinstimmungen werden gelb hervorgehoben."
+        }
+      ]
+    },
+    "text-diff": {
+      "title": "Text-Diff-Vergleich",
+      "description": "Vergleichen Sie zwei Texte nebeneinander mit farbcodierten Unterschieden.",
+      "icon": "📊",
+      "features": [
+        "Nebeneinander-Vergleich",
+        "Farbcodierte Änderungen",
+        "JSON Auto-Format Option",
+        "Panel mit einem Klick tauschen"
+      ],
+      "faq": [
+        {
+          "q": "Wie funktioniert der Algorithmus?",
+          "a": "Verwendet den LCS-Algorithmus zur Minimaledition."
+        },
+        {
+          "q": "Kann ich JSON vergleichen?",
+          "a": "Ja, verwenden Sie die Formatieren-Schaltfläche."
+        }
+      ]
     }
   },
   "blog": {
@@ -915,6 +978,40 @@
       "successMessage": "Feedback erfolgreich gesendet! Vielen Dank.",
       "errorMessage": "Fehler beim Senden des Feedbacks. Bitte versuchen Sie es später erneut.",
       "successHeading": "Erfolgreich!"
+    },
+    "jwt": {
+      "placeholder": "JWT-Token hier einfügen...",
+      "decodeButton": "JWT Dekodieren",
+      "paste": "Aus Zwischenablage einfügen",
+      "copied": "In die Zwischenablage kopiert",
+      "empty": "Bitte geben Sie ein JWT-Token ein",
+      "invalid": "Ungültiges JWT-Format. 3 durch Punkte getrennte Teile erwartet.",
+      "decodeError": "Dekodierung fehlgeschlagen. Überprüfen Sie das Format.",
+      "copy": "Kopieren"
+    },
+    "regex": {
+      "pattern": "Regex-Muster",
+      "patternPlaceholder": "z.B. ^\\d{3}-\\d{4}$",
+      "testString": "Testtext",
+      "testPlaceholder": "Geben Sie Text zum Testen ein...",
+      "result": "Übereinstimmungsergebnis",
+      "matchDetails": "Übereinstimmungsdetails",
+      "invalidPattern": "Ungültiges reguläres Ausdrucksmuster",
+      "copied": "In die Zwischenablage kopiert"
+    },
+    "diff": {
+      "left": "Original",
+      "right": "Modifiziert",
+      "leftPlaceholder": "Originaltext hier einfügen...",
+      "rightPlaceholder": "Modifizierten Text hier einfügen...",
+      "compare": "Vergleichen",
+      "swap": "Tauschen",
+      "clear": "Löschen",
+      "formatJson": "JSON Formatieren",
+      "formatted": "Text als JSON formatiert",
+      "added": "hinzugefügt",
+      "removed": "entfernt",
+      "unchanged": "unverändert"
     }
   },
   "privacyPage": {
