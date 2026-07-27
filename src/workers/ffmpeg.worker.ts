@@ -59,7 +59,6 @@ self.onmessage = async (event) => {
         self.postMessage({ type: 'log', message: `[ffmpeg.worker] Read output file: ${outputFileName}` });
 
         // Envia o resultado de volta para o thread principal
-        console.log('[ffmpeg.worker] Sending result to main thread.');
         self.postMessage({ type: 'result', data: data as Uint8Array, outputFileName });
         break;
       }

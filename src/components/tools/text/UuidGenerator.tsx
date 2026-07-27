@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useToast } from '../../Toast';
 
 function generateUuid(): string {
@@ -9,7 +10,7 @@ function generateUuid(): string {
   }));
 }
 
-const UuidGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const UuidGenerator: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [uuids, setUuids] = useState<string[]>([]);

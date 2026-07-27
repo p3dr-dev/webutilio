@@ -1,35 +1,16 @@
 ---
 import { tools } from '../data/tools';
 import { useTranslations } from '../i18n/utils';
+import { pageSlugs, toolBasePath, allLangs, type Language } from '../lib/slugs';
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const { pathname } = Astro.url;
 
-const allLangs = ['en', 'pt', 'es', 'fr', 'de', 'ru'] as const;
-type LangCode = typeof allLangs[number];
+type LangCode = Language;
 
 const langLabels: Record<LangCode, string> = { en: 'EN', pt: 'PT', es: 'ES', fr: 'FR', de: 'DE', ru: 'RU' };
 const langNames: Record<LangCode, string> = { en: 'English', pt: 'Português', es: 'Español', fr: 'Français', de: 'Deutsch', ru: 'Русский' };
-
-const basePathMap: Record<LangCode, string> = {
-  en: 'tools',
-  pt: 'ferramentas',
-  es: 'herramientas',
-  fr: 'outils',
-  de: 'werkzeuge',
-  ru: 'instrumenty',
-};
-
-const pageSlugs: Record<string, Record<LangCode, string>> = {
-  sobre:    { en: 'about', pt: 'sobre', es: 'sobre', fr: 'a-propos', de: 'ueber-uns', ru: 'o-nas' },
-  about:    { en: 'about', pt: 'sobre', es: 'sobre', fr: 'a-propos', de: 'ueber-uns', ru: 'o-nas' },
-  'politica-privacidade': { en: 'privacy-policy', pt: 'politica-privacidade', es: 'politica-privacidad', fr: 'politique-confidentialite', de: 'datenschutzrichtlinie', ru: 'politika-konfidencialnosti' },
-  'privacy-policy': { en: 'privacy-policy', pt: 'politica-privacidade', es: 'politica-privacidad', fr: 'politique-confidentialite', de: 'datenschutzrichtlinie', ru: 'politika-konfidencialnosti' },
-  feedback: { en: 'feedback', pt: 'feedback', es: 'feedback', fr: 'retour', de: 'feedback', ru: 'obratnaya-svyaz' },
-  apoie:    { en: 'support', pt: 'apoie', es: 'apoyar', fr: 'soutenir', de: 'unterstuetzen', ru: 'podderzhat' },
-  support:  { en: 'support', pt: 'apoie', es: 'apoyar', fr: 'soutenir', de: 'unterstuetzen', ru: 'podderzhat' },
-};
 
 const getTargetPath = (targetLang: LangCode): string => {
   if (targetLang === lang) return '#';
@@ -42,7 +23,7 @@ const getTargetPath = (targetLang: LangCode): string => {
     const currentSlug = parts[2];
     const tool = tools.find(t => (Object.values(t.slugs) as string[]).includes(currentSlug));
     if (tool) {
-      return `/${targetLang}/${basePathMap[targetLang]}/${tool.slugs[targetLang]}`;
+      return `/${targetLang}/${toolBasePath[targetLang]}/${tool.slugs[targetLang]}`;
     }
   }
 
@@ -50,7 +31,7 @@ const getTargetPath = (targetLang: LangCode): string => {
   if (parts.length === 2 && allLangs.includes(currentLang)) {
     const slug = parts[1];
     if (pageSlugs[slug]) {
-      return `/${targetLang}/${pageSlugs[slug][targetLang]}`;
+      return `/${targetLang}/${pageSlugs[slug as keyof typeof pageSlugs][targetLang]}`;
     }
   }
 

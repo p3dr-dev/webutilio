@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import exifr from 'exifr';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useToast } from '../../Toast';
 import LoadingSpinner from '../common/LoadingSpinner';
 
-const ExifExtractor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const ExifExtractor: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [exifData, setExifData] = useState<Record<string, unknown> | null>(null);

@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 
-const HashGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const HashGenerator: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [input, setInput] = useState('');
   const [hash, setHash] = useState('');
@@ -15,6 +16,13 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ l
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
 
   const [copied, setCopied] = useState(false);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (!hash || !compareHash) {
@@ -33,7 +41,8 @@ const HashGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ l
     try {
       await navigator.clipboard.writeText(hash);
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+      copiedTimerRef.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       // clipboard not available
     }

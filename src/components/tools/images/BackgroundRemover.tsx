@@ -2,13 +2,14 @@ import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { removeBackground } from '@imgly/background-removal';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import * as ort from 'onnxruntime-web';
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
 // Configure o caminho do WASM uma vez fora do componente
 ort.env.wasm.wasmPath = '/models/';
 
-const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const BackgroundRemover: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string | null>(null);
@@ -24,9 +25,10 @@ const BackgroundRemover: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = 
   const originalUrlRef = useRef<string | null>(null);
 
   useEffect(() => {
+    const currentOriginal = originalUrlRef.current;
     return () => {
       if (processedUrl) URL.revokeObjectURL(processedUrl);
-      if (originalUrlRef.current) URL.revokeObjectURL(originalUrlRef.current);
+      if (currentOriginal) URL.revokeObjectURL(currentOriginal);
     };
   }, [processedUrl]);
 

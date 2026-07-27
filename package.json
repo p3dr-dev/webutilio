@@ -3,17 +3,17 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "test": "vitest",
-    "test:run": "vitest run",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "check": "astro check",
+    "dev": "node node_modules/.bin/astro dev",
+    "start": "node node_modules/.bin/astro dev",
+    "build": "node node_modules/.bin/astro build",
+    "preview": "node node_modules/.bin/astro preview",
+    "astro": "node node_modules/.bin/astro",
+    "test": "node node_modules/.bin/vitest",
+    "test:run": "node node_modules/.bin/vitest run",
+    "lint": "node node_modules/.bin/eslint .",
+    "lint:fix": "node node_modules/.bin/eslint . --fix",
+    "format": "node node_modules/.bin/prettier --write .",
+    "check": "node node_modules/.bin/astro check",
     "audit": "npm audit --audit-level=high"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
     "typescript": "~5.9.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^18.3.31",

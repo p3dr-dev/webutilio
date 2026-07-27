@@ -1,9 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
-const ImageResizer: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const ImageResizer: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalImage, setOriginalImage] = useState<File | null>(null);
   const [originalImageUrl, setOriginalImageUrl] = useState<string | null>(null);
@@ -17,16 +18,16 @@ const ImageResizer: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ la
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
 
   useEffect(() => {
-    // This effect runs when the component unmounts or when the URLs change.
     return () => {
-      if (originalImageUrl) {
-        URL.revokeObjectURL(originalImageUrl);
-      }
-      if (resizedImageUrl) {
-        URL.revokeObjectURL(resizedImageUrl);
-      }
+      if (originalImageUrl) URL.revokeObjectURL(originalImageUrl);
     };
-  }, [originalImageUrl, resizedImageUrl]);
+  }, [originalImageUrl]);
+
+  useEffect(() => {
+    return () => {
+      if (resizedImageUrl) URL.revokeObjectURL(resizedImageUrl);
+    };
+  }, [resizedImageUrl]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];

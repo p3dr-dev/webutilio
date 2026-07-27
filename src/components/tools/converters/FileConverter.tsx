@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { Canvg } from 'canvg';
 import * as pdfjs from 'pdfjs-dist';
 
@@ -13,7 +14,7 @@ type InputType = 'image' | 'svg' | 'pdf' | 'json';
 
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 
-const FileConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const FileConverter: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string>('');
@@ -26,16 +27,16 @@ const FileConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ l
   const loadingText = useLoadingPhrases(isLoading, t('components.loading.genericPhrases') as string[]);
 
   useEffect(() => {
-    // This effect runs when the component unmounts or when the URLs change.
     return () => {
-      if (originalUrl) {
-        URL.revokeObjectURL(originalUrl);
-      }
-      if (convertedUrl) {
-        URL.revokeObjectURL(convertedUrl);
-      }
+      if (originalUrl) URL.revokeObjectURL(originalUrl);
     };
-  }, [originalUrl, convertedUrl]);
+  }, [originalUrl]);
+
+  useEffect(() => {
+    return () => {
+      if (convertedUrl) URL.revokeObjectURL(convertedUrl);
+    };
+  }, [convertedUrl]);
 
   const availableFormats: Record<string, OutputFormat[]> = {
     'image/jpeg': ['png', 'webp', 'jpeg'],

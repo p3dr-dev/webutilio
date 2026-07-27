@@ -1,34 +1,71 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { tools, type Language } from '../data/tools';
 
 interface Props {
   placeholder: string;
   noResultsText: string;
   clearText: string;
+  lang: Language;
 }
 
-export default function HomeSearch({ placeholder, noResultsText, clearText }: Props) {
+interface ToolCardInfo {
+  id: string;
+  slug: string;
+  icon: string;
+  keywords: string[];
+}
+
+export default function HomeSearch({ placeholder, noResultsText, clearText, lang }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [hasResults, setHasResults] = useState(true);
+  const [matchingIds, setMatchingIds] = useState<Set<string> | null>(null);
+  const toolCardsRef = useRef<Map<string, HTMLElement>>(new Map());
 
+  // Build searchable index once
+  const toolIndex: ToolCardInfo[] = tools.map(tool => ({
+    id: tool.id,
+    slug: tool.slugs[lang],
+    icon: tool.icon,
+    keywords: tool.keywords,
+  }));
+
+  // Register card DOM elements
+  const registerCard = useCallback((id: string, el: HTMLElement | null) => {
+    if (el) {
+      toolCardsRef.current.set(id, el);
+    } else {
+      toolCardsRef.current.delete(id);
+    }
+  }, []);
+
+  // Search logic using pre-built index
   const handleSearch = useCallback((term: string) => {
-    const cards = document.querySelectorAll('[data-tool-card]');
     const normalizedTerm = term.toLowerCase().trim();
-    let matchCount = 0;
 
-    cards.forEach((card) => {
-      const searchData = (card as HTMLElement).dataset.searchTerms || '';
-      const isVisible = searchData.includes(normalizedTerm);
-      
-      if (isVisible) {
-        (card as HTMLElement).style.display = 'flex';
-        matchCount++;
+    if (!normalizedTerm) {
+      setMatchingIds(null);
+      return;
+    }
+
+    const matches = new Set<string>();
+    for (const tool of toolIndex) {
+      const searchableText = [tool.id, tool.icon, ...tool.keywords].join(' ').toLowerCase();
+      if (searchableText.includes(normalizedTerm)) {
+        matches.add(tool.id);
+      }
+    }
+    setMatchingIds(matches);
+  }, []);
+
+  // Apply visibility based on matching IDs
+  useEffect(() => {
+    toolCardsRef.current.forEach((el, id) => {
+      if (matchingIds === null) {
+        el.style.display = '';
       } else {
-        (card as HTMLElement).style.display = 'none';
+        el.style.display = matchingIds.has(id) ? '' : 'none';
       }
     });
-
-    setHasResults(matchCount > 0);
-  }, []);
+  }, [matchingIds]);
 
   useEffect(() => {
     handleSearch(searchTerm);
@@ -63,7 +100,7 @@ export default function HomeSearch({ placeholder, noResultsText, clearText }: Pr
         )}
       </div>
 
-      {!hasResults && (
+      {matchingIds !== null && matchingIds.size === 0 && (
         <div className="mt-8 text-center animate-fade-in">
           <div className="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
             <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

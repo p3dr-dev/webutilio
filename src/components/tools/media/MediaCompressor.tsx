@@ -1,10 +1,11 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 import { formatBytes } from '../../../utils/format';
 
-const MediaCompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const MediaCompressor: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [originalFile, setOriginalFile] = useState<File | null>(null);
   const [originalUrl, setOriginalUrl] = useState<string>('');
@@ -26,8 +27,11 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({
   const [estimatedSize, setEstimatedSize] = useState<number | null>(null);
 
   useEffect(() => {
-    workerRef.current = new Worker(new URL('../../../workers/ffmpeg.worker.ts', import.meta.url), { type: 'module' });
-    const worker = workerRef.current;
+    // Only create worker when a video file is loaded
+    if (!originalFile || !originalFile.type.startsWith('video/')) return;
+
+    const worker = new Worker(new URL('../../../workers/ffmpeg.worker.ts', import.meta.url), { type: 'module' });
+    workerRef.current = worker;
 
     worker.onmessage = (event) => {
       const { type, data, progress, message: workerMessage } = event.data;
@@ -64,7 +68,16 @@ const MediaCompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({
     };
 
     return () => {
-      if (workerRef.current) workerRef.current.terminate();
+      if (workerRef.current) {
+        workerRef.current.terminate();
+        workerRef.current = null;
+      }
+    };
+  }, [originalFile]);
+
+  // Cleanup for all object URLs on unmount (covers both image and video)
+  useEffect(() => {
+    return () => {
       const currentOriginal = originalUrlRef.current;
       const currentCompressed = compressedUrlRef.current;
       if (currentOriginal) URL.revokeObjectURL(currentOriginal);
