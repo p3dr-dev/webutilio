@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
 import LoadingSpinner from '../common/LoadingSpinner';
 
-const FileEncryptor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const FileEncryptor: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState('');
@@ -18,9 +19,10 @@ const FileEncryptor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ l
   const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => {
+    const currentWorker = workerRef.current;
     return () => {
       if (processedFileUrl) URL.revokeObjectURL(processedFileUrl);
-      if (workerRef.current) workerRef.current.terminate();
+      if (currentWorker) currentWorker.terminate();
     };
   }, [processedFileUrl]);
 

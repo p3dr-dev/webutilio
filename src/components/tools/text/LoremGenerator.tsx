@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useToast } from '../../Toast';
 
 const LOREM_WORDS = 'lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');
 
-function generateLorem(count: number, startWithLorem: boolean): string {
+function generateLorem(wordCount: number, startWithLorem: boolean): string {
   const sentences: string[] = [];
-  for (let i = 0; i < Math.ceil(count / 10); i++) {
-    const len = 8 + Math.floor(Math.random() * 8);
+  let wordsGenerated = 0;
+  while (wordsGenerated < wordCount) {
+    const len = Math.min(8 + Math.floor(Math.random() * 8), wordCount - wordsGenerated);
     const words = Array.from({ length: len }, () => LOREM_WORDS[Math.floor(Math.random() * LOREM_WORDS.length)]);
     words[0] = words[0][0].toUpperCase() + words[0].slice(1);
     sentences.push(words.join(' ') + '.');
+    wordsGenerated += len;
   }
   let result = sentences.join(' ');
   if (startWithLorem && !result.toLowerCase().startsWith('lorem')) {
     result = 'Lorem ipsum dolor sit amet, ' + result.slice(result.indexOf(' ') + 1);
   }
-  return result.slice(0, count);
+  return result;
 }
 
-const LoremGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const LoremGenerator: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [wordCount, setWordCount] = useState(50);

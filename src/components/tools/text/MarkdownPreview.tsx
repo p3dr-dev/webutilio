@@ -1,8 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
+
+// Basic HTML sanitizer to prevent XSS from dangerouslySetInnerHTML
+function sanitizeHtml(html: string): string {
+  return html
+    // Remove script tags and their content
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    // Remove event handlers (on* attributes)
+    .replace(/\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi, '')
+    // Remove javascript: URLs in href/src attributes
+    .replace(/(href|src)\s*=\s*["']?\s*javascript:[^"'\s>]*/gi, '$1="#"')
+    // Remove data: URLs except safe ones (images)
+    .replace(/(href)\s*=\s*["']?\s*data:[^"'\s>]*/gi, '$1="#"')
+    // Remove <iframe>, <object>, <embed> tags
+    .replace(/<(iframe|object|embed|form|input|button|select|textarea)\b[^>]*>/gi, '')
+    .replace(/<\/(iframe|object|embed|form|input|button|select|textarea)>/gi, '');
+}
 
 function renderMarkdown(text: string): string {
-  return text
+  const html = text
     .replace(/^### (.*$)/gm, '<h3>$1</h3>')
     .replace(/^## (.*$)/gm, '<h2>$1</h2>')
     .replace(/^# (.*$)/gm, '<h1>$1</h1>')
@@ -15,11 +32,13 @@ function renderMarkdown(text: string): string {
     .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
     .replace(/\n\n/g, '</p><p>')
     .replace(/\n/g, '<br/>');
+  return sanitizeHtml(html);
 }
 
-const MarkdownPreview: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const MarkdownPreview: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [input, setInput] = useState('# Hello World\n\nThis is **bold** and *italic* text.\n\n- Item 1\n- Item 2\n- Item 3\n\n`code example`');
+  const htmlOutput = useMemo(() => renderMarkdown(input), [input]);
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md dark:bg-gray-800">
@@ -38,7 +57,7 @@ const MarkdownPreview: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({
           <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">{t('components.markdown.preview')}</label>
           <div
             className="w-full p-3 border border-gray-300 rounded-md prose dark:prose-invert dark:bg-gray-700 dark:border-gray-600 min-h-[20rem] overflow-auto text-sm"
-            dangerouslySetInnerHTML={{ __html: renderMarkdown(input) }}
+            dangerouslySetInnerHTML={{ __html: htmlOutput }}
           />
         </div>
       </div>

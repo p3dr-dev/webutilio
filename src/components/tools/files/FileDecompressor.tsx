@@ -3,6 +3,7 @@ import JSZip from 'jszip';
 import untar from 'js-untar';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { formatBytes } from '../../../utils/format';
 
 import { useLoadingPhrases } from '../common/useLoadingPhrases';
@@ -14,7 +15,7 @@ interface ExtractedFile {
   blob: Blob | null;
 }
 
-const FileDecompressor: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const FileDecompressor: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const [archiveFile, setArchiveFile] = useState<File | null>(null);
   const [fileList, setFileList] = useState<ExtractedFile[]>([]);

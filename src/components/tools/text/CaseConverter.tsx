@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useToast } from '../../Toast';
 
 const CASES = ['lowercase', 'uppercase', 'titlecase', 'sentencecase', 'camelcase', 'snakecase', 'kebabcase', 'pascalcase'] as const;
@@ -18,7 +19,7 @@ function toCase(text: string, caseType: string): string {
   }
 }
 
-const CaseConverter: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const CaseConverter: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [input, setInput] = useState('');

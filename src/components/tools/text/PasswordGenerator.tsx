@@ -1,8 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useTranslations } from '../../../i18n/utils';
+import type { Language } from "../../../data/tools";
 import { useToast } from '../../Toast';
 
-const PasswordGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const PasswordGenerator: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   const { showToast } = useToast();
   const [password, setPassword] = useState('');
@@ -12,6 +13,13 @@ const PasswordGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = 
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSymbols, setIncludeSymbols] = useState(true);
   const [copied, setCopied] = useState(false);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
 
   const generate = useCallback(() => {
     let charset = '';
@@ -36,7 +44,8 @@ const PasswordGenerator: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = 
       await navigator.clipboard.writeText(password);
       setCopied(true);
       showToast(t('components.passwordGenerator.copied'), 'success');
-      setTimeout(() => setCopied(false), 2000);
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+      copiedTimerRef.current = setTimeout(() => setCopied(false), 2000);
     } catch {
       // clipboard not available
     }

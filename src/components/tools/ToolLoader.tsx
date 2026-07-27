@@ -1,10 +1,11 @@
 import React, { Suspense, lazy, Component, type ReactNode } from 'react';
 import { useTranslations } from '../../i18n/utils';
 import { ToastProvider } from '../Toast';
+import type { Language } from '../../data/tools';
 
 interface ToolLoaderProps {
   toolId: string;
-  lang: 'pt' | 'en' | 'es' | 'fr' | 'de';
+  lang: Language;
 }
 
 class ErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
@@ -49,7 +50,7 @@ const toolComponentMap: { [key: string]: React.LazyExoticComponent<React.Compone
 };
 
 // Componente de fallback para o Suspense
-const LoadingFallback: React.FC<{ lang: 'pt' | 'en' | 'es' | 'fr' | 'de' }> = ({ lang }) => {
+const LoadingFallback: React.FC<{ lang: Language }> = ({ lang }) => {
   const t = useTranslations(lang);
   return (
     <div className="flex flex-col justify-center items-center p-10 min-h-[600px] w-full bg-white dark:bg-gray-800 rounded-lg shadow-md">
