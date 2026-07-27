@@ -1,4 +1,5 @@
 ---
+lang: en
 title: "Why Client-Side Processing Is the Future of Online Tools"
 description: "Learn why processing files in your browser — without uploading to servers — is safer, faster, and more private. A deep dive into modern web technologies like WebAssembly, Web Crypto API, and Canvas."
 pubDate: 2026-07-20

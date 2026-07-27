@@ -1,4 +1,5 @@
 ---
+lang: en
 title: "How FFmpeg Runs in Your Browser (And Why It Matters)"
 description: "Discover how FFmpeg — the world's most popular video processing tool — now runs entirely in your browser using WebAssembly. No installation, no upload, no server."
 pubDate: 2026-07-18

@@ -489,7 +489,8 @@
     "toggle": "Alternar tema"
   },
   "search": {
-    "clear": "Limpar busca"
+    "clear": "Limpar busca",
+    "noResultsFeedback": "Não encontrou uma ferramenta? Sugira uma!"
   },
   "recentTools": {
     "title": "Usados Recentemente"
@@ -897,7 +898,10 @@
     "techTitle": "Stack Tecnológico Confiável",
     "videoProcessing": "Processamento de vídeo",
     "aiInference": "Inferência de IA",
-    "modernFramework": "Framework moderno"
+    "modernFramework": "Framework moderno",
+    "feedbackTitle": "Não encontrou o que procurava?",
+    "feedbackDesc": "Considere deixar seu feedback e seu pedido. Atenderemos o mais rápido possível.",
+    "feedbackCta": "Deixe seu feedback"
   },
   "a11y": {
     "tocTitle": "Índice",

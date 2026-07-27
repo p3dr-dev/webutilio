@@ -1,4 +1,5 @@
 ---
+lang: en
 title: "10 Free Online Tools That Respect Your Privacy in 2026"
 description: "Looking for free online tools that don't upload your files? Here are 10 privacy-first tools that run entirely in your browser — no signup, no tracking, no server."
 pubDate: 2026-07-15
