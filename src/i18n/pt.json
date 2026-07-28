@@ -634,7 +634,8 @@
   },
   "search": {
     "clear": "Limpar busca",
-    "noResultsFeedback": "Não encontrou uma ferramenta? Sugira uma!"
+    "noResultsFeedback": "Não encontrou uma ferramenta? Sugira uma!",
+    "suggestTool": "Sugerir uma ferramenta"
   },
   "recentTools": {
     "title": "Usados Recentemente"

@@ -6,6 +6,8 @@ interface Props {
   noResultsText: string;
   clearText: string;
   lang: Language;
+  feedbackUrl: string;
+  noResultsFeedbackText: string;
 }
 
 interface ToolCardInfo {
@@ -15,7 +17,7 @@ interface ToolCardInfo {
   keywords: string[];
 }
 
-export default function HomeSearch({ placeholder, noResultsText, clearText, lang }: Props) {
+export default function HomeSearch({ placeholder, noResultsText, clearText, lang, feedbackUrl, noResultsFeedbackText }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [matchingIds, setMatchingIds] = useState<Set<string> | null>(null);
   const toolCardsRef = useRef<Map<string, HTMLElement>>(new Map());

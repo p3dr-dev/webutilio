@@ -634,7 +634,8 @@
   },
   "search": {
     "clear": "Suche löschen",
-    "noResultsFeedback": "Finden Sie kein Werkzeug? Schlagen Sie eines vor!"
+    "noResultsFeedback": "Finden Sie kein Werkzeug? Schlagen Sie eines vor!",
+    "suggestTool": "Werkzeug vorschlagen"
   },
   "recentTools": {
     "title": "Kürzlich verwendet"

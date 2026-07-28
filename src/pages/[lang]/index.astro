@@ -66,6 +66,8 @@ const t = useTranslations(lang);
     noResultsText={t('home.noResults')} 
     clearText={t('search.clear')} 
     lang={lang}
+    feedbackUrl={`/${lang}/${pageSlugs.feedback[lang]}`}
+    noResultsFeedbackText={t('search.suggestTool')}
   />
 
   <h2 id="tools" class="sr-only">{t('site.allTools')}</h2>

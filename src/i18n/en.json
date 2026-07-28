@@ -634,7 +634,8 @@
   },
   "search": {
     "clear": "Clear search",
-    "noResultsFeedback": "Can't find a tool? Suggest one!"
+    "noResultsFeedback": "Can't find a tool? Suggest one!",
+    "suggestTool": "Suggest a tool"
   },
   "recentTools": {
     "title": "Recently Used"
