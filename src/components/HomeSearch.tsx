@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { tools, type Language } from '../data/tools';
 
 interface Props {
@@ -19,10 +19,9 @@ interface ToolCardInfo {
 
 export default function HomeSearch({ placeholder, noResultsText, clearText, lang, feedbackUrl, noResultsFeedbackText }: Props) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [matchingIds, setMatchingIds] = useState<Set<string> | null>(null);
-  const toolCardsRef = useRef<Map<string, HTMLElement>>(new Map());
+  const [matchCount, setMatchCount] = useState<number | null>(null);
 
-  // Build searchable index once
+  // Build searchable index from tools data
   const toolIndex: ToolCardInfo[] = tools.map(tool => ({
     id: tool.id,
     slug: tool.slugs[lang],
@@ -30,44 +29,41 @@ export default function HomeSearch({ placeholder, noResultsText, clearText, lang
     keywords: tool.keywords,
   }));
 
-  // Register card DOM elements
-  const registerCard = useCallback((id: string, el: HTMLElement | null) => {
-    if (el) {
-      toolCardsRef.current.set(id, el);
-    } else {
-      toolCardsRef.current.delete(id);
-    }
-  }, []);
-
-  // Search logic using pre-built index
+  // Search and filter tool cards by querying the DOM directly
   const handleSearch = useCallback((term: string) => {
     const normalizedTerm = term.toLowerCase().trim();
 
+    // Find all tool card elements rendered by Astro
+    const cards = document.querySelectorAll<HTMLElement>('[data-tool-card]');
+
     if (!normalizedTerm) {
-      setMatchingIds(null);
+      // Show all cards
+      cards.forEach(card => { card.style.display = ''; });
+      setMatchCount(null);
       return;
     }
 
-    const matches = new Set<string>();
-    for (const tool of toolIndex) {
-      const searchableText = [tool.id, tool.icon, ...tool.keywords].join(' ').toLowerCase();
-      if (searchableText.includes(normalizedTerm)) {
-        matches.add(tool.id);
-      }
-    }
-    setMatchingIds(matches);
-  }, []);
+    let count = 0;
+    cards.forEach(card => {
+      // Prefer data-search-terms from the Astro component, fall back to index
+      const searchTerms = card.dataset.searchTerms || '';
+      const toolId = card.dataset.toolId || '';
+      const tool = toolIndex.find(t => t.id === toolId);
+      const indexTerms = tool
+        ? [tool.id, tool.icon, ...tool.keywords].join(' ').toLowerCase()
+        : '';
+      const haystack = (searchTerms + ' ' + indexTerms).toLowerCase();
 
-  // Apply visibility based on matching IDs
-  useEffect(() => {
-    toolCardsRef.current.forEach((el, id) => {
-      if (matchingIds === null) {
-        el.style.display = '';
+      if (haystack.includes(normalizedTerm)) {
+        card.style.display = '';
+        count++;
       } else {
-        el.style.display = matchingIds.has(id) ? '' : 'none';
+        card.style.display = 'none';
       }
     });
-  }, [matchingIds]);
+
+    setMatchCount(count);
+  }, [toolIndex]);
 
   useEffect(() => {
     handleSearch(searchTerm);
@@ -102,7 +98,7 @@ export default function HomeSearch({ placeholder, noResultsText, clearText, lang
         )}
       </div>
 
-      {matchingIds !== null && matchingIds.size === 0 && (
+      {matchCount !== null && matchCount === 0 && (
         <div className="mt-8 text-center animate-fade-in">
           <div className="inline-block p-4 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
             <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
