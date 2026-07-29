@@ -704,7 +704,9 @@
       "viewOnMaps": "View on Google Maps",
       "noGps": "No GPS coordinates found",
       "altPreview": "Photo preview",
-      "errorParsing": "Error parsing EXIF data"
+      "errorParsing": "Error parsing EXIF data",
+      "showAllTags": "Show all raw tags",
+      "hideAllTags": "Hide raw tags"
     },
     "loading": {
       "message": "Loading tool...",

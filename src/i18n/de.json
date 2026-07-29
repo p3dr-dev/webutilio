@@ -704,7 +704,9 @@
       "viewOnMaps": "Auf Google Maps anzeigen",
       "noGps": "Keine GPS-Koordinaten gefunden",
       "altPreview": "Fotovorschau",
-      "errorParsing": "Fehler beim Lesen der EXIF-Daten"
+      "errorParsing": "Fehler beim Lesen der EXIF-Daten",
+      "showAllTags": "Alle Rohdaten anzeigen",
+      "hideAllTags": "Rohdaten ausblenden"
     },
     "loading": {
       "message": "Werkzeug wird geladen...",

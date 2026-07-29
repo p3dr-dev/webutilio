@@ -704,7 +704,9 @@
       "viewOnMaps": "Посмотреть на Google Maps",
       "noGps": "Координаты GPS не найдены",
       "altPreview": "Предпросмотр фотографии",
-      "errorParsing": "Ошибка чтения данных EXIF"
+      "errorParsing": "Ошибка чтения данных EXIF",
+      "showAllTags": "Показать все теги",
+      "hideAllTags": "Скрыть теги"
     },
     "loading": {
       "message": "Загрузка инструмента...",

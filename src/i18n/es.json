@@ -704,7 +704,9 @@
       "viewOnMaps": "Ver en Google Maps",
       "noGps": "No se encontraron coordenadas GPS",
       "altPreview": "Vista previa de la foto",
-      "errorParsing": "Error al procesar datos EXIF"
+      "errorParsing": "Error al procesar datos EXIF",
+      "showAllTags": "Mostrar todas las etiquetas",
+      "hideAllTags": "Ocultar etiquetas"
     },
     "loading": {
       "message": "Cargando herramienta...",

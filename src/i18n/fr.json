@@ -704,7 +704,9 @@
       "viewOnMaps": "Voir sur Google Maps",
       "noGps": "Aucune coordonnée GPS trouvée",
       "altPreview": "Aperçu de la photo",
-      "errorParsing": "Erreur lors de l'analyse des données EXIF"
+      "errorParsing": "Erreur lors de l'analyse des données EXIF",
+      "showAllTags": "Afficher toutes les balises",
+      "hideAllTags": "Masquer les balises"
     },
     "loading": {
       "message": "Chargement de l'outil...",
