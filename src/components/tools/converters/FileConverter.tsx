@@ -212,15 +212,27 @@ const FileConverter: React.FC<{ lang: Language }> = ({ lang }) => {
           const pdf = await loadingTask.promise;
 
           const paragraphs: Paragraph[] = [];
+          let totalChars = 0;
 
           for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
             if (pageNum > 1) {
-              paragraphs.push(new Paragraph({ children: [new TextRun({ text: '', break: 1 })] }));
+              // Page break between pages
+              paragraphs.push(new Paragraph({ pageBreakBefore: true, children: [] }));
             }
 
             const page = await pdf.getPage(pageNum);
-            const textContent = await page.getTextContent();
-            const text = textContent.items.map((item: { str: string }) => item.str).join(' ');
+            // normalizeWhitespace: true helps with PDFs that use unusual whitespace
+            const textContent = await page.getTextContent({ normalizeWhitespace: true });
+            
+            // Build text with proper line breaks (respect hasEOL from pdfjs)
+            let pageText = '';
+            for (const item of textContent.items) {
+              const txt = (item as { str: string }).str || '';
+              pageText += txt;
+              if ((item as { hasEOL?: boolean }).hasEOL) {
+                pageText += '\n';
+              }
+            }
 
             // Add page heading
             paragraphs.push(
@@ -230,20 +242,36 @@ const FileConverter: React.FC<{ lang: Language }> = ({ lang }) => {
               })
             );
 
-            // Split text into paragraphs by line breaks, preserve spacing
-            const lines = text.split('\n').filter(l => l.trim());
-            if (lines.length === 0) {
-              paragraphs.push(new Paragraph({ children: [new TextRun(text)] }));
-            } else {
-              for (const line of lines) {
+            if (pageText.trim()) {
+              totalChars += pageText.trim().length;
+              // Split into paragraphs by double newlines, or single lines
+              const rawLines = pageText.split('\n');
+              const contentLines = rawLines.map(l => l.trim()).filter(l => l.length > 0);
+              
+              for (const line of contentLines) {
                 paragraphs.push(
                   new Paragraph({
                     spacing: { after: 120 },
-                    children: [new TextRun({ text: line.trim(), size: 22 })],
+                    children: [new TextRun({ text: line, size: 22 })],
                   })
                 );
               }
             }
+            // If pageText is empty, skip — only the page heading appears
+          }
+
+          // If no actual text was extracted across all pages, inform the user
+          if (totalChars === 0 && pdf.numPages > 0) {
+            // Add a note explaining that no selectable text was found
+            paragraphs.push(
+              new Paragraph({
+                spacing: { before: 400 },
+                children: [new TextRun({ text: 'Note: No selectable text was found in this PDF.', italics: true, size: 22, color: '999999' })],
+              }),
+              new Paragraph({
+                children: [new TextRun({ text: 'This may happen with scanned documents or image-only PDFs. Try converting to images instead.', italics: true, size: 22, color: '999999' })],
+              })
+            );
           }
 
           const doc = new Document({
